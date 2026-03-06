@@ -1,0 +1,56 @@
+{
+  "task": "vrsbench_referring",
+  "thresholds": [
+    0.5,
+    0.7
+  ],
+  "expected_num_samples": 16159,
+  "num_rows_in_file": 16159,
+  "preds": "benchmark/vrsbench/eval/prompt_modified/03_merger_lora_epoch10_fixed256/grounding_merger_lora.jsonl",
+  "meta": "benchmark/vrsbench/data/vrsbench_referring_meta.json",
+  "config_hint": {
+    "qwen_model_dir": "models/Qwen3-VL-8B-Instruct",
+    "dinov3_dir": "models/dinov3/dinov3-vitl16-pretrain-sat493m",
+    "merger_ckpt": "checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro2_6_ga4_effective32_taskseq_resume_from_epoch5_20260208/epoch10/merger.safetensors",
+    "lora_dir": "checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro2_6_ga4_effective32_taskseq_resume_from_epoch5_20260208/epoch10/lora",
+    "prompt_template": "[refer] where can I locate the <p>{ref_sentence}</p>? Return exactly one box in this format: {{<x1><y1><x2><y2>}}. Output integers in [0,100] only. If you internally use [0,1000], divide each coordinate by 10 and round to nearest integer before output. Hard rules: 0<=x1<x2<=100, 0<=y1<y2<=100. Return one line only and nothing else.",
+    "max_new_tokens": 256,
+    "requested_batch_size": 256,
+    "image_size": 256,
+    "smart_resize_min_pixels": 65536,
+    "smart_resize_max_pixels": 65536,
+    "resize_mode": "fixed",
+    "decode_strategy": "generation_config_default",
+    "do_sample": null,
+    "temperature": null,
+    "top_p": null,
+    "top_k": null,
+    "num_beams": null,
+    "repetition_penalty": null,
+    "no_repeat_ngram_size": null,
+    "seed": null
+  },
+  "splits": {
+    "all": {
+      "total": 16159,
+      "Acc@0.5": 58.93929079769787,
+      "Acc@0.7": 31.883161086700913,
+      "meanIoU": 50.88369314592628,
+      "cumIoU": 56.55940992331089
+    },
+    "unique": {
+      "total": 6736,
+      "Acc@0.5": 63.732185273159146,
+      "Acc@0.7": 30.893705463182897,
+      "meanIoU": 54.42834872294527,
+      "cumIoU": 57.20096778337596
+    },
+    "non_unique": {
+      "total": 9423,
+      "Acc@0.5": 55.513106229438606,
+      "Acc@0.7": 32.590470126286746,
+      "meanIoU": 48.34980797487665,
+      "cumIoU": 54.81042167063125
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "num_images": 9350,
+  "metrics": {
+    "BLEU-1": 0.2486099589502024,
+    "BLEU-2": 0.1117084411095066,
+    "BLEU-3": 0.05073722661165966,
+    "BLEU-4": 0.024315294060710056,
+    "METEOR": 0.157501450289275,
+    "ROUGE_L": 0.20970633770910124,
+    "CIDEr": 0.02201233747340291
+  },
+  "metrics_x100": {
+    "BLEU-1": 24.860995895020242,
+    "BLEU-2": 11.17084411095066,
+    "BLEU-3": 5.073722661165966,
+    "BLEU-4": 2.4315294060710055,
+    "METEOR": 15.7501450289275,
+    "ROUGE_L": 20.970633770910123,
+    "CIDEr": 2.201233747340291
+  },
+  "avg_len_words": 84.52513368983958,
+  "refs": "benchmark/vrsbench/data/vrsbench_refs_test.json",
+  "preds": "benchmark/vrsbench/eval/prompt_modified/01_baseline_qwen3vl8b/caption_baseline.jsonl",
+  "samples": [
+    {
+      "imgid": "0",
+      "prediction": "This is an aerial satellite image showing a roadside industrial or commercial area adjacent to a multi-lane highway. On the left, there's a parking lot with several yellow school buses parked in rows, alongside stacks of shipping containers and other industrial equipment. A grassy median separates the parking area from the highway, where two cars are visible driving on the road. The scene suggests a logistics or transportation hub located near a major roadway.",
+      "refs": [
+        "The aerial image from GoogleEarth features a group of large yellow buses lined up on the left side, and two small vehicles, one on the top-right and another large vehicle on the bottom-right side of the image. The buses are parked in a lot adjacent to a green area and a road running roughly north-south."
+      ]
+    },
+    {
+      "imgid": "1",
+      "prediction": "This aerial satellite image shows a curved, two-lane road bordered by green vegetation and a paved parking lot. On the left, the parking lot contains a yellow school bus and several stacked shipping containers near a building. Two dark-colored cars are visible on the road, one closer to the foreground and another further up the curve. The scene appears to be a roadside area with industrial or commercial elements, captured from above under daylight conditions.",
+      "refs": [
+        "The image from GoogleEarth captures a section of a road with three vehicles visible. One large vehicle is positioned towards the middle-left side of the frame, two small vehicles are located at the top of the frame and the other at the bottom, with the road curving around the landscape."
+      ]
+    },
+    {
+      "imgid": "2",
+      "prediction": "This is an aerial view of a paved parking lot adjacent to a road, featuring a large, modern building with a grid-patterned roof and a black facade. A small landscaped area with trees and shrubs is situated between the road and the parking lot. Several yellow directional arrows are painted on the pavement, indicating traffic flow, and a few vehicles, including a dark car and a white van, are parked. The overall scene suggests a commercial or industrial facility with designated parking and traffic management.",
+      "refs": [
+        "The high-resolution image from GoogleEarth shows a parking area with vehicles and asphalt surfaces. A small vehicle is positioned towards the top of this aerial view."
+      ]
+    },
+    {
+      "imgid": "3",
+      "prediction": "This is an aerial satellite image of a large parking lot filled with numerous semi-trucks and trailers, many parked in neat rows. A paved road runs along the left edge with a single truck driving on it. The lot is bordered by patches of green grass and trees, with a few small buildings or structures visible at the bottom right. Several cars are parked near the top right corner, and a yellow vehicle, possibly a school bus, is parked near the center. The overall scene suggests a truck stop, logistics yard, or freight depot.",
+      "refs": [
+        "The aerial image, sourced from GoogleEarth with high resolution, shows a parking lot with large vehicles arranged neatly in rows. Most of the large vehicles are white, and they are predominantly parked in a north-south alignment. There is a large vehicle at the left edge of the road."
+      ]
+    },
+    {
+      "imgid": "4",
+      "prediction": "This is an aerial view of a large, paved parking lot filled with a variety of vehicles. In the upper section, several cars—including red, white, blue, and yellow—are parked in neat rows. The lower section contains a longer row of vehicles, including sedans, vans, and several large semi-trucks with trailers. A small tree and a few utility poles are visible, and a dark-colored car can be seen driving on a road adjacent to the lot. The overall scene suggests a commercial or industrial area with ample parking.",
+      "refs": [
+        "A high-resolution Google Earth image capturing a gray parking lot with large vehicles and a small vehicle. The large vehicles are aligned in parallel rows. A small vehicle is positioned near the top-right corner."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "task": "vrsbench_referring",
+  "thresholds": [
+    0.5,
+    0.7
+  ],
+  "expected_num_samples": 16159,
+  "num_rows_in_file": 16159,
+  "preds": "benchmark/vrsbench/eval/prompt_modified/05_qwen_native_epoch10/grounding_qwen_native.jsonl",
+  "meta": "benchmark/vrsbench/data/vrsbench_referring_meta.json",
+  "config_hint": {
+    "model": "qwen3-vl-native",
+    "model_dir": "models/Qwen3-VL-8B-Instruct",
+    "merger_ckpt": "checkpoints/vrsbench_joint/merger_lora_8b_qwen_native_micro8_8_ga2_effective32_wd001_taskseq_run_20260302_160151/epoch10/merger.safetensors",
+    "lora_dir": "checkpoints/vrsbench_joint/merger_lora_8b_qwen_native_micro8_8_ga2_effective32_wd001_taskseq_run_20260302_160151/epoch10/lora",
+    "prompt_template": "[refer] where can I locate the <p>{ref_sentence}</p>? Return exactly one box in this format: {{<x1><y1><x2><y2>}}. Output integers in [0,100] only. If you internally use [0,1000], divide each coordinate by 10 and round to nearest integer before output. Hard rules: 0<=x1<x2<=100, 0<=y1<y2<=100. Return one line only and nothing else.",
+    "max_new_tokens": 256,
+    "requested_batch_size": 256
+  },
+  "splits": {
+    "all": {
+      "total": 16159,
+      "Acc@0.5": 70.25187202178353,
+      "Acc@0.7": 43.777461476576526,
+      "meanIoU": 59.082341628246326,
+      "cumIoU": 58.65095211513838
+    },
+    "unique": {
+      "total": 6736,
+      "Acc@0.5": 72.7731591448931,
+      "Acc@0.7": 40.691805225653205,
+      "meanIoU": 61.00493523132751,
+      "cumIoU": 58.48527430712275
+    },
+    "non_unique": {
+      "total": 9423,
+      "Acc@0.5": 68.44953836357848,
+      "Acc@0.7": 45.983232516183804,
+      "meanIoU": 57.70798202829346,
+      "cumIoU": 59.112483868120044
+    }
+  }
+}

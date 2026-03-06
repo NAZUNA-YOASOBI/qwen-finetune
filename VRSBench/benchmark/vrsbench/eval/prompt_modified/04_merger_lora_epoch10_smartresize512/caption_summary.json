@@ -1,0 +1,61 @@
+{
+  "num_images": 9350,
+  "metrics": {
+    "BLEU-1": 0.441850087061693,
+    "BLEU-2": 0.2774775796609666,
+    "BLEU-3": 0.17831821997419472,
+    "BLEU-4": 0.11724740773556001,
+    "METEOR": 0.20729387610622838,
+    "ROUGE_L": 0.3416347630393631,
+    "CIDEr": 0.2564548566258846
+  },
+  "metrics_x100": {
+    "BLEU-1": 44.1850087061693,
+    "BLEU-2": 27.74775796609666,
+    "BLEU-3": 17.83182199741947,
+    "BLEU-4": 11.724740773556002,
+    "METEOR": 20.729387610622837,
+    "ROUGE_L": 34.16347630393631,
+    "CIDEr": 25.645485662588456
+  },
+  "avg_len_words": 51.21176470588235,
+  "refs": "benchmark/vrsbench/data/vrsbench_refs_test.json",
+  "preds": "benchmark/vrsbench/eval/prompt_modified/04_merger_lora_epoch10_smartresize/caption_smartbucket.jsonl",
+  "samples": [
+    {
+      "imgid": "0",
+      "prediction": "The high-resolution image sourced from GoogleEarth shows a section of an outdoor area with a road and nearby stalls. There are six large vehicles parked parallel to the road, featuring a mix of colors and varying in size. Two distinct small vehicles are also visible: one is positioned on the right side of the road towards the top, and the other is on the bottom right, near the road's edge. The road itself has multiple lanes, as indicated by the road markings, and it runs diagonally from the top left to the bottom right of the image.",
+      "refs": [
+        "The aerial image from GoogleEarth features a group of large yellow buses lined up on the left side, and two small vehicles, one on the top-right and another large vehicle on the bottom-right side of the image. The buses are parked in a lot adjacent to a green area and a road running roughly north-south."
+      ]
+    },
+    {
+      "imgid": "1",
+      "prediction": "The high-resolution image sourced from GoogleEarth shows a section of a roadway with two large vehicles and two small vehicles. One of the large vehicles is positioned in the middle-left area of the image. The small vehicles are located at the top and the bottom sections of the roadway; the top-most small vehicle is positioned closer to the top edge of the image, while the bottom-most is near the bottom edge.",
+      "refs": [
+        "The image from GoogleEarth captures a section of a road with three vehicles visible. One large vehicle is positioned towards the middle-left side of the frame, two small vehicles are located at the top of the frame and the other at the bottom, with the road curving around the landscape."
+      ]
+    },
+    {
+      "imgid": "2",
+      "prediction": "The high-resolution image from GoogleEarth shows a section of an outdoor area with a green tree surrounded by patches of grass and a row of parked vehicles to the top. There is a unique small vehicle in the top part of the image that is easily distinguishable from its surroundings.",
+      "refs": [
+        "The high-resolution image from GoogleEarth shows a parking area with vehicles and asphalt surfaces. A small vehicle is positioned towards the top of this aerial view."
+      ]
+    },
+    {
+      "imgid": "3",
+      "prediction": "The high-resolution image sourced from GoogleEarth depicts a parking lot with various vehicles. There are numerous large white vehicles organized in rows, and a few smaller vehicles scattered around. The parking lot is bordered by trees and a small-body vehicle is located at the bottom right, near the edge of the lot.",
+      "refs": [
+        "The aerial image, sourced from GoogleEarth with high resolution, shows a parking lot with large vehicles arranged neatly in rows. Most of the large vehicles are white, and they are predominantly parked in a north-south alignment. There is a large vehicle at the left edge of the road."
+      ]
+    },
+    {
+      "imgid": "4",
+      "prediction": "The high-resolution image from GoogleEarth shows a parking area with several vehicles. There are a number of large vehicles primarily located in the bottom-right section of the image. Among them, the right-most large vehicle is distinguishable by its position. Additionally, there is a unique small vehicle identified in the top-right area of the parking space.",
+      "refs": [
+        "A high-resolution Google Earth image capturing a gray parking lot with large vehicles and a small vehicle. The large vehicles are aligned in parallel rows. A small vehicle is positioned near the top-right corner."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "source": "benchmark/vrsbench/paper/vrsbench_2406.12384.pdf",
+  "table": "Table 3: Detailed image caption performance on VRSBench dataset",
+  "metrics_scale_note": "Numbers are copied as-is from the paper table (typically reported in x100 scale for BLEU/METEOR/ROUGE/CIDEr).",
+  "rows": [
+    {
+      "method": "GeoChat w/o ft",
+      "BLEU-1": 13.9,
+      "BLEU-2": 6.6,
+      "BLEU-3": 3.0,
+      "BLEU-4": 1.4,
+      "METEOR": 7.8,
+      "ROUGE_L": 13.2,
+      "CIDEr": 0.4,
+      "CHAIR2": 0.42,
+      "Avg_L": 36.0
+    },
+    {
+      "method": "GPT-4V",
+      "BLEU-1": 37.2,
+      "BLEU-2": 22.5,
+      "BLEU-3": 13.7,
+      "BLEU-4": 8.6,
+      "METEOR": 20.9,
+      "ROUGE_L": 30.1,
+      "CIDEr": 19.1,
+      "CHAIR2": 0.83,
+      "Avg_L": 67.0
+    },
+    {
+      "method": "MiniGPT-v2",
+      "BLEU-1": 36.8,
+      "BLEU-2": 22.4,
+      "BLEU-3": 13.9,
+      "BLEU-4": 8.7,
+      "METEOR": 17.1,
+      "ROUGE_L": 30.8,
+      "CIDEr": 21.4,
+      "CHAIR2": 0.73,
+      "Avg_L": 37.0
+    },
+    {
+      "method": "LLaVA-1.5",
+      "BLEU-1": 48.1,
+      "BLEU-2": 31.5,
+      "BLEU-3": 21.2,
+      "BLEU-4": 14.7,
+      "METEOR": 21.9,
+      "ROUGE_L": 36.9,
+      "CIDEr": 33.9,
+      "CHAIR2": 0.78,
+      "Avg_L": 49.0
+    },
+    {
+      "method": "GeoChat",
+      "BLEU-1": 46.7,
+      "BLEU-2": 30.2,
+      "BLEU-3": 20.1,
+      "BLEU-4": 13.8,
+      "METEOR": 21.1,
+      "ROUGE_L": 35.2,
+      "CIDEr": 28.2,
+      "CHAIR2": 0.77,
+      "Avg_L": 52.0
+    },
+    {
+      "method": "Mini-Gemini",
+      "BLEU-1": 47.6,
+      "BLEU-2": 31.1,
+      "BLEU-3": 20.9,
+      "BLEU-4": 14.3,
+      "METEOR": 21.5,
+      "ROUGE_L": 36.8,
+      "CIDEr": 33.5,
+      "CHAIR2": 0.77,
+      "Avg_L": 47.0
+    }
+  ]
+}
