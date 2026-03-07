@@ -1,0 +1,188 @@
+{
+  "results": {
+    "rsvqa_hr_test1": {
+      "dataset": "rsvqa_hr_test1",
+      "task": "vqa",
+      "num_rows": 131468,
+      "per_type": {
+        "presence": {
+          "paper_question_type": "presence",
+          "num_rows": 58545,
+          "accuracy_normalized": 0.6457938338030574
+        },
+        "comp": {
+          "paper_question_type": "comparison",
+          "num_rows": 72923,
+          "accuracy_normalized": 0.7504902431331678
+        }
+      },
+      "sample_predictions": [
+        {
+          "question_id": 40820,
+          "question_type": "presence",
+          "question": "Is there a road?",
+          "prediction": "yes",
+          "prediction_normalized": "yes",
+          "answer": "yes",
+          "correct_normalized": true
+        },
+        {
+          "question_id": 40822,
+          "question_type": "presence",
+          "question": "Is there a building at the top of a  road?",
+          "prediction": "no",
+          "prediction_normalized": "no",
+          "answer": "no",
+          "correct_normalized": true
+        },
+        {
+          "question_id": 40823,
+          "question_type": "presence",
+          "question": "Is there a small commercial building?",
+          "prediction": "no",
+          "prediction_normalized": "no",
+          "answer": "no",
+          "correct_normalized": true
+        },
+        {
+          "question_id": 40828,
+          "question_type": "presence",
+          "question": "Is there a park?",
+          "prediction": "no",
+          "prediction_normalized": "no",
+          "answer": "yes",
+          "correct_normalized": false
+        },
+        {
+          "question_id": 40831,
+          "question_type": "presence",
+          "question": "Is a parking present?",
+          "prediction": "yes",
+          "prediction_normalized": "yes",
+          "answer": "yes",
+          "correct_normalized": true
+        },
+        {
+          "question_id": 40837,
+          "question_type": "presence",
+          "question": "Is a grass area present in the image?",
+          "prediction": "no",
+          "prediction_normalized": "no",
+          "answer": "yes",
+          "correct_normalized": false
+        },
+        {
+          "question_id": 40839,
+          "question_type": "presence",
+          "question": "Is there a road on the left of the  park?",
+          "prediction": "no",
+          "prediction_normalized": "no",
+          "answer": "no",
+          "correct_normalized": true
+        },
+        {
+          "question_id": 40841,
+          "question_type": "presence",
+          "question": "Is a rectangular grass area present?",
+          "prediction": "no",
+          "prediction_normalized": "no",
+          "answer": "yes",
+          "correct_normalized": false
+        }
+      ],
+      "num_pending_before_run": 131468
+    },
+    "rsvqa_hr_test2": {
+      "dataset": "rsvqa_hr_test2",
+      "task": "vqa",
+      "num_rows": 62554,
+      "per_type": {
+        "presence": {
+          "paper_question_type": "presence",
+          "num_rows": 27535,
+          "accuracy_normalized": 0.657345197021972
+        },
+        "comp": {
+          "paper_question_type": "comparison",
+          "num_rows": 35019,
+          "accuracy_normalized": 0.7537622433536081
+        }
+      },
+      "sample_predictions": [
+        {
+          "question_id": 960669,
+          "question_type": "presence",
+          "question": "Is there a park?",
+          "prediction": "yes",
+          "prediction_normalized": "yes",
+          "answer": "yes",
+          "correct_normalized": true
+        },
+        {
+          "question_id": 960673,
+          "question_type": "presence",
+          "question": "Is a building present?",
+          "prediction": "no",
+          "prediction_normalized": "no",
+          "answer": "yes",
+          "correct_normalized": false
+        },
+        {
+          "question_id": 960680,
+          "question_type": "presence",
+          "question": "Is a residential building present?",
+          "prediction": "no",
+          "prediction_normalized": "no",
+          "answer": "yes",
+          "correct_normalized": false
+        },
+        {
+          "question_id": 960681,
+          "question_type": "presence",
+          "question": "Is there a commercial building?",
+          "prediction": "no",
+          "prediction_normalized": "no",
+          "answer": "no",
+          "correct_normalized": true
+        },
+        {
+          "question_id": 960682,
+          "question_type": "presence",
+          "question": "Is there a road?",
+          "prediction": "yes",
+          "prediction_normalized": "yes",
+          "answer": "yes",
+          "correct_normalized": true
+        },
+        {
+          "question_id": 960683,
+          "question_type": "presence",
+          "question": "Is there a square commercial building?",
+          "prediction": "no",
+          "prediction_normalized": "no",
+          "answer": "no",
+          "correct_normalized": true
+        },
+        {
+          "question_id": 960686,
+          "question_type": "presence",
+          "question": "Is there a rectangular commercial building?",
+          "prediction": "no",
+          "prediction_normalized": "no",
+          "answer": "no",
+          "correct_normalized": true
+        },
+        {
+          "question_id": 960697,
+          "question_type": "presence",
+          "question": "Is there a small building in the image?",
+          "prediction": "no",
+          "prediction_normalized": "no",
+          "answer": "no",
+          "correct_normalized": true
+        }
+      ],
+      "num_pending_before_run": 62554
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "dataset_root": "datasets/VRSBench",
+  "annotation_file": "datasets/VRSBench/VRSBench_EVAL_referring.json",
+  "image_dir": "datasets/VRSBench/Images_val",
+  "num_samples": 16159,
+  "unique_samples": 6736,
+  "non_unique_samples": 9423
+}

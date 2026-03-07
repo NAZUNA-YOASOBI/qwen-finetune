@@ -1,0 +1,101 @@
+{
+  "results": {
+    "rsvqa_lr_test": {
+      "dataset": "rsvqa_lr_test",
+      "task": "vqa",
+      "num_rows": 7057,
+      "per_type": {
+        "presence": {
+          "paper_question_type": "presence",
+          "num_rows": 2955,
+          "accuracy_normalized": 0.682233502538071
+        },
+        "comp": {
+          "paper_question_type": "comparison",
+          "num_rows": 4002,
+          "accuracy_normalized": 0.7363818090954523
+        },
+        "rural_urban": {
+          "paper_question_type": "rural/urban",
+          "num_rows": 100,
+          "accuracy_normalized": 0.73
+        }
+      },
+      "sample_predictions": [
+        {
+          "question_id": 23209,
+          "question_type": "presence",
+          "question": "Is there a grass area?",
+          "prediction": "yes",
+          "prediction_normalized": "yes",
+          "answer": "yes",
+          "correct_normalized": true
+        },
+        {
+          "question_id": 23211,
+          "question_type": "presence",
+          "question": "Is there a road?",
+          "prediction": "yes",
+          "prediction_normalized": "yes",
+          "answer": "yes",
+          "correct_normalized": true
+        },
+        {
+          "question_id": 23212,
+          "question_type": "presence",
+          "question": "Is a large road present?",
+          "prediction": "yes",
+          "prediction_normalized": "yes",
+          "answer": "no",
+          "correct_normalized": false
+        },
+        {
+          "question_id": 23214,
+          "question_type": "presence",
+          "question": "Is a residential building present?",
+          "prediction": "yes",
+          "prediction_normalized": "yes",
+          "answer": "yes",
+          "correct_normalized": true
+        },
+        {
+          "question_id": 23216,
+          "question_type": "presence",
+          "question": "Is a forest present in the image?",
+          "prediction": "no",
+          "prediction_normalized": "no",
+          "answer": "yes",
+          "correct_normalized": false
+        },
+        {
+          "question_id": 23225,
+          "question_type": "presence",
+          "question": "Is a water area present?",
+          "prediction": "yes",
+          "prediction_normalized": "yes",
+          "answer": "yes",
+          "correct_normalized": true
+        },
+        {
+          "question_id": 23226,
+          "question_type": "presence",
+          "question": "Is a commercial building present in the image?",
+          "prediction": "yes",
+          "prediction_normalized": "yes",
+          "answer": "yes",
+          "correct_normalized": true
+        },
+        {
+          "question_id": 23229,
+          "question_type": "presence",
+          "question": "Is a parking present?",
+          "prediction": "yes",
+          "prediction_normalized": "yes",
+          "answer": "yes",
+          "correct_normalized": true
+        }
+      ],
+      "num_pending_before_run": 7057
+    }
+  }
+}

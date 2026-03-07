@@ -1,0 +1,38 @@
+{
+  "results": {
+    "rsicd": {
+      "dataset": "rsicd",
+      "task": "caption",
+      "num_rows": 1093,
+      "prompt": "Write one concise English caption for this remote sensing image in 8 to 15 words. Mention only the main scene and key objects.",
+      "sample_predictions": [
+        {
+          "filename": "00623.jpg",
+          "prediction": "Satellite view of school sports field with track and green playing area.",
+          "first_ref": "this is a huge playground with basketball courts and tennis courts planned orderly inside ."
+        },
+        {
+          "filename": "00624.jpg",
+          "prediction": "Satellite view of schoolyard with track, tennis courts, and surrounding buildings.",
+          "first_ref": "the block formed by two roads has a football field, a basketball court and several buildings ."
+        },
+        {
+          "filename": "00625.jpg",
+          "prediction": "Satellite view of a football field surrounded by roads and buildings.",
+          "first_ref": "in this area at the road corner, a standard, new footballfield with two basketball courts aside can be seen ."
+        },
+        {
+          "filename": "00626.jpg",
+          "prediction": "Aerial view of a school with red track and green football field.",
+          "first_ref": "the football field is located near a l-shaped buildings and a construction site ."
+        },
+        {
+          "filename": "00627.jpg",
+          "prediction": "School campus with track, field, and surrounding buildings.",
+          "first_ref": "the football field and two basketball courts are a aprt of this irregular area near the construction site ."
+        }
+      ],
+      "num_pending_before_run": 1093
+    }
+  }
+}
