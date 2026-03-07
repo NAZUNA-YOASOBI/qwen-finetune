@@ -1,6 +1,6 @@
 # noftqwen3.5
 
-这个目录保存了一个基于 `Qwen/Qwen3.5-4B` 
+这个目录保存了一个基于 `Qwen/Qwen3.5-4B` 直接推理
 ## 结果汇总
 
 本次结果来自 [`vg_eval_metrics.json`](./vg_eval_metrics.json)：
