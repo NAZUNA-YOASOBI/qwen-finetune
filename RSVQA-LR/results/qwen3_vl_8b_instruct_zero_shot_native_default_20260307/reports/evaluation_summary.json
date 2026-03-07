@@ -1,0 +1,31 @@
+{
+  "vqa": {
+    "rsvqa_lr_test": {
+      "num_rows": 7057,
+      "per_type": {
+        "presence": {
+          "paper_question_type": "presence",
+          "num_rows": 2955,
+          "accuracy": 0.682233502538071,
+          "accuracy_x100": 68.2233502538071
+        },
+        "comp": {
+          "paper_question_type": "comparison",
+          "num_rows": 4002,
+          "accuracy": 0.7363818090954523,
+          "accuracy_x100": 73.63818090954523
+        },
+        "rural_urban": {
+          "paper_question_type": "rural/urban",
+          "num_rows": 100,
+          "accuracy": 0.73,
+          "accuracy_x100": 73.0
+        }
+      },
+      "average_accuracy": 0.7162051038778411,
+      "average_accuracy_x100": 71.62051038778411,
+      "overall_accuracy": 0.7136176845685135,
+      "overall_accuracy_x100": 71.36176845685135
+    }
+  }
+}

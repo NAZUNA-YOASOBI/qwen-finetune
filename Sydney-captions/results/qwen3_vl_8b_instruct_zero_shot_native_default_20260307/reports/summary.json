@@ -1,0 +1,38 @@
+{
+  "results": {
+    "sydney_captions": {
+      "dataset": "sydney_captions",
+      "task": "caption",
+      "num_rows": 58,
+      "prompt": "Write one concise English caption for this remote sensing image in 8 to 15 words. Mention only the main scene and key objects.",
+      "sample_predictions": [
+        {
+          "filename": "219.tif",
+          "prediction": "Aerial view of suburban neighborhood with houses, roads, and swimming pools.",
+          "first_ref": "A residential area with many hosues arranged neatly and a piece of lawn in the upper right corner ."
+        },
+        {
+          "filename": "220.tif",
+          "prediction": "Aerial view of residential neighborhood with houses, streets, and greenery.",
+          "first_ref": "A residential area with many hosues arranged in lines and some roads go through this area ."
+        },
+        {
+          "filename": "221.tif",
+          "prediction": "Aerial view of residential neighborhood with houses, roads, and sparse vegetation.",
+          "first_ref": "A residential area with many hosues arranged neatly and a wide highway beside ."
+        },
+        {
+          "filename": "222.tif",
+          "prediction": "Residential neighborhood with houses, roads, and winding canal.",
+          "first_ref": "A residential area with many hosues arranged densely and some roads go through this area ."
+        },
+        {
+          "filename": "223.tif",
+          "prediction": "Urban neighborhood with residential houses, roads, and green spaces.",
+          "first_ref": "Many houses arranged neatly with some roads go across this area ."
+        }
+      ],
+      "num_pending_before_run": 58
+    }
+  }
+}
