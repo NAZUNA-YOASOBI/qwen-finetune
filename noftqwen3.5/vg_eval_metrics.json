@@ -1,0 +1,41 @@
+{
+  "total_selected": 16159,
+  "processed": 16159,
+  "valid_for_iou": 16145,
+  "mean_iou": 0.4996051775249368,
+  "acc@0.5": 0.5661860263630175,
+  "acc@0.7": 0.35540565629061205,
+  "acc@0.5_count": 9149,
+  "acc@0.7_count": 5743,
+  "by_split": {
+    "unique": {
+      "count_total": 6736,
+      "count_valid_for_iou": 6731,
+      "acc@0.5": 0.6165380047505938,
+      "acc@0.7": 0.4002375296912114,
+      "acc@0.5_count": 4153,
+      "acc@0.7_count": 2696
+    },
+    "non_unique": {
+      "count_total": 9423,
+      "count_valid_for_iou": 9414,
+      "acc@0.5": 0.5301920832006792,
+      "acc@0.7": 0.3233577416958506,
+      "acc@0.5_count": 4996,
+      "acc@0.7_count": 3047
+    },
+    "all": {
+      "count_total": 16159,
+      "count_valid_for_iou": 16145,
+      "acc@0.5": 0.5661860263630175,
+      "acc@0.7": 0.35540565629061205,
+      "acc@0.5_count": 9149,
+      "acc@0.7_count": 5743
+    }
+  },
+  "predictions_file": "vg_eval_predictions.jsonl",
+  "start_idx": 0,
+  "limit": 0,
+  "elapsed_seconds": 5461.0241458415985,
+  "batch_size": 64
+}
