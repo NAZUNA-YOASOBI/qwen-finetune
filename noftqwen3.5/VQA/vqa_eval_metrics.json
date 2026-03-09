@@ -1,0 +1,124 @@
+{
+  "accuracy": 0.5180838835574327,
+  "correct": 19381,
+  "num_questions": 37409,
+  "num_questions_in_eval_json": 37409,
+  "by_type_raw": {
+    "image": {
+      "count": 1129,
+      "correct": 478,
+      "accuracy": 0.42338352524357836
+    },
+    "object category": {
+      "count": 5434,
+      "correct": 1422,
+      "accuracy": 0.26168568273831433
+    },
+    "object color": {
+      "count": 3550,
+      "correct": 2170,
+      "accuracy": 0.6112676056338028
+    },
+    "object direction": {
+      "count": 477,
+      "correct": 240,
+      "accuracy": 0.5031446540880503
+    },
+    "object existence": {
+      "count": 7789,
+      "correct": 6546,
+      "accuracy": 0.8404159712414944
+    },
+    "object position": {
+      "count": 5828,
+      "correct": 2055,
+      "accuracy": 0.3526080988332189
+    },
+    "object quantity": {
+      "count": 6374,
+      "correct": 3080,
+      "accuracy": 0.48321305302792594
+    },
+    "object shape": {
+      "count": 1423,
+      "correct": 673,
+      "accuracy": 0.4729444834855938
+    },
+    "object size": {
+      "count": 1011,
+      "correct": 447,
+      "accuracy": 0.4421364985163205
+    },
+    "reasoning": {
+      "count": 902,
+      "correct": 491,
+      "accuracy": 0.5443458980044346
+    },
+    "rural or urban": {
+      "count": 295,
+      "correct": 243,
+      "accuracy": 0.823728813559322
+    },
+    "scene type": {
+      "count": 3197,
+      "correct": 1536,
+      "accuracy": 0.480450422270879
+    }
+  },
+  "by_type_paper_table3": {
+    "Category": {
+      "count": 5434,
+      "correct": 1422,
+      "accuracy": 0.26168568273831433
+    },
+    "Presence": {
+      "count": 7789,
+      "correct": 6546,
+      "accuracy": 0.8404159712414944
+    },
+    "Quantity": {
+      "count": 6374,
+      "correct": 3080,
+      "accuracy": 0.48321305302792594
+    },
+    "Color": {
+      "count": 3550,
+      "correct": 2170,
+      "accuracy": 0.6112676056338028
+    },
+    "Shape": {
+      "count": 1423,
+      "correct": 673,
+      "accuracy": 0.4729444834855938
+    },
+    "Size": {
+      "count": 1011,
+      "correct": 447,
+      "accuracy": 0.4421364985163205
+    },
+    "Position": {
+      "count": 5828,
+      "correct": 2055,
+      "accuracy": 0.3526080988332189
+    },
+    "Direction": {
+      "count": 477,
+      "correct": 240,
+      "accuracy": 0.5031446540880503
+    },
+    "Scene": {
+      "count": 4621,
+      "correct": 2257,
+      "accuracy": 0.48842241938974246
+    },
+    "Reasoning": {
+      "count": 902,
+      "correct": 491,
+      "accuracy": 0.5443458980044346
+    }
+  },
+  "eval_json": "/opt/data/private/qwen/data/VRSBench_EVAL_vqa.json",
+  "preds": "/opt/data/private/qwen/vqa_eval_predictions.jsonl",
+  "metric_protocol": "exact_match",
+  "paper_alignment_note": "OpenAI-based GPT judge was removed. This metric is local normalized exact match only, while keeping the paper-style 10-category grouping."
+}
