@@ -189,6 +189,19 @@ run_grounding_eval() {
   log "[END]   $(date '+%F %T') $name"
 }
 
+run_grounding_eval_noftstyle() {
+  local name="$1"
+  local preds_file="$2"
+  local summary_file="$3"
+  local log_file="$LOG_ROOT/${name}.log"
+  log "[START] $(date '+%F %T') $name"
+  "$PY" benchmark/vrsbench/scripts/eval_referring_baseline_noftstyle.py \
+    --preds "$preds_file" \
+    --meta benchmark/vrsbench/data/vrsbench_referring_meta.json \
+    --output "$summary_file" > "$log_file" 2>&1
+  log "[END]   $(date '+%F %T') $name"
+}
+
 prepare_model_dir() {
   local model_dir="$1"
   mkdir -p "$model_dir"
@@ -198,7 +211,7 @@ prepare_model_dir() {
 BASELINE_DIR="$OUT_ROOT/01_baseline_qwen3vl8b"
 MERGER_ONLY_DIR="$OUT_ROOT/02_merger_only_epoch10_fixed256"
 MERGER_LORA_DIR="$OUT_ROOT/03_merger_lora_epoch10_fixed256"
-SMART_DIR="$OUT_ROOT/04_merger_lora_epoch10_smartresize512"
+SMART_DIR="$OUT_ROOT/04_merger_lora_epoch10_smartresize"
 QNATIVE_DIR="$OUT_ROOT/05_qwen_native_epoch10"
 
 for d in "$BASELINE_DIR" "$MERGER_ONLY_DIR" "$MERGER_LORA_DIR" "$SMART_DIR" "$QNATIVE_DIR"; do
@@ -221,12 +234,12 @@ run_sharded_generate caption_baseline imgid 128 benchmark/vrsbench/scripts/gener
   --max-sentences 4 \
   --max-retries 10 > "$LOG_ROOT/caption_baseline_fix.log" 2>&1
 run_caption_eval caption_baseline_eval "$BASELINE_DIR/caption_baseline.jsonl" "$BASELINE_DIR/caption_summary.json"
-run_sharded_generate grounding_baseline qid 256 benchmark/vrsbench/scripts/generate_referring_baseline.py "$BASELINE_DIR" \
+run_sharded_generate grounding_baseline qid 128 benchmark/vrsbench/scripts/generate_referring_baseline_noftstyle.py "$BASELINE_DIR" \
   --model-dir models/Qwen3-VL-8B-Instruct \
   --data benchmark/vrsbench/data/vrsbench_referring_test.jsonl \
   --max-new-tokens 256 \
   --dtype bf16
-run_grounding_eval grounding_baseline_eval "$BASELINE_DIR/grounding_baseline.jsonl" "$BASELINE_DIR/grounding_summary.json"
+run_grounding_eval_noftstyle grounding_baseline_eval "$BASELINE_DIR/grounding_baseline.jsonl" "$BASELINE_DIR/grounding_summary.json"
 
 run_sharded_generate caption_merger_only imgid 256 benchmark/vrsbench/scripts/generate_dinov3.py "$MERGER_ONLY_DIR" \
   --qwen-model-dir models/Qwen3-VL-8B-Instruct \

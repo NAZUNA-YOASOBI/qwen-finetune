@@ -136,7 +136,7 @@ def main() -> None:
     parser.add_argument("--baseline-dir", type=str, default="benchmark/vrsbench/eval/prompt_modified/01_baseline_qwen3vl8b")
     parser.add_argument("--merger-only-dir", type=str, default="benchmark/vrsbench/eval/prompt_modified/02_merger_only_epoch10_fixed256")
     parser.add_argument("--merger-lora-dir", type=str, default="benchmark/vrsbench/eval/prompt_modified/03_merger_lora_epoch10_fixed256")
-    parser.add_argument("--smartbucket-dir", type=str, default="benchmark/vrsbench/eval/prompt_modified/04_merger_lora_epoch10_smartresize512")
+    parser.add_argument("--smartbucket-dir", type=str, default="benchmark/vrsbench/eval/prompt_modified/04_merger_lora_epoch10_smartresize")
     parser.add_argument("--qwen-native-dir", type=str, default="benchmark/vrsbench/eval/prompt_modified/05_qwen_native_epoch10")
     parser.add_argument("--out", type=str, default="benchmark/vrsbench/eval/prompt_modified/compare_bench_vs_ours.md")
     args = parser.parse_args()
@@ -148,7 +148,7 @@ def main() -> None:
         ("Ours-baseline8b", _resolve_from_project(args.baseline_dir)),
         ("Ours-merger_only-epoch10-fixed256", _resolve_from_project(args.merger_only_dir)),
         ("Ours-merger_lora-epoch10-fixed256", _resolve_from_project(args.merger_lora_dir)),
-        ("Ours-merger_lora-epoch10-smartresize512", _resolve_from_project(args.smartbucket_dir)),
+        ("Ours-merger_lora-epoch10-smartresize", _resolve_from_project(args.smartbucket_dir)),
         ("Ours-qwen_native-epoch10", _resolve_from_project(args.qwen_native_dir)),
     ]
 
@@ -220,8 +220,8 @@ def main() -> None:
     lines.append("# VRSBench 指标对比（Bench vs Ours）\n")
     lines.append("- 运行标签：`prompt_modified`。\n")
     lines.append("- Caption 的 BLEU/METEOR/ROUGE_L/CIDEr 按 x100 展示。\n")
-    lines.append("- Grounding 的 Acc 指标直接来自官方口径 summary（单位：百分比点）。\n")
-    lines.append("- 当前 grounding 生成脚本使用严格 prompt，并按前 4 个数字解析 / 规范化。\n")
+    lines.append("- Grounding 的 Acc 指标直接来自各自 summary（单位：百分比点）。\n")
+    lines.append("- 当前 grounding 生成脚本按各自输出协议做解析与规范化。\n")
     lines.append(
         f"- Bench 数据来源：`{_rel_to_project(_resolve_from_project(args.paper_caption))}` 与 `{_rel_to_project(_resolve_from_project(args.paper_grounding))}`。\n\n"
     )

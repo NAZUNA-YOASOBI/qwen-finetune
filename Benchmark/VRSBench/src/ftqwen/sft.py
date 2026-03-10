@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -21,6 +23,73 @@ def _resolve_from_project(path: str | Path) -> Path:
     if p.is_absolute():
         return p
     return (_project_root() / p).resolve()
+
+
+def _read_image_hw(image_fs_path: Path) -> tuple[int, int]:
+    with Image.open(str(image_fs_path)) as pil_img:
+        return int(pil_img.height), int(pil_img.width)
+
+
+def _compute_resize_key_from_hw(
+    *,
+    height: int,
+    width: int,
+    patch_size: int,
+    merge_size: int,
+    smart_resize_min_pixels: int,
+    smart_resize_max_pixels: int,
+) -> tuple[int, int, int, int, int]:
+    resize = compute_vision_resize(
+        height=int(height),
+        width=int(width),
+        patch_size=int(patch_size),
+        merge_size=int(merge_size),
+        min_pixels=int(smart_resize_min_pixels),
+        max_pixels=int(smart_resize_max_pixels),
+    )
+    return (
+        int(resize.resized_height),
+        int(resize.resized_width),
+        int(resize.grid_h),
+        int(resize.grid_w),
+        int(resize.num_image_tokens),
+    )
+
+
+def _load_image_hw_cache(cache_path: Path) -> dict[str, tuple[int, int]] | None:
+    if not cache_path.is_file():
+        return None
+    try:
+        payload = json.loads(cache_path.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+    if not isinstance(payload, dict):
+        return None
+
+    raw_images = payload.get("images")
+    if not isinstance(raw_images, dict):
+        return None
+
+    image_hw: dict[str, tuple[int, int]] = {}
+    for image_name, hw in raw_images.items():
+        if not isinstance(hw, dict):
+            return None
+        try:
+            height = int(hw.get("height", 0))
+            width = int(hw.get("width", 0))
+        except Exception:
+            return None
+        if height <= 0 or width <= 0:
+            return None
+        image_hw[str(image_name)] = (int(height), int(width))
+    return image_hw
+
+
+def _write_json_atomic(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp_path = path.with_name(f".{path.name}.tmp.{os.getpid()}")
+    tmp_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    tmp_path.replace(path)
 
 
 def expand_image_tokens(text: str, *, image_token: str, num_image_tokens: int) -> str:
@@ -335,26 +404,61 @@ class VrsbenchMultiTaskSFTDataset(Dataset):
         # VRSBench 的训练图片目录固定为 Images_train
         self.images_dir = self.dataset_root / ("Images_train" if self.split == "train" else "Images_val")
         self._resize_key_cache: dict[int, tuple[int, int, int, int, int]] = {}
+        self.cache_dir = self.dataset_root / "cache"
+        self.image_hw_cache_path = self.cache_dir / f"vrsbench_{self.split}_image_hw.json"
+        self._image_hw_cache: dict[str, tuple[int, int]] | None = None
+
+    def _resolve_image_fs_path(self, image_name: str) -> Path:
+        return (self.images_dir / str(image_name)).resolve()
+
+    def ensure_image_hw_cache(self, *, build_if_missing: bool) -> None:
+        if self._image_hw_cache is not None:
+            return
+
+        cache = _load_image_hw_cache(self.image_hw_cache_path)
+        if cache is not None:
+            self._image_hw_cache = cache
+            return
+        if not build_if_missing:
+            return
+
+        unique_names: list[str] = []
+        seen: set[str] = set()
+        for item in self.items:
+            image_name = str(item.get("image", "")).strip()
+            if not image_name:
+                raise ValueError("Found empty image name while building image size cache.")
+            if image_name in seen:
+                continue
+            seen.add(image_name)
+            unique_names.append(image_name)
+
+        images_payload: dict[str, dict[str, int]] = {}
+        for image_name in unique_names:
+            height, width = _read_image_hw(self._resolve_image_fs_path(image_name))
+            images_payload[image_name] = {"height": int(height), "width": int(width)}
+
+        payload = {
+            "version": 1,
+            "dataset": "VRSBench",
+            "split": self.split,
+            "images_dir": self.images_dir.name,
+            "num_images": int(len(images_payload)),
+            "images": images_payload,
+        }
+        _write_json_atomic(self.image_hw_cache_path, payload)
+        self._image_hw_cache = _load_image_hw_cache(self.image_hw_cache_path)
 
     def _compute_resize_key_from_image_name(self, image_name: str) -> tuple[int, int, int, int, int]:
-        image_fs_path = (self.images_dir / str(image_name)).resolve()
-        with Image.open(str(image_fs_path)) as pil_img:
-            h = int(pil_img.height)
-            w = int(pil_img.width)
-        resize = compute_vision_resize(
-            height=int(h),
-            width=int(w),
+        image_fs_path = self._resolve_image_fs_path(image_name)
+        height, width = _read_image_hw(image_fs_path)
+        return _compute_resize_key_from_hw(
+            height=int(height),
+            width=int(width),
             patch_size=int(self.patch_size),
             merge_size=int(self.merge_size),
-            min_pixels=int(self.smart_resize_min_pixels),
-            max_pixels=int(self.smart_resize_max_pixels),
-        )
-        return (
-            int(resize.resized_height),
-            int(resize.resized_width),
-            int(resize.grid_h),
-            int(resize.grid_w),
-            int(resize.num_image_tokens),
+            smart_resize_min_pixels=int(self.smart_resize_min_pixels),
+            smart_resize_max_pixels=int(self.smart_resize_max_pixels),
         )
 
     def get_resize_bucket_key(self, idx: int) -> tuple[int, int, int, int, int]:
@@ -367,7 +471,22 @@ class VrsbenchMultiTaskSFTDataset(Dataset):
         image_name = str(it.get("image", ""))
         if not image_name:
             raise ValueError(f"Empty image name at idx={i}")
-        key = self._compute_resize_key_from_image_name(image_name)
+
+        if self._image_hw_cache is None:
+            self._image_hw_cache = _load_image_hw_cache(self.image_hw_cache_path)
+
+        cached_hw = None if self._image_hw_cache is None else self._image_hw_cache.get(image_name)
+        if cached_hw is not None:
+            key = _compute_resize_key_from_hw(
+                height=int(cached_hw[0]),
+                width=int(cached_hw[1]),
+                patch_size=int(self.patch_size),
+                merge_size=int(self.merge_size),
+                smart_resize_min_pixels=int(self.smart_resize_min_pixels),
+                smart_resize_max_pixels=int(self.smart_resize_max_pixels),
+            )
+        else:
+            key = self._compute_resize_key_from_image_name(image_name)
         self._resize_key_cache[i] = key
         return key
 
@@ -402,7 +521,7 @@ class VrsbenchMultiTaskSFTDataset(Dataset):
         answer = str(gpt_text).strip()
 
         # 图像：按 DINOv3 的方式做 resize/normalize
-        image_fs_path = (self.images_dir / image_name).resolve()
+        image_fs_path = self._resolve_image_fs_path(image_name)
         # 用上下文管理器读取图片，避免长时间训练时文件句柄堆积。
         with Image.open(str(image_fs_path)) as pil_img:
             img = pil_img.convert("RGB")
@@ -495,26 +614,61 @@ class VrsbenchMultiTaskQwenNativeSFTDataset(Dataset):
 
         self.images_dir = self.dataset_root / ("Images_train" if self.split == "train" else "Images_val")
         self._resize_key_cache: dict[int, tuple[int, int, int, int, int]] = {}
+        self.cache_dir = self.dataset_root / "cache"
+        self.image_hw_cache_path = self.cache_dir / f"vrsbench_{self.split}_image_hw.json"
+        self._image_hw_cache: dict[str, tuple[int, int]] | None = None
+
+    def _resolve_image_fs_path(self, image_name: str) -> Path:
+        return (self.images_dir / str(image_name)).resolve()
+
+    def ensure_image_hw_cache(self, *, build_if_missing: bool) -> None:
+        if self._image_hw_cache is not None:
+            return
+
+        cache = _load_image_hw_cache(self.image_hw_cache_path)
+        if cache is not None:
+            self._image_hw_cache = cache
+            return
+        if not build_if_missing:
+            return
+
+        unique_names: list[str] = []
+        seen: set[str] = set()
+        for item in self.items:
+            image_name = str(item.get("image", "")).strip()
+            if not image_name:
+                raise ValueError("Found empty image name while building image size cache.")
+            if image_name in seen:
+                continue
+            seen.add(image_name)
+            unique_names.append(image_name)
+
+        images_payload: dict[str, dict[str, int]] = {}
+        for image_name in unique_names:
+            height, width = _read_image_hw(self._resolve_image_fs_path(image_name))
+            images_payload[image_name] = {"height": int(height), "width": int(width)}
+
+        payload = {
+            "version": 1,
+            "dataset": "VRSBench",
+            "split": self.split,
+            "images_dir": self.images_dir.name,
+            "num_images": int(len(images_payload)),
+            "images": images_payload,
+        }
+        _write_json_atomic(self.image_hw_cache_path, payload)
+        self._image_hw_cache = _load_image_hw_cache(self.image_hw_cache_path)
 
     def _compute_resize_key_from_image_name(self, image_name: str) -> tuple[int, int, int, int, int]:
-        image_fs_path = (self.images_dir / str(image_name)).resolve()
-        with Image.open(str(image_fs_path)) as pil_img:
-            h = int(pil_img.height)
-            w = int(pil_img.width)
-        resize = compute_vision_resize(
-            height=int(h),
-            width=int(w),
+        image_fs_path = self._resolve_image_fs_path(image_name)
+        height, width = _read_image_hw(image_fs_path)
+        return _compute_resize_key_from_hw(
+            height=int(height),
+            width=int(width),
             patch_size=int(self.patch_size),
             merge_size=int(self.merge_size),
-            min_pixels=int(self.smart_resize_min_pixels),
-            max_pixels=int(self.smart_resize_max_pixels),
-        )
-        return (
-            int(resize.resized_height),
-            int(resize.resized_width),
-            int(resize.grid_h),
-            int(resize.grid_w),
-            int(resize.num_image_tokens),
+            smart_resize_min_pixels=int(self.smart_resize_min_pixels),
+            smart_resize_max_pixels=int(self.smart_resize_max_pixels),
         )
 
     def get_resize_bucket_key(self, idx: int) -> tuple[int, int, int, int, int]:
@@ -527,7 +681,22 @@ class VrsbenchMultiTaskQwenNativeSFTDataset(Dataset):
         image_name = str(it.get("image", ""))
         if not image_name:
             raise ValueError(f"Empty image name at idx={i}")
-        key = self._compute_resize_key_from_image_name(image_name)
+
+        if self._image_hw_cache is None:
+            self._image_hw_cache = _load_image_hw_cache(self.image_hw_cache_path)
+
+        cached_hw = None if self._image_hw_cache is None else self._image_hw_cache.get(image_name)
+        if cached_hw is not None:
+            key = _compute_resize_key_from_hw(
+                height=int(cached_hw[0]),
+                width=int(cached_hw[1]),
+                patch_size=int(self.patch_size),
+                merge_size=int(self.merge_size),
+                smart_resize_min_pixels=int(self.smart_resize_min_pixels),
+                smart_resize_max_pixels=int(self.smart_resize_max_pixels),
+            )
+        else:
+            key = self._compute_resize_key_from_image_name(image_name)
         self._resize_key_cache[i] = key
         return key
 
@@ -560,7 +729,7 @@ class VrsbenchMultiTaskQwenNativeSFTDataset(Dataset):
         prompt = _strip_llava_image_placeholder(human_text)
         answer = str(gpt_text).strip()
 
-        image_fs_path = (self.images_dir / image_name).resolve()
+        image_fs_path = self._resolve_image_fs_path(image_name)
         with Image.open(str(image_fs_path)) as pil_img:
             img = pil_img.convert("RGB")
 

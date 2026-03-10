@@ -2,7 +2,8 @@
 - 运行标签：`prompt_modified`。
 - Caption 的 BLEU/METEOR/ROUGE_L/CIDEr 按 x100 展示。
 - Grounding 的 Acc 指标直接来自官方口径 summary（单位：百分比点）。
-- 当前 grounding 生成脚本使用严格 prompt，并按前 4 个数字解析 / 规范化。
+- 除 `Ours-baseline8b` 外，其余 grounding 结果来自 `prompt_modified` 严格 prompt 口径。
+- `Ours-baseline8b` 使用 `17_qwen8b_baseline_noftstyle_20260308` 的 `noftstyle` 链路结果。
 - Bench 数据来源：`benchmark/vrsbench/paper/table3_caption_paper.json` 与 `benchmark/vrsbench/paper/table4_grounding_paper.json`。
 
 ## Caption 对比
@@ -14,7 +15,7 @@
 | Bench | LLaVA-1.5 | 48.10 | 31.50 | 21.20 | 14.70 | 21.90 | 36.90 | 33.90 | 0.78 | 49.00 |
 | Bench | GeoChat | 46.70 | 30.20 | 20.10 | 13.80 | 21.10 | 35.20 | 28.20 | 0.77 | 52.00 |
 | Bench | Mini-Gemini | 47.60 | 31.10 | 20.90 | 14.30 | 21.50 | 36.80 | 33.50 | 0.77 | 47.00 |
-| Ours | Ours-baseline8b | 24.86 | 11.17 | 5.07 | 2.43 | 15.75 | 20.97 | 2.20 | - | 84.53 |
+| Ours | Ours-baseline8b | 24.87 | 11.16 | 5.05 | 2.42 | 15.75 | 20.94 | 2.32 | - | 84.60 |
 | Ours | Ours-merger_only-epoch10-fixed256 | 36.09 | 21.29 | 12.81 | 7.99 | 20.22 | 30.34 | 13.81 | - | 65.21 |
 | Ours | Ours-merger_lora-epoch10-fixed256 | 44.69 | 28.20 | 18.22 | 12.04 | 20.61 | 34.15 | 24.58 | - | 50.17 |
 | Ours | Ours-merger_lora-epoch10-smartresize512 | 44.19 | 27.75 | 17.83 | 11.72 | 20.73 | 34.16 | 25.65 | - | 51.21 |
@@ -29,7 +30,7 @@
 | Bench | LLaVA-1.5 | 51.10 | 16.40 | 34.80 | 11.50 | 41.60 | 13.60 |
 | Bench | GeoChat | 57.40 | 22.60 | 44.50 | 18.00 | 49.80 | 19.90 |
 | Bench | Mini-Gemini | 41.10 | 9.60 | 22.30 | 4.90 | 30.10 | 6.80 |
-| Ours | Ours-baseline8b | 23.31 | 7.07 | 12.80 | 4.06 | 17.18 | 5.32 |
+| Ours | Ours-baseline8b | 63.52 | 43.72 | 53.07 | 33.29 | 57.43 | 37.64 |
 | Ours | Ours-merger_only-epoch10-fixed256 | 4.38 | 1.25 | 2.00 | 0.51 | 2.99 | 0.82 |
 | Ours | Ours-merger_lora-epoch10-fixed256 | 63.73 | 30.89 | 55.51 | 32.59 | 58.94 | 31.88 |
 | Ours | Ours-merger_lora-epoch10-smartresize512 | 65.69 | 32.21 | 56.34 | 31.33 | 60.24 | 31.70 |
