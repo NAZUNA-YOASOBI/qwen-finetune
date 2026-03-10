@@ -13,8 +13,12 @@ DEFAULT_PROMPT_TEMPLATE = (
     "Hard rules: 0<=x1<x2<=100, 0<=y1<y2<=100. Return one line only and nothing else."
 )
 
-_INT_RE = re.compile(r"\d+")
-_ANGLE_INT_RE = re.compile(r"<\s*(\d+)\s*>")
+_SIGNED_INT_RE = re.compile(r"-?\d+")
+_ANGLE_SIGNED_INT_RE = re.compile(r"<\s*(-?\d+)\s*>")
+
+
+def _clip_box_100(vals: list[int]) -> list[int]:
+    return [max(0, min(100, int(v))) for v in vals]
 
 
 def _extract_box(text: str) -> tuple[str | None, list[int] | None]:
@@ -25,14 +29,14 @@ def _extract_box(text: str) -> tuple[str | None, list[int] | None]:
     """
 
     t = str(text or "")
-    nums = _ANGLE_INT_RE.findall(t)
+    nums = _ANGLE_SIGNED_INT_RE.findall(t)
     if len(nums) >= 4:
-        vals = [int(x) for x in nums[:4]]
+        vals = _clip_box_100([int(x) for x in nums[:4]])
         return f"{{<{vals[0]}><{vals[1]}><{vals[2]}><{vals[3]}>}}", vals
 
-    nums2 = _INT_RE.findall(t)
+    nums2 = _SIGNED_INT_RE.findall(t)
     if len(nums2) >= 4:
-        vals = [int(x) for x in nums2[:4]]
+        vals = _clip_box_100([int(x) for x in nums2[:4]])
         return f"{{<{vals[0]}><{vals[1]}><{vals[2]}><{vals[3]}>}}", vals
 
     return None, None
