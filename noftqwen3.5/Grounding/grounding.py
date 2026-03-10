@@ -194,12 +194,32 @@ def try_parse_json(text: str) -> Optional[Dict[str, Any]]:
     if not text:
         return None
 
-    try:
-        obj = json.loads(text)
+    def _coerce_json_object(obj: Any) -> Optional[Dict[str, Any]]:
         if isinstance(obj, dict):
             return obj
+        if isinstance(obj, list) and obj and isinstance(obj[0], dict):
+            return obj[0]
+        return None
+
+    try:
+        obj = json.loads(text)
+        parsed = _coerce_json_object(obj)
+        if parsed is not None:
+            return parsed
     except Exception:
         pass
+
+    list_start = text.find("[")
+    list_end = text.rfind("]")
+    if list_start != -1 and list_end != -1 and list_end > list_start:
+        snippet = text[list_start : list_end + 1]
+        try:
+            obj = json.loads(snippet)
+            parsed = _coerce_json_object(obj)
+            if parsed is not None:
+                return parsed
+        except Exception:
+            pass
 
     start = text.find("{")
     end = text.rfind("}")
@@ -207,8 +227,9 @@ def try_parse_json(text: str) -> Optional[Dict[str, Any]]:
         snippet = text[start : end + 1]
         try:
             obj = json.loads(snippet)
-            if isinstance(obj, dict):
-                return obj
+            parsed = _coerce_json_object(obj)
+            if parsed is not None:
+                return parsed
         except Exception:
             return None
 
@@ -218,35 +239,29 @@ def try_parse_json(text: str) -> Optional[Dict[str, Any]]:
 def apply_chat_template_with_thinking(
     processor: Any, messages: List[Dict[str, Any]], enable_thinking: bool
 ) -> str:
-    base_kwargs: Dict[str, Any] = {"tokenize": False, "add_generation_prompt": True}
-    attempts: List[Dict[str, Any]] = [
-        # Some versions expect template vars passed directly.
-        {**base_kwargs, "enable_thinking": enable_thinking},
-        # Some wrappers require chat_template_kwargs.
-        {
-            **base_kwargs,
-            "chat_template_kwargs": {"enable_thinking": enable_thinking},
-        },
-        # Backward-compatible alias fallback.
-        {
-            **base_kwargs,
-            "chat_template_kwargs": {
-                "enable_thinking": enable_thinking,
-                "thinking": enable_thinking,
-            },
-        },
-        base_kwargs,
-    ]
-    for kwargs in attempts:
-        try:
-            return processor.apply_chat_template(messages, **kwargs)
-        except TypeError:
-            continue
-    # Keep default behavior if processor has a custom signature.
-    return processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    # Pass enable_thinking as a top-level template argument.
+    return processor.apply_chat_template(
+        messages,
+        tokenize=False,
+        add_generation_prompt=True,
+        enable_thinking=enable_thinking,
+    )
 
 
-def strip_thinking_and_role_markers(text: str) -> str:
+def slice_generated_tokens(generated_ids: Any, inputs: Dict[str, Any]) -> List[Any]:
+    # For decoder-only batched generation with left padding, generated sequences share
+    # the same input width. Slicing by attention_mask.sum() leaks prompt suffix tokens.
+    if "input_ids" in inputs:
+        prompt_len = int(inputs["input_ids"].shape[1])
+    elif "attention_mask" in inputs:
+        prompt_len = int(inputs["attention_mask"].shape[1])
+    else:
+        raise KeyError("Expected input_ids or attention_mask in model inputs.")
+
+    return [generated_ids[i, prompt_len:] for i in range(generated_ids.shape[0])]
+
+
+def strip_output_wrappers(text: str) -> str:
     s = (text or "").strip()
     if not s:
         return s
@@ -255,14 +270,8 @@ def strip_thinking_and_role_markers(text: str) -> str:
     s = re.sub(r"^<\|im_start\|>\s*assistant\s*", "", s, flags=re.IGNORECASE)
     s = re.sub(r"^assistant\s*", "", s, flags=re.IGNORECASE)
     s = s.replace("<|im_end|>", "").strip()
-
-    # If model emitted reasoning, keep only content after </think>.
-    if "<think>" in s:
-        if "</think>" in s:
-            s = s.split("</think>", 1)[1].strip()
-        else:
-            # Keep incomplete content for regex fallback instead of dropping all text.
-            s = s.replace("<think>", "").strip()
+    s = re.sub(r"^```(?:json)?\s*", "", s, flags=re.IGNORECASE)
+    s = re.sub(r"\s*```$", "", s)
     return s
 
 
@@ -369,70 +378,6 @@ def load_vlm(model: str) -> Tuple[Any, Any]:
     return processor, vlm
 
 
-def call_lvlm_with_loaded(
-    processor: Any,
-    vlm: Any,
-    prompt: str,
-    image: Image.Image,
-    temperature: float,
-    enable_thinking: bool,
-    max_output_tokens: int,
-    debug_raw_output: bool = False,
-) -> Tuple[Optional[Dict[str, Any]], str]:
-    messages = [
-        {
-            "role": "user",
-            "content": [
-                {"type": "image", "image": image},
-                {"type": "text", "text": prompt},
-            ],
-        }
-    ]
-
-    text_input = apply_chat_template_with_thinking(
-        processor=processor, messages=messages, enable_thinking=enable_thinking
-    )
-
-    inputs = processor(
-        text=[text_input],
-        images=[image],
-        padding=True,
-        return_tensors="pt",
-    )
-    inputs = {k: v.to(vlm.device) for k, v in inputs.items()}
-
-    do_sample = temperature > 0
-    generation_kwargs: Dict[str, Any] = {
-        "max_new_tokens": max_output_tokens,
-        "do_sample": do_sample,
-    }
-    if do_sample:
-        generation_kwargs["temperature"] = max(temperature, 1e-5)
-
-    with torch.inference_mode():
-        generated_ids = vlm.generate(**inputs, **generation_kwargs)
-    prompt_len = inputs["input_ids"].shape[1]
-    generated_only = generated_ids[:, prompt_len:]
-
-    raw_text = processor.batch_decode(
-        generated_only,
-        skip_special_tokens=True,
-        clean_up_tokenization_spaces=False,
-    )[0].strip()
-    clean_text = strip_thinking_and_role_markers(raw_text)
-
-    if not raw_text:
-        raise RuntimeError("Model returned empty output.")
-
-    if debug_raw_output:
-        print("\n========== RAW_MODEL_OUTPUT_BEGIN ==========")
-        print(raw_text)
-        print("=========== RAW_MODEL_OUTPUT_END ===========\n")
-
-    parsed = try_parse_json(clean_text)
-    return parsed, clean_text or raw_text
-
-
 def call_lvlm_batch_with_loaded(
     processor: Any,
     vlm: Any,
@@ -443,6 +388,11 @@ def call_lvlm_batch_with_loaded(
     max_output_tokens: int,
     debug_raw_output: bool = False,
 ) -> List[Tuple[Optional[Dict[str, Any]], str]]:
+    if len(prompts) != len(images):
+        raise ValueError(
+            f"prompts/images length mismatch: {len(prompts)} vs {len(images)}"
+        )
+
     messages_list: List[List[Dict[str, Any]]] = []
     for prompt, image in zip(prompts, images):
         messages_list.append(
@@ -482,17 +432,14 @@ def call_lvlm_batch_with_loaded(
     with torch.inference_mode():
         generated_ids = vlm.generate(**inputs, **generation_kwargs)
 
-    prompt_lens = inputs["attention_mask"].sum(dim=1).tolist()
-    generated_only_list = [
-        generated_ids[i, int(prompt_lens[i]) :] for i in range(generated_ids.shape[0])
-    ]
+    generated_only_list = slice_generated_tokens(generated_ids, inputs)
     raw_texts = processor.batch_decode(
         generated_only_list,
         skip_special_tokens=True,
         clean_up_tokenization_spaces=False,
     )
     raw_texts = [x.strip() for x in raw_texts]
-    clean_texts = [strip_thinking_and_role_markers(x) for x in raw_texts]
+    clean_texts = [strip_output_wrappers(x) for x in raw_texts]
 
     if debug_raw_output:
         for i, txt in enumerate(raw_texts):
@@ -503,7 +450,7 @@ def call_lvlm_batch_with_loaded(
     results: List[Tuple[Optional[Dict[str, Any]], str]] = []
     for raw_txt, clean_txt in zip(raw_texts, clean_texts):
         txt = clean_txt or raw_txt or ""
-        results.append((try_parse_json(clean_txt), txt))
+        results.append((try_parse_json(txt), txt))
     return results
 
 
@@ -560,6 +507,7 @@ def run_dataset_eval_mode(processor: Any, vlm: Any) -> None:
     valid = 0
     sum_iou = 0.0
     acc50 = 0
+    batch_fallback_count = 0
 
     split_stats: Dict[str, Dict[str, int]] = {
         "all": {"total": 0, "valid": 0, "hit50": 0, "hit70": 0},
@@ -627,19 +575,24 @@ def run_dataset_eval_mode(processor: Any, vlm: Any) -> None:
                     debug_raw_output=debug_raw_output,
                 )
             except Exception as e:
+                batch_fallback_count += 1
+                print(
+                    f"Batch inference failed for chunk starting at {chunk_start}; "
+                    f"falling back to per-sample retries. error={e}"
+                )
                 batch_outputs = []
                 for p in prepared:
                     try:
-                        parsed, raw_text = call_lvlm_with_loaded(
+                        parsed, raw_text = call_lvlm_batch_with_loaded(
                             processor=processor,
                             vlm=vlm,
-                            prompt=p["prompt"],
-                            image=p["img"],
+                            prompts=[p["prompt"]],
+                            images=[p["img"]],
                             temperature=temperature,
                             enable_thinking=enable_thinking,
                             max_output_tokens=max_output_tokens,
                             debug_raw_output=debug_raw_output,
-                        )
+                        )[0]
                         batch_outputs.append((parsed, raw_text))
                     except Exception as e2:
                         rec = {
@@ -769,6 +722,7 @@ def run_dataset_eval_mode(processor: Any, vlm: Any) -> None:
         "limit": limit,
         "elapsed_seconds": time.time() - t0,
         "batch_size": batch_size,
+        "batch_fallback_count": batch_fallback_count,
     }
 
     with open(metrics_path, "w", encoding="utf-8") as f:
