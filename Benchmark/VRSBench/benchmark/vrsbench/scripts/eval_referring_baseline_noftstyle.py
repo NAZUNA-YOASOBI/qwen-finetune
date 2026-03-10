@@ -75,7 +75,7 @@ def bbox2d_to_pixels(bbox_2d: list[float], width: int, height: int) -> list[int]
     return clamp_bbox_xyxy(px, width, height)
 
 
-def compute_iou_xyxy(bbox1: list[int], bbox2: list[int]) -> float:
+def compute_iou_xyxy(bbox1: list[int], bbox2: list[int], *, return_parts: bool = False):
     """
     与 eval_vrsbench_referring.py 保持一致，复刻官方 eval_utils.py 的 computeIoU（面积计算含 +1）。
     bbox: [x1, y1, x2, y2]
@@ -96,8 +96,13 @@ def compute_iou_xyxy(bbox1: list[int], bbox2: list[int]) -> float:
     area2 = (x4 - x3 + 1) * (y4 - y3 + 1)
     union = area1 + area2 - inter_area
     if union <= 0:
+        if return_parts:
+            return 0.0, int(inter_area), int(union)
         return 0.0
-    return float(inter_area) / float(union)
+    iou = float(inter_area) / float(union)
+    if return_parts:
+        return float(iou), int(inter_area), int(union)
+    return float(iou)
 
 
 def parse_gt_bbox_1000(gt: str) -> list[float] | None:
@@ -150,13 +155,15 @@ def main() -> None:
         except Exception:
             expected_num_samples = None
 
-    split_stats: dict[str, dict[str, int]] = {
-        "unique": {"total": 0, "valid": 0, "hit50": 0, "hit70": 0},
-        "non_unique": {"total": 0, "valid": 0, "hit50": 0, "hit70": 0},
-        "all": {"total": 0, "valid": 0, "hit50": 0, "hit70": 0},
+    split_stats: dict[str, dict[str, int | float]] = {
+        "unique": {"total": 0, "valid": 0, "hit50": 0, "hit70": 0, "sum_iou": 0.0, "cum_i": 0, "cum_u": 0},
+        "non_unique": {"total": 0, "valid": 0, "hit50": 0, "hit70": 0, "sum_iou": 0.0, "cum_i": 0, "cum_u": 0},
+        "all": {"total": 0, "valid": 0, "hit50": 0, "hit70": 0, "sum_iou": 0.0, "cum_i": 0, "cum_u": 0},
     }
     valid = 0
     sum_iou = 0.0
+    cum_i = 0
+    cum_u = 0
 
     for row in rows:
         split_key = "unique" if bool(row.get("is_unique", row.get("unique", False))) else "non_unique"
@@ -183,11 +190,19 @@ def main() -> None:
         if pred_xyxy is None:
             continue
 
-        iou = compute_iou_xyxy(pred_xyxy, gt_xyxy)
+        iou, inter, union = compute_iou_xyxy(pred_xyxy, gt_xyxy, return_parts=True)
         valid += 1
         sum_iou += iou
+        cum_i += int(inter)
+        cum_u += int(union)
         split_stats["all"]["valid"] += 1
         split_stats[split_key]["valid"] += 1
+        split_stats["all"]["sum_iou"] += float(iou)
+        split_stats[split_key]["sum_iou"] += float(iou)
+        split_stats["all"]["cum_i"] += int(inter)
+        split_stats[split_key]["cum_i"] += int(inter)
+        split_stats["all"]["cum_u"] += int(union)
+        split_stats[split_key]["cum_u"] += int(union)
         if iou >= 0.5:
             split_stats["all"]["hit50"] += 1
             split_stats[split_key]["hit50"] += 1
@@ -204,8 +219,12 @@ def main() -> None:
         split_metrics[key] = {
             "count_total": total_k,
             "count_valid_for_iou": valid_k,
-            "acc@0.5": (hit50_k / total_k) if total_k > 0 else 0.0,
-            "acc@0.7": (hit70_k / total_k) if total_k > 0 else 0.0,
+            "acc@0.5": ((hit50_k / total_k) * 100.0) if total_k > 0 else 0.0,
+            "acc@0.7": ((hit70_k / total_k) * 100.0) if total_k > 0 else 0.0,
+            "meanIoU": ((float(split_stats[key]["sum_iou"]) / total_k) * 100.0) if total_k > 0 else 0.0,
+            "cumIoU": ((float(split_stats[key]["cum_i"]) / float(split_stats[key]["cum_u"])) * 100.0)
+            if int(split_stats[key]["cum_u"]) > 0
+            else 0.0,
             "acc@0.5_count": hit50_k,
             "acc@0.7_count": hit70_k,
         }
@@ -220,6 +239,10 @@ def main() -> None:
             "total": int(total_k),
             "Acc@0.5": float(hit50_k) / denom_k * 100.0,
             "Acc@0.7": float(hit70_k) / denom_k * 100.0,
+            "meanIoU": (float(split_stats[key]["sum_iou"]) / denom_k) * 100.0,
+            "cumIoU": ((float(split_stats[key]["cum_i"]) / float(split_stats[key]["cum_u"])) * 100.0)
+            if int(split_stats[key]["cum_u"]) > 0
+            else 0.0,
         }
 
     config_hint: dict[str, Any] = {}
@@ -256,9 +279,10 @@ def main() -> None:
         "total_selected": len(rows),
         "processed": len(rows),
         "valid_for_iou": valid,
-        "mean_iou": (sum_iou / valid) if valid > 0 else 0.0,
-        "acc@0.5": (split_stats["all"]["hit50"] / split_stats["all"]["total"]) if split_stats["all"]["total"] > 0 else 0.0,
-        "acc@0.7": (split_stats["all"]["hit70"] / split_stats["all"]["total"]) if split_stats["all"]["total"] > 0 else 0.0,
+        "mean_iou": ((sum_iou / split_stats["all"]["total"]) * 100.0) if split_stats["all"]["total"] > 0 else 0.0,
+        "cum_iou": ((float(cum_i) / float(cum_u)) * 100.0) if cum_u > 0 else 0.0,
+        "acc@0.5": ((split_stats["all"]["hit50"] / split_stats["all"]["total"]) * 100.0) if split_stats["all"]["total"] > 0 else 0.0,
+        "acc@0.7": ((split_stats["all"]["hit70"] / split_stats["all"]["total"]) * 100.0) if split_stats["all"]["total"] > 0 else 0.0,
         "acc@0.5_count": split_stats["all"]["hit50"],
         "acc@0.7_count": split_stats["all"]["hit70"],
         "by_split": split_metrics,
