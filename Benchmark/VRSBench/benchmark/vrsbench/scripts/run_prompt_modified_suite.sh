@@ -211,7 +211,7 @@ prepare_model_dir() {
 BASELINE_DIR="$OUT_ROOT/01_baseline_qwen3vl8b"
 MERGER_ONLY_DIR="$OUT_ROOT/02_merger_only_epoch10_fixed256"
 MERGER_LORA_DIR="$OUT_ROOT/03_merger_lora_epoch10_fixed256"
-SMART_DIR="$OUT_ROOT/04_merger_lora_epoch10_smartresize"
+SMART_DIR="$OUT_ROOT/04_merger_lora_epoch10_smartresize512_sampleavg"
 QNATIVE_DIR="$OUT_ROOT/05_qwen_native_epoch10"
 
 for d in "$BASELINE_DIR" "$MERGER_ONLY_DIR" "$MERGER_LORA_DIR" "$SMART_DIR" "$QNATIVE_DIR"; do
@@ -308,8 +308,8 @@ run_grounding_eval grounding_merger_lora_eval "$MERGER_LORA_DIR/grounding_merger
 run_sharded_generate caption_smartbucket imgid 128 benchmark/vrsbench/scripts/generate_dinov3.py "$SMART_DIR" \
   --qwen-model-dir models/Qwen3-VL-8B-Instruct \
   --dinov3-dir models/dinov3/dinov3-vitl16-pretrain-sat493m \
-  --merger-ckpt checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_run_20260213_153823/epoch10/merger.safetensors \
-  --lora-dir checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_run_20260213_153823/epoch10/lora \
+  --merger-ckpt checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/merger.safetensors \
+  --lora-dir checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/lora \
   --data benchmark/vrsbench/data/vrsbench_images_test.jsonl \
   --image-size 256 \
   --smart-resize-min-pixels 65536 \
@@ -317,8 +317,8 @@ run_sharded_generate caption_smartbucket imgid 128 benchmark/vrsbench/scripts/ge
   --max-new-tokens 256 \
   --dtype bf16
 run_dino_fix caption_smartbucket_fix "$SMART_DIR/caption_smartbucket.jsonl" \
-  checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_run_20260213_153823/epoch10/merger.safetensors \
-  checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_run_20260213_153823/epoch10/lora 128 \
+  checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/merger.safetensors \
+  checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/lora 128 \
   --dinov3-dir models/dinov3/dinov3-vitl16-pretrain-sat493m \
   --image-size 256 \
   --smart-resize-min-pixels 65536 \
@@ -328,8 +328,8 @@ run_caption_eval caption_smartbucket_eval "$SMART_DIR/caption_smartbucket.jsonl"
 run_sharded_generate grounding_smartbucket qid 128 benchmark/vrsbench/scripts/generate_referring_dinov3.py "$SMART_DIR" \
   --qwen-model-dir models/Qwen3-VL-8B-Instruct \
   --dinov3-dir models/dinov3/dinov3-vitl16-pretrain-sat493m \
-  --merger-ckpt checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_run_20260213_153823/epoch10/merger.safetensors \
-  --lora-dir checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_run_20260213_153823/epoch10/lora \
+  --merger-ckpt checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/merger.safetensors \
+  --lora-dir checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/lora \
   --data benchmark/vrsbench/data/vrsbench_referring_test.jsonl \
   --image-size 256 \
   --smart-resize-min-pixels 65536 \

@@ -136,7 +136,7 @@ def main() -> None:
     parser.add_argument("--baseline-dir", type=str, default="benchmark/vrsbench/eval/prompt_modified/01_baseline_qwen3vl8b")
     parser.add_argument("--merger-only-dir", type=str, default="benchmark/vrsbench/eval/prompt_modified/02_merger_only_epoch10_fixed256")
     parser.add_argument("--merger-lora-dir", type=str, default="benchmark/vrsbench/eval/prompt_modified/03_merger_lora_epoch10_fixed256")
-    parser.add_argument("--smartbucket-dir", type=str, default="benchmark/vrsbench/eval/prompt_modified/04_merger_lora_epoch10_smartresize")
+    parser.add_argument("--smartbucket-dir", type=str, default="benchmark/vrsbench/eval/prompt_modified/04_merger_lora_epoch10_smartresize512_sampleavg")
     parser.add_argument("--qwen-native-dir", type=str, default="benchmark/vrsbench/eval/prompt_modified/05_qwen_native_epoch10")
     parser.add_argument("--out", type=str, default="benchmark/vrsbench/eval/prompt_modified/compare_bench_vs_ours.md")
     args = parser.parse_args()
@@ -148,7 +148,7 @@ def main() -> None:
         ("Ours-baseline8b", _resolve_from_project(args.baseline_dir)),
         ("Ours-merger_only-epoch10-fixed256", _resolve_from_project(args.merger_only_dir)),
         ("Ours-merger_lora-epoch10-fixed256", _resolve_from_project(args.merger_lora_dir)),
-        ("Ours-merger_lora-epoch10-smartresize", _resolve_from_project(args.smartbucket_dir)),
+        ("Ours-merger_lora-epoch10-smartresize512-sampleavg", _resolve_from_project(args.smartbucket_dir)),
         ("Ours-qwen_native-epoch10", _resolve_from_project(args.qwen_native_dir)),
     ]
 

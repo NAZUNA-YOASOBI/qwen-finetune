@@ -15,10 +15,10 @@
    - `DINOv3 + merger + LoRA`
    - checkpoint: `checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro2_6_ga4_effective32_taskseq_resume_from_epoch5_20260208/epoch10/merger.safetensors`
    - lora: `checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro2_6_ga4_effective32_taskseq_resume_from_epoch5_20260208/epoch10/lora`
-4. `04_merger_lora_epoch10_smartresize512`
+4. `04_merger_lora_epoch10_smartresize512_sampleavg`
    - `DINOv3 + merger + LoRA + smart resize`
-   - checkpoint: `checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_run_20260213_153823/epoch10/merger.safetensors`
-   - lora: `checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_run_20260213_153823/epoch10/lora`
+   - checkpoint: `checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/merger.safetensors`
+   - lora: `checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/lora`
 5. `05_qwen_native_epoch10`
    - 原生 `Qwen3-VL` 视觉编码器 + merger + LoRA
    - checkpoint: `checkpoints/vrsbench_joint/merger_lora_8b_qwen_native_micro8_8_ga2_effective32_wd001_taskseq_run_20260302_160151/epoch10/merger.safetensors`
@@ -38,18 +38,21 @@
   - 最终对比报告
   - 每个模型的 `caption_summary.json`
   - 每个模型的 `grounding_summary.json`
+- `benchmark/vrsbench/outputs/`
+  - `17_qwen8b_baseline_noftstyle_20260308/`
+  - `18_qwen8b_merger_lora_epoch10_smartresize512_sampleavg_20260310/`
 
 ## 未复制内容
 
-以下内容刻意不放入本目录：
+以下内容默认不放入本目录：
 
 - 模型权重
 - LoRA 权重
 - DINOv3 权重
 - 原始图片数据集
-- 大体积原始预测文件 `*.jsonl`
+- 其他大体积原始预测文件 `*.jsonl`
 
-这样做是为了控制 GitHub 仓库体积，同时避免把不必要的大文件混入版本管理。
+这样做是为了控制 GitHub 仓库体积，同时避免把不必要的大文件混入版本管理。当前仅额外保留了两组 VRSBench 输出，分别用于原生 baseline 和最新 smartresize512 结果复核。
 
 ## 结果入口
 
@@ -62,7 +65,7 @@
 - `benchmark/vrsbench/eval/prompt_modified/01_baseline_qwen3vl8b/`
 - `benchmark/vrsbench/eval/prompt_modified/02_merger_only_epoch10_fixed256/`
 - `benchmark/vrsbench/eval/prompt_modified/03_merger_lora_epoch10_fixed256/`
-- `benchmark/vrsbench/eval/prompt_modified/04_merger_lora_epoch10_smartresize512/`
+- `benchmark/vrsbench/eval/prompt_modified/04_merger_lora_epoch10_smartresize512_sampleavg/`
 - `benchmark/vrsbench/eval/prompt_modified/05_qwen_native_epoch10/`
 
 ## 说明
