@@ -98,7 +98,7 @@ launch_caption_epoch() {
   local eval_log="${LOG_DIR}/epoch${epoch}_caption_eval.log"
 
   if [[ "${SHARD_WORLD_SIZE}" -eq 1 ]]; then
-    run_cmd bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[0]} '${PY}' benchmark/sva_deepstack_ca/scripts/generate_sva_deepstack_ca.py \
+    run_cmd bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[0]} '${PY}' benchmark/vrsbench/scripts/generate_sva_deepstack_ca.py \
       --qwen-model-dir '${MODEL_DIR}' \
       --dinov3-dir '${DINOV3_DIR}' \
       --merger-ckpt '${ckpt_dir}/merger.safetensors' \
@@ -115,7 +115,7 @@ launch_caption_epoch() {
       --output '${merged_output}' \
       --key imgid \
       --delete-inputs"
-    run_cmd bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[0]} '${PY}' benchmark/sva_deepstack_ca/scripts/fix_max_new_tokens_hits_sva_deepstack_ca.py \
+    run_cmd bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[0]} '${PY}' benchmark/vrsbench/scripts/fix_max_new_tokens_hits_sva_deepstack_ca.py \
       --preds '${merged_output}' \
       --output '${patch0_output}' \
       --qwen-model-dir '${MODEL_DIR}' \
@@ -137,7 +137,7 @@ launch_caption_epoch() {
       --delete-patches"
   else
     if [[ "${DRY_RUN}" == "1" ]]; then
-      run_bg_cmd bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[0]} '${PY}' benchmark/sva_deepstack_ca/scripts/generate_sva_deepstack_ca.py \
+      run_bg_cmd bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[0]} '${PY}' benchmark/vrsbench/scripts/generate_sva_deepstack_ca.py \
         --qwen-model-dir '${MODEL_DIR}' \
         --dinov3-dir '${DINOV3_DIR}' \
         --merger-ckpt '${ckpt_dir}/merger.safetensors' \
@@ -149,7 +149,7 @@ launch_caption_epoch() {
         --shard-world-size 2 \
         --shard-rank 0 \
         ${SHARD_WEIGHTS:+--shard-weights '${SHARD_WEIGHTS}'} > '${log0}' 2>&1"
-      run_bg_cmd bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[1]} '${PY}' benchmark/sva_deepstack_ca/scripts/generate_sva_deepstack_ca.py \
+      run_bg_cmd bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[1]} '${PY}' benchmark/vrsbench/scripts/generate_sva_deepstack_ca.py \
         --qwen-model-dir '${MODEL_DIR}' \
         --dinov3-dir '${DINOV3_DIR}' \
         --merger-ckpt '${ckpt_dir}/merger.safetensors' \
@@ -166,7 +166,7 @@ launch_caption_epoch() {
         --output '${merged_output}' \
         --key imgid \
         --delete-inputs"
-      run_bg_cmd bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[0]} '${PY}' benchmark/sva_deepstack_ca/scripts/fix_max_new_tokens_hits_sva_deepstack_ca.py \
+      run_bg_cmd bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[0]} '${PY}' benchmark/vrsbench/scripts/fix_max_new_tokens_hits_sva_deepstack_ca.py \
         --preds '${merged_output}' \
         --output '${patch0_output}' \
         --qwen-model-dir '${MODEL_DIR}' \
@@ -182,7 +182,7 @@ launch_caption_epoch() {
         --shard-world-size 2 \
         --shard-rank 0 \
         ${SHARD_WEIGHTS:+--shard-weights '${SHARD_WEIGHTS}'} > '${fix_log0}' 2>&1"
-      run_bg_cmd bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[1]} '${PY}' benchmark/sva_deepstack_ca/scripts/fix_max_new_tokens_hits_sva_deepstack_ca.py \
+      run_bg_cmd bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[1]} '${PY}' benchmark/vrsbench/scripts/fix_max_new_tokens_hits_sva_deepstack_ca.py \
         --preds '${merged_output}' \
         --output '${patch1_output}' \
         --qwen-model-dir '${MODEL_DIR}' \
@@ -204,7 +204,7 @@ launch_caption_epoch() {
         --key imgid \
         --delete-patches"
     else
-      bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[0]} '${PY}' benchmark/sva_deepstack_ca/scripts/generate_sva_deepstack_ca.py \
+      bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[0]} '${PY}' benchmark/vrsbench/scripts/generate_sva_deepstack_ca.py \
         --qwen-model-dir '${MODEL_DIR}' \
         --dinov3-dir '${DINOV3_DIR}' \
         --merger-ckpt '${ckpt_dir}/merger.safetensors' \
@@ -217,7 +217,7 @@ launch_caption_epoch() {
         --shard-rank 0 \
         ${SHARD_WEIGHTS:+--shard-weights '${SHARD_WEIGHTS}'} > '${log0}' 2>&1" &
       local pid0=$!
-      bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[1]} '${PY}' benchmark/sva_deepstack_ca/scripts/generate_sva_deepstack_ca.py \
+      bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[1]} '${PY}' benchmark/vrsbench/scripts/generate_sva_deepstack_ca.py \
         --qwen-model-dir '${MODEL_DIR}' \
         --dinov3-dir '${DINOV3_DIR}' \
         --merger-ckpt '${ckpt_dir}/merger.safetensors' \
@@ -238,7 +238,7 @@ launch_caption_epoch() {
         --key imgid \
         --delete-inputs"
 
-      bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[0]} '${PY}' benchmark/sva_deepstack_ca/scripts/fix_max_new_tokens_hits_sva_deepstack_ca.py \
+      bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[0]} '${PY}' benchmark/vrsbench/scripts/fix_max_new_tokens_hits_sva_deepstack_ca.py \
         --preds '${merged_output}' \
         --output '${patch0_output}' \
         --qwen-model-dir '${MODEL_DIR}' \
@@ -255,7 +255,7 @@ launch_caption_epoch() {
         --shard-rank 0 \
         ${SHARD_WEIGHTS:+--shard-weights '${SHARD_WEIGHTS}'} > '${fix_log0}' 2>&1" &
       local fix_pid0=$!
-      bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[1]} '${PY}' benchmark/sva_deepstack_ca/scripts/fix_max_new_tokens_hits_sva_deepstack_ca.py \
+      bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[1]} '${PY}' benchmark/vrsbench/scripts/fix_max_new_tokens_hits_sva_deepstack_ca.py \
         --preds '${merged_output}' \
         --output '${patch1_output}' \
         --qwen-model-dir '${MODEL_DIR}' \
@@ -312,7 +312,7 @@ launch_grounding_epoch() {
   local eval_log="${LOG_DIR}/epoch${epoch}_grounding_eval.log"
 
   if [[ "${SHARD_WORLD_SIZE}" -eq 1 ]]; then
-    run_cmd bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[0]} '${PY}' benchmark/sva_deepstack_ca/scripts/generate_referring_sva_deepstack_ca.py \
+    run_cmd bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[0]} '${PY}' benchmark/vrsbench/scripts/generate_referring_sva_deepstack_ca.py \
       --qwen-model-dir '${MODEL_DIR}' \
       --dinov3-dir '${DINOV3_DIR}' \
       --merger-ckpt '${ckpt_dir}/merger.safetensors' \
@@ -331,7 +331,7 @@ launch_grounding_epoch() {
       --delete-inputs"
   else
     if [[ "${DRY_RUN}" == "1" ]]; then
-      run_bg_cmd bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[0]} '${PY}' benchmark/sva_deepstack_ca/scripts/generate_referring_sva_deepstack_ca.py \
+      run_bg_cmd bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[0]} '${PY}' benchmark/vrsbench/scripts/generate_referring_sva_deepstack_ca.py \
         --qwen-model-dir '${MODEL_DIR}' \
         --dinov3-dir '${DINOV3_DIR}' \
         --merger-ckpt '${ckpt_dir}/merger.safetensors' \
@@ -343,7 +343,7 @@ launch_grounding_epoch() {
         --shard-world-size 2 \
         --shard-rank 0 \
         ${SHARD_WEIGHTS:+--shard-weights '${SHARD_WEIGHTS}'} > '${log0}' 2>&1"
-      run_bg_cmd bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[1]} '${PY}' benchmark/sva_deepstack_ca/scripts/generate_referring_sva_deepstack_ca.py \
+      run_bg_cmd bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[1]} '${PY}' benchmark/vrsbench/scripts/generate_referring_sva_deepstack_ca.py \
         --qwen-model-dir '${MODEL_DIR}' \
         --dinov3-dir '${DINOV3_DIR}' \
         --merger-ckpt '${ckpt_dir}/merger.safetensors' \
@@ -361,7 +361,7 @@ launch_grounding_epoch() {
         --key qid \
         --delete-inputs"
     else
-      bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[0]} '${PY}' benchmark/sva_deepstack_ca/scripts/generate_referring_sva_deepstack_ca.py \
+      bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[0]} '${PY}' benchmark/vrsbench/scripts/generate_referring_sva_deepstack_ca.py \
         --qwen-model-dir '${MODEL_DIR}' \
         --dinov3-dir '${DINOV3_DIR}' \
         --merger-ckpt '${ckpt_dir}/merger.safetensors' \
@@ -374,7 +374,7 @@ launch_grounding_epoch() {
         --shard-rank 0 \
         ${SHARD_WEIGHTS:+--shard-weights '${SHARD_WEIGHTS}'} > '${log0}' 2>&1" &
       local pid0=$!
-      bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[1]} '${PY}' benchmark/sva_deepstack_ca/scripts/generate_referring_sva_deepstack_ca.py \
+      bash -lc "CUDA_VISIBLE_DEVICES=${GPU_ARRAY[1]} '${PY}' benchmark/vrsbench/scripts/generate_referring_sva_deepstack_ca.py \
         --qwen-model-dir '${MODEL_DIR}' \
         --dinov3-dir '${DINOV3_DIR}' \
         --merger-ckpt '${ckpt_dir}/merger.safetensors' \
