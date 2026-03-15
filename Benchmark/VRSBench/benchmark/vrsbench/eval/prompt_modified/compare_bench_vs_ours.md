@@ -19,6 +19,7 @@
 | Ours | Ours-merger_only-epoch10-fixed256 | 36.09 | 21.29 | 12.81 | 7.99 | 20.22 | 30.34 | 13.81 | - | 65.21 |
 | Ours | Ours-merger_lora-epoch10-fixed256 | 44.69 | 28.20 | 18.22 | 12.04 | 20.61 | 34.15 | 24.58 | - | 50.17 |
 | Ours | Ours-merger_lora-epoch10-smartresize512-sampleavg | 45.15 | 28.57 | 18.54 | 12.35 | 20.74 | 34.46 | 26.24 | - | 49.82 |
+| Ours | Ours-sva_deepstack_ca-epoch10 | 45.13 | 28.42 | 18.29 | 12.05 | 20.44 | 34.11 | 25.41 | - | 49.20 |
 | Ours | Ours-qwen_native-epoch10 | 45.14 | 28.76 | 18.69 | 12.41 | 21.39 | 34.97 | 27.35 | - | 51.45 |
 
 ## Grounding 对比
@@ -34,4 +35,5 @@
 | Ours | Ours-merger_only-epoch10-fixed256 | 4.38 | 1.25 | 2.00 | 0.51 | 2.99 | 0.82 |
 | Ours | Ours-merger_lora-epoch10-fixed256 | 63.73 | 30.89 | 55.51 | 32.59 | 58.94 | 31.88 |
 | Ours | Ours-merger_lora-epoch10-smartresize512-sampleavg | 80.30 | 60.35 | 68.36 | 49.21 | 73.34 | 53.85 |
+| Ours | Ours-sva_deepstack_ca-epoch10 | 77.05 | 54.74 | 65.65 | 45.74 | 70.40 | 49.49 |
 | Ours | Ours-qwen_native-epoch10 | 72.77 | 40.69 | 68.45 | 45.98 | 70.25 | 43.78 |

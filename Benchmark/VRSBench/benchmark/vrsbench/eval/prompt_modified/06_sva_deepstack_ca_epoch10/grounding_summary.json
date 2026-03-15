@@ -1,0 +1,56 @@
+{
+  "task": "vrsbench_referring",
+  "thresholds": [
+    0.5,
+    0.7
+  ],
+  "expected_num_samples": 16159,
+  "num_rows_in_file": 16159,
+  "preds": "benchmark/vrsbench/outputs/19_qwen8b_sva_deepstack_ca_epoch10_20260315/grounding_epoch10.jsonl",
+  "meta": "benchmark/vrsbench/data/vrsbench_referring_meta.json",
+  "config_hint": {
+    "qwen_model_dir": "models/Qwen3-VL-8B-Instruct",
+    "dinov3_dir": "models/dinov3/dinov3-vitl16-pretrain-sat493m",
+    "merger_ckpt": "checkpoints/vrsbench_joint/merger_lora_8b_sva_deepstack_ca_micro8_8_ga2_effective32_taskseq_sampleavg_wd001_run_20260313_083153/epoch10/merger.safetensors",
+    "lora_dir": "checkpoints/vrsbench_joint/merger_lora_8b_sva_deepstack_ca_micro8_8_ga2_effective32_taskseq_sampleavg_wd001_run_20260313_083153/epoch10/lora",
+    "prompt_template": "[refer] where can I locate the <p>{ref_sentence}</p>? Return exactly one box in this format: {{<x1><y1><x2><y2>}}. Output integers in [0,100] only. If you internally use [0,1000], divide each coordinate by 10 and round to nearest integer before output. Hard rules: 0<=x1<x2<=100, 0<=y1<y2<=100. Return one line only and nothing else.",
+    "max_new_tokens": 256,
+    "requested_batch_size": 128,
+    "image_size": null,
+    "smart_resize_min_pixels": 65536,
+    "smart_resize_max_pixels": 16777216,
+    "resize_mode": "fixed_grid",
+    "decode_strategy": "generation_config_default",
+    "do_sample": null,
+    "temperature": null,
+    "top_p": null,
+    "top_k": null,
+    "num_beams": null,
+    "repetition_penalty": null,
+    "no_repeat_ngram_size": null,
+    "seed": null
+  },
+  "splits": {
+    "all": {
+      "total": 16159,
+      "Acc@0.5": 70.40039606411288,
+      "Acc@0.7": 49.48944860449285,
+      "meanIoU": 60.23678741438779,
+      "cumIoU": 71.10850345518104
+    },
+    "unique": {
+      "total": 6736,
+      "Acc@0.5": 77.04869358669833,
+      "Acc@0.7": 54.73574821852731,
+      "meanIoU": 65.62588286502024,
+      "cumIoU": 74.45615544751647
+    },
+    "non_unique": {
+      "total": 9423,
+      "Acc@0.5": 65.64788283985992,
+      "Acc@0.7": 45.739148891011354,
+      "meanIoU": 56.38441057522308,
+      "cumIoU": 63.21668256702817
+    }
+  }
+}

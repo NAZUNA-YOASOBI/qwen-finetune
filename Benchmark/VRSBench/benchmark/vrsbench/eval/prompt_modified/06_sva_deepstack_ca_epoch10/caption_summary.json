@@ -1,0 +1,61 @@
+{
+  "num_images": 9350,
+  "metrics": {
+    "BLEU-1": 0.45129207383278946,
+    "BLEU-2": 0.2842436197299763,
+    "BLEU-3": 0.18288929310934107,
+    "BLEU-4": 0.12045639348279574,
+    "METEOR": 0.2043725199668268,
+    "ROUGE_L": 0.34112492440135367,
+    "CIDEr": 0.25413805224399877
+  },
+  "metrics_x100": {
+    "BLEU-1": 45.129207383278946,
+    "BLEU-2": 28.42436197299763,
+    "BLEU-3": 18.28892931093411,
+    "BLEU-4": 12.045639348279574,
+    "METEOR": 20.43725199668268,
+    "ROUGE_L": 34.11249244013537,
+    "CIDEr": 25.413805224399876
+  },
+  "avg_len_words": 49.1951871657754,
+  "refs": "benchmark/vrsbench/data/vrsbench_refs_test.json",
+  "preds": "benchmark/vrsbench/outputs/19_qwen8b_sva_deepstack_ca_epoch10_20260315/caption_epoch10.jsonl",
+  "samples": [
+    {
+      "imgid": "0",
+      "prediction": "The high-resolution image from GoogleEarth features a collection of large and small vehicles parked along the street. There are five large vehicles aligned parallel to each other, spanning from the left edge to the center of the image. Two small vehicles are located on the right side of the image; one is situated closer to the bottom-right corner, while the other is positioned more towards the top-right side.",
+      "refs": [
+        "The aerial image from GoogleEarth features a group of large yellow buses lined up on the left side, and two small vehicles, one on the top-right and another large vehicle on the bottom-right side of the image. The buses are parked in a lot adjacent to a green area and a road running roughly north-south."
+      ]
+    },
+    {
+      "imgid": "1",
+      "prediction": "This high-resolution image from GoogleEarth shows a section of a road with its surroundings. There are two large vehicles present; one is positioned towards the left and is the top-most in the image, while the other is the bottom-most in the image. There are also two small vehicles, one located at the bottom and to the left and the other towards the right. The road is surrounded by greenery on either side, with some buildings visible on the left.",
+      "refs": [
+        "The image from GoogleEarth captures a section of a road with three vehicles visible. One large vehicle is positioned towards the middle-left side of the frame, two small vehicles are located at the top of the frame and the other at the bottom, with the road curving around the landscape."
+      ]
+    },
+    {
+      "imgid": "2",
+      "prediction": "The image, sourced from GoogleEarth, depicts a section of a parking area without specifying the resolution. There are two small vehicles visible, one located near the top-left of the image and another roughly at the center. Additionally, there is a structure with a blue roof adjacent to the bottom-center area of the image.",
+      "refs": [
+        "The high-resolution image from GoogleEarth shows a parking area with vehicles and asphalt surfaces. A small vehicle is positioned towards the top of this aerial view."
+      ]
+    },
+    {
+      "imgid": "3",
+      "prediction": "The high-resolution image from GoogleEarth displays a parking area with a variety of large vehicles. Among these, there are nine distinguishable large vehicles, including trucks and buses, positioned throughout the space. The vehicles are arranged in various orientations, with most of them along the top and left sides of the frame. Notably, there is one large vehicle located at the bottom-right, which is the bottom-most among its category. Another large vehicle is unique in being positioned at the left-most part of the image.",
+      "refs": [
+        "The aerial image, sourced from GoogleEarth with high resolution, shows a parking lot with large vehicles arranged neatly in rows. Most of the large vehicles are white, and they are predominantly parked in a north-south alignment. There is a large vehicle at the left edge of the road."
+      ]
+    },
+    {
+      "imgid": "4",
+      "prediction": "The high-resolution image from GoogleEarth shows a parking area with a variety of vehicles. There are several large vehicles positioned towards the right side of the image, with one occupying the right-most position. Additionally, there are multiple small vehicles scattered throughout the parking space. The asphalt surface of the parking area is marked with parking lines, and there are patches of grass around the area.",
+      "refs": [
+        "A high-resolution Google Earth image capturing a gray parking lot with large vehicles and a small vehicle. The large vehicles are aligned in parallel rows. A small vehicle is positioned near the top-right corner."
+      ]
+    }
+  ]
+}
