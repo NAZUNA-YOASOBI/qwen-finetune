@@ -32,12 +32,16 @@ def _extract_box(text: str) -> tuple[str | None, list[int] | None]:
     t = str(text or "")
     nums = _ANGLE_INT_RE.findall(t)
     if len(nums) >= 4:
-        vals = [int(x) for x in nums[:4]]
+        vals = [max(0, min(100, int(x))) for x in nums[:4]]
+        if vals[0] >= vals[2] or vals[1] >= vals[3]:
+            return None, None
         return f"{{<{vals[0]}><{vals[1]}><{vals[2]}><{vals[3]}>}}", vals
 
     nums2 = _INT_RE.findall(t)
     if len(nums2) >= 4:
-        vals = [int(x) for x in nums2[:4]]
+        vals = [max(0, min(100, int(x))) for x in nums2[:4]]
+        if vals[0] >= vals[2] or vals[1] >= vals[3]:
+            return None, None
         return f"{{<{vals[0]}><{vals[1]}><{vals[2]}><{vals[3]}>}}", vals
 
     return None, None

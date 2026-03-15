@@ -92,7 +92,6 @@ run_dino_fix() {
       --merger-ckpt "$merger_ckpt" \
       --lora-dir "$lora_dir" \
       --max-new-tokens 256 \
-      --max-sentences 7 \
       --max-retries 10 \
       --batch-size "$fix_batch_size" \
       --shard-world-size 2 \
@@ -108,7 +107,6 @@ run_dino_fix() {
       --merger-ckpt "$merger_ckpt" \
       --lora-dir "$lora_dir" \
       --max-new-tokens 256 \
-      --max-sentences 7 \
       --max-retries 10 \
       --batch-size "$fix_batch_size" \
       --shard-world-size 2 \
@@ -123,7 +121,6 @@ run_dino_fix() {
       --output "$patch0" \
       --merger-ckpt "$merger_ckpt" \
       --max-new-tokens 256 \
-      --max-sentences 7 \
       --max-retries 10 \
       --batch-size "$fix_batch_size" \
       --shard-world-size 2 \
@@ -138,7 +135,6 @@ run_dino_fix() {
       --output "$patch1" \
       --merger-ckpt "$merger_ckpt" \
       --max-new-tokens 256 \
-      --max-sentences 7 \
       --max-retries 10 \
       --batch-size "$fix_batch_size" \
       --shard-world-size 2 \
@@ -231,7 +227,6 @@ run_sharded_generate caption_baseline imgid 128 benchmark/vrsbench/scripts/gener
   --model-dir models/Qwen3-VL-8B-Instruct \
   --prompt "$BASELINE_CAPTION_PROMPT" \
   --max-new-tokens 256 \
-  --max-sentences 4 \
   --max-retries 10 > "$LOG_ROOT/caption_baseline_fix.log" 2>&1
 run_caption_eval caption_baseline_eval "$BASELINE_DIR/caption_baseline.jsonl" "$BASELINE_DIR/caption_summary.json"
 run_sharded_generate grounding_baseline qid 128 benchmark/vrsbench/scripts/generate_referring_baseline_noftstyle.py "$BASELINE_DIR" \
@@ -353,7 +348,6 @@ CUDA_VISIBLE_DEVICES=0 "$PY" benchmark/vrsbench/scripts/fix_max_new_tokens_hits_
   --lora-dir checkpoints/vrsbench_joint/merger_lora_8b_qwen_native_micro8_8_ga2_effective32_wd001_taskseq_run_20260302_160151/epoch10/lora \
   --prompt "Describe the image in detail." \
   --max-new-tokens 256 \
-  --max-sentences 7 \
   --max-retries 10 > "$LOG_ROOT/caption_qwen_native_fix.log" 2>&1
 log "[END]   $(date '+%F %T') caption_qwen_native_fix"
 run_caption_eval caption_qwen_native_eval "$QNATIVE_DIR/caption_qwen_native.jsonl" "$QNATIVE_DIR/caption_summary.json"

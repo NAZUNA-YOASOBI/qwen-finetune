@@ -5,12 +5,15 @@ from pathlib import Path
 from typing import Any
 
 from .device import assert_model_on_cuda, require_cuda
-from .qwen_dinov3 import build_generate_kwargs, maybe_set_generation_seed
+from .qwen_dinov3 import build_generate_kwargs, maybe_set_generation_seed, summarize_generated_sequences
 
 
 @dataclass(frozen=True)
 class CaptionResult:
     text: str
+    generated_token_count: int = 0
+    ended_by_eos: bool = False
+    last_generated_token_id: int | None = None
 
 
 class Qwen3VLCaptioner:
@@ -138,9 +141,34 @@ class Qwen3VLCaptioner:
             prompt_len = int(attn.shape[1])
             prompt_lens = [prompt_len] * int(generated_ids.shape[0])
 
-        trimmed = [out[int(pl) :] for out, pl in zip(generated_ids, prompt_lens)]
-        texts = self.processor.batch_decode(trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False)
-        return [CaptionResult(text=str(t).strip()) for t in texts]
+        generation_config = getattr(self.model, 'generation_config', None)
+        eos_token_id = getattr(generation_config, 'eos_token_id', None)
+        pad_token_id = getattr(generation_config, 'pad_token_id', None)
+        if eos_token_id is None:
+            eos_token_id = getattr(self.processor.tokenizer, 'eos_token_id', None)
+        if pad_token_id is None:
+            pad_token_id = getattr(self.processor.tokenizer, 'pad_token_id', None)
+
+        sequence_summaries = summarize_generated_sequences(
+            generated_ids,
+            prompt_lens,
+            eos_token_id=eos_token_id,
+            pad_token_id=pad_token_id,
+        )
+        texts = self.processor.batch_decode(
+            [item.token_ids for item in sequence_summaries],
+            skip_special_tokens=True,
+            clean_up_tokenization_spaces=False,
+        )
+        return [
+            CaptionResult(
+                text=str(text).strip(),
+                generated_token_count=int(item.generated_token_count),
+                ended_by_eos=bool(item.ended_by_eos),
+                last_generated_token_id=item.last_generated_token_id,
+            )
+            for text, item in zip(texts, sequence_summaries)
+        ]
 
 
 def _torch_dtype_from_str(torch_mod, dtype: str):

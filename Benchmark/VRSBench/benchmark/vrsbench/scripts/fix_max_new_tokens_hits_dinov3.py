@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -105,28 +104,6 @@ def _slice_by_shard(items: list[int], *, world_size: int, rank: int, weights: st
     return items[start:end]
 
 
-_SENT_SPLIT = re.compile(r"(?<=[.!?])\s+")
-
-
-def limit_sentences(text: str, max_sentences: int) -> str:
-    text = str(text).strip()
-    if not text:
-        return ""
-    parts = [p.strip() for p in _SENT_SPLIT.split(text) if p.strip()]
-    if len(parts) <= int(max_sentences):
-        return " ".join(parts).strip()
-    return " ".join(parts[: int(max_sentences)]).strip()
-
-
-def ensure_sentence_end(text: str) -> str:
-    text = str(text).strip()
-    if not text:
-        return ""
-    if text[-1] in ".!?":
-        return text
-    return text + "."
-
-
 def _token_len(tokenizer: Any, text: str) -> int:
     return len(tokenizer(str(text), add_special_tokens=False).input_ids)
 
@@ -138,6 +115,21 @@ def _safe_int(v: Any, default: int = -1) -> int:
         return default
 
 
+def _row_hits_max_new_tokens(row: dict[str, Any], *, tokenizer: Any, max_new_tokens: int) -> tuple[bool, int, bool]:
+    pred = str(row.get("prediction", "")).strip()
+    if not pred:
+        return True, 0, False
+
+    ended_by_eos = row.get("generation_ended_by_eos", None)
+    if isinstance(ended_by_eos, bool):
+        generated_token_count = _safe_int(row.get("generated_token_count", 0), default=0)
+        is_hit = (not bool(ended_by_eos)) and int(generated_token_count) >= int(max_new_tokens)
+        return bool(is_hit), int(generated_token_count), False
+
+    tok_len = _token_len(tokenizer, pred)
+    return bool(tok_len >= int(max_new_tokens)), int(tok_len), True
+
+
 @dataclass
 class RetryItem:
     idx: int
@@ -145,6 +137,8 @@ class RetryItem:
     image_path: Path
     last_pred: str
     last_tok_len: int
+    last_ended_by_eos: bool = False
+    last_generated_token_id: int | None = None
     attempt_used: int = 0
     success: bool = False
 
@@ -182,7 +176,6 @@ def main() -> None:
     parser.add_argument("--no-repeat-ngram-size", type=int, default=None)
     parser.add_argument("--repetition-penalty", type=float, default=None)
 
-    parser.add_argument("--max-sentences", type=int, default=4, help="Post-trim to at most N sentences.")
     parser.add_argument("--shard-world-size", type=int, default=2, help="Total shard workers for retry split.")
     parser.add_argument("--shard-rank", type=int, default=0, help="Current shard rank in [0, shard_world_size).")
     parser.add_argument("--shard-weights", type=str, default="", help="Optional shard weight ratio, e.g. 1:1.")
@@ -258,17 +251,20 @@ def main() -> None:
 
     max_new_tokens = int(args.max_new_tokens)
     max_retries = max(1, int(args.max_retries))
-    max_sentences = max(1, int(args.max_sentences))
     requested_batch_size = max(1, int(args.batch_size))
 
     hit_idx: list[int] = []
     hit_imgids: list[int] = []
+    fallback_rows = 0
     for i, row in enumerate(rows):
-        pred = str(row.get("prediction", "")).strip()
-        if not pred:
-            continue
-        tok_len = _token_len(tokenizer, pred)
-        if tok_len >= max_new_tokens:
+        is_hit, _, used_fallback = _row_hits_max_new_tokens(
+            row,
+            tokenizer=tokenizer,
+            max_new_tokens=max_new_tokens,
+        )
+        if used_fallback:
+            fallback_rows += 1
+        if is_hit:
             hit_idx.append(i)
             hit_imgids.append(_safe_int(row.get("imgid"), default=-1))
 
@@ -289,11 +285,13 @@ def main() -> None:
 
     print(
         f"[retry-policy] file={preds_path} max_new_tokens={max_new_tokens} max_retries={max_retries} "
-        f"max_sentences={max_sentences} requested_batch_size={requested_batch_size}"
+        f"requested_batch_size={requested_batch_size}"
     )
-    print(f"[check] file={preds_path} total={len(rows)} hit(max_new_tokens)={len(hit_idx)}")
+    print(f"[check] file={preds_path} total={len(rows)} hit(max_new_tokens_without_eos)={len(hit_idx)}")
     if hit_imgids_sorted:
         print(f"[check] hit_imgids(first 30)={hit_imgids_sorted[:30]}")
+    if fallback_rows:
+        print(f"[warn] rows_missing_generation_eos_metadata={fallback_rows}, fallback_to_token_length=1")
     print(
         f"[shard] rank={shard_rank}/{shard_world_size} weights={shard_weights or 'even'} "
         f"selected_hit={len(selected_hit_idx)}/{len(hit_idx)}"
@@ -359,14 +357,20 @@ def main() -> None:
             raise ValueError(f"Missing valid imgid for shard patch row: {row}")
 
         last_pred = str(row.get("prediction", "")).strip()
-        last_tok_len = _token_len(tokenizer, last_pred) if last_pred else 0
+        last_generated_token_count = _safe_int(row.get("generated_token_count", 0), default=0)
+        last_ended_by_eos = bool(row.get("generation_ended_by_eos", False))
+        last_generated_token_id = row.get("generation_last_token_id", None)
         selected_items.append(
             RetryItem(
                 idx=i,
                 imgid=imgid,
                 image_path=image_path,
                 last_pred=last_pred,
-                last_tok_len=last_tok_len,
+                last_tok_len=int(last_generated_token_count),
+                last_ended_by_eos=bool(last_ended_by_eos),
+                last_generated_token_id=_safe_int(last_generated_token_id, default=-1)
+                if last_generated_token_id is not None
+                else None,
             )
         )
 
@@ -407,33 +411,38 @@ def main() -> None:
                 raise RuntimeError(f"Prediction count mismatch: expected={len(chunk)} got={len(preds)}")
 
             for item, pred_obj in zip(chunk, preds):
-                pred = limit_sentences(str(pred_obj.text), max_sentences=max_sentences)
-                pred = ensure_sentence_end(pred)
-
-                tok_len = _token_len(tokenizer, pred)
-                item.last_pred = str(pred).strip()
-                item.last_tok_len = tok_len
+                item.last_pred = str(pred_obj.text).strip()
+                item.last_tok_len = int(pred_obj.generated_token_count)
                 item.attempt_used += 1
 
-                is_hit = int(tok_len >= max_new_tokens)
+                is_hit = int((not bool(pred_obj.ended_by_eos)) and int(pred_obj.generated_token_count) >= max_new_tokens)
                 print(
                     f"[retry] imgid={item.imgid} attempt={item.attempt_used}/{max_retries} "
-                    f"tok_len={tok_len} hit={is_hit}"
+                    f"generated_token_count={int(pred_obj.generated_token_count)} "
+                    f"ended_by_eos={int(bool(pred_obj.ended_by_eos))} hit={is_hit}"
                 )
 
-                if tok_len < max_new_tokens:
+                if bool(pred_obj.ended_by_eos) and bool(item.last_pred):
                     item.success = True
+                    item.last_tok_len = int(pred_obj.generated_token_count)
+                    item.last_generated_token_id = pred_obj.last_generated_token_id
+                    item.last_ended_by_eos = bool(pred_obj.ended_by_eos)
                     resolved += 1
                     continue
 
                 if round_idx >= max_retries:
                     unresolved_imgids.append(item.imgid)
+                    item.last_generated_token_id = pred_obj.last_generated_token_id
+                    item.last_ended_by_eos = bool(pred_obj.ended_by_eos)
                     print(
                         f"[retry-fail] imgid={item.imgid} attempts={max_retries} "
-                        f"final_tok_len={item.last_tok_len}"
+                        f"final_generated_token_count={item.last_tok_len} "
+                        f"ended_by_eos={int(bool(pred_obj.ended_by_eos))}"
                     )
                     continue
 
+                item.last_generated_token_id = pred_obj.last_generated_token_id
+                item.last_ended_by_eos = bool(pred_obj.ended_by_eos)
                 next_remaining.append(item)
 
             idx += len(chunk)
@@ -456,6 +465,9 @@ def main() -> None:
             {
                 "imgid": int(item.imgid),
                 "prediction": str(item.last_pred).strip(),
+                "generated_token_count": int(item.last_tok_len),
+                "generation_ended_by_eos": bool(getattr(item, "last_ended_by_eos", False)),
+                "generation_last_token_id": getattr(item, "last_generated_token_id", None),
                 "prompt": prompt,
                 "max_new_tokens": max_new_tokens,
                 "smart_resize_min_pixels": int(resize_cfg.smart_resize_min_pixels),

@@ -18,7 +18,6 @@ GPU_IDS="${GPU_IDS:-0,1}"
 SHARD_WEIGHTS="${SHARD_WEIGHTS:-}"
 CAPTION_BATCH_SIZE="${CAPTION_BATCH_SIZE:-128}"
 CAPTION_FIX_BATCH_SIZE="${CAPTION_FIX_BATCH_SIZE:-256}"
-CAPTION_FIX_MAX_SENTENCES="${CAPTION_FIX_MAX_SENTENCES:-7}"
 GROUNDING_BATCH_SIZE="${GROUNDING_BATCH_SIZE:-128}"
 MAX_NEW_TOKENS="${MAX_NEW_TOKENS:-256}"
 DTYPE="${DTYPE:-bf16}"
@@ -124,7 +123,6 @@ launch_caption_epoch() {
       --lora-dir '${ckpt_dir}/lora' \
       --prompt 'Describe the image in detail.' \
       --max-new-tokens '${MAX_NEW_TOKENS}' \
-      --max-sentences '${CAPTION_FIX_MAX_SENTENCES}' \
       --max-retries 10 \
       --batch-size '${CAPTION_FIX_BATCH_SIZE}' \
       --dtype '${DTYPE}' \
@@ -175,7 +173,6 @@ launch_caption_epoch() {
         --lora-dir '${ckpt_dir}/lora' \
         --prompt 'Describe the image in detail.' \
         --max-new-tokens '${MAX_NEW_TOKENS}' \
-        --max-sentences '${CAPTION_FIX_MAX_SENTENCES}' \
         --max-retries 10 \
         --batch-size '${CAPTION_FIX_BATCH_SIZE}' \
         --dtype '${DTYPE}' \
@@ -191,7 +188,6 @@ launch_caption_epoch() {
         --lora-dir '${ckpt_dir}/lora' \
         --prompt 'Describe the image in detail.' \
         --max-new-tokens '${MAX_NEW_TOKENS}' \
-        --max-sentences '${CAPTION_FIX_MAX_SENTENCES}' \
         --max-retries 10 \
         --batch-size '${CAPTION_FIX_BATCH_SIZE}' \
         --dtype '${DTYPE}' \
@@ -247,7 +243,6 @@ launch_caption_epoch() {
         --lora-dir '${ckpt_dir}/lora' \
         --prompt 'Describe the image in detail.' \
         --max-new-tokens '${MAX_NEW_TOKENS}' \
-        --max-sentences '${CAPTION_FIX_MAX_SENTENCES}' \
         --max-retries 10 \
         --batch-size '${CAPTION_FIX_BATCH_SIZE}' \
         --dtype '${DTYPE}' \
@@ -264,7 +259,6 @@ launch_caption_epoch() {
         --lora-dir '${ckpt_dir}/lora' \
         --prompt 'Describe the image in detail.' \
         --max-new-tokens '${MAX_NEW_TOKENS}' \
-        --max-sentences '${CAPTION_FIX_MAX_SENTENCES}' \
         --max-retries 10 \
         --batch-size '${CAPTION_FIX_BATCH_SIZE}' \
         --dtype '${DTYPE}' \

@@ -4,7 +4,7 @@ import argparse
 from pathlib import Path
 
 
-DEFAULT_PROMPT = "Describe the image in detail."
+DEFAULT_PROMPT = "Describe the image in detail in 2 to 4 sentences."
 
 
 def _project_root() -> Path:
@@ -171,6 +171,9 @@ def main() -> None:
                     "filename": it.get("filename", ""),
                     "image_path": str(Path(it["image_path"])),
                     "prediction": pred.text,
+                    "generated_token_count": int(pred.generated_token_count),
+                    "generation_ended_by_eos": bool(pred.ended_by_eos),
+                    "generation_last_token_id": pred.last_generated_token_id,
                     "prompt": str(args.prompt),
                     "model": "qwen3-vl-baseline",
                     "model_dir": str(Path(args.model_dir)),

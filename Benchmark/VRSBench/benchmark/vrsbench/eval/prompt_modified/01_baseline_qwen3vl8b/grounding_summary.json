@@ -13,7 +13,7 @@
     "model_dir": "models/Qwen3-VL-8B-Instruct",
     "prompt_template": "You are a visual grounding assistant.\nGiven an image and a referring expression, output strict JSON only.\nReferring expression: {ref_sentence}\nImage: {image_name}\nJSON schema:\n{{\"instance\": \"short target description\", \"bbox_2d\": [x0, y0, x1, y1]}}\nRules:\n1) Prefer bbox_2d in 0..1000 normalized coordinates.\n2) If uncertain, return empty bbox arrays.",
     "max_new_tokens": 256,
-    "requested_batch_size": 64,
+    "requested_batch_size": 256,
     "decode_strategy": "generation_config_default",
     "do_sample": null,
     "temperature": null,
@@ -26,66 +26,66 @@
   "splits": {
     "unique": {
       "total": 6736,
-      "Acc@0.5": 63.524346793349174,
-      "Acc@0.7": 43.72030878859858,
-      "meanIoU": 56.7510573559731,
-      "cumIoU": 63.34756484712665
+      "Acc@0.5": 63.717339667458425,
+      "Acc@0.7": 43.453087885985745,
+      "meanIoU": 56.809619232480735,
+      "cumIoU": 63.47934666226636
     },
     "non_unique": {
       "total": 9423,
-      "Acc@0.5": 53.0722699777141,
-      "Acc@0.7": 33.290884007216384,
-      "meanIoU": 46.29285840735852,
-      "cumIoU": 47.366100908009805
+      "Acc@0.5": 52.62655205348615,
+      "Acc@0.7": 33.14231136580707,
+      "meanIoU": 46.1397358214545,
+      "cumIoU": 46.718615443985165
     },
     "all": {
       "total": 16159,
-      "Acc@0.5": 57.42929636734947,
-      "Acc@0.7": 37.638467726963306,
-      "meanIoU": 50.65243685391262,
-      "cumIoU": 58.20540141731352
+      "Acc@0.5": 57.249829816201505,
+      "Acc@0.7": 37.44043567052417,
+      "meanIoU": 50.58755651931144,
+      "cumIoU": 58.06293183429821
     }
   },
   "total_selected": 16159,
   "processed": 16159,
-  "valid_for_iou": 16139,
-  "mean_iou": 50.65243685391262,
-  "cum_iou": 58.20540141731352,
-  "acc@0.5": 57.42929636734947,
-  "acc@0.7": 37.638467726963306,
-  "acc@0.5_count": 9280,
-  "acc@0.7_count": 6082,
+  "valid_for_iou": 16140,
+  "mean_iou": 50.58755651931144,
+  "cum_iou": 58.06293183429821,
+  "acc@0.5": 57.249829816201505,
+  "acc@0.7": 37.44043567052417,
+  "acc@0.5_count": 9251,
+  "acc@0.7_count": 6050,
   "by_split": {
     "unique": {
       "count_total": 6736,
       "count_valid_for_iou": 6728,
-      "acc@0.5": 63.524346793349174,
-      "acc@0.7": 43.72030878859858,
-      "meanIoU": 56.7510573559731,
-      "cumIoU": 63.34756484712665,
-      "acc@0.5_count": 4279,
-      "acc@0.7_count": 2945
+      "acc@0.5": 63.717339667458425,
+      "acc@0.7": 43.453087885985745,
+      "meanIoU": 56.809619232480735,
+      "cumIoU": 63.47934666226636,
+      "acc@0.5_count": 4292,
+      "acc@0.7_count": 2927
     },
     "non_unique": {
       "count_total": 9423,
-      "count_valid_for_iou": 9411,
-      "acc@0.5": 53.0722699777141,
-      "acc@0.7": 33.290884007216384,
-      "meanIoU": 46.29285840735852,
-      "cumIoU": 47.366100908009805,
-      "acc@0.5_count": 5001,
-      "acc@0.7_count": 3137
+      "count_valid_for_iou": 9412,
+      "acc@0.5": 52.62655205348615,
+      "acc@0.7": 33.14231136580707,
+      "meanIoU": 46.1397358214545,
+      "cumIoU": 46.718615443985165,
+      "acc@0.5_count": 4959,
+      "acc@0.7_count": 3123
     },
     "all": {
       "count_total": 16159,
-      "count_valid_for_iou": 16139,
-      "acc@0.5": 57.42929636734947,
-      "acc@0.7": 37.638467726963306,
-      "meanIoU": 50.65243685391262,
-      "cumIoU": 58.20540141731352,
-      "acc@0.5_count": 9280,
-      "acc@0.7_count": 6082
+      "count_valid_for_iou": 16140,
+      "acc@0.5": 57.249829816201505,
+      "acc@0.7": 37.44043567052417,
+      "meanIoU": 50.58755651931144,
+      "cumIoU": 58.06293183429821,
+      "acc@0.5_count": 9251,
+      "acc@0.7_count": 6050
     }
   },
-  "predictions_file": "/opt/yanzixi/project/fine-tune-qwen3-vl/fine-tune-qwen3-vl/Benchmark/VRSBench/benchmark/vrsbench/outputs/17_qwen8b_baseline_noftstyle_20260308/grounding_baseline_test.jsonl"
+  "predictions_file": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/benchmark/vrsbench/outputs/baseline_noftstyle/18_qwen8b_baseline_noftstyle_retest_20260315/grounding_baseline.jsonl"
 }

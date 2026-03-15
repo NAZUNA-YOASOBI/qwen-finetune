@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 from pathlib import Path
 from typing import Any
 
@@ -37,28 +36,6 @@ def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
             f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
 
-_SENT_SPLIT = re.compile(r"(?<=[.!?])\s+")
-
-
-def limit_sentences(text: str, max_sentences: int) -> str:
-    text = str(text).strip()
-    if not text:
-        return ""
-    parts = [p.strip() for p in _SENT_SPLIT.split(text) if p.strip()]
-    if len(parts) <= int(max_sentences):
-        return " ".join(parts).strip()
-    return " ".join(parts[: int(max_sentences)]).strip()
-
-
-def ensure_sentence_end(text: str) -> str:
-    text = str(text).strip()
-    if not text:
-        return ""
-    if text[-1] in ".!?":
-        return text
-    return text + "."
-
-
 def _token_len(tokenizer: Any, text: str) -> int:
     return len(tokenizer(str(text), add_special_tokens=False).input_ids)
 
@@ -68,6 +45,21 @@ def _safe_int(v: Any, default: int = -1) -> int:
         return int(v)
     except Exception:
         return default
+
+
+def _row_hits_max_new_tokens(row: dict[str, Any], *, tokenizer: Any, max_new_tokens: int) -> tuple[bool, int, bool]:
+    pred = str(row.get("prediction", "")).strip()
+    if not pred:
+        return True, 0, False
+
+    ended_by_eos = row.get("generation_ended_by_eos", None)
+    if isinstance(ended_by_eos, bool):
+        generated_token_count = _safe_int(row.get("generated_token_count", 0), default=0)
+        is_hit = (not bool(ended_by_eos)) and int(generated_token_count) >= int(max_new_tokens)
+        return bool(is_hit), int(generated_token_count), False
+
+    tok_len = _token_len(tokenizer, pred)
+    return bool(tok_len >= int(max_new_tokens)), int(tok_len), True
 
 
 def main() -> None:
@@ -93,7 +85,6 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--repetition-penalty", type=float, default=None)
 
-    parser.add_argument("--max-sentences", type=int, default=7, help="Post-trim to at most N sentences.")
     parser.add_argument("--dry-run", action="store_true", help="Only report which imgids hit max_new_tokens.")
     args = parser.parse_args()
 
@@ -116,32 +107,75 @@ def main() -> None:
     merger_ckpt = _resolve_from_project(args.merger_ckpt) if str(args.merger_ckpt).strip() else None
     lora_dir = _resolve_from_project(args.lora_dir) if str(args.lora_dir).strip() else None
 
+    file_model = str(rows[0].get("model_dir", "")).strip() if rows else ""
+    if file_model:
+        expected = _resolve_from_project(file_model)
+        if expected.exists() and model_dir.exists():
+            ok = expected.resolve() == model_dir.resolve()
+        else:
+            ok = expected.name == model_dir.name
+        if not ok:
+            raise ValueError(f"model_dir mismatches preds metadata. preds expect={file_model}, got={model_dir}")
+
+    file_merger = str(rows[0].get("merger_ckpt", "")).strip() if rows else ""
+    if file_merger or merger_ckpt is not None:
+        if not file_merger or merger_ckpt is None:
+            raise ValueError(
+                "merger_ckpt mismatches preds metadata. "
+                f"preds expect={file_merger or '<empty>'}, got={merger_ckpt or '<empty>'}"
+            )
+        expected = _resolve_from_project(file_merger)
+        if expected.exists() and merger_ckpt.exists():
+            ok = expected.resolve() == merger_ckpt.resolve()
+        else:
+            ok = expected.name == merger_ckpt.name
+        if not ok:
+            raise ValueError(f"merger_ckpt mismatches preds metadata. preds expect={file_merger}, got={merger_ckpt}")
+
+    file_lora = str(rows[0].get("lora_dir", "")).strip() if rows else ""
+    if file_lora or lora_dir is not None:
+        if not file_lora or lora_dir is None:
+            raise ValueError(
+                "lora_dir mismatches preds metadata. "
+                f"preds expect={file_lora or '<empty>'}, got={lora_dir or '<empty>'}"
+            )
+        expected = _resolve_from_project(file_lora)
+        if expected.exists() and lora_dir.exists():
+            ok = expected.resolve() == lora_dir.resolve()
+        else:
+            ok = expected.name == lora_dir.name
+        if not ok:
+            raise ValueError(f"lora_dir mismatches preds metadata. preds expect={file_lora}, got={lora_dir}")
+
     processor = AutoProcessor.from_pretrained(str(model_dir))
     tokenizer = processor.tokenizer
 
     max_new_tokens = int(args.max_new_tokens)
     max_retries = max(1, int(args.max_retries))
-    max_sentences = max(1, int(args.max_sentences))
-
     hit_idx: list[int] = []
     hit_imgids: list[int] = []
+    fallback_rows = 0
     for i, row in enumerate(rows):
-        pred = str(row.get("prediction", "")).strip()
-        if not pred:
-            continue
-        tok_len = _token_len(tokenizer, pred)
-        if tok_len >= max_new_tokens:
+        is_hit, _, used_fallback = _row_hits_max_new_tokens(
+            row,
+            tokenizer=tokenizer,
+            max_new_tokens=max_new_tokens,
+        )
+        if used_fallback:
+            fallback_rows += 1
+        if is_hit:
             hit_idx.append(i)
             hit_imgids.append(_safe_int(row.get("imgid"), default=-1))
 
     hit_imgids_sorted = [x for x in sorted(hit_imgids) if x >= 0]
     print(
-        f"[retry-policy] file={preds_path} max_new_tokens={max_new_tokens} max_retries={max_retries} "
-        f"max_sentences={max_sentences}"
+        f"[retry-policy] file={preds_path} max_new_tokens={max_new_tokens} max_retries={max_retries}"
     )
-    print(f"[check] file={preds_path} total={len(rows)} hit(max_new_tokens)={len(hit_idx)}")
+    print(f"[check] file={preds_path} total={len(rows)} hit(max_new_tokens_without_eos)={len(hit_idx)}")
     if hit_imgids_sorted:
         print(f"[check] hit_imgids(first 30)={hit_imgids_sorted[:30]}")
+    if fallback_rows:
+        print(f"[warn] rows_missing_generation_eos_metadata={fallback_rows}, fallback_to_token_length=1")
 
     if bool(args.dry_run):
         print(
@@ -189,7 +223,9 @@ def main() -> None:
             raise FileNotFoundError(f"Missing image_path for imgid={imgid_for_log}: {image_path}")
 
         last_pred = str(row.get("prediction", "")).strip()
-        last_tok_len = _token_len(tokenizer, last_pred)
+        last_generated_token_count = _safe_int(row.get("generated_token_count", 0), default=0)
+        last_ended_by_eos = bool(row.get("generation_ended_by_eos", False))
+        last_generated_token_id = row.get("generation_last_token_id", None)
         attempt_used = 0
         success = False
         abort_after_item = False
@@ -197,7 +233,7 @@ def main() -> None:
 
         for attempt in range(1, max_retries + 1):
             try:
-                pred = captioner.caption(image_path=image_path, prompt=prompt).text
+                pred_obj = captioner.caption(image_path=image_path, prompt=prompt)
             except Exception as e:
                 abort_after_item = True
                 print(
@@ -205,24 +241,26 @@ def main() -> None:
                     f"error={type(e).__name__}: {e}"
                 )
                 break
-            pred = limit_sentences(pred, max_sentences=max_sentences)
-            pred = ensure_sentence_end(pred)
-
-            tok_len = _token_len(tokenizer, pred)
-            last_pred = str(pred).strip()
-            last_tok_len = tok_len
+            last_pred = str(pred_obj.text).strip()
+            last_generated_token_count = int(pred_obj.generated_token_count)
+            last_ended_by_eos = bool(pred_obj.ended_by_eos)
+            last_generated_token_id = pred_obj.last_generated_token_id
             attempt_used = attempt
 
-            is_hit = int(tok_len >= max_new_tokens)
+            is_hit = int((not bool(pred_obj.ended_by_eos)) and int(pred_obj.generated_token_count) >= max_new_tokens)
             print(
                 f"[retry] imgid={imgid_for_log} attempt={attempt}/{max_retries} "
-                f"tok_len={tok_len} hit={is_hit}"
+                f"generated_token_count={int(pred_obj.generated_token_count)} "
+                f"ended_by_eos={int(bool(pred_obj.ended_by_eos))} hit={is_hit}"
             )
-            if tok_len < max_new_tokens:
+            if bool(pred_obj.ended_by_eos) and bool(last_pred):
                 success = True
                 break
 
         row["prediction"] = last_pred
+        row["generated_token_count"] = int(last_generated_token_count)
+        row["generation_ended_by_eos"] = bool(last_ended_by_eos)
+        row["generation_last_token_id"] = last_generated_token_id
         row["prompt"] = prompt
         row["max_new_tokens"] = max_new_tokens
         row["max_token_retry_attempts"] = attempt_used
@@ -235,7 +273,8 @@ def main() -> None:
                 unresolved_imgids.append(imgid)
             print(
                 f"[retry-fail] imgid={imgid_for_log} attempts={max_retries} "
-                f"final_tok_len={last_tok_len}"
+                f"final_generated_token_count={last_generated_token_count} "
+                f"ended_by_eos={int(bool(last_ended_by_eos))}"
             )
 
         if abort_after_item:
@@ -257,11 +296,16 @@ def main() -> None:
     rows2 = read_jsonl(preds_path)
     hit2 = 0
     hit2_imgids: list[int] = []
+    fallback_rows_after = 0
     for row in rows2:
-        pred = str(row.get("prediction", "")).strip()
-        if not pred:
-            continue
-        if _token_len(tokenizer, pred) >= max_new_tokens:
+        is_hit, _, used_fallback = _row_hits_max_new_tokens(
+            row,
+            tokenizer=tokenizer,
+            max_new_tokens=max_new_tokens,
+        )
+        if used_fallback:
+            fallback_rows_after += 1
+        if is_hit:
             hit2 += 1
             maybe_id = _safe_int(row.get("imgid"), default=-1)
             if maybe_id >= 0:
@@ -282,6 +326,8 @@ def main() -> None:
         print(f"[retry-summary-after] file={preds_path} hit_after={hit2} hit_imgids(first 30)={hit2_imgids[:30]}")
     else:
         print(f"[retry-summary-after] file={preds_path} hit_after={hit2}")
+    if fallback_rows_after:
+        print(f"[warn] rows_missing_generation_eos_metadata_after={fallback_rows_after}, fallback_to_token_length=1")
 
 
 if __name__ == "__main__":

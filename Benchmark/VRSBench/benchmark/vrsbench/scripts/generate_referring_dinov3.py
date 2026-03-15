@@ -23,6 +23,10 @@ def _clip_box_100(vals: list[int]) -> list[int]:
     return [max(0, min(100, int(v))) for v in vals]
 
 
+def _is_valid_box_100(vals: list[int]) -> bool:
+    return len(vals) == 4 and int(vals[0]) < int(vals[2]) and int(vals[1]) < int(vals[3])
+
+
 def _extract_box(text: str) -> tuple[str | None, list[int] | None]:
     """
     从模型输出中提取一个 bbox（4 个整数），并规范化成 `{<x1><y1><x2><y2>}` 字符串。
@@ -34,11 +38,15 @@ def _extract_box(text: str) -> tuple[str | None, list[int] | None]:
     nums = _ANGLE_SIGNED_INT_RE.findall(t)
     if len(nums) >= 4:
         vals = _clip_box_100([int(x) for x in nums[:4]])
+        if not _is_valid_box_100(vals):
+            return None, None
         return f"{{<{vals[0]}><{vals[1]}><{vals[2]}><{vals[3]}>}}", vals
 
     nums2 = _SIGNED_INT_RE.findall(t)
     if len(nums2) >= 4:
         vals = _clip_box_100([int(x) for x in nums2[:4]])
+        if not _is_valid_box_100(vals):
+            return None, None
         return f"{{<{vals[0]}><{vals[1]}><{vals[2]}><{vals[3]}>}}", vals
 
     return None, None

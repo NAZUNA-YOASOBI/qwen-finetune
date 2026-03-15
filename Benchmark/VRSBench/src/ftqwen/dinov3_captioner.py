@@ -13,6 +13,7 @@ from .qwen_dinov3 import (
     build_generate_kwargs,
     load_merger_safetensors,
     maybe_set_generation_seed,
+    summarize_generated_sequences,
     torch_dtype_from_str,
 )
 from .vision_resize import compute_vision_resize
@@ -21,6 +22,9 @@ from .vision_resize import compute_vision_resize
 @dataclass(frozen=True)
 class CaptionResult:
     text: str
+    generated_token_count: int = 0
+    ended_by_eos: bool = False
+    last_generated_token_id: int | None = None
 
 
 class DinoV3Captioner:
@@ -206,9 +210,34 @@ class DinoV3Captioner:
                 prompt_len = int(attn.shape[1])
                 prompt_lens = [prompt_len] * int(generated_ids.shape[0])
 
-            trimmed = [out[int(pl) :] for out, pl in zip(generated_ids, prompt_lens)]
-            out_texts = self.processor.batch_decode(trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False)
-            return [CaptionResult(text=str(t).strip()) for t in out_texts]
+            generation_config = getattr(self.model, 'generation_config', None)
+            eos_token_id = getattr(generation_config, 'eos_token_id', None)
+            pad_token_id = getattr(generation_config, 'pad_token_id', None)
+            if eos_token_id is None:
+                eos_token_id = getattr(tokenizer, 'eos_token_id', None)
+            if pad_token_id is None:
+                pad_token_id = getattr(tokenizer, 'pad_token_id', None)
+
+            sequence_summaries = summarize_generated_sequences(
+                generated_ids,
+                prompt_lens,
+                eos_token_id=eos_token_id,
+                pad_token_id=pad_token_id,
+            )
+            out_texts = self.processor.batch_decode(
+                [item.token_ids for item in sequence_summaries],
+                skip_special_tokens=True,
+                clean_up_tokenization_spaces=False,
+            )
+            return [
+                CaptionResult(
+                    text=str(text).strip(),
+                    generated_token_count=int(item.generated_token_count),
+                    ended_by_eos=bool(item.ended_by_eos),
+                    last_generated_token_id=item.last_generated_token_id,
+                )
+                for text, item in zip(out_texts, sequence_summaries)
+            ]
 
         image_paths = [Path(p) for p in image_paths]
         prompts = [str(p) for p in prompts]

@@ -153,7 +153,7 @@ def main() -> None:
     for row in preds_rows:
         imgid = str(row.get("imgid"))
         pred = str(row.get("prediction", "")).strip()
-        if imgid and pred:
+        if imgid:
             preds[imgid] = pred
 
     # 按 imgid 排序后截断，保证可复现。

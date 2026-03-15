@@ -78,13 +78,20 @@ def compute_iou_xyxy(bbox1: list[int], bbox2: list[int], *, return_parts: bool =
 _SIGNED_INT_RE = re.compile(r"-?\d+")
 
 
-def _parse_first4_ints(text: str, *, clamp_to_100: bool = False) -> list[int] | None:
+def _parse_first4_ints(
+    text: str,
+    *,
+    clamp_to_100: bool = False,
+    validate_order: bool = False,
+) -> list[int] | None:
     nums = _SIGNED_INT_RE.findall(text or "")
     if len(nums) < 4:
         return None
     vals = [int(nums[0]), int(nums[1]), int(nums[2]), int(nums[3])]
     if clamp_to_100:
         vals = [max(0, min(100, v)) for v in vals]
+    if bool(validate_order) and (int(vals[0]) >= int(vals[2]) or int(vals[1]) >= int(vals[3])):
+        return None
     return vals
 
 
@@ -113,8 +120,8 @@ def _eval_split(rows: list[dict[str, Any]], *, unique_filter: str, thresholds: l
             continue
 
         total += 1
-        gt = _parse_first4_ints(str(r.get("ground_truth", "")))
-        pred = _parse_first4_ints(str(r.get("answer", "")), clamp_to_100=True)
+        gt = _parse_first4_ints(str(r.get("ground_truth", "")), validate_order=False)
+        pred = _parse_first4_ints(str(r.get("answer", "")), clamp_to_100=True, validate_order=True)
         if gt is None or len(gt) != 4:
             # 标注缺失属于数据异常，直接报错更安全。
             raise ValueError(f"Invalid ground_truth for qid={r.get('qid')}: {r.get('ground_truth')}")
