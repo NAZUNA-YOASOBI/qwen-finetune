@@ -1,0 +1,94 @@
+{
+  "task": "vrsbench_referring_noftstyle",
+  "thresholds": [
+    0.5,
+    0.7
+  ],
+  "expected_num_samples": 16159,
+  "num_rows_in_file": 16159,
+  "preds": "benchmark/vrsbench/outputs/qwen35_baseline/02_qwen35_9b_baseline_githubstyle_20260315/grounding_qwen35_9b.jsonl",
+  "meta": "benchmark/vrsbench/data/vrsbench_referring_meta.json",
+  "config_hint": {
+    "model": "qwen3.5-baseline-noftstyle",
+    "model_dir": "/opt/yanzixi/project/fine-tune-qwen3.5/models/Qwen3.5-9B",
+    "prompt_template": "You are a visual grounding assistant.\nGiven an image and a referring expression, output strict JSON only.\nReferring expression: {ref_sentence}\nImage: {image_name}\nJSON schema:\n{{\"instance\": \"short target description\", \"bbox_2d\": [x0, y0, x1, y1]}}\nRules:\n1) Prefer bbox_2d in 0..1000 normalized coordinates.\n2) If uncertain, return empty bbox arrays.",
+    "max_new_tokens": 256,
+    "requested_batch_size": 64,
+    "decode_strategy": "generation_config_default",
+    "do_sample": null,
+    "temperature": null,
+    "top_p": null,
+    "top_k": null,
+    "num_beams": null,
+    "repetition_penalty": null,
+    "seed": null,
+    "shard_world_size": 2,
+    "shard_rank": 0,
+    "shard_weights": "1:1"
+  },
+  "splits": {
+    "unique": {
+      "total": 6736,
+      "Acc@0.5": 64.7268408551069,
+      "Acc@0.7": 44.99703087885985,
+      "meanIoU": 57.2648668228138,
+      "cumIoU": 57.986949553996034
+    },
+    "non_unique": {
+      "total": 9423,
+      "Acc@0.5": 54.770243022392016,
+      "Acc@0.7": 35.22232834553751,
+      "meanIoU": 46.86050037780083,
+      "cumIoU": 35.20652606947052
+    },
+    "all": {
+      "total": 16159,
+      "Acc@0.5": 58.92072529240671,
+      "Acc@0.7": 39.29698619964107,
+      "meanIoU": 51.19763834262577,
+      "cumIoU": 49.85241711204434
+    }
+  },
+  "total_selected": 16159,
+  "processed": 16159,
+  "valid_for_iou": 16141,
+  "mean_iou": 51.19763834262577,
+  "cum_iou": 49.85241711204434,
+  "acc@0.5": 58.92072529240671,
+  "acc@0.7": 39.29698619964107,
+  "acc@0.5_count": 9521,
+  "acc@0.7_count": 6350,
+  "by_split": {
+    "unique": {
+      "count_total": 6736,
+      "count_valid_for_iou": 6731,
+      "acc@0.5": 64.7268408551069,
+      "acc@0.7": 44.99703087885985,
+      "meanIoU": 57.2648668228138,
+      "cumIoU": 57.986949553996034,
+      "acc@0.5_count": 4360,
+      "acc@0.7_count": 3031
+    },
+    "non_unique": {
+      "count_total": 9423,
+      "count_valid_for_iou": 9410,
+      "acc@0.5": 54.770243022392016,
+      "acc@0.7": 35.22232834553751,
+      "meanIoU": 46.86050037780083,
+      "cumIoU": 35.20652606947052,
+      "acc@0.5_count": 5161,
+      "acc@0.7_count": 3319
+    },
+    "all": {
+      "count_total": 16159,
+      "count_valid_for_iou": 16141,
+      "acc@0.5": 58.92072529240671,
+      "acc@0.7": 39.29698619964107,
+      "meanIoU": 51.19763834262577,
+      "cumIoU": 49.85241711204434,
+      "acc@0.5_count": 9521,
+      "acc@0.7_count": 6350
+    }
+  },
+  "predictions_file": "/opt/yanzixi/project/fine-tune-qwen3.5/VRSBench/benchmark/vrsbench/outputs/qwen35_baseline/02_qwen35_9b_baseline_githubstyle_20260315/grounding_qwen35_9b.jsonl"
+}
