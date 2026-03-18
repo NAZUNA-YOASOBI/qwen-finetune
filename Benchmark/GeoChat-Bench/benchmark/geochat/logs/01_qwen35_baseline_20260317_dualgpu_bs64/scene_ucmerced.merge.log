@@ -1,0 +1,3 @@
+[OK] merged_rows=2100 -> /opt/yanzixi/project/fine-tune-qwen3-vl/GeoChat-Benchmark/benchmark/geochat/outputs/01_qwen35_baseline_20260317_dualgpu_bs64/scene_ucmerced.jsonl
+[OK] deleted shard: /opt/yanzixi/project/fine-tune-qwen3-vl/GeoChat-Benchmark/benchmark/geochat/outputs/01_qwen35_baseline_20260317_dualgpu_bs64/scene_ucmerced.gpu0.jsonl
+[OK] deleted shard: /opt/yanzixi/project/fine-tune-qwen3-vl/GeoChat-Benchmark/benchmark/geochat/outputs/01_qwen35_baseline_20260317_dualgpu_bs64/scene_ucmerced.gpu1.jsonl

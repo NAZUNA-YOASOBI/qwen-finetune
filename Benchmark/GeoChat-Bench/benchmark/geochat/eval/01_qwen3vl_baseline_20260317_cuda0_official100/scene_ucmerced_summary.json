@@ -1,0 +1,310 @@
+{
+  "task": "geochat_scene",
+  "total": 2100,
+  "correct": 1693,
+  "incorrect": 407,
+  "accuracy": 0.8061904761904762,
+  "accuracy_x100": 80.61904761904762,
+  "mismatch_examples": [
+    {
+      "question_id": "denseresidential/denseresidential31.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential96.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential87.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential88.tif",
+      "ground_truth": "denseresidential",
+      "answer": "sparse residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential19.tif",
+      "ground_truth": "denseresidential",
+      "answer": "sparse residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential44.tif",
+      "ground_truth": "denseresidential",
+      "answer": "buildings",
+      "answer_norm": "buildings"
+    },
+    {
+      "question_id": "denseresidential/denseresidential04.tif",
+      "ground_truth": "denseresidential",
+      "answer": "intersection",
+      "answer_norm": "intersection"
+    },
+    {
+      "question_id": "denseresidential/denseresidential83.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential70.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential98.tif",
+      "ground_truth": "denseresidential",
+      "answer": "parking lot",
+      "answer_norm": "parkinglot"
+    },
+    {
+      "question_id": "denseresidential/denseresidential20.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential90.tif",
+      "ground_truth": "denseresidential",
+      "answer": "sparse residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential30.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential23.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential26.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential95.tif",
+      "ground_truth": "denseresidential",
+      "answer": "sparse residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential39.tif",
+      "ground_truth": "denseresidential",
+      "answer": "sparse residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential16.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential93.tif",
+      "ground_truth": "denseresidential",
+      "answer": "sparse residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential37.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential92.tif",
+      "ground_truth": "denseresidential",
+      "answer": "sparse residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential38.tif",
+      "ground_truth": "denseresidential",
+      "answer": "buildings",
+      "answer_norm": "buildings"
+    },
+    {
+      "question_id": "denseresidential/denseresidential63.tif",
+      "ground_truth": "denseresidential",
+      "answer": "parking lot",
+      "answer_norm": "parkinglot"
+    },
+    {
+      "question_id": "denseresidential/denseresidential46.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential42.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential71.tif",
+      "ground_truth": "denseresidential",
+      "answer": "sparse residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential86.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential15.tif",
+      "ground_truth": "denseresidential",
+      "answer": "sparse residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential56.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential54.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential36.tif",
+      "ground_truth": "denseresidential",
+      "answer": "sparse residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential17.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential69.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential91.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential64.tif",
+      "ground_truth": "denseresidential",
+      "answer": "mobile home park",
+      "answer_norm": "mobilehomepark"
+    },
+    {
+      "question_id": "denseresidential/denseresidential43.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential34.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential11.tif",
+      "ground_truth": "denseresidential",
+      "answer": "sparse residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential22.tif",
+      "ground_truth": "denseresidential",
+      "answer": "sparse residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential12.tif",
+      "ground_truth": "denseresidential",
+      "answer": "sparse residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential45.tif",
+      "ground_truth": "denseresidential",
+      "answer": "buildings",
+      "answer_norm": "buildings"
+    },
+    {
+      "question_id": "denseresidential/denseresidential89.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential94.tif",
+      "ground_truth": "denseresidential",
+      "answer": "intersection",
+      "answer_norm": "intersection"
+    },
+    {
+      "question_id": "denseresidential/denseresidential27.tif",
+      "ground_truth": "denseresidential",
+      "answer": "sparse residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential61.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential29.tif",
+      "ground_truth": "denseresidential",
+      "answer": "sparse residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential57.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential97.tif",
+      "ground_truth": "denseresidential",
+      "answer": "sparse residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential21.tif",
+      "ground_truth": "denseresidential",
+      "answer": "medium residential",
+      "answer_norm": "mediumresidential"
+    },
+    {
+      "question_id": "denseresidential/denseresidential35.tif",
+      "ground_truth": "denseresidential",
+      "answer": "sparse residential",
+      "answer_norm": "sparseresidential"
+    }
+  ]
+}

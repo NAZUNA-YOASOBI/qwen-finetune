@@ -1,0 +1,2 @@
+[check] file=/opt/yanzixi/project/fine-tune-qwen3-vl/GeoChat-Benchmark/benchmark/geochat/outputs/01_qwen35_baseline_20260317_dualgpu_bs64/region_caption.jsonl total=2797 hit_without_eos=0 max_new_tokens=256
+[summary] retried=0 resolved=0 unresolved=0 dry_run=0

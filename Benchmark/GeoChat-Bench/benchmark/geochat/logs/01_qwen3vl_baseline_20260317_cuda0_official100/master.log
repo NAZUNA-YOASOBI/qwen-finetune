@@ -1,0 +1,8 @@
+[SKIP]  2026-03-18 05:26:56 scene_aid already has predictions and summary.
+[SKIP]  2026-03-18 05:26:56 scene_ucmerced already has predictions and summary.
+[SKIP]  2026-03-18 05:26:56 prepare_hrben_gt reuse existing file -> /opt/yanzixi/project/fine-tune-qwen3-vl/GeoChat-Benchmark/dataset/raw/HRBEN/geochat_hrben_test_phili_gt.jsonl
+[SKIP]  2026-03-18 05:26:59 vqa_hrben already has predictions and summary.
+[WARN] Skip vqa_lrben: ground-truth file missing -> 
+[SKIP]  2026-03-18 05:26:59 region_caption already has predictions and summary.
+[START] 2026-03-18 05:26:59 referring
+[END]   2026-03-18 06:52:55 referring

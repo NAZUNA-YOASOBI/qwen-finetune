@@ -1,0 +1,826 @@
+{
+  "task": "geochat_vqa",
+  "total": 62554,
+  "correct": 44906,
+  "accuracy": 0.7178757553473799,
+  "accuracy_x100": 71.78757553473798,
+  "missing_ground_truth": 0,
+  "excluded_rows": 0,
+  "excluded_categories": [],
+  "per_category": {
+    "comp": {
+      "total": 35019,
+      "correct": 26651,
+      "accuracy": 0.761044004683172,
+      "accuracy_x100": 76.1044004683172
+    },
+    "presence": {
+      "total": 27535,
+      "correct": 18255,
+      "accuracy": 0.6629743962229889,
+      "accuracy_x100": 66.2974396222989
+    }
+  },
+  "mismatch_examples": [
+    {
+      "question_id": "960672",
+      "category": "comp",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "960673",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960680",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960685",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960697",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "960707",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "960720",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960722",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960724",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "960728",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "960752",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960753",
+      "category": "comp",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "960757",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960762",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960765",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "960769",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960771",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960776",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960777",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960800",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960803",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960804",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "960817",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960821",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960825",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960828",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960829",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960831",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960833",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960836",
+      "category": "comp",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "960839",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960845",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "960849",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960857",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960863",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960872",
+      "category": "comp",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "960873",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960882",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "960886",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960888",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960900",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "960907",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960909",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960928",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "960932",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960935",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960937",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960940",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960945",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "960963",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "960966",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960968",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "960982",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "960995",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961001",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961004",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961016",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961023",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961027",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961034",
+      "category": "comp",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961045",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961071",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961074",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961080",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961090",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961097",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961111",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961123",
+      "category": "comp",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961124",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961129",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961131",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961132",
+      "category": "comp",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961134",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961135",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961144",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961151",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961152",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961156",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961180",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961189",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961191",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961204",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961207",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961210",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961213",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961217",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961218",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961235",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961242",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961247",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961277",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961280",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961281",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961285",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961289",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961292",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961296",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    },
+    {
+      "question_id": "961312",
+      "category": "presence",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961314",
+      "category": "comp",
+      "answer": "no",
+      "answer_norm": "no",
+      "ground_truth": "yes",
+      "ground_truth_norm": "yes"
+    },
+    {
+      "question_id": "961335",
+      "category": "presence",
+      "answer": "yes",
+      "answer_norm": "yes",
+      "ground_truth": "no",
+      "ground_truth_norm": "no"
+    }
+  ]
+}
