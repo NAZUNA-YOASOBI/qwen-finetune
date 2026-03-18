@@ -1,0 +1,494 @@
+[INFO] shard rank=0/2 weights=1:1 selected=31277/62554 first_question_id=960669 last_question_id=1013067
+The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/760 [00:00<?, ?it/s]Loading weights:   0%|          | 1/760 [00:01<12:41,  1.00s/it]Loading weights:   4%|▍         | 29/760 [00:01<00:20, 35.36it/s]Loading weights:   6%|▌         | 45/760 [00:01<00:13, 51.87it/s]Loading weights:   8%|▊         | 59/760 [00:01<00:11, 62.94it/s]Loading weights:   9%|▉         | 72/760 [00:01<00:09, 74.19it/s]Loading weights:  11%|█         | 85/760 [00:01<00:08, 80.02it/s]Loading weights:  13%|█▎        | 97/760 [00:01<00:07, 83.89it/s]Loading weights:  14%|█▍        | 108/760 [00:01<00:07, 83.84it/s]Loading weights:  16%|█▌        | 121/760 [00:01<00:06, 93.32it/s]Loading weights:  18%|█▊        | 134/760 [00:02<00:06, 101.00it/s]Loading weights:  19%|█▉        | 147/760 [00:02<00:05, 104.92it/s]Loading weights:  21%|██        | 159/760 [00:02<00:06, 99.78it/s] Loading weights:  23%|██▎       | 173/760 [00:02<00:05, 106.36it/s]Loading weights:  24%|██▍       | 185/760 [00:02<00:05, 101.94it/s]Loading weights:  26%|██▌       | 196/760 [00:02<00:05, 97.72it/s] Loading weights:  27%|██▋       | 207/760 [00:02<00:06, 90.38it/s]Loading weights:  30%|██▉       | 226/760 [00:02<00:04, 110.27it/s]Loading weights:  32%|███▏      | 241/760 [00:03<00:04, 117.26it/s]Loading weights:  34%|███▎      | 255/760 [00:03<00:04, 117.51it/s]Loading weights:  35%|███▌      | 267/760 [00:03<00:04, 109.70it/s]Loading weights:  37%|███▋      | 280/760 [00:03<00:04, 114.81it/s]Loading weights:  39%|███▊      | 293/760 [00:03<00:04, 113.32it/s]Loading weights:  40%|████      | 305/760 [00:03<00:04, 95.49it/s] Loading weights:  42%|████▏     | 316/760 [00:03<00:04, 89.46it/s]Loading weights:  44%|████▎     | 331/760 [00:03<00:04, 98.37it/s]Loading weights:  45%|████▌     | 345/760 [00:04<00:03, 107.63it/s]Loading weights:  47%|████▋     | 359/760 [00:04<00:03, 112.06it/s]Loading weights:  49%|████▉     | 371/760 [00:04<00:03, 108.80it/s]Loading weights:  51%|█████     | 385/760 [00:04<00:03, 109.43it/s]Loading weights:  52%|█████▏    | 398/760 [00:04<00:03, 110.37it/s]Loading weights:  54%|█████▍    | 410/760 [00:04<00:04, 71.83it/s] Loading weights:  55%|█████▌    | 419/760 [00:05<00:04, 70.15it/s]Loading weights:  69%|██████▉   | 527/760 [00:05<00:00, 275.77it/s]Loading weights:  83%|████████▎ | 633/760 [00:05<00:00, 451.53it/s]Loading weights:  97%|█████████▋| 736/760 [00:05<00:00, 591.37it/s]Loading weights: 100%|██████████| 760/760 [00:05<00:00, 140.72it/s]
+vqa:qwen35:   0%|          | 0/31277 [00:00<?, ?it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   0%|          | 64/31277 [00:10<1:26:01,  6.05it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   0%|          | 128/31277 [00:19<1:17:23,  6.71it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   1%|          | 192/31277 [00:28<1:13:50,  7.02it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   1%|          | 256/31277 [00:36<1:11:56,  7.19it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   1%|          | 320/31277 [00:45<1:11:00,  7.27it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   1%|          | 384/31277 [00:53<1:10:17,  7.32it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   1%|▏         | 448/31277 [01:02<1:09:42,  7.37it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   2%|▏         | 512/31277 [01:11<1:09:24,  7.39it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   2%|▏         | 576/31277 [01:19<1:08:55,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   2%|▏         | 640/31277 [01:28<1:08:49,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   2%|▏         | 704/31277 [01:36<1:08:46,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   2%|▏         | 768/31277 [01:45<1:08:49,  7.39it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   3%|▎         | 832/31277 [01:54<1:08:30,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   3%|▎         | 896/31277 [02:02<1:08:21,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   3%|▎         | 960/31277 [02:11<1:08:13,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   3%|▎         | 1024/31277 [02:20<1:08:32,  7.36it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   3%|▎         | 1088/31277 [02:28<1:08:07,  7.39it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   4%|▎         | 1152/31277 [02:37<1:07:52,  7.40it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   4%|▍         | 1216/31277 [02:46<1:07:44,  7.40it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   4%|▍         | 1280/31277 [02:54<1:07:26,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   4%|▍         | 1344/31277 [03:03<1:07:09,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   5%|▍         | 1408/31277 [03:11<1:06:57,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   5%|▍         | 1472/31277 [03:20<1:06:43,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   5%|▍         | 1536/31277 [03:29<1:07:04,  7.39it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   5%|▌         | 1600/31277 [03:37<1:06:41,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   5%|▌         | 1664/31277 [03:46<1:06:25,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   6%|▌         | 1728/31277 [03:55<1:06:20,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   6%|▌         | 1792/31277 [04:03<1:06:06,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   6%|▌         | 1856/31277 [04:12<1:05:50,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   6%|▌         | 1920/31277 [04:20<1:05:49,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   6%|▋         | 1984/31277 [04:29<1:05:44,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   7%|▋         | 2048/31277 [04:38<1:05:39,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   7%|▋         | 2112/31277 [04:46<1:05:24,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   7%|▋         | 2176/31277 [04:55<1:05:15,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   7%|▋         | 2240/31277 [05:03<1:05:07,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   7%|▋         | 2304/31277 [05:12<1:05:02,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   8%|▊         | 2368/31277 [05:21<1:04:56,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   8%|▊         | 2432/31277 [05:29<1:04:49,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   8%|▊         | 2496/31277 [05:38<1:04:34,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   8%|▊         | 2560/31277 [05:46<1:04:21,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   8%|▊         | 2624/31277 [05:55<1:04:11,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   9%|▊         | 2688/31277 [06:04<1:03:58,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   9%|▉         | 2752/31277 [06:12<1:03:51,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   9%|▉         | 2816/31277 [06:21<1:03:41,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   9%|▉         | 2880/31277 [06:29<1:03:29,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:   9%|▉         | 2944/31277 [06:38<1:03:19,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  10%|▉         | 3008/31277 [06:46<1:02:34,  7.53it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  10%|▉         | 3072/31277 [06:55<1:02:50,  7.48it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  10%|█         | 3136/31277 [07:04<1:02:54,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  10%|█         | 3200/31277 [07:12<1:02:47,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  10%|█         | 3264/31277 [07:21<1:02:46,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  11%|█         | 3328/31277 [07:29<1:02:37,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  11%|█         | 3392/31277 [07:38<1:02:23,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  11%|█         | 3456/31277 [07:47<1:02:15,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  11%|█▏        | 3520/31277 [07:55<1:02:14,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  11%|█▏        | 3584/31277 [08:04<1:02:08,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  12%|█▏        | 3648/31277 [08:12<1:01:52,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  12%|█▏        | 3712/31277 [08:21<1:01:45,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  12%|█▏        | 3776/31277 [08:30<1:01:30,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  12%|█▏        | 3840/31277 [08:38<1:01:25,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  12%|█▏        | 3904/31277 [08:47<1:01:15,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  13%|█▎        | 3968/31277 [08:55<1:01:08,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  13%|█▎        | 4032/31277 [09:04<1:01:18,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  13%|█▎        | 4096/31277 [09:13<1:01:10,  7.40it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  13%|█▎        | 4160/31277 [09:21<1:00:51,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  14%|█▎        | 4224/31277 [09:30<1:00:33,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  14%|█▎        | 4288/31277 [09:39<1:00:28,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  14%|█▍        | 4352/31277 [09:47<1:00:20,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  14%|█▍        | 4416/31277 [09:56<1:00:10,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  14%|█▍        | 4480/31277 [10:04<1:00:00,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  15%|█▍        | 4544/31277 [10:13<59:54,  7.44it/s]  Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  15%|█▍        | 4608/31277 [10:22<59:45,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  15%|█▍        | 4672/31277 [10:30<59:52,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  15%|█▌        | 4736/31277 [10:39<59:38,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  15%|█▌        | 4800/31277 [10:48<59:26,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  16%|█▌        | 4864/31277 [10:56<59:21,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  16%|█▌        | 4928/31277 [11:05<59:09,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  16%|█▌        | 4992/31277 [11:13<58:56,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  16%|█▌        | 5056/31277 [11:22<58:45,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  16%|█▋        | 5120/31277 [11:31<58:37,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  17%|█▋        | 5184/31277 [11:39<58:16,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  17%|█▋        | 5248/31277 [11:48<58:08,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  17%|█▋        | 5312/31277 [11:56<57:54,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  17%|█▋        | 5376/31277 [12:05<57:58,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  17%|█▋        | 5440/31277 [12:13<57:53,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  18%|█▊        | 5504/31277 [12:22<57:43,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  18%|█▊        | 5568/31277 [12:31<57:37,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  18%|█▊        | 5632/31277 [12:39<57:17,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  18%|█▊        | 5696/31277 [12:48<57:17,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  18%|█▊        | 5760/31277 [12:56<57:06,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  19%|█▊        | 5824/31277 [13:05<56:59,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  19%|█▉        | 5888/31277 [13:14<56:45,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  19%|█▉        | 5952/31277 [13:22<56:36,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  19%|█▉        | 6016/31277 [13:31<56:24,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  19%|█▉        | 6080/31277 [13:39<56:25,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  20%|█▉        | 6144/31277 [13:48<56:20,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  20%|█▉        | 6208/31277 [13:57<56:17,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  20%|██        | 6272/31277 [14:05<56:07,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  20%|██        | 6336/31277 [14:14<56:00,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  20%|██        | 6400/31277 [14:23<55:47,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  21%|██        | 6464/31277 [14:31<55:46,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  21%|██        | 6528/31277 [14:40<55:48,  7.39it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  21%|██        | 6592/31277 [14:48<55:26,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  21%|██▏       | 6656/31277 [14:57<55:17,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  21%|██▏       | 6720/31277 [15:06<55:02,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  22%|██▏       | 6784/31277 [15:14<54:57,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  22%|██▏       | 6848/31277 [15:23<54:48,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  22%|██▏       | 6912/31277 [15:31<54:32,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  22%|██▏       | 6976/31277 [15:40<54:23,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  23%|██▎       | 7040/31277 [15:49<54:13,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  23%|██▎       | 7104/31277 [15:57<54:06,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  23%|██▎       | 7168/31277 [16:06<53:56,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  23%|██▎       | 7232/31277 [16:14<53:42,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  23%|██▎       | 7296/31277 [16:23<53:51,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  24%|██▎       | 7360/31277 [16:32<53:39,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  24%|██▎       | 7424/31277 [16:40<53:26,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  24%|██▍       | 7488/31277 [16:49<53:08,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  24%|██▍       | 7552/31277 [16:57<52:55,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  24%|██▍       | 7616/31277 [17:06<52:50,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  25%|██▍       | 7680/31277 [17:14<52:39,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  25%|██▍       | 7744/31277 [17:23<52:33,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  25%|██▍       | 7808/31277 [17:32<52:26,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  25%|██▌       | 7872/31277 [17:40<52:15,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  25%|██▌       | 7936/31277 [17:49<52:09,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  26%|██▌       | 8000/31277 [17:57<52:04,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  26%|██▌       | 8064/31277 [18:06<51:59,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  26%|██▌       | 8128/31277 [18:15<51:48,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  26%|██▌       | 8192/31277 [18:23<51:45,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  26%|██▋       | 8256/31277 [18:32<51:34,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  27%|██▋       | 8320/31277 [18:40<51:22,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  27%|██▋       | 8384/31277 [18:49<51:12,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  27%|██▋       | 8448/31277 [18:58<51:01,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  27%|██▋       | 8512/31277 [19:06<50:52,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  27%|██▋       | 8576/31277 [19:15<50:44,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  28%|██▊       | 8640/31277 [19:23<50:41,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  28%|██▊       | 8704/31277 [19:32<50:41,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  28%|██▊       | 8768/31277 [19:41<50:29,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  28%|██▊       | 8832/31277 [19:49<50:20,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  28%|██▊       | 8896/31277 [19:58<50:11,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  29%|██▊       | 8960/31277 [20:07<50:08,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  29%|██▉       | 9024/31277 [20:15<49:49,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  29%|██▉       | 9088/31277 [20:24<49:42,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  29%|██▉       | 9152/31277 [20:32<49:36,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  29%|██▉       | 9216/31277 [20:41<49:27,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  30%|██▉       | 9280/31277 [20:49<49:16,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  30%|██▉       | 9344/31277 [20:58<49:04,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  30%|███       | 9408/31277 [21:07<48:54,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  30%|███       | 9472/31277 [21:15<48:43,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  30%|███       | 9536/31277 [21:24<48:37,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  31%|███       | 9600/31277 [21:32<48:31,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  31%|███       | 9664/31277 [21:41<48:22,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  31%|███       | 9728/31277 [21:50<48:14,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  31%|███▏      | 9792/31277 [21:58<48:16,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  32%|███▏      | 9856/31277 [22:07<48:15,  7.40it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  32%|███▏      | 9920/31277 [22:16<48:00,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  32%|███▏      | 9984/31277 [22:24<47:47,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  32%|███▏      | 10048/31277 [22:33<47:32,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  32%|███▏      | 10112/31277 [22:41<47:26,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  33%|███▎      | 10176/31277 [22:50<47:16,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  33%|███▎      | 10240/31277 [22:59<47:05,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  33%|███▎      | 10304/31277 [23:07<46:55,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  33%|███▎      | 10368/31277 [23:16<46:51,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  33%|███▎      | 10432/31277 [23:24<46:43,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  34%|███▎      | 10496/31277 [23:33<46:32,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  34%|███▍      | 10560/31277 [23:42<46:25,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  34%|███▍      | 10624/31277 [23:50<46:21,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  34%|███▍      | 10688/31277 [23:59<46:18,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  34%|███▍      | 10752/31277 [24:08<46:07,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  35%|███▍      | 10816/31277 [24:16<45:54,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  35%|███▍      | 10880/31277 [24:25<45:41,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  35%|███▍      | 10944/31277 [24:33<45:29,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  35%|███▌      | 11008/31277 [24:42<45:23,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  35%|███▌      | 11072/31277 [24:50<45:15,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  36%|███▌      | 11136/31277 [24:59<45:08,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  36%|███▌      | 11200/31277 [25:08<44:57,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  36%|███▌      | 11264/31277 [25:16<44:54,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  36%|███▌      | 11328/31277 [25:25<44:45,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  36%|███▋      | 11392/31277 [25:34<44:36,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  37%|███▋      | 11456/31277 [25:42<44:19,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  37%|███▋      | 11520/31277 [25:51<44:10,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  37%|███▋      | 11584/31277 [25:59<44:02,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  37%|███▋      | 11648/31277 [26:08<43:52,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  37%|███▋      | 11712/31277 [26:16<43:45,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  38%|███▊      | 11776/31277 [26:25<43:31,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  38%|███▊      | 11840/31277 [26:34<43:22,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  38%|███▊      | 11904/31277 [26:42<43:15,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  38%|███▊      | 11968/31277 [26:51<43:07,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  38%|███▊      | 12032/31277 [26:59<42:58,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  39%|███▊      | 12096/31277 [27:08<42:50,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  39%|███▉      | 12160/31277 [27:16<42:38,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  39%|███▉      | 12224/31277 [27:25<42:33,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  39%|███▉      | 12288/31277 [27:34<42:25,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  39%|███▉      | 12352/31277 [27:42<42:20,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  40%|███▉      | 12416/31277 [27:51<42:12,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  40%|███▉      | 12480/31277 [27:59<42:05,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  40%|████      | 12544/31277 [28:08<41:53,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  40%|████      | 12608/31277 [28:17<41:46,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  41%|████      | 12672/31277 [28:25<41:38,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  41%|████      | 12736/31277 [28:34<41:32,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  41%|████      | 12800/31277 [28:42<41:21,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  41%|████      | 12864/31277 [28:51<41:15,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  41%|████▏     | 12928/31277 [29:00<41:05,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  42%|████▏     | 12992/31277 [29:08<40:58,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  42%|████▏     | 13056/31277 [29:17<40:50,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  42%|████▏     | 13120/31277 [29:26<40:49,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  42%|████▏     | 13184/31277 [29:34<40:36,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  42%|████▏     | 13248/31277 [29:43<40:24,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  43%|████▎     | 13312/31277 [29:51<40:13,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  43%|████▎     | 13376/31277 [30:00<40:03,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  43%|████▎     | 13440/31277 [30:08<39:50,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  43%|████▎     | 13504/31277 [30:17<39:43,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  43%|████▎     | 13568/31277 [30:26<39:32,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  44%|████▎     | 13632/31277 [30:34<39:22,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  44%|████▍     | 13696/31277 [30:43<39:13,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  44%|████▍     | 13760/31277 [30:51<39:08,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  44%|████▍     | 13824/31277 [31:00<39:02,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  44%|████▍     | 13888/31277 [31:09<39:01,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  45%|████▍     | 13952/31277 [31:17<38:48,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  45%|████▍     | 14016/31277 [31:26<38:38,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  45%|████▌     | 14080/31277 [31:34<38:28,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  45%|████▌     | 14144/31277 [31:43<38:29,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  45%|████▌     | 14208/31277 [31:52<38:17,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  46%|████▌     | 14272/31277 [32:00<38:04,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  46%|████▌     | 14336/31277 [32:09<37:54,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  46%|████▌     | 14400/31277 [32:17<37:44,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  46%|████▌     | 14464/31277 [32:26<37:37,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  46%|████▋     | 14528/31277 [32:34<37:26,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  47%|████▋     | 14592/31277 [32:43<37:13,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  47%|████▋     | 14656/31277 [32:52<37:06,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  47%|████▋     | 14720/31277 [33:00<37:08,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  47%|████▋     | 14784/31277 [33:09<36:55,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  47%|████▋     | 14848/31277 [33:17<36:44,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  48%|████▊     | 14912/31277 [33:26<36:34,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  48%|████▊     | 14976/31277 [33:35<36:23,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  48%|████▊     | 15040/31277 [33:43<36:17,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  48%|████▊     | 15104/31277 [33:52<36:08,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  48%|████▊     | 15168/31277 [34:00<35:59,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  49%|████▊     | 15232/31277 [34:09<35:50,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  49%|████▉     | 15296/31277 [34:17<35:42,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  49%|████▉     | 15360/31277 [34:26<35:33,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  49%|████▉     | 15424/31277 [34:35<35:23,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  50%|████▉     | 15488/31277 [34:43<35:20,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  50%|████▉     | 15552/31277 [34:52<35:14,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  50%|████▉     | 15616/31277 [35:00<35:01,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  50%|█████     | 15680/31277 [35:09<34:53,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  50%|█████     | 15744/31277 [35:18<34:50,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  51%|█████     | 15808/31277 [35:26<34:37,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  51%|█████     | 15872/31277 [35:35<34:26,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  51%|█████     | 15936/31277 [35:43<34:17,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  51%|█████     | 16000/31277 [35:52<34:10,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  51%|█████▏    | 16064/31277 [36:01<34:03,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  52%|█████▏    | 16128/31277 [36:09<33:53,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  52%|█████▏    | 16192/31277 [36:18<33:43,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  52%|█████▏    | 16256/31277 [36:26<33:34,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  52%|█████▏    | 16320/31277 [36:35<33:27,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  52%|█████▏    | 16384/31277 [36:44<33:21,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  53%|█████▎    | 16448/31277 [36:52<33:12,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  53%|█████▎    | 16512/31277 [37:01<32:59,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  53%|█████▎    | 16576/31277 [37:09<32:50,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  53%|█████▎    | 16640/31277 [37:18<32:43,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  53%|█████▎    | 16704/31277 [37:26<32:32,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  54%|█████▎    | 16768/31277 [37:35<32:29,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  54%|█████▍    | 16832/31277 [37:44<32:24,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  54%|█████▍    | 16896/31277 [37:52<32:11,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  54%|█████▍    | 16960/31277 [38:01<32:06,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  54%|█████▍    | 17024/31277 [38:09<31:57,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  55%|█████▍    | 17088/31277 [38:18<31:45,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  55%|█████▍    | 17152/31277 [38:27<31:37,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  55%|█████▌    | 17216/31277 [38:35<31:31,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  55%|█████▌    | 17280/31277 [38:44<31:18,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  55%|█████▌    | 17344/31277 [38:52<31:07,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  56%|█████▌    | 17408/31277 [39:01<30:59,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  56%|█████▌    | 17472/31277 [39:10<30:48,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  56%|█████▌    | 17536/31277 [39:18<30:40,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  56%|█████▋    | 17600/31277 [39:27<30:28,  7.48it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  56%|█████▋    | 17664/31277 [39:35<30:18,  7.48it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  57%|█████▋    | 17728/31277 [39:44<30:11,  7.48it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  57%|█████▋    | 17792/31277 [39:52<30:10,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  57%|█████▋    | 17856/31277 [40:01<30:00,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  57%|█████▋    | 17920/31277 [40:10<29:53,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  57%|█████▋    | 17984/31277 [40:18<29:43,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  58%|█████▊    | 18048/31277 [40:27<29:38,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  58%|█████▊    | 18112/31277 [40:35<29:29,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  58%|█████▊    | 18176/31277 [40:44<29:22,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  58%|█████▊    | 18240/31277 [40:53<29:12,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  59%|█████▊    | 18304/31277 [41:01<29:04,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  59%|█████▊    | 18368/31277 [41:10<28:54,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  59%|█████▉    | 18432/31277 [41:18<28:43,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  59%|█████▉    | 18496/31277 [41:27<28:34,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  59%|█████▉    | 18560/31277 [41:36<28:27,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  60%|█████▉    | 18624/31277 [41:44<28:18,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  60%|█████▉    | 18688/31277 [41:53<28:11,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  60%|█████▉    | 18752/31277 [42:01<28:02,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  60%|██████    | 18816/31277 [42:10<27:54,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  60%|██████    | 18880/31277 [42:19<27:52,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  61%|██████    | 18944/31277 [42:27<27:41,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  61%|██████    | 19008/31277 [42:36<27:33,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  61%|██████    | 19072/31277 [42:45<27:23,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  61%|██████    | 19136/31277 [42:53<27:15,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  61%|██████▏   | 19200/31277 [43:02<27:13,  7.39it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  62%|██████▏   | 19264/31277 [43:10<27:01,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  62%|██████▏   | 19328/31277 [43:19<26:52,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  62%|██████▏   | 19392/31277 [43:28<26:42,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  62%|██████▏   | 19456/31277 [43:36<26:28,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  62%|██████▏   | 19520/31277 [43:45<26:20,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  63%|██████▎   | 19584/31277 [43:54<26:14,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  63%|██████▎   | 19648/31277 [44:02<26:10,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  63%|██████▎   | 19712/31277 [44:11<25:57,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  63%|██████▎   | 19776/31277 [44:19<25:46,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  63%|██████▎   | 19840/31277 [44:28<25:35,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  64%|██████▎   | 19904/31277 [44:36<25:26,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  64%|██████▍   | 19968/31277 [44:45<25:16,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  64%|██████▍   | 20032/31277 [44:54<25:07,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  64%|██████▍   | 20096/31277 [45:02<24:59,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  64%|██████▍   | 20160/31277 [45:11<24:50,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  65%|██████▍   | 20224/31277 [45:19<24:41,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  65%|██████▍   | 20288/31277 [45:28<24:35,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  65%|██████▌   | 20352/31277 [45:37<24:25,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  65%|██████▌   | 20416/31277 [45:45<24:17,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  65%|██████▌   | 20480/31277 [45:54<24:07,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  66%|██████▌   | 20544/31277 [46:02<24:03,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  66%|██████▌   | 20608/31277 [46:11<23:53,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  66%|██████▌   | 20672/31277 [46:20<23:46,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  66%|██████▋   | 20736/31277 [46:28<23:35,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  67%|██████▋   | 20800/31277 [46:37<23:25,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  67%|██████▋   | 20864/31277 [46:45<23:16,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  67%|██████▋   | 20928/31277 [46:54<23:11,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  67%|██████▋   | 20992/31277 [47:03<23:00,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  67%|██████▋   | 21056/31277 [47:11<22:55,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  68%|██████▊   | 21120/31277 [47:20<22:44,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  68%|██████▊   | 21184/31277 [47:28<22:36,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  68%|██████▊   | 21248/31277 [47:37<22:33,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  68%|██████▊   | 21312/31277 [47:46<22:22,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  68%|██████▊   | 21376/31277 [47:54<22:11,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  69%|██████▊   | 21440/31277 [48:03<22:02,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  69%|██████▉   | 21504/31277 [48:11<21:53,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  69%|██████▉   | 21568/31277 [48:20<21:41,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  69%|██████▉   | 21632/31277 [48:29<21:33,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  69%|██████▉   | 21696/31277 [48:37<21:22,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  70%|██████▉   | 21760/31277 [48:46<21:13,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  70%|██████▉   | 21824/31277 [48:54<21:04,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  70%|██████▉   | 21888/31277 [49:03<20:56,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  70%|███████   | 21952/31277 [49:11<20:47,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  70%|███████   | 22016/31277 [49:20<20:44,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  71%|███████   | 22080/31277 [49:29<20:42,  7.40it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  71%|███████   | 22144/31277 [49:37<20:29,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  71%|███████   | 22208/31277 [49:46<20:19,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  71%|███████   | 22272/31277 [49:54<20:09,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  71%|███████▏  | 22336/31277 [50:03<19:58,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  72%|███████▏  | 22400/31277 [50:12<19:49,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  72%|███████▏  | 22464/31277 [50:20<19:40,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  72%|███████▏  | 22528/31277 [50:29<19:32,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  72%|███████▏  | 22592/31277 [50:37<19:25,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  72%|███████▏  | 22656/31277 [50:46<19:17,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  73%|███████▎  | 22720/31277 [50:55<19:07,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  73%|███████▎  | 22784/31277 [51:03<18:59,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  73%|███████▎  | 22848/31277 [51:12<18:48,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  73%|███████▎  | 22912/31277 [51:20<18:39,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  73%|███████▎  | 22976/31277 [51:29<18:32,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  74%|███████▎  | 23040/31277 [51:37<18:22,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  74%|███████▍  | 23104/31277 [51:46<18:16,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  74%|███████▍  | 23168/31277 [51:55<18:07,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  74%|███████▍  | 23232/31277 [52:03<17:59,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  74%|███████▍  | 23296/31277 [52:12<17:50,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  75%|███████▍  | 23360/31277 [52:20<17:42,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  75%|███████▍  | 23424/31277 [52:29<17:33,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  75%|███████▌  | 23488/31277 [52:38<17:27,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  75%|███████▌  | 23552/31277 [52:46<17:17,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  76%|███████▌  | 23616/31277 [52:55<17:08,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  76%|███████▌  | 23680/31277 [53:03<17:01,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  76%|███████▌  | 23744/31277 [53:12<16:55,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  76%|███████▌  | 23808/31277 [53:21<16:44,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  76%|███████▋  | 23872/31277 [53:29<16:33,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  77%|███████▋  | 23936/31277 [53:38<16:23,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  77%|███████▋  | 24000/31277 [53:46<16:15,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  77%|███████▋  | 24064/31277 [53:55<16:04,  7.48it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  77%|███████▋  | 24128/31277 [54:03<15:57,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  77%|███████▋  | 24192/31277 [54:12<15:48,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  78%|███████▊  | 24256/31277 [54:21<15:40,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  78%|███████▊  | 24320/31277 [54:29<15:33,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  78%|███████▊  | 24384/31277 [54:38<15:26,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  78%|███████▊  | 24448/31277 [54:46<15:17,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  78%|███████▊  | 24512/31277 [54:55<15:08,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  79%|███████▊  | 24576/31277 [55:04<15:00,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  79%|███████▉  | 24640/31277 [55:12<14:51,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  79%|███████▉  | 24704/31277 [55:21<14:41,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  79%|███████▉  | 24768/31277 [55:29<14:26,  7.51it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  79%|███████▉  | 24832/31277 [55:38<14:22,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  80%|███████▉  | 24896/31277 [55:46<14:14,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  80%|███████▉  | 24960/31277 [55:55<14:06,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  80%|████████  | 25024/31277 [56:04<13:59,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  80%|████████  | 25088/31277 [56:12<13:51,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  80%|████████  | 25152/31277 [56:21<13:42,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  81%|████████  | 25216/31277 [56:29<13:34,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  81%|████████  | 25280/31277 [56:38<13:26,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  81%|████████  | 25344/31277 [56:47<13:22,  7.39it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  81%|████████  | 25408/31277 [56:55<13:13,  7.39it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  81%|████████▏ | 25472/31277 [57:04<13:04,  7.40it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  82%|████████▏ | 25536/31277 [57:13<12:53,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  82%|████████▏ | 25600/31277 [57:21<12:43,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  82%|████████▏ | 25664/31277 [57:30<12:36,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  82%|████████▏ | 25728/31277 [57:38<12:27,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  82%|████████▏ | 25792/31277 [57:47<12:17,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  83%|████████▎ | 25856/31277 [57:56<12:09,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  83%|████████▎ | 25920/31277 [58:04<12:01,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  83%|████████▎ | 25984/31277 [58:13<11:51,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  83%|████████▎ | 26048/31277 [58:21<11:42,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  83%|████████▎ | 26112/31277 [58:30<11:35,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  84%|████████▎ | 26176/31277 [58:39<11:27,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  84%|████████▍ | 26240/31277 [58:48<11:22,  7.38it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  84%|████████▍ | 26304/31277 [58:56<11:11,  7.40it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  84%|████████▍ | 26368/31277 [59:05<11:02,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  85%|████████▍ | 26432/31277 [59:13<10:53,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  85%|████████▍ | 26496/31277 [59:22<10:44,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  85%|████████▍ | 26560/31277 [59:31<10:34,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  85%|████████▌ | 26624/31277 [59:39<10:27,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  85%|████████▌ | 26688/31277 [59:48<10:17,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  86%|████████▌ | 26752/31277 [59:56<10:08,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  86%|████████▌ | 26816/31277 [1:00:05<10:01,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  86%|████████▌ | 26880/31277 [1:00:14<09:52,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  86%|████████▌ | 26944/31277 [1:00:22<09:43,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  86%|████████▋ | 27008/31277 [1:00:31<09:35,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  87%|████████▋ | 27072/31277 [1:00:39<09:25,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  87%|████████▋ | 27136/31277 [1:00:48<09:16,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  87%|████████▋ | 27200/31277 [1:00:57<09:07,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  87%|████████▋ | 27264/31277 [1:01:05<08:58,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  87%|████████▋ | 27328/31277 [1:01:14<08:48,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  88%|████████▊ | 27392/31277 [1:01:22<08:40,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  88%|████████▊ | 27456/31277 [1:01:31<08:32,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  88%|████████▊ | 27520/31277 [1:01:40<08:24,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  88%|████████▊ | 27584/31277 [1:01:48<08:15,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  88%|████████▊ | 27648/31277 [1:01:57<08:06,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  89%|████████▊ | 27712/31277 [1:02:05<07:57,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  89%|████████▉ | 27776/31277 [1:02:14<07:48,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  89%|████████▉ | 27840/31277 [1:02:22<07:41,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  89%|████████▉ | 27904/31277 [1:02:31<07:33,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  89%|████████▉ | 27968/31277 [1:02:40<07:24,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  90%|████████▉ | 28032/31277 [1:02:48<07:15,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  90%|████████▉ | 28096/31277 [1:02:57<07:07,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  90%|█████████ | 28160/31277 [1:03:05<06:59,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  90%|█████████ | 28224/31277 [1:03:14<06:50,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  90%|█████████ | 28288/31277 [1:03:23<06:42,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  91%|█████████ | 28352/31277 [1:03:31<06:32,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  91%|█████████ | 28416/31277 [1:03:40<06:23,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  91%|█████████ | 28480/31277 [1:03:49<06:17,  7.41it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  91%|█████████▏| 28544/31277 [1:03:57<06:09,  7.40it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  91%|█████████▏| 28608/31277 [1:04:06<06:00,  7.40it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  92%|█████████▏| 28672/31277 [1:04:14<05:50,  7.42it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  92%|█████████▏| 28736/31277 [1:04:23<05:42,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  92%|█████████▏| 28800/31277 [1:04:32<05:33,  7.43it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  92%|█████████▏| 28864/31277 [1:04:40<05:24,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  92%|█████████▏| 28928/31277 [1:04:49<05:15,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  93%|█████████▎| 28992/31277 [1:04:57<05:07,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  93%|█████████▎| 29056/31277 [1:05:06<04:58,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  93%|█████████▎| 29120/31277 [1:05:15<04:50,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  93%|█████████▎| 29184/31277 [1:05:23<04:41,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  94%|█████████▎| 29248/31277 [1:05:32<04:32,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  94%|█████████▎| 29312/31277 [1:05:40<04:23,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  94%|█████████▍| 29376/31277 [1:05:49<04:15,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  94%|█████████▍| 29440/31277 [1:05:58<04:06,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  94%|█████████▍| 29504/31277 [1:06:06<03:57,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  95%|█████████▍| 29568/31277 [1:06:15<03:49,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  95%|█████████▍| 29632/31277 [1:06:23<03:40,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  95%|█████████▍| 29696/31277 [1:06:32<03:31,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  95%|█████████▌| 29760/31277 [1:06:40<03:23,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  95%|█████████▌| 29824/31277 [1:06:49<03:14,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  96%|█████████▌| 29888/31277 [1:06:58<03:06,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  96%|█████████▌| 29952/31277 [1:07:06<02:57,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  96%|█████████▌| 30016/31277 [1:07:15<02:48,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  96%|█████████▌| 30080/31277 [1:07:23<02:40,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  96%|█████████▋| 30144/31277 [1:07:32<02:31,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  97%|█████████▋| 30208/31277 [1:07:40<02:23,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  97%|█████████▋| 30272/31277 [1:07:49<02:14,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  97%|█████████▋| 30336/31277 [1:07:58<02:05,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  97%|█████████▋| 30400/31277 [1:08:06<01:57,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  97%|█████████▋| 30464/31277 [1:08:15<01:48,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  98%|█████████▊| 30528/31277 [1:08:23<01:40,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  98%|█████████▊| 30592/31277 [1:08:32<01:32,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  98%|█████████▊| 30656/31277 [1:08:41<01:23,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  98%|█████████▊| 30720/31277 [1:08:49<01:14,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  98%|█████████▊| 30784/31277 [1:08:58<01:05,  7.48it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  99%|█████████▊| 30848/31277 [1:09:06<00:57,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  99%|█████████▉| 30912/31277 [1:09:15<00:48,  7.48it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  99%|█████████▉| 30976/31277 [1:09:23<00:40,  7.47it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  99%|█████████▉| 31040/31277 [1:09:32<00:31,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35:  99%|█████████▉| 31104/31277 [1:09:41<00:23,  7.44it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35: 100%|█████████▉| 31168/31277 [1:09:49<00:14,  7.45it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35: 100%|█████████▉| 31232/31277 [1:09:58<00:06,  7.46it/s]Setting `pad_token_id` to `eos_token_id`:248044 for open-end generation.
+vqa:qwen35: 100%|██████████| 31277/31277 [1:10:04<00:00,  7.45it/s]vqa:qwen35: 100%|██████████| 31277/31277 [1:10:04<00:00,  7.44it/s]
+[OK] Wrote predictions: /opt/yanzixi/project/fine-tune-qwen3-vl/GeoChat-Benchmark/benchmark/geochat/outputs/01_qwen35_baseline_20260317_dualgpu_bs64/vqa_hrben.gpu0.jsonl

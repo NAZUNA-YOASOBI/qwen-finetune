@@ -1,0 +1,310 @@
+{
+  "task": "geochat_scene",
+  "total": 3000,
+  "correct": 2043,
+  "incorrect": 957,
+  "accuracy": 0.681,
+  "accuracy_x100": 68.1,
+  "mismatch_examples": [
+    {
+      "question_id": "MediumResidential/mediumresidential_288.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Dense Residential",
+      "answer_norm": "denseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_258.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Dense Residential",
+      "answer_norm": "denseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_77.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_196.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_23.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_113.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_48.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Dense Residential",
+      "answer_norm": "denseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_162.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_56.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_130.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_72.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Dense Residential",
+      "answer_norm": "denseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_91.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_14.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Dense Residential",
+      "answer_norm": "denseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_190.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Dense Residential",
+      "answer_norm": "denseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_233.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Dense Residential",
+      "answer_norm": "denseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_143.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_167.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_191.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Dense Residential",
+      "answer_norm": "denseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_52.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Dense Residential",
+      "answer_norm": "denseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_124.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_277.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_180.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_81.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_57.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_217.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_259.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_118.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_36.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Dense Residential",
+      "answer_norm": "denseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_17.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Dense Residential",
+      "answer_norm": "denseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_138.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_182.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_272.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Dense Residential",
+      "answer_norm": "denseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_253.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_208.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Dense Residential",
+      "answer_norm": "denseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_239.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Dense Residential",
+      "answer_norm": "denseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_172.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_76.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_151.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_4.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Dense Residential",
+      "answer_norm": "denseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_205.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Dense Residential",
+      "answer_norm": "denseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_50.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Dense Residential",
+      "answer_norm": "denseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_188.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_16.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Dense Residential",
+      "answer_norm": "denseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_9.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Dense Residential",
+      "answer_norm": "denseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_202.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_187.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_176.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_273.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_104.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    },
+    {
+      "question_id": "MediumResidential/mediumresidential_93.png",
+      "ground_truth": "mediumresidential",
+      "answer": "Sparse Residential",
+      "answer_norm": "sparseresidential"
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+[OK] merged_rows=7593 -> /opt/yanzixi/project/fine-tune-qwen3-vl/GeoChat-Benchmark/benchmark/geochat/outputs/01_qwen35_baseline_20260317_dualgpu_bs64/referring.jsonl
+[OK] deleted shard: /opt/yanzixi/project/fine-tune-qwen3-vl/GeoChat-Benchmark/benchmark/geochat/outputs/01_qwen35_baseline_20260317_dualgpu_bs64/referring.gpu0.jsonl
+[OK] deleted shard: /opt/yanzixi/project/fine-tune-qwen3-vl/GeoChat-Benchmark/benchmark/geochat/outputs/01_qwen35_baseline_20260317_dualgpu_bs64/referring.gpu1.jsonl
