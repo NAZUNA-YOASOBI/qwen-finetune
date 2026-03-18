@@ -6,7 +6,7 @@
   - 训练来源 = DOTA-v2.0 + DIOR
   - 测试来源 = DOTA-v2.0 + DIOR
 
-- GeoChat：
+- GeoChat-Bench：
   - 训练来源 = SAMRS(DOTA-v2.0 + DIOR + FAIR1M-2.0) + NWPU-RESISC-45 + RSVQA-LRBEN(RSVQA-LR) + FloodNet
   - 测试来源 = AID + UCMerced + RSVQA-HRBEN(RSVQA-HR) + RSVQA-LRBEN(RSVQA-LR) + SAMRS(DOTA-v2.0 + DIOR + FAIR1M-2.0)
 
