@@ -449,17 +449,20 @@ def main() -> None:
             )
 
         meta_path = auto_merger.with_suffix(".json")
-        if meta_path.is_file():
-            try:
-                resume_step = max(0, int(_read_json(meta_path).get("step", 0)))
-            except Exception:
-                resume_step = 0
+        if not meta_path.is_file():
+            raise FileNotFoundError(f"Missing merger metadata for strict resume: {meta_path}")
+        try:
+            resume_step = max(0, int(_read_json(meta_path).get("step", 0)))
+        except Exception as e:
+            raise RuntimeError(f"Failed to read resume step from merger metadata: {meta_path}") from e
         optimizer_path = resume_lora_dir.parent / "optimizer.pt"
         scheduler_path = resume_lora_dir.parent / "scheduler.pt"
-        if optimizer_path.is_file():
-            resume_optimizer_path = optimizer_path
-        if scheduler_path.is_file():
-            resume_scheduler_path = scheduler_path
+        if not optimizer_path.is_file():
+            raise FileNotFoundError(f"Missing optimizer state for strict resume: {optimizer_path}")
+        if not scheduler_path.is_file():
+            raise FileNotFoundError(f"Missing scheduler state for strict resume: {scheduler_path}")
+        resume_optimizer_path = optimizer_path
+        resume_scheduler_path = scheduler_path
 
     if init_merger_path is not None:
         resize_cfg = assert_dino_runtime_matches_merger(
@@ -954,29 +957,36 @@ def main() -> None:
 
     accelerator.wait_for_everyone()
     if accelerator.is_main_process:
-        final_dir = out_dir / "final"
-        final_dir.mkdir(parents=True, exist_ok=True)
-        model_to_save = accelerator.unwrap_model(model)
-        base_to_save = model_to_save.get_base_model()
-        model_to_save.save_pretrained(str(final_dir / "lora"))
-        torch.save(optimizer.state_dict(), str(final_dir / "optimizer.pt"))
-        torch.save(lr_scheduler.state_dict(), str(final_dir / "scheduler.pt"))
-        save_merger_safetensors(
-            base_to_save,
-            final_dir / "merger.safetensors",
-            extra={
-                "step": int(global_step),
-                "run": run_meta,
-                "train_json": _rel_to_project(train_json),
-                "adapter": {
-                    "dinov3_dir": _rel_to_project(dinov3_dir),
-                    "image_size": int(adapter_cfg.image_size),
-                    "merge_size": int(adapter_cfg.merge_size),
-                    "deepstack_visual_indexes": list(adapter_cfg.deepstack_visual_indexes),
+        if int(global_step) > 0 and int(global_step) % int(steps_per_epoch) == 0:
+            final_dir = out_dir / "final"
+            final_dir.mkdir(parents=True, exist_ok=True)
+            model_to_save = accelerator.unwrap_model(model)
+            base_to_save = model_to_save.get_base_model()
+            model_to_save.save_pretrained(str(final_dir / "lora"))
+            torch.save(optimizer.state_dict(), str(final_dir / "optimizer.pt"))
+            torch.save(lr_scheduler.state_dict(), str(final_dir / "scheduler.pt"))
+            save_merger_safetensors(
+                base_to_save,
+                final_dir / "merger.safetensors",
+                extra={
+                    "step": int(global_step),
+                    "run": run_meta,
+                    "train_json": _rel_to_project(train_json),
+                    "adapter": {
+                        "dinov3_dir": _rel_to_project(dinov3_dir),
+                        "image_size": int(adapter_cfg.image_size),
+                        "merge_size": int(adapter_cfg.merge_size),
+                        "deepstack_visual_indexes": list(adapter_cfg.deepstack_visual_indexes),
+                    },
                 },
-            },
-        )
-        print(f"[OK] Saved: {final_dir}", flush=True)
+            )
+            print(f"[OK] Saved: {final_dir}", flush=True)
+        else:
+            print(
+                "[WARN] Skip saving final checkpoint because current step is not on an epoch boundary: "
+                f"step={global_step}, steps_per_epoch={steps_per_epoch}.",
+                flush=True,
+            )
 
     accelerator.end_training()
 

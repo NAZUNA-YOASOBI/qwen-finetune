@@ -995,44 +995,51 @@ def main() -> None:
 
     accelerator.wait_for_everyone()
     if accelerator.is_main_process:
-        final_dir = out_dir / "final"
-        final_dir.mkdir(parents=True, exist_ok=True)
-        model_to_save = accelerator.unwrap_model(model)
-        base_to_save = model_to_save.get_base_model()
-        model_to_save.save_pretrained(str(final_dir / "lora"))
-        torch.save(optimizer.state_dict(), str(final_dir / "optimizer.pt"))
-        torch.save(lr_scheduler.state_dict(), str(final_dir / "scheduler.pt"))
-        save_sva_deepstack_ca_merger_safetensors(
-            base_to_save,
-            final_dir / "merger.safetensors",
-            extra={
-                "step": int(global_step),
-                "run": run_meta,
-                "train_json": _rel_to_project(train_json),
-                "visual": {
-                    "mode": "sva_deepstack_ca_visual",
-                    "adapter_type": "sva_deepstack_ca_visual",
-                    "dinov3_dir": _rel_to_project(dinov3_dir),
-                    "patch_size": int(base_to_save.config.vision_config.patch_size),
-                    "merge_size": int(base_to_save.config.vision_config.spatial_merge_size),
-                    "latent_grid_h": int(getattr(base_to_save.model.visual, "latent_grid_h", 16)),
-                    "latent_grid_w": int(getattr(base_to_save.model.visual, "latent_grid_w", 16)),
-                    "fixed_llm_image_tokens": int(
-                        getattr(base_to_save.model.visual, "latent_grid_h", 16)
-                        * getattr(base_to_save.model.visual, "latent_grid_w", 16)
-                        // (int(base_to_save.config.vision_config.spatial_merge_size) ** 2)
-                    ),
-                    "deepstack_visual_indexes": list(
-                        int(x) for x in getattr(base_to_save.model.visual, "deepstack_visual_indexes", [])
-                    ),
-                    "query_base_side": int(getattr(getattr(base_to_save.model.visual, "cfg", None), "query_base_side", 0)),
-                    "sva_num_heads": int(getattr(getattr(base_to_save.model.visual, "cfg", None), "sva_num_heads", 0)),
-                    "sva_mlp_ratio": float(getattr(getattr(base_to_save.model.visual, "cfg", None), "sva_mlp_ratio", 0.0)),
-                    "sva_dropout": float(getattr(getattr(base_to_save.model.visual, "cfg", None), "sva_dropout", 0.0)),
+        if int(global_step) > 0 and int(global_step) % int(steps_per_epoch) == 0:
+            final_dir = out_dir / "final"
+            final_dir.mkdir(parents=True, exist_ok=True)
+            model_to_save = accelerator.unwrap_model(model)
+            base_to_save = model_to_save.get_base_model()
+            model_to_save.save_pretrained(str(final_dir / "lora"))
+            torch.save(optimizer.state_dict(), str(final_dir / "optimizer.pt"))
+            torch.save(lr_scheduler.state_dict(), str(final_dir / "scheduler.pt"))
+            save_sva_deepstack_ca_merger_safetensors(
+                base_to_save,
+                final_dir / "merger.safetensors",
+                extra={
+                    "step": int(global_step),
+                    "run": run_meta,
+                    "train_json": _rel_to_project(train_json),
+                    "visual": {
+                        "mode": "sva_deepstack_ca_visual",
+                        "adapter_type": "sva_deepstack_ca_visual",
+                        "dinov3_dir": _rel_to_project(dinov3_dir),
+                        "patch_size": int(base_to_save.config.vision_config.patch_size),
+                        "merge_size": int(base_to_save.config.vision_config.spatial_merge_size),
+                        "latent_grid_h": int(getattr(base_to_save.model.visual, "latent_grid_h", 16)),
+                        "latent_grid_w": int(getattr(base_to_save.model.visual, "latent_grid_w", 16)),
+                        "fixed_llm_image_tokens": int(
+                            getattr(base_to_save.model.visual, "latent_grid_h", 16)
+                            * getattr(base_to_save.model.visual, "latent_grid_w", 16)
+                            // (int(base_to_save.config.vision_config.spatial_merge_size) ** 2)
+                        ),
+                        "deepstack_visual_indexes": list(
+                            int(x) for x in getattr(base_to_save.model.visual, "deepstack_visual_indexes", [])
+                        ),
+                        "query_base_side": int(getattr(getattr(base_to_save.model.visual, "cfg", None), "query_base_side", 0)),
+                        "sva_num_heads": int(getattr(getattr(base_to_save.model.visual, "cfg", None), "sva_num_heads", 0)),
+                        "sva_mlp_ratio": float(getattr(getattr(base_to_save.model.visual, "cfg", None), "sva_mlp_ratio", 0.0)),
+                        "sva_dropout": float(getattr(getattr(base_to_save.model.visual, "cfg", None), "sva_dropout", 0.0)),
+                    },
                 },
-            },
-        )
-        print(f"[OK] Saved: {final_dir}", flush=True)
+            )
+            print(f"[OK] Saved: {final_dir}", flush=True)
+        else:
+            print(
+                "[WARN] Skip saving final checkpoint because current step is not on an epoch boundary: "
+                f"step={global_step}, steps_per_epoch={steps_per_epoch}.",
+                flush=True,
+            )
 
     accelerator.end_training()
 

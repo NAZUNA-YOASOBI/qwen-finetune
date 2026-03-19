@@ -124,10 +124,10 @@ def main() -> None:
     parser.add_argument("--paper-caption", type=str, default="benchmark/vrsbench/paper/table3_caption_paper.json")
     parser.add_argument("--paper-grounding", type=str, default="benchmark/vrsbench/paper/table4_grounding_paper.json")
     parser.add_argument("--baseline-dir", type=str, default="benchmark/vrsbench/eval_results/prompt_modified/01_baseline_qwen3vl8b")
-    parser.add_argument("--qwen35-dir", type=str, default="benchmark/vrsbench/eval_results/prompt_modified/07_qwen35_9b_baseline")
+    parser.add_argument("--qwen35-dir", type=str, default="")
     parser.add_argument("--smartbucket-dir", type=str, default="benchmark/vrsbench/eval_results/prompt_modified/04_merger_lora_epoch10_smartresize512_sampleavg")
-    parser.add_argument("--sva-dir", type=str, default="benchmark/vrsbench/eval_results/prompt_modified/06_sva_deepstack_ca_epoch10")
-    parser.add_argument("--qwen-native-dir", type=str, default="")
+    parser.add_argument("--sva-dir", type=str, default="")
+    parser.add_argument("--qwen-native-dir", type=str, default="benchmark/vrsbench/eval_results/prompt_modified/05_qwen_native_epoch10")
     parser.add_argument("--out", type=str, default="benchmark/vrsbench/eval_results/prompt_modified/compare_bench_vs_ours.md")
     args = parser.parse_args()
 
@@ -136,12 +136,14 @@ def main() -> None:
 
     model_dirs = [
         ("Ours-baseline8b", _resolve_from_project(args.baseline_dir)),
-        ("Ours-qwen3.5-9b-baseline", _resolve_from_project(args.qwen35_dir)),
         ("Ours-merger_lora-epoch10-smartresize512-sampleavg", _resolve_from_project(args.smartbucket_dir)),
-        ("Ours-sva_deepstack_ca-epoch10", _resolve_from_project(args.sva_dir)),
     ]
     if str(args.qwen_native_dir).strip():
         model_dirs.append(("Ours-qwen_native-epoch10", _resolve_from_project(args.qwen_native_dir)))
+    if str(args.qwen35_dir).strip():
+        model_dirs.append(("Ours-qwen3.5-9b-baseline", _resolve_from_project(args.qwen35_dir)))
+    if str(args.sva_dir).strip():
+        model_dirs.append(("Ours-sva_deepstack_ca-epoch10", _resolve_from_project(args.sva_dir)))
 
     caption_rows: list[dict[str, Any]] = []
     grounding_rows: list[dict[str, Any]] = []

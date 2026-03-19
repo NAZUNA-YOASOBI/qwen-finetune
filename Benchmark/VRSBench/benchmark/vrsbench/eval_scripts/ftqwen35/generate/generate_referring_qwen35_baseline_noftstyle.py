@@ -203,11 +203,6 @@ def strip_thinking_and_role_markers(text: str) -> str:
     s = re.sub(r"^<\|im_start\|>\s*assistant\s*", "", s, flags=re.IGNORECASE)
     s = re.sub(r"^assistant\s*", "", s, flags=re.IGNORECASE)
     s = s.replace("<|im_end|>", "").strip()
-    if "<think>" in s:
-        if "</think>" in s:
-            s = s.split("</think>", 1)[1].strip()
-        else:
-            s = s.replace("<think>", "").strip()
     return s
 
 

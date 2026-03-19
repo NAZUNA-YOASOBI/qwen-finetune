@@ -26,10 +26,12 @@
 
 - `run/run_prompt_modified_suite.sh`
   - 当前 `prompt_modified` 这一套评测入口
+  - 默认只产出并汇总 baseline、smartresize512、qwen_native 这三条结果
 - `run/run_eval_reverse_epochs.sh`
   - `sva_deepstack_ca` 按 epoch 回溯评测入口
 - `report/make_report_prompt_modified.py`
   - 生成 `compare_bench_vs_ours.md`
+  - 如果要把 `sva` 或 `qwen3.5` 纳入总表，需要显式传 `--sva-dir` / `--qwen35-dir`
 
 ## 使用约定
 

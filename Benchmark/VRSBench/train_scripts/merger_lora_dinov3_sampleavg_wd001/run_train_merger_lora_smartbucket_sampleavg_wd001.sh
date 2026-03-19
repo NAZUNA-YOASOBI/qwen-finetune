@@ -34,4 +34,5 @@ conda run --no-capture-output -n qwen3-dinov3 \
   --lora-dropout 0.05 \
   --seed 42 \
   --num-workers 2 \
+  "$@" \
   2>&1 | tee "${RUN_DIR}/train.log"

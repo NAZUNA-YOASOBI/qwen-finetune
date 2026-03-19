@@ -180,10 +180,3 @@ def torch_dtype_from_str(torch_mod, dtype: str):
     if dtype in {"fp32", "float32"}:
         return torch_mod.float32
     return torch_mod.float32
-
-
-def strip_thinking_content(text: str) -> str:
-    t = str(text or "")
-    if "</think>" in t:
-        t = t.split("</think>", 1)[1]
-    return t.strip()

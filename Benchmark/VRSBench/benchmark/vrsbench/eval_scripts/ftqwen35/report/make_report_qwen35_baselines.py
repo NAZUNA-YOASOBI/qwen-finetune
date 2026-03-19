@@ -42,7 +42,7 @@ def _caption_row(method: str, summary: dict[str, Any]) -> dict[str, Any]:
         "ROUGE_L": metrics.get("ROUGE_L", 0.0) * 100.0,
         "CIDEr": metrics.get("CIDEr", 0.0) * 100.0,
         "CHAIR": metrics.get("CHAIR2", None),
-        "Avg_L": metrics.get("Avg_L", None),
+        "Avg_L": summary.get("avg_len_words", None),
     }
 
 

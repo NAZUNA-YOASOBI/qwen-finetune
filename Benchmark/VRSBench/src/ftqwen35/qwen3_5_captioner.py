@@ -10,7 +10,6 @@ from .device import assert_model_on_cuda, require_cuda
 from .qwen35_utils import (
     build_generate_kwargs,
     maybe_set_generation_seed,
-    strip_thinking_content,
     summarize_generated_sequences,
     torch_dtype_from_str,
 )
@@ -137,10 +136,15 @@ class Qwen35Captioner:
         with torch.no_grad():
             generated_ids = self.model.generate(**inputs, **self.generate_config.gen_kwargs)
 
+        input_ids = inputs.get("input_ids", None)
         attn = inputs.get("attention_mask", None)
-        if attn is None:
-            raise RuntimeError("Missing attention_mask while trimming generated ids.")
-        prompt_lens = [int(x) for x in attn.sum(dim=1).tolist()]
+        if input_ids is not None:
+            prompt_len = int(input_ids.shape[1])
+        elif attn is not None:
+            prompt_len = int(attn.shape[1])
+        else:
+            raise RuntimeError("Missing input_ids/attention_mask while trimming generated ids.")
+        prompt_lens = [int(prompt_len)] * int(generated_ids.shape[0])
         generation_config = getattr(self.model, "generation_config", None)
         eos_token_id = getattr(generation_config, "eos_token_id", None)
         pad_token_id = getattr(generation_config, "pad_token_id", None)
@@ -162,7 +166,7 @@ class Qwen35Captioner:
         )
         return [
             CaptionResult(
-                text=strip_thinking_content(str(text).strip()),
+                text=str(text).strip(),
                 generated_token_count=int(item.generated_token_count),
                 ended_by_eos=bool(item.ended_by_eos),
                 last_generated_token_id=item.last_generated_token_id,

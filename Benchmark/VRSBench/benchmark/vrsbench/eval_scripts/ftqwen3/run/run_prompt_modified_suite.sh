@@ -297,6 +297,8 @@ run_grounding_eval grounding_qwen_native_eval "$QNATIVE_DIR/grounding_qwen_nativ
 
 log "[START] $(date '+%F %T') make_prompt_modified_report"
 "$PY" "$SCRIPT_ROOT/report/make_report_prompt_modified.py" \
+  --baseline-dir "$BASELINE_DIR" \
+  --smartbucket-dir "$SMART_DIR" \
   --qwen-native-dir "$QNATIVE_DIR" > "$LOG_ROOT/make_report.log" 2>&1
 log "[END]   $(date '+%F %T') make_prompt_modified_report"
 log "[DONE]  $(date '+%F %T') prompt_modified suite completed"
