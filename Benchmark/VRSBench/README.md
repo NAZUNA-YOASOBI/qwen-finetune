@@ -25,7 +25,7 @@
 
 ### 已复制内容
 
-- `benchmark/vrsbench/scripts/ftqwen3/`
+- `benchmark/vrsbench/eval_scripts/ftqwen3/`
   - `generate/` 生成脚本
   - `fix/` 补跑与修复脚本
   - `eval/` 算分脚本
@@ -33,7 +33,7 @@
   - `prepare/` 数据准备脚本
   - `utils/` 通用工具脚本
   - `run/` 运行入口脚本
-- `benchmark/vrsbench/scripts/ftqwen35/`
+- `benchmark/vrsbench/eval_scripts/ftqwen35/`
   - `generate/` 生成脚本
   - `fix/` 补跑与修复脚本
   - `eval/` 算分脚本
@@ -48,7 +48,7 @@
   - 评测和生成用到的小型测试索引与引用文件
 - `benchmark/vrsbench/paper/`
   - paper 对比表原始数据
-- `benchmark/vrsbench/eval/prompt_modified/`
+- `benchmark/vrsbench/eval_results/prompt_modified/`
   - 最终对比报告
   - 当前保留结果的 `caption_summary.json`
   - 当前保留结果的 `grounding_summary.json`
@@ -74,11 +74,11 @@
 
 最终总表：
 
-- `benchmark/vrsbench/eval/prompt_modified/compare_bench_vs_ours.md`
+- `benchmark/vrsbench/eval_results/prompt_modified/compare_bench_vs_ours.md`
 
 每个模型的结果摘要：
 
-- `benchmark/vrsbench/eval/prompt_modified/01_baseline_qwen3vl8b/`
-- `benchmark/vrsbench/eval/prompt_modified/04_merger_lora_epoch10_smartresize512_sampleavg/`
-- `benchmark/vrsbench/eval/prompt_modified/06_sva_deepstack_ca_epoch10/`
-- `benchmark/vrsbench/eval/prompt_modified/07_qwen35_9b_baseline/`
+- `benchmark/vrsbench/eval_results/prompt_modified/01_baseline_qwen3vl8b/`
+- `benchmark/vrsbench/eval_results/prompt_modified/04_merger_lora_epoch10_smartresize512_sampleavg/`
+- `benchmark/vrsbench/eval_results/prompt_modified/06_sva_deepstack_ca_epoch10/`
+- `benchmark/vrsbench/eval_results/prompt_modified/07_qwen35_9b_baseline/`
