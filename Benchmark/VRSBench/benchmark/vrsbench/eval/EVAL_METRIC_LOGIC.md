@@ -1,20 +1,24 @@
 # VRSBench 当前评测指标逻辑说明
 
-本文档只说明当前 `VRSBench/benchmark/vrsbench/scripts` 这套评测链路中，**分数是怎么计算出来的**，以及哪些部分来自官方，哪些部分是我们自己补的。
+本文档只说明当前 `VRSBench/benchmark/vrsbench/scripts/ftqwen3` 与 `VRSBench/benchmark/vrsbench/scripts/ftqwen35` 这两套评测链路中，**分数是怎么计算出来的**，以及哪些部分来自官方，哪些部分是我们自己补的。
 
 ## 1. 当前实际用到的脚本
 
 - Caption 评测：
-  - `VRSBench/benchmark/vrsbench/scripts/eval_vrsbench_cap.py`
+  - `VRSBench/benchmark/vrsbench/scripts/ftqwen3/eval/eval_vrsbench_cap.py`
 - Grounding 评测：
-  - 微调模型与常规链路：`VRSBench/benchmark/vrsbench/scripts/eval_vrsbench_referring.py`
-  - 原生未微调 baseline：`VRSBench/benchmark/vrsbench/scripts/eval_referring_baseline_noftstyle.py`
+  - 微调模型与常规链路：`VRSBench/benchmark/vrsbench/scripts/ftqwen3/eval/eval_vrsbench_referring.py`
+  - 原生未微调 baseline：`VRSBench/benchmark/vrsbench/scripts/ftqwen3/eval/eval_referring_baseline_noftstyle.py`
 - 与评测结果直接相关、但不属于“指标公式”的修正脚本：
-  - `VRSBench/benchmark/vrsbench/scripts/fix_max_new_tokens_hits_baseline.py`
-  - `VRSBench/benchmark/vrsbench/scripts/fix_max_new_tokens_hits_dinov3.py`
-  - `VRSBench/benchmark/vrsbench/scripts/fix_max_new_tokens_hits_qwen_native.py`
-  - `VRSBench/benchmark/vrsbench/scripts/fix_max_new_tokens_hits_sva_deepstack_ca.py`
-  - `VRSBench/benchmark/vrsbench/scripts/normalize_referring_predictions.py`
+  - `VRSBench/benchmark/vrsbench/scripts/ftqwen3/fix/fix_max_new_tokens_hits_baseline.py`
+  - `VRSBench/benchmark/vrsbench/scripts/ftqwen3/fix/fix_max_new_tokens_hits_dinov3.py`
+  - `VRSBench/benchmark/vrsbench/scripts/ftqwen3/fix/fix_max_new_tokens_hits_qwen_native.py`
+  - `VRSBench/benchmark/vrsbench/scripts/ftqwen3/fix/fix_max_new_tokens_hits_sva_deepstack_ca.py`
+  - `VRSBench/benchmark/vrsbench/scripts/ftqwen3/utils/normalize_referring_predictions.py`
+
+补充说明：
+
+- `ftqwen35` 下同名 `eval/` 脚本沿用同一套指标逻辑，这里不重复展开。
 
 ---
 
@@ -31,8 +35,8 @@
 
 当前实现：
 
-- `VRSBench/benchmark/vrsbench/scripts/eval_vrsbench_referring.py`
-- `VRSBench/benchmark/vrsbench/scripts/eval_referring_baseline_noftstyle.py`
+- `VRSBench/benchmark/vrsbench/scripts/ftqwen3/eval/eval_vrsbench_referring.py`
+- `VRSBench/benchmark/vrsbench/scripts/ftqwen3/eval/eval_referring_baseline_noftstyle.py`
 
 复刻点：
 
@@ -79,8 +83,8 @@
 
 这点在：
 
-- `VRSBench/benchmark/vrsbench/scripts/eval_vrsbench_referring.py`
-- `VRSBench/benchmark/vrsbench/scripts/eval_referring_baseline_noftstyle.py`
+- `VRSBench/benchmark/vrsbench/scripts/ftqwen3/eval/eval_vrsbench_referring.py`
+- `VRSBench/benchmark/vrsbench/scripts/ftqwen3/eval/eval_referring_baseline_noftstyle.py`
 
 里都是这样做的。
 
@@ -127,7 +131,7 @@
 
 当前实现：
 
-- `VRSBench/benchmark/vrsbench/scripts/eval_vrsbench_cap.py`
+- `VRSBench/benchmark/vrsbench/scripts/ftqwen3/eval/eval_vrsbench_cap.py`
 
 所用标准库：
 
@@ -162,10 +166,10 @@
 
 当前脚本：
 
-- `VRSBench/benchmark/vrsbench/scripts/fix_max_new_tokens_hits_baseline.py`
-- `VRSBench/benchmark/vrsbench/scripts/fix_max_new_tokens_hits_dinov3.py`
-- `VRSBench/benchmark/vrsbench/scripts/fix_max_new_tokens_hits_qwen_native.py`
-- `VRSBench/benchmark/vrsbench/scripts/fix_max_new_tokens_hits_sva_deepstack_ca.py`
+- `VRSBench/benchmark/vrsbench/scripts/ftqwen3/fix/fix_max_new_tokens_hits_baseline.py`
+- `VRSBench/benchmark/vrsbench/scripts/ftqwen3/fix/fix_max_new_tokens_hits_dinov3.py`
+- `VRSBench/benchmark/vrsbench/scripts/ftqwen3/fix/fix_max_new_tokens_hits_qwen_native.py`
+- `VRSBench/benchmark/vrsbench/scripts/ftqwen3/fix/fix_max_new_tokens_hits_sva_deepstack_ca.py`
 
 这一步不是官方给的算分公式，它是我们为了避免“句子被截断后直接拉低 caption 指标”而加的工程修正。
 
@@ -179,8 +183,8 @@
 
 当前实现：
 
-- `VRSBench/benchmark/vrsbench/scripts/eval_vrsbench_referring.py`
-- `VRSBench/benchmark/vrsbench/scripts/normalize_referring_predictions.py`
+- `VRSBench/benchmark/vrsbench/scripts/ftqwen3/eval/eval_vrsbench_referring.py`
+- `VRSBench/benchmark/vrsbench/scripts/ftqwen3/utils/normalize_referring_predictions.py`
 
 这不是官方 notebook 原样提供的逻辑，而是我们为了适配当前训练后模型“偶尔出负数、偶尔出超过 100 的值”的工程修正。
 
@@ -199,7 +203,7 @@
 
 当前实现：
 
-- `VRSBench/benchmark/vrsbench/scripts/eval_referring_baseline_noftstyle.py`
+- `VRSBench/benchmark/vrsbench/scripts/ftqwen3/eval/eval_referring_baseline_noftstyle.py`
 
 这也是工程适配，不是官方 notebook 直接提供的 baseline scorer。
 
@@ -231,7 +235,7 @@
 
 当前实现：
 
-- `VRSBench/benchmark/vrsbench/scripts/eval_vrsbench_cap.py`
+- `VRSBench/benchmark/vrsbench/scripts/ftqwen3/eval/eval_vrsbench_cap.py`
 
 这部分官方仓库没有给出 scorer，所以它**不是官方明确定义**。
 

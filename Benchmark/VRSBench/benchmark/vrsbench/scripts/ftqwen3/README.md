@@ -1,0 +1,36 @@
+# ftqwen3 脚本说明
+
+本目录存放 `Qwen3-VL` 这一条线在 VRSBench 中用到的脚本，按功能分类。
+
+## 目录结构
+
+- `generate/`
+  - 生成模型输出
+  - 包括 baseline、DINOv3、Qwen native、SVA deepstack CA，以及对应 referring 生成脚本
+- `fix/`
+  - 处理生成时触发 `max_new_tokens` 后的补跑与修复
+- `eval/`
+  - Caption 与 referring 的算分脚本
+- `report/`
+  - paper 表格提取与最终 markdown 对比表生成脚本
+- `prepare/`
+  - 从原始数据集整理出 VRSBench 测试所需的标注与索引文件
+- `utils/`
+  - 通用工具脚本
+  - 当前包括 jsonl 分片合并、按 key 打补丁、referring 预测规范化
+- `run/`
+  - 运行入口脚本
+  - 用来串起完整评测流程或按 epoch 反向评测
+
+## 常用入口
+
+- `run/run_prompt_modified_suite.sh`
+  - 当前 `prompt_modified` 这一套评测入口
+- `run/run_eval_reverse_epochs.sh`
+  - `sva_deepstack_ca` 按 epoch 回溯评测入口
+- `report/make_report_prompt_modified.py`
+  - 生成 `compare_bench_vs_ours.md`
+
+## 使用约定
+
+- 所有脚本都默认以 `Benchmark/VRSBench` 为项目根目录来解析相对路径
