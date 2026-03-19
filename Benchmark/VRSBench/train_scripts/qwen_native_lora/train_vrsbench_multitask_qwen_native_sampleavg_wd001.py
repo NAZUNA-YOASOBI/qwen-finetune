@@ -26,6 +26,44 @@ def _rel_to_project(path: Path) -> str:
         return str(p.resolve())
 
 
+def _resolve_language_lora_targets(base_model, target_leaf_names: list[str]) -> list[str]:
+    """把 LoRA target 限定在 language_model，避免误命中 visual 分支。"""
+    leaf_set = {str(x).strip() for x in target_leaf_names if str(x).strip()}
+    if not leaf_set:
+        raise ValueError("Empty LoRA target module list.")
+
+    matched: list[str] = []
+    for name, _module in base_model.named_modules():
+        if not name:
+            continue
+        leaf = name.rsplit(".", 1)[-1]
+        if leaf not in leaf_set:
+            continue
+        if ".language_model." not in f".{name}.":
+            continue
+        matched.append(name)
+
+    matched = sorted(set(matched))
+    if not matched:
+        want = ", ".join(sorted(leaf_set))
+        raise RuntimeError(f"No language_model LoRA targets matched. wanted=[{want}]")
+    return matched
+
+
+def _assert_no_visual_lora_trainables(model) -> None:
+    """防止把 LoRA 打到 visual 分支，避免实验口径污染。"""
+    bad: list[str] = []
+    for name, p in model.named_parameters():
+        if "lora_" not in name:
+            continue
+        if ".visual." in f".{name}." and bool(getattr(p, "requires_grad", False)):
+            bad.append(name)
+            if len(bad) >= 8:
+                break
+    if bad:
+        show = ", ".join(bad)
+        raise RuntimeError("Found trainable visual LoRA params (expected LLM-only LoRA): " + show)
+
 
 def _read_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
@@ -102,35 +140,30 @@ def _extract_vrsbench_task(item: dict) -> str:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="VRSBench multi-task SFT: train merger only (DINOv3 visual, sample-average loss).")
-    parser.add_argument("--qwen-model-dir", type=str, default="models/Qwen3-VL-8B-Instruct")
-    parser.add_argument(
-        "--dinov3-dir",
-        type=str,
-        default="models/dinov3/dinov3-vitl16-pretrain-sat493m",
+    parser = argparse.ArgumentParser(
+        description="VRSBench multi-task SFT: train merger + LLM LoRA (Qwen3-VL native visual, sample-average loss)."
     )
+    parser.add_argument("--qwen-model-dir", type=str, default="models/Qwen3-VL-8B-Instruct")
     parser.add_argument("--dataset-root", type=str, default="datasets/VRSBench")
     parser.add_argument("--train-json", type=str, default="datasets/VRSBench/VRSBench_train.json")
-    parser.add_argument("--image-size", type=int, default=256)
-    parser.add_argument("--smart-resize-min-pixels", type=int, default=None)
-    parser.add_argument("--smart-resize-max-pixels", type=int, default=None)
+    parser.add_argument("--smart-resize-min-pixels", type=int, default=256 * 256)
+    parser.add_argument("--smart-resize-max-pixels", type=int, default=4096 * 4096)
 
-    parser.add_argument("--output-dir", type=str, default="checkpoints/vrsbench_joint/merger_only_sampleavg_wd001")
-    parser.add_argument("--init-merger", type=str, default="", help="Merger safetensors to init from (optional).")
     parser.add_argument(
-        "--resume-merger",
+        "--output-dir",
         type=str,
-        default="",
-        help="Merger safetensors to resume from (must be saved at an epoch boundary).",
+        default="checkpoints/vrsbench_joint/merger_lora_8b_qwen_native_sampleavg_wd001",
     )
+    parser.add_argument("--init-merger", type=str, default="", help="Merger safetensors to init from (optional).")
+    parser.add_argument("--resume-lora", type=str, default="", help="LoRA dir to resume from.")
 
-    parser.add_argument("--epochs", type=float, default=5.0)
+    parser.add_argument("--epochs", type=float, default=10.0)
     parser.add_argument("--max-steps", type=int, default=0, help="If >0, stop after this many optimizer steps.")
-    parser.add_argument("--batch-size", type=int, default=16)
+    parser.add_argument("--batch-size", type=int, default=8)
     parser.add_argument(
         "--batch-size-per-rank",
         type=str,
-        default="8,24",
+        default="8,8",
         help="Optional: comma-separated local micro-batch per rank, e.g. '8,24'.",
     )
     parser.add_argument(
@@ -139,7 +172,7 @@ def main() -> None:
         default="1:1",
         help="Optional: per-rank ratio list (':' separated). Used when --batch-size-per-rank is empty.",
     )
-    parser.add_argument("--grad-accum", type=int, default=1)
+    parser.add_argument("--grad-accum", type=int, default=2)
     parser.add_argument("--lr", type=float, default=2e-4)
     parser.add_argument("--weight-decay", type=float, default=0.01)
     parser.add_argument("--warmup-ratio", type=float, default=0.03)
@@ -147,20 +180,27 @@ def main() -> None:
     parser.add_argument("--mixed-precision", type=str, default="bf16", choices=["no", "fp16", "bf16"])
     parser.add_argument("--gradient-checkpointing", action="store_true")
 
+    parser.add_argument("--lora-r", type=int, default=64)
+    parser.add_argument("--lora-alpha", type=int, default=64)
+    parser.add_argument("--lora-dropout", type=float, default=0.05)
+    parser.add_argument(
+        "--lora-target",
+        type=str,
+        default="q_proj,k_proj,v_proj,o_proj,gate_proj,up_proj,down_proj",
+        help="Comma-separated module names.",
+    )
+
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--num-workers", type=int, default=2)
     args = parser.parse_args()
 
-    if (args.smart_resize_min_pixels is None) ^ (args.smart_resize_max_pixels is None):
-        raise ValueError("--smart-resize-min-pixels and --smart-resize-max-pixels must be both set or both unset.")
-    if args.smart_resize_min_pixels is not None:
-        if int(args.smart_resize_min_pixels) <= 0:
-            raise ValueError(f"--smart-resize-min-pixels must be > 0, got {args.smart_resize_min_pixels}")
-        if int(args.smart_resize_max_pixels) < int(args.smart_resize_min_pixels):
-            raise ValueError(
-                "--smart-resize-max-pixels must be >= --smart-resize-min-pixels, "
-                f"got {args.smart_resize_max_pixels} < {args.smart_resize_min_pixels}"
-            )
+    if int(args.smart_resize_min_pixels) <= 0:
+        raise ValueError(f"--smart-resize-min-pixels must be > 0, got {args.smart_resize_min_pixels}")
+    if int(args.smart_resize_max_pixels) < int(args.smart_resize_min_pixels):
+        raise ValueError(
+            "--smart-resize-max-pixels must be >= --smart-resize-min-pixels, "
+            f"got {args.smart_resize_max_pixels} < {args.smart_resize_min_pixels}"
+        )
 
     import sys
 
@@ -168,14 +208,14 @@ def main() -> None:
 
     import torch
     from accelerate import Accelerator
+    from peft import LoraConfig, PeftModel, get_peft_model  # type: ignore
     from torch.utils.data import DataLoader, Sampler, Subset
-    from transformers import AutoImageProcessor, AutoProcessor, Qwen3VLForConditionalGeneration, get_scheduler
+    from transformers import AutoProcessor, Qwen3VLForConditionalGeneration, get_scheduler
 
-    from ftqwen.device import require_cuda
-    from ftqwen.dinov3_adapter import DinoV3AdapterConfig, DinoV3VisualAdapter
-    from ftqwen.qwen_dinov3 import assert_dino_runtime_matches_merger, load_merger_safetensors, resolve_dino_resize_config, save_merger_safetensors, torch_dtype_from_str
-    from ftqwen.sft import CaptionSFTCollator, VrsbenchMultiTaskSFTDataset
-    from ftqwen.training_losses import causal_lm_sample_average_loss
+    from ftqwen3.device import require_cuda
+    from ftqwen3.qwen_dinov3 import load_merger_safetensors, save_merger_safetensors, torch_dtype_from_str
+    from ftqwen3.sft import QwenNativeSFTCollator, VrsbenchMultiTaskQwenNativeSFTDataset
+    from ftqwen3.training_losses import causal_lm_sample_average_loss
 
     class ProportionalDistributedSampler(Sampler[int]):
         """按每个 rank 的 micro-batch 比例切分数据，并按桶做“全局 batch=32”级别采样。"""
@@ -213,6 +253,7 @@ def main() -> None:
             if self.global_micro_batch <= 0:
                 raise ValueError(f"Invalid global_micro_batch={self.global_micro_batch}.")
 
+            # 以一次参数更新对应的全局 batch 作为分桶阈值（例如 32）。
             self.global_batch = int(self.global_micro_batch * self.grad_accum)
             self.local_batch_size = int(self.local_batch_sizes[self.rank])
             self.local_samples_per_update = int(self.local_batch_size * self.grad_accum)
@@ -252,6 +293,7 @@ def main() -> None:
             g = torch.Generator()
             g.manual_seed(int(self.seed) + int(self.epoch))
 
+            # 先在每个桶内随机打乱，再按“全局 batch”切块；不足一个全局 batch 的尾部直接丢弃。
             global_update_groups: list[list[int]] = []
             for key in self.bucket_keys:
                 src = self.bucket_to_indices[key]
@@ -268,6 +310,7 @@ def main() -> None:
                     f"Update group count mismatch: expect={self.steps_per_epoch}, got={len(global_update_groups)}"
                 )
 
+            # 打乱“更新步”的顺序，让不同桶在一个 epoch 内交错出现。
             if len(global_update_groups) > 1:
                 perm = torch.randperm(len(global_update_groups), generator=g).tolist()
                 global_update_groups = [global_update_groups[i] for i in perm]
@@ -278,6 +321,8 @@ def main() -> None:
                     raise RuntimeError(
                         f"Global batch size mismatch: expect={self.global_batch}, got={len(update_group)}"
                     )
+
+                # 一个 update_group 拆成 grad_accum 个 micro-step，保证训练循环不需要改。
                 for micro_idx in range(int(self.grad_accum)):
                     m_start = int(micro_idx * self.global_micro_batch)
                     m_end = int(m_start + self.global_micro_batch)
@@ -343,68 +388,48 @@ def main() -> None:
     sample_ddp_loss_scale = float(world_size) * float(local_batch_size) / float(global_micro_batch)
 
     qwen_model_dir = _resolve_from_project(args.qwen_model_dir)
-    dinov3_dir = _resolve_from_project(args.dinov3_dir)
     dataset_root = _resolve_from_project(args.dataset_root)
     train_json = _resolve_from_project(args.train_json)
     out_dir = _resolve_from_project(args.output_dir)
 
-    resume_merger_path = _resolve_from_project(args.resume_merger) if str(args.resume_merger).strip() else None
+    resume_lora_dir = _resolve_from_project(args.resume_lora) if str(args.resume_lora).strip() else None
     init_merger_path = _resolve_from_project(args.init_merger) if str(args.init_merger).strip() else None
     resume_step = 0
     resume_optimizer_path: Path | None = None
     resume_scheduler_path: Path | None = None
 
-    if resume_merger_path is not None:
-        if not resume_merger_path.is_file():
-            raise FileNotFoundError(f"Missing merger checkpoint for resume_merger: {resume_merger_path}")
+    if resume_lora_dir is not None:
+        # 约定：LoRA 目录与 merger.safetensors 在同一层级（epoch*/lora 对应 epoch*/merger.safetensors）。
+        auto_merger = resume_lora_dir.parent / "merger.safetensors"
+        if not auto_merger.is_file():
+            raise FileNotFoundError(f"Missing sibling merger checkpoint for resume_lora: {auto_merger}")
 
         if init_merger_path is None:
-            init_merger_path = resume_merger_path
-        elif init_merger_path.resolve() != resume_merger_path.resolve():
+            init_merger_path = auto_merger
+        elif init_merger_path.resolve() != auto_merger.resolve():
             raise ValueError(
-                "resume_merger and init_merger mismatch. "
-                f"resume expects {resume_merger_path}, but got {init_merger_path}."
+                "resume_lora and init_merger mismatch. "
+                f"resume expects {auto_merger}, but got {init_merger_path}."
             )
 
-        meta_path = resume_merger_path.with_suffix(".json")
+        meta_path = auto_merger.with_suffix(".json")
         if meta_path.is_file():
             try:
                 resume_step = max(0, int(_read_json(meta_path).get("step", 0)))
             except Exception:
                 resume_step = 0
-        optimizer_path = resume_merger_path.parent / "optimizer.pt"
-        scheduler_path = resume_merger_path.parent / "scheduler.pt"
+        optimizer_path = resume_lora_dir.parent / "optimizer.pt"
+        scheduler_path = resume_lora_dir.parent / "scheduler.pt"
         if optimizer_path.is_file():
             resume_optimizer_path = optimizer_path
         if scheduler_path.is_file():
             resume_scheduler_path = scheduler_path
 
-    if init_merger_path is not None:
-        resize_cfg = assert_dino_runtime_matches_merger(
-            qwen_model_dir=qwen_model_dir,
-            dinov3_dir=dinov3_dir,
-            image_size=int(args.image_size),
-            smart_resize_min_pixels=args.smart_resize_min_pixels,
-            smart_resize_max_pixels=args.smart_resize_max_pixels,
-            merger_ckpt=init_merger_path,
-        )
-    else:
-        resize_cfg = resolve_dino_resize_config(
-            image_size=int(args.image_size),
-            smart_resize_min_pixels=args.smart_resize_min_pixels,
-            smart_resize_max_pixels=args.smart_resize_max_pixels,
-            merger_ckpt=None,
-        )
-    args.image_size = int(resize_cfg.image_size)
-    args.smart_resize_min_pixels = int(resize_cfg.smart_resize_min_pixels)
-    args.smart_resize_max_pixels = int(resize_cfg.smart_resize_max_pixels)
-
     out_dir.mkdir(parents=True, exist_ok=True)
 
     run_meta = {
         "qwen_model_dir": _rel_to_project(qwen_model_dir),
-        "dinov3_dir": _rel_to_project(dinov3_dir),
-        "image_size": int(args.image_size),
+        "visual_backbone": "qwen3_vl_native",
         "smart_resize_min_pixels": int(args.smart_resize_min_pixels),
         "smart_resize_max_pixels": int(args.smart_resize_max_pixels),
     }
@@ -416,7 +441,7 @@ def main() -> None:
 
     processor = AutoProcessor.from_pretrained(str(qwen_model_dir))
     tokenizer = processor.tokenizer
-    image_processor = AutoImageProcessor.from_pretrained(str(dinov3_dir))
+    image_processor = processor.image_processor
 
     model_dtype = torch_dtype_from_str(
         "bf16"
@@ -431,22 +456,6 @@ def main() -> None:
     )
     base_model.config.use_cache = False
 
-    old_visual = base_model.model.visual
-    adapter_cfg = DinoV3AdapterConfig(
-        dinov3_dir=dinov3_dir,
-        image_size=int(args.image_size),
-        merge_size=int(old_visual.spatial_merge_size),
-        deepstack_visual_indexes=tuple(int(x) for x in getattr(old_visual, "deepstack_visual_indexes", (5, 11, 17))),
-        qwen_vision_depth=int(getattr(getattr(old_visual, "config", None), "depth", 0) or len(getattr(old_visual, "blocks", []))),
-    )
-    adapter = DinoV3VisualAdapter(
-        adapter_cfg,
-        merger=old_visual.merger,
-        deepstack_merger_list=getattr(old_visual, "deepstack_merger_list", None),
-        torch_dtype=base_model.dtype,
-    )
-    base_model.model.visual = adapter
-
     def _enable_visual_trainables(target_model: torch.nn.Module) -> None:
         visual = target_model.model.visual
         for p in visual.merger.parameters():
@@ -454,13 +463,42 @@ def main() -> None:
         if getattr(visual, "deepstack_merger_list", None) is not None:
             for p in visual.deepstack_merger_list.parameters():
                 p.requires_grad = True
-        # 当 DINOv3 hidden_size 与 Qwen3-VL 视觉 hidden_size 不一致时，adapter 内会插入 input_proj。
-        # 这里把它也解冻，确保 8B 等模型可以正常训练。
+        # 兼容未来结构：若视觉分支包含 input_proj，也允许参与训练。
         if getattr(visual, "input_proj", None) is not None:
             for p in visual.input_proj.parameters():
                 p.requires_grad = True
 
-    # 先冻结所有参数，再启用 merger / deepstack_merger / input_proj 参数
+    def _assert_expected_trainables_layout(target_model) -> None:
+        bad: list[str] = []
+        has_visual = False
+        has_lora = False
+        for name, p in target_model.named_parameters():
+            if not bool(getattr(p, "requires_grad", False)):
+                continue
+            scoped = f".{name}."
+            is_visual = (
+                ".visual.merger." in scoped
+                or ".visual.deepstack_merger_list." in scoped
+                or ".visual.input_proj." in scoped
+            )
+            is_lora = "lora_" in name
+            if is_visual:
+                has_visual = True
+            if is_lora:
+                has_lora = True
+            if not (is_visual or is_lora):
+                bad.append(name)
+                if len(bad) >= 8:
+                    break
+        if bad:
+            show = ", ".join(bad)
+            raise RuntimeError("Found unexpected trainable params outside merger/deepstack/input_proj + LoRA: " + show)
+        if not has_visual:
+            raise RuntimeError("No trainable visual merger params found.")
+        if not has_lora:
+            raise RuntimeError("No trainable LoRA params found.")
+
+    # 先冻结所有参数，再启用 merger 与 LoRA 参数
     for p in base_model.parameters():
         p.requires_grad = False
     _enable_visual_trainables(base_model)
@@ -468,52 +506,48 @@ def main() -> None:
     if init_merger_path is not None:
         load_merger_safetensors(base_model, init_merger_path)
 
-    model = base_model
+    lora_target_leaf = [x.strip() for x in str(args.lora_target).split(",") if x.strip()]
+    lora_targets = _resolve_language_lora_targets(base_model, lora_target_leaf)
+    lora_cfg = LoraConfig(
+        r=int(args.lora_r),
+        lora_alpha=int(args.lora_alpha),
+        lora_dropout=float(args.lora_dropout),
+        bias="none",
+        target_modules=lora_targets,
+        task_type="CAUSAL_LM",
+    )
 
-    def _assert_expected_trainables(target_model: torch.nn.Module) -> None:
-        allowed_prefixes = (
-            "model.visual.merger.",
-            "model.visual.deepstack_merger_list.",
-            "model.visual.input_proj.",
-        )
-        bad: list[str] = []
-        count = 0
-        for name, p in target_model.named_parameters():
-            if not bool(getattr(p, "requires_grad", False)):
-                continue
-            count += 1
-            if not any(name.startswith(pref) for pref in allowed_prefixes):
-                bad.append(name)
-                if len(bad) >= 8:
-                    break
-        if count <= 0:
-            raise RuntimeError("No trainable parameters found for merger-only training.")
-        if bad:
-            show = ", ".join(bad)
-            raise RuntimeError("Found unexpected trainable parameters in merger-only mode: " + show)
+    if resume_lora_dir is not None:
+        # 直接把 LoRA 权重加载到 base_model，避免 get_peft_model + from_pretrained 造成嵌套 PEFT。
+        model = PeftModel.from_pretrained(base_model, str(resume_lora_dir), is_trainable=True)
+    else:
+        model = get_peft_model(base_model, lora_cfg)
 
-    _assert_expected_trainables(model)
+    # PEFT 会默认冻结非 LoRA 参数，这里显式重新打开视觉 merger 的 trainable 参数。
+    _enable_visual_trainables(model.get_base_model())
+    _assert_no_visual_lora_trainables(model)
+    _assert_expected_trainables_layout(model)
 
     if args.gradient_checkpointing:
         try:
-            model.model.language_model.gradient_checkpointing_enable()
+            base = model.get_base_model()
+            base.model.language_model.gradient_checkpointing_enable()
         except Exception:
             pass
 
-    dataset = VrsbenchMultiTaskSFTDataset(
+    dataset = VrsbenchMultiTaskQwenNativeSFTDataset(
         items,
         tokenizer=tokenizer,
         image_processor=image_processor,
         dataset_root=dataset_root,
         split="train",
-        image_size=int(args.image_size),
-        patch_size=int(model.config.vision_config.patch_size),
-        merge_size=int(model.config.vision_config.spatial_merge_size),
+        patch_size=int(base_model.config.vision_config.patch_size),
+        merge_size=int(base_model.config.vision_config.spatial_merge_size),
         smart_resize_min_pixels=int(args.smart_resize_min_pixels),
         smart_resize_max_pixels=int(args.smart_resize_max_pixels),
         image_token="<|image_pad|>",
     )
-    collator = CaptionSFTCollator(pad_token_id=int(tokenizer.pad_token_id))
+    collator = QwenNativeSFTCollator(pad_token_id=int(tokenizer.pad_token_id))
 
     dataset.ensure_image_hw_cache(build_if_missing=bool(accelerator.is_main_process))
     accelerator.wait_for_everyone()
@@ -665,16 +699,18 @@ def main() -> None:
                 {
                     "run": {
                         "qwen_model_dir": _rel_to_project(qwen_model_dir),
-                        "dinov3_dir": _rel_to_project(dinov3_dir),
                         "dataset_root": str(Path(args.dataset_root)),
                         "train_json": str(Path(args.train_json)),
-                        "image_size": int(args.image_size),
+                        "visual_backbone": "qwen3_vl_native",
+                        "smart_resize_min_pixels": int(args.smart_resize_min_pixels),
+                        "smart_resize_max_pixels": int(args.smart_resize_max_pixels),
                     },
-                    "adapter": {
-                        "dinov3_dir": _rel_to_project(dinov3_dir),
-                        "image_size": int(adapter_cfg.image_size),
-                        "merge_size": int(adapter_cfg.merge_size),
-                        "deepstack_visual_indexes": list(adapter_cfg.deepstack_visual_indexes),
+                    "visual": {
+                        "patch_size": int(base_model.config.vision_config.patch_size),
+                        "merge_size": int(base_model.config.vision_config.spatial_merge_size),
+                        "deepstack_visual_indexes": list(
+                            int(x) for x in getattr(base_model.model.visual, "deepstack_visual_indexes", [])
+                        ),
                     },
                     "train": {
                         "epochs": float(args.epochs),
@@ -711,8 +747,15 @@ def main() -> None:
                         "average_within_task": "sample",
                     },
                     "tasks": task_stats,
+                    "lora": {
+                        "r": int(args.lora_r),
+                        "alpha": int(args.lora_alpha),
+                        "dropout": float(args.lora_dropout),
+                        "target_leaf": lora_target_leaf,
+                        "target_modules": lora_targets,
+                    },
                     "init_merger": _rel_to_project(init_merger_path) if init_merger_path is not None else "",
-                    "resume_merger": _rel_to_project(resume_merger_path) if resume_merger_path is not None else "",
+                    "resume_lora": _rel_to_project(resume_lora_dir) if resume_lora_dir is not None else "",
                     "resume_optimizer": _rel_to_project(resume_optimizer_path) if resume_optimizer_path is not None else "",
                     "resume_scheduler": _rel_to_project(resume_scheduler_path) if resume_scheduler_path is not None else "",
                     "optimizer_state_loaded": bool(optimizer_state_loaded),
@@ -835,10 +878,12 @@ def main() -> None:
                 epoch_dir = out_dir / f"epoch{epoch + 1}"
                 epoch_dir.mkdir(parents=True, exist_ok=True)
                 model_to_save = accelerator.unwrap_model(model)
+                base_to_save = model_to_save.get_base_model()
+                model_to_save.save_pretrained(str(epoch_dir / "lora"))
                 torch.save(optimizer.state_dict(), str(epoch_dir / "optimizer.pt"))
                 torch.save(lr_scheduler.state_dict(), str(epoch_dir / "scheduler.pt"))
                 save_merger_safetensors(
-                    model_to_save,
+                    base_to_save,
                     epoch_dir / "merger.safetensors",
                     extra={
                         "step": int(global_step),
@@ -846,11 +891,13 @@ def main() -> None:
                         "run": run_meta,
                         "train_json": _rel_to_project(train_json),
                         "task_order": list(task_order),
-                        "adapter": {
-                            "dinov3_dir": _rel_to_project(dinov3_dir),
-                            "image_size": int(adapter_cfg.image_size),
-                            "merge_size": int(adapter_cfg.merge_size),
-                            "deepstack_visual_indexes": list(adapter_cfg.deepstack_visual_indexes),
+                        "visual": {
+                            "mode": "qwen3_vl_native",
+                            "patch_size": int(base_to_save.config.vision_config.patch_size),
+                            "merge_size": int(base_to_save.config.vision_config.spatial_merge_size),
+                            "deepstack_visual_indexes": list(
+                                int(x) for x in getattr(base_to_save.model.visual, "deepstack_visual_indexes", [])
+                            ),
                         },
                     },
                 )
@@ -866,41 +913,27 @@ def main() -> None:
 
     accelerator.wait_for_everyone()
     if accelerator.is_main_process:
-        model_to_save = accelerator.unwrap_model(model)
-
         final_dir = out_dir / "final"
         final_dir.mkdir(parents=True, exist_ok=True)
+        model_to_save = accelerator.unwrap_model(model)
+        base_to_save = model_to_save.get_base_model()
+        model_to_save.save_pretrained(str(final_dir / "lora"))
         torch.save(optimizer.state_dict(), str(final_dir / "optimizer.pt"))
         torch.save(lr_scheduler.state_dict(), str(final_dir / "scheduler.pt"))
         save_merger_safetensors(
-            model_to_save,
+            base_to_save,
             final_dir / "merger.safetensors",
             extra={
                 "step": int(global_step),
                 "run": run_meta,
                 "train_json": _rel_to_project(train_json),
-                "adapter": {
-                    "dinov3_dir": _rel_to_project(dinov3_dir),
-                    "image_size": int(adapter_cfg.image_size),
-                    "merge_size": int(adapter_cfg.merge_size),
-                    "deepstack_visual_indexes": list(adapter_cfg.deepstack_visual_indexes),
-                },
-            },
-        )
-
-        # 与旧版 merger-only 产物兼容，额外保存一份 merger_final.safetensors。
-        save_merger_safetensors(
-            model_to_save,
-            out_dir / "merger_final.safetensors",
-            extra={
-                "step": int(global_step),
-                "run": run_meta,
-                "train_json": _rel_to_project(train_json),
-                "adapter": {
-                    "dinov3_dir": _rel_to_project(dinov3_dir),
-                    "image_size": int(adapter_cfg.image_size),
-                    "merge_size": int(adapter_cfg.merge_size),
-                    "deepstack_visual_indexes": list(adapter_cfg.deepstack_visual_indexes),
+                "visual": {
+                    "mode": "qwen3_vl_native",
+                    "patch_size": int(base_to_save.config.vision_config.patch_size),
+                    "merge_size": int(base_to_save.config.vision_config.spatial_merge_size),
+                    "deepstack_visual_indexes": list(
+                        int(x) for x in getattr(base_to_save.model.visual, "deepstack_visual_indexes", [])
+                    ),
                 },
             },
         )

@@ -93,8 +93,8 @@ def main() -> None:
 
     from tqdm import tqdm  # type: ignore
 
-    from ftqwen.jsonl import append_jsonl, read_jsonl
-    from ftqwen.qwen3_vl_native_captioner import Qwen3VLNativeCaptioner
+    from ftqwen3.jsonl import append_jsonl, read_jsonl
+    from ftqwen3.qwen3_vl_native_captioner import Qwen3VLNativeCaptioner
 
     data_path = _resolve_from_project(args.data)
     if not data_path.is_file():

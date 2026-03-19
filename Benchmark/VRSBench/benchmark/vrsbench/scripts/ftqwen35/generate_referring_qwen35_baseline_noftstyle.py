@@ -304,8 +304,8 @@ def main() -> None:
 
     from tqdm import tqdm  # type: ignore
 
-    from ftqwen.jsonl import append_jsonl, read_jsonl
-    from ftqwen.qwen3_5_captioner import Qwen35Captioner
+    from ftqwen35.jsonl import append_jsonl, read_jsonl
+    from ftqwen35.qwen3_5_captioner import Qwen35Captioner
 
     data_path = _resolve_from_project(args.data)
     if not data_path.is_file():

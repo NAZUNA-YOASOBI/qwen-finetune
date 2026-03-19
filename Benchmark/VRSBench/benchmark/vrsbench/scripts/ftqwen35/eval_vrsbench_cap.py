@@ -195,7 +195,7 @@ def main() -> None:
     }
 
     if bool(args.bertscore):
-        from ftqwen.semantic_metrics import compute_bertscore
+        from ftqwen35.semantic_metrics import compute_bertscore
 
         bert_metrics, bert_meta = compute_bertscore(
             refs,

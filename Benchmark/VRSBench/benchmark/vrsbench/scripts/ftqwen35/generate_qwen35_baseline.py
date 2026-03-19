@@ -38,7 +38,6 @@ def _slice_by_shard(items: list[dict], *, world_size: int, rank: int, weights: s
 
     parsed = _parse_shard_weights(weights, world_size=int(world_size))
     total = len(items)
-
     if parsed is None:
         shard = [it for i, it in enumerate(items) if (i % int(world_size)) == int(rank)]
     else:
@@ -52,31 +51,32 @@ def _slice_by_shard(items: list[dict], *, world_size: int, rank: int, weights: s
     first_key = shard[0].get(key_name, "") if shard else ""
     last_key = shard[-1].get(key_name, "") if shard else ""
     print(
-        f"[INFO] shard rank={rank}/{world_size} weights={weights or 'even'} "
-        f"selected={len(shard)}/{total} first_{key_name}={first_key} last_{key_name}={last_key}",
+        f"[INFO] shard rank={rank}/{world_size} weights={weights or 'even'} selected={len(shard)}/{total} "
+        f"first_{key_name}={first_key} last_{key_name}={last_key}",
         flush=True,
     )
     return shard
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="VRSBench captioning with Qwen3.5 baseline (github-style logic).")
+    parser = argparse.ArgumentParser(description="VRSBench captioning with Qwen3.5 baseline.")
     parser.add_argument("--model-dir", type=str, required=True)
     parser.add_argument("--data", type=str, default="benchmark/vrsbench/data/vrsbench_images_test.jsonl")
     parser.add_argument("--output", type=str, required=True)
     parser.add_argument("--prompt", type=str, default=DEFAULT_PROMPT)
     parser.add_argument("--max-new-tokens", type=int, default=256)
-    parser.add_argument("--do-sample", dest="do_sample", action="store_true", default=None)
+    parser.add_argument("--do-sample", dest="do_sample", action="store_true")
     parser.add_argument("--no-sample", dest="do_sample", action="store_false")
-    parser.add_argument("--temperature", type=float, default=None)
-    parser.add_argument("--top-p", type=float, default=None)
-    parser.add_argument("--top-k", type=int, default=None)
+    parser.set_defaults(do_sample=True)
+    parser.add_argument("--temperature", type=float, default=1.0)
+    parser.add_argument("--top-p", type=float, default=0.95)
+    parser.add_argument("--top-k", type=int, default=20)
     parser.add_argument("--num-beams", type=int, default=None)
     parser.add_argument("--repetition-penalty", type=float, default=None)
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--batch-size", type=int, default=1)
     parser.add_argument("--device-map", type=str, default="auto")
-    parser.add_argument("--dtype", type=str, default="auto", choices=["auto", "fp16", "bf16", "fp32"])
+    parser.add_argument("--dtype", type=str, default="bf16", choices=["auto", "fp16", "bf16", "fp32"])
     parser.add_argument("--max-images", type=int, default=0)
     parser.add_argument("--shard-world-size", type=int, default=1)
     parser.add_argument("--shard-rank", type=int, default=0)
@@ -89,8 +89,8 @@ def main() -> None:
 
     from tqdm import tqdm  # type: ignore
 
-    from ftqwen.jsonl import append_jsonl, read_jsonl
-    from ftqwen.qwen3_5_captioner import Qwen35Captioner
+    from ftqwen35.jsonl import append_jsonl, read_jsonl
+    from ftqwen35.qwen3_5_captioner import Qwen35Captioner
 
     data_path = _resolve_from_project(args.data)
     if not data_path.is_file():
@@ -100,13 +100,7 @@ def main() -> None:
     images = sorted(images, key=lambda x: int(x["imgid"]))
     if args.max_images and int(args.max_images) > 0:
         images = images[: int(args.max_images)]
-    images = _slice_by_shard(
-        images,
-        world_size=int(args.shard_world_size),
-        rank=int(args.shard_rank),
-        weights=str(args.shard_weights),
-        key_name="imgid",
-    )
+    images = _slice_by_shard(images, world_size=int(args.shard_world_size), rank=int(args.shard_rank), weights=str(args.shard_weights), key_name="imgid")
 
     out_path = _resolve_from_project(args.output)
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -129,7 +123,7 @@ def main() -> None:
         device_map=str(args.device_map),
         dtype=str(args.dtype),
         max_new_tokens=int(args.max_new_tokens),
-        do_sample=args.do_sample,
+        do_sample=bool(args.do_sample),
         temperature=args.temperature,
         top_p=args.top_p,
         top_k=args.top_k,
@@ -145,7 +139,7 @@ def main() -> None:
     max_batch_size = max(1, int(args.batch_size))
     cur_bs = int(max_batch_size)
 
-    pbar = tqdm(total=len(pending), desc="caption:vrsbench:qwen35:githubstyle")
+    pbar = tqdm(total=len(pending), desc="caption:vrsbench:qwen35")
     idx = 0
     while idx < len(pending):
         chunk = pending[idx : idx + cur_bs]
@@ -173,10 +167,9 @@ def main() -> None:
                     "generation_ended_by_eos": bool(pred.ended_by_eos),
                     "generation_last_token_id": pred.last_generated_token_id,
                     "prompt": str(args.prompt),
-                    "model": "qwen3.5-baseline",
                     "model_dir": str(Path(args.model_dir)),
                     "max_new_tokens": int(args.max_new_tokens),
-                    "do_sample": args.do_sample,
+                    "do_sample": bool(args.do_sample),
                     "temperature": args.temperature,
                     "top_p": args.top_p,
                     "top_k": args.top_k,

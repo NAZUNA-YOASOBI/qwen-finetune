@@ -406,7 +406,7 @@ def attach_dinov3_adapter(
 ) -> Any:
     from transformers import AutoImageProcessor
 
-    from ftqwen.dinov3_adapter import DinoV3AdapterConfig, DinoV3VisualAdapter
+    from ftqwen3.dinov3_adapter import DinoV3AdapterConfig, DinoV3VisualAdapter
 
     old_visual = model.model.visual
     cfg = DinoV3AdapterConfig(
