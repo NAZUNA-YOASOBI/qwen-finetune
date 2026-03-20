@@ -23,7 +23,7 @@
   - `dataset/GeoChat-Bench/UCmerced.jsonl`
 - 生成方式：
   - 直接使用数据中的 `text` 作为问题。
-  - 当前实现：`src/geochatbench_generate.py`
+  - 当前实现：`src/shared/generate.py`
 - 评测方式：
   - 指标为分类准确率。
   - 按官方公开 scene 脚本的逻辑，用 `question_id.split('/')[0]` 作为标准类别。

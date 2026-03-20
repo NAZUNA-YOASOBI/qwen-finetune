@@ -188,8 +188,8 @@ def main() -> None:
 
     from transformers import AutoProcessor
 
-    from ftqwen3.dinov3_captioner import DinoV3Captioner
-    from ftqwen3.qwen_dinov3 import assert_dino_runtime_matches_merger, path_metadata_matches
+    from ftqwen3.dinov3_merger.dinov3_captioner import DinoV3Captioner
+    from ftqwen3.shared.qwen_dinov3 import assert_dino_runtime_matches_merger, path_metadata_matches
 
     preds_path = _resolve_from_project(args.preds)
     if not preds_path.is_file():

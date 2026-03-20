@@ -7,18 +7,18 @@
 ### 1.1 统一评测脚本
 
 - Scene：
-  - `GeoChat-Benchmark/benchmark/shared/scripts/eval_geochat_scene.py`
+  - `GeoChat-Benchmark/benchmark/geochat/eval_scripts/shared/eval/eval_geochat_scene.py`
 - VQA：
-  - `GeoChat-Benchmark/benchmark/shared/scripts/eval_geochat_vqa.py`
+  - `GeoChat-Benchmark/benchmark/geochat/eval_scripts/shared/eval/eval_geochat_vqa.py`
 - Region Caption：
-  - `GeoChat-Benchmark/benchmark/shared/scripts/eval_geochat_region_caption.py`
+  - `GeoChat-Benchmark/benchmark/geochat/eval_scripts/shared/eval/eval_geochat_region_caption.py`
 - Referring / Grounding：
-  - `GeoChat-Benchmark/benchmark/shared/scripts/eval_geochat_referring.py`
+  - `GeoChat-Benchmark/benchmark/geochat/eval_scripts/shared/eval/eval_geochat_referring.py`
 
 ### 1.2 与正式评测直接相关、但不属于“指标公式”的辅助脚本
 
 - HRBEN GT 对齐：
-  - `GeoChat-Benchmark/benchmark/shared/scripts/prepare_geochat_hrben_gt.py`
+  - `GeoChat-Benchmark/benchmark/geochat/eval_scripts/shared/prepare/prepare_geochat_hrben_gt.py`
 
 ### 1.3 官方仓库中可直接参照的入口
 
@@ -58,7 +58,7 @@
 
 我们当前实现：
 
-- `GeoChat-Benchmark/benchmark/shared/scripts/eval_geochat_scene.py`
+- `GeoChat-Benchmark/benchmark/geochat/eval_scripts/shared/eval/eval_geochat_scene.py`
 
 和官方一致的部分：
 
@@ -115,7 +115,7 @@
 
 当前实现：
 
-- `GeoChat-Benchmark/benchmark/shared/scripts/eval_geochat_region_caption.py`
+- `GeoChat-Benchmark/benchmark/geochat/eval_scripts/shared/eval/eval_geochat_region_caption.py`
 
 所用库：
 
@@ -167,7 +167,7 @@
 
 当前脚本：
 
-- `GeoChat-Benchmark/benchmark/shared/scripts/prepare_geochat_hrben_gt.py`
+- `GeoChat-Benchmark/benchmark/geochat/eval_scripts/shared/prepare/prepare_geochat_hrben_gt.py`
 
 这不是指标公式本身，但没有它，`HRBEN` 这项没法正式评测。
 
@@ -198,7 +198,7 @@
 
 当前实现：
 
-- `GeoChat-Benchmark/benchmark/shared/scripts/eval_geochat_referring.py`
+- `GeoChat-Benchmark/benchmark/geochat/eval_scripts/shared/eval/eval_geochat_referring.py`
 
 这样做的原因是：
 
@@ -247,7 +247,7 @@ GeoChat 这套 `Referring` 数据里的 GT 本来是 polygon。
 
 当前实现：
 
-- `GeoChat-Benchmark/benchmark/shared/scripts/eval_geochat_referring.py`
+- `GeoChat-Benchmark/benchmark/geochat/eval_scripts/shared/eval/eval_geochat_referring.py`
 
 我们现在做的是两步：
 

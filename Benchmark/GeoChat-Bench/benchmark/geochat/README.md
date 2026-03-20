@@ -12,9 +12,9 @@
 - Grounding Description
 
 目录约定：
-- `benchmark/shared/scripts/`：共享评测脚本
-- `benchmark/qwen3vl/scripts/`：`Qwen3-VL` 生成脚本
-- `benchmark/qwen35/scripts/`：`Qwen3.5` 生成脚本
+- `benchmark/geochat/eval_scripts/shared/`：共享评测脚本，按 `eval/`、`fix/`、`prepare/`、`utils/` 分类
+- `benchmark/geochat/eval_scripts/qwen3vl/`：`Qwen3-VL` 脚本，按 `generate/`、`run/` 分类
+- `benchmark/geochat/eval_scripts/qwen35/`：`Qwen3.5` 脚本，按 `generate/`、`run/` 分类
 - `benchmark/geochat/outputs/`：模型输出
 - `benchmark/geochat/eval/`：评测汇总
 - `benchmark/geochat/logs/`：运行日志
@@ -26,13 +26,13 @@
 - 当前本地 raw 数据中：
   - `LRBEN` 的 GT 与公开 `jsonl` 键对齐，可以正式打分。
   - `HRBEN` 实际对应 Zenodo 的 `test_phili` 这套 raw 文件，不是普通 `test`。
-  - 总控脚本会先调用 `benchmark/shared/scripts/prepare_geochat_hrben_gt.py` 生成对齐后的 GT，再做评测。
+  - 总控脚本会先调用 `benchmark/geochat/eval_scripts/shared/prepare/prepare_geochat_hrben_gt.py` 生成对齐后的 GT，再做评测。
 - `Qwen3.5` 明确关闭思考模式：`enable_thinking=False`。
 - `Referring` 当前只接受严格的坐标标签格式，不再回退抓答案中的任意数字。
 
 当前可直接使用的总控脚本：
-- `benchmark/qwen3vl/scripts/run_eval_qwen3vl_baseline.sh`
-- `benchmark/qwen35/scripts/run_eval_qwen35_baseline.sh`
+- `benchmark/geochat/eval_scripts/qwen3vl/run/run_eval_qwen3vl_baseline.sh`
+- `benchmark/geochat/eval_scripts/qwen35/run/run_eval_qwen35_baseline.sh`
 - 本地一键入口会自动加载：
   - `benchmark/geochat/data/local_paths.sh`
 

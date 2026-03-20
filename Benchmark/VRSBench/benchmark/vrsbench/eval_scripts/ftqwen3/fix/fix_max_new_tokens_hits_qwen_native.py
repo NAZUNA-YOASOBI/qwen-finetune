@@ -94,7 +94,7 @@ def main() -> None:
 
     from transformers import AutoProcessor
 
-    from ftqwen3.qwen3_vl_native_captioner import Qwen3VLNativeCaptioner
+    from ftqwen3.qwen_native.qwen3_vl_native_captioner import Qwen3VLNativeCaptioner
 
     preds_path = _resolve_from_project(args.preds)
     if not preds_path.is_file():

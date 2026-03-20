@@ -32,3 +32,10 @@
 ## 使用约定
 
 - 所有脚本都默认以 `Benchmark/VRSBench` 为项目根目录来解析相对路径
+
+## 源码分层
+
+`src/ftqwen35/` 当前按最小需要拆分为：
+
+- `shared/`：通用底层模块
+- `baseline/`：Qwen3.5 baseline 推理模块

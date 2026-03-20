@@ -1,0 +1,79 @@
+{
+  "metric": "accuracy",
+  "aggregation": "per-prompt accuracy averaged across prompts, then averaged across samples",
+  "num_questions": 3211,
+  "total_prompts": 16055,
+  "missing_prompt_count": 0,
+  "parse_fail_count": 0,
+  "overall_accuracy": 0.5090625973217067,
+  "per_task": {
+    "Aircraft Type Classification": {
+      "num_questions": 100,
+      "accuracy": 0.48
+    },
+    "Building Counting": {
+      "num_questions": 170,
+      "accuracy": 0.34588235294117653
+    },
+    "Crop Type Classification": {
+      "num_questions": 55,
+      "accuracy": 0.2654545454545455
+    },
+    "Disaster Type Classification": {
+      "num_questions": 227,
+      "accuracy": 0.5259911894273127
+    },
+    "Fire Risk Assessment": {
+      "num_questions": 120,
+      "accuracy": 0.20833333333333334
+    },
+    "General Aircraft Counting": {
+      "num_questions": 100,
+      "accuracy": 0.44599999999999995
+    },
+    "General Vehicle Counting": {
+      "num_questions": 150,
+      "accuracy": 0.3626666666666666
+    },
+    "Land Use Classification": {
+      "num_questions": 410,
+      "accuracy": 0.5819512195121953
+    },
+    "Marine Debirs Counting": {
+      "num_questions": 100,
+      "accuracy": 0.42
+    },
+    "Scene Classification": {
+      "num_questions": 415,
+      "accuracy": 0.814939759036145
+    },
+    "Ship Type Classification": {
+      "num_questions": 207,
+      "accuracy": 0.43671497584541064
+    },
+    "Specific Aircraft Type Counting": {
+      "num_questions": 140,
+      "accuracy": 0.33428571428571424
+    },
+    "Specific Vehicle Type Counting": {
+      "num_questions": 224,
+      "accuracy": 0.2705357142857144
+    },
+    "Sptatial Relation Classification": {
+      "num_questions": 466,
+      "accuracy": 0.7656652360515023
+    },
+    "Tree Health Assessment": {
+      "num_questions": 157,
+      "accuracy": 0.20254777070063695
+    },
+    "Trees Counting": {
+      "num_questions": 85,
+      "accuracy": 0.26588235294117646
+    },
+    "Water Bodies Counting": {
+      "num_questions": 85,
+      "accuracy": 0.4941176470588236
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "metric": "strict Acc and mean F1",
+  "aggregation": "GT polygons and predicted polygons use 4-point polygons; predicted bbox_2d uses direct pixel polygon corners, values outside the image range are clamped to [0, image_size], maximum bipartite matching is applied, and a sample counts as correct only when sample_F1=1",
+  "num_questions": 1313,
+  "missing_prediction_count": 0,
+  "parse_fail_count": 1,
+  "thresholds": {
+    "0.25": {
+      "acc": 0.04341203351104341,
+      "mean_f1": 0.05471305372295471,
+      "total_tp": 102,
+      "total_fp": 1687,
+      "total_fn": 2070,
+      "micro_precision": 0.05701509223029626,
+      "micro_recall": 0.04696132596685083,
+      "per_task": {
+        "Referring Expression Detection": {
+          "num_questions": 1313,
+          "acc": 0.04341203351104341
+        }
+      }
+    },
+    "0.50": {
+      "acc": 0.00456968773800457,
+      "mean_f1": 0.007199071555507199,
+      "total_tp": 14,
+      "total_fp": 1775,
+      "total_fn": 2158,
+      "micro_precision": 0.007825600894354388,
+      "micro_recall": 0.006445672191528545,
+      "per_task": {
+        "Referring Expression Detection": {
+          "num_questions": 1313,
+          "acc": 0.00456968773800457
+        }
+      }
+    }
+  }
+}

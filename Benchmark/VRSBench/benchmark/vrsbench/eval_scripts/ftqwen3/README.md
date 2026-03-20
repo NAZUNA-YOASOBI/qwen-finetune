@@ -36,3 +36,14 @@
 ## 使用约定
 
 - 所有脚本都默认以 `Benchmark/VRSBench` 为项目根目录来解析相对路径
+
+## 源码分层
+
+`src/ftqwen3/` 当前按模型线与共享模块拆分为：
+
+- `shared/`：通用底层模块
+- `baseline/`：原生未微调 baseline
+- `qwen_native/`：原生 Qwen3-VL 视觉分支微调线
+- `dinov3_merger/`：DINOv3 + merger 微调线
+- `sva_deepstack_ca/`：SVA deepstack cross-attention 微调线
+

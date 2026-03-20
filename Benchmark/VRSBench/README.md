@@ -41,9 +41,9 @@
   - `utils/` 通用工具脚本
   - `run/` 运行入口脚本
 - `src/ftqwen3/`
-  - `Qwen3-VL` 相关最小运行模块
+  - 按 `shared/`、`baseline/`、`qwen_native/`、`dinov3_merger/`、`sva_deepstack_ca/` 分层整理后的 `Qwen3-VL` 相关最小运行模块
 - `src/ftqwen35/`
-  - `Qwen3.5` 相关最小运行模块
+  - 按 `shared/`、`baseline/` 分层整理后的 `Qwen3.5` 相关最小运行模块
 - `benchmark/vrsbench/data/`
   - 评测和生成用到的小型测试索引与引用文件
 - `benchmark/vrsbench/paper/`

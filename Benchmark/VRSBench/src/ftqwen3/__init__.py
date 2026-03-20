@@ -1,7 +1,8 @@
-# 用于 Qwen3-VL 遥感图像描述（RSICD）实验的最小复现脚手架。
+# VRSBench 的 Qwen3-VL 相关模块，按模型线与共享能力分层整理。
 __all__ = [
-    "jsonl",
-    "rsicd",
-    "qwen3_vl_captioner",
-    "caption_metrics",
+    "shared",
+    "baseline",
+    "qwen_native",
+    "dinov3_merger",
+    "sva_deepstack_ca",
 ]

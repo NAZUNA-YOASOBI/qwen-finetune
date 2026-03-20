@@ -212,10 +212,10 @@ def main() -> None:
     from torch.utils.data import DataLoader, Sampler, Subset
     from transformers import AutoProcessor, Qwen3VLForConditionalGeneration, get_scheduler
 
-    from ftqwen3.device import require_cuda
-    from ftqwen3.qwen_dinov3 import load_merger_safetensors, save_merger_safetensors, torch_dtype_from_str
-    from ftqwen3.sft import QwenNativeSFTCollator, VrsbenchMultiTaskQwenNativeSFTDataset
-    from ftqwen3.training_losses import causal_lm_sample_average_loss
+    from ftqwen3.shared.device import require_cuda
+    from ftqwen3.shared.qwen_dinov3 import load_merger_safetensors, save_merger_safetensors, torch_dtype_from_str
+    from ftqwen3.shared.sft import QwenNativeSFTCollator, VrsbenchMultiTaskQwenNativeSFTDataset
+    from ftqwen3.shared.training_losses import causal_lm_sample_average_loss
 
     class ProportionalDistributedSampler(Sampler[int]):
         """按每个 rank 的 micro-batch 比例切分数据，并按桶做“全局 batch=32”级别采样。"""

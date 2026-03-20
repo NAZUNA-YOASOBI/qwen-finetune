@@ -335,9 +335,9 @@ def main() -> None:
 
     from tqdm import tqdm  # type: ignore
 
-    from ftqwen3.device import assert_model_on_cuda, require_cuda
-    from ftqwen3.jsonl import append_jsonl, read_jsonl
-    from ftqwen3.qwen_dinov3 import build_generate_kwargs, maybe_set_generation_seed, torch_dtype_from_str
+    from ftqwen3.shared.device import assert_model_on_cuda, require_cuda
+    from ftqwen3.shared.jsonl import append_jsonl, read_jsonl
+    from ftqwen3.shared.qwen_dinov3 import build_generate_kwargs, maybe_set_generation_seed, torch_dtype_from_str
 
     data_path = _resolve_from_project(args.data)
     if not data_path.is_file():

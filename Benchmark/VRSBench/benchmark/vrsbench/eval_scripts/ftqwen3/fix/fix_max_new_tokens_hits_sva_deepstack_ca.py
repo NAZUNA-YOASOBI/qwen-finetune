@@ -152,9 +152,9 @@ def main() -> None:
 
     from transformers import AutoProcessor
 
-    from ftqwen3.qwen_dinov3 import path_metadata_matches
-    from ftqwen3.sva_deepstack_ca_captioner import SVADeepstackCACaptioner
-    from ftqwen3.sva_deepstack_ca_visual_adapter import assert_sva_deepstack_ca_runtime_matches_merger
+    from ftqwen3.shared.qwen_dinov3 import path_metadata_matches
+    from ftqwen3.sva_deepstack_ca.sva_deepstack_ca_captioner import SVADeepstackCACaptioner
+    from ftqwen3.sva_deepstack_ca.sva_deepstack_ca_visual_adapter import assert_sva_deepstack_ca_runtime_matches_merger
 
     preds_path = _resolve_from_project(args.preds)
     if not preds_path.is_file():

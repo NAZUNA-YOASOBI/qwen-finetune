@@ -140,8 +140,8 @@ def main() -> None:
 
     from tqdm import tqdm  # type: ignore
 
-    from ftqwen3.jsonl import append_jsonl, read_jsonl
-    from ftqwen3.sva_deepstack_ca_captioner import SVADeepstackCACaptioner
+    from ftqwen3.shared.jsonl import append_jsonl, read_jsonl
+    from ftqwen3.sva_deepstack_ca.sva_deepstack_ca_captioner import SVADeepstackCACaptioner
 
     data_path = _resolve_from_project(args.data)
     if not data_path.is_file():

@@ -1,0 +1,31 @@
+{
+  "metric": "accuracy",
+  "aggregation": "per-prompt accuracy averaged across prompts, then averaged across samples",
+  "num_questions": 1713,
+  "total_prompts": 8565,
+  "missing_prompt_count": 0,
+  "parse_fail_count": 0,
+  "overall_accuracy": 0.5405720957384705,
+  "per_task": {
+    "Crop Type Classification": {
+      "num_questions": 55,
+      "accuracy": 0.17818181818181816
+    },
+    "Damaged Building Counting": {
+      "num_questions": 1050,
+      "accuracy": 0.5683809523809527
+    },
+    "Disaster Type Classification": {
+      "num_questions": 227,
+      "accuracy": 0.505726872246696
+    },
+    "Farm Pond Change Detection": {
+      "num_questions": 76,
+      "accuracy": 0.20526315789473681
+    },
+    "Land Use Classification": {
+      "num_questions": 305,
+      "accuracy": 0.6196721311475409
+    }
+  }
+}

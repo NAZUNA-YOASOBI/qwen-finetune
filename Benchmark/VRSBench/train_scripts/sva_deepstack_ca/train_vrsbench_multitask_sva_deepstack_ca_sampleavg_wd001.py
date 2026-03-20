@@ -217,16 +217,16 @@ def main() -> None:
     from torch.utils.data import DataLoader, Sampler, Subset
     from transformers import AutoProcessor, Qwen3VLForConditionalGeneration, get_scheduler
 
-    from ftqwen3.device import require_cuda
-    from ftqwen3.qwen_dinov3 import torch_dtype_from_str
-    from ftqwen3.sva_deepstack_ca_sft import QwenNativeSVAFixedGridCollator, VrsbenchMultiTaskSVAFixedGridDataset
-    from ftqwen3.sva_deepstack_ca_visual_adapter import (
+    from ftqwen3.shared.device import require_cuda
+    from ftqwen3.shared.qwen_dinov3 import torch_dtype_from_str
+    from ftqwen3.sva_deepstack_ca.sva_deepstack_ca_sft import QwenNativeSVAFixedGridCollator, VrsbenchMultiTaskSVAFixedGridDataset
+    from ftqwen3.sva_deepstack_ca.sva_deepstack_ca_visual_adapter import (
         assert_sva_deepstack_ca_runtime_matches_merger,
         attach_sva_deepstack_ca_visual_adapter,
         load_sva_deepstack_ca_merger_safetensors,
         save_sva_deepstack_ca_merger_safetensors,
     )
-    from ftqwen3.training_losses import causal_lm_sample_average_loss
+    from ftqwen3.shared.training_losses import causal_lm_sample_average_loss
 
     class ProportionalDistributedSampler(Sampler[int]):
         """按每个 rank 的 micro-batch 比例切分数据，并按桶做“全局 batch=32”级别采样。"""

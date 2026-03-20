@@ -1,0 +1,17 @@
+{
+  "metric": "BERTScore-F1",
+  "aggregation": "per-prompt BERTScore-F1 averaged across prompts, then averaged across samples",
+  "num_questions": 434,
+  "total_prompts": 2170,
+  "missing_prompt_count": 0,
+  "overall_bertscore_f1": 0.8750482914634564,
+  "lang": "en",
+  "model_type": "",
+  "rescale_with_baseline": false,
+  "per_task": {
+    "Image Captioning": {
+      "num_questions": 434,
+      "bertscore_f1": 0.8750482914634574
+    }
+  }
+}

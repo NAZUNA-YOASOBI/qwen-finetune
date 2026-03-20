@@ -1,0 +1,10 @@
+# 依赖保持最小集合，覆盖当前 GeoBench-VLM 评测链路。
+numpy>=1.24
+tqdm>=4.66
+pillow>=10.0
+transformers>=4.57.0,<5
+accelerate>=1.0
+torchvision>=0.20.0
+bert-score==0.3.13
+xgrammar>=0.1.32
+pypdf==5.2.0
