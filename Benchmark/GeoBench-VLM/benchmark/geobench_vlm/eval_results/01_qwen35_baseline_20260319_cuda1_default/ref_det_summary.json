@@ -1,0 +1,39 @@
+{
+  "metric": "strict Acc and mean F1",
+  "aggregation": "GT polygons stay unchanged, predicted bbox_2d uses 0..1000 normalized xyxy, each prediction is converted to a 4-point rectangle polygon, maximum bipartite matching is applied, and a sample counts as correct only when sample_F1=1",
+  "num_questions": 1313,
+  "missing_prediction_count": 0,
+  "parse_fail_count": 61,
+  "thresholds": {
+    "0.25": {
+      "acc": 0.44097486671744096,
+      "mean_f1": 0.5374304587313885,
+      "total_tp": 1173,
+      "total_fp": 2012,
+      "total_fn": 999,
+      "micro_precision": 0.3682888540031397,
+      "micro_recall": 0.5400552486187845,
+      "per_task": {
+        "Referring Expression Detection": {
+          "num_questions": 1313,
+          "acc": 0.44097486671744096
+        }
+      }
+    },
+    "0.50": {
+      "acc": 0.3488194973343488,
+      "mean_f1": 0.41775906648871225,
+      "total_tp": 904,
+      "total_fp": 2281,
+      "total_fn": 1268,
+      "micro_precision": 0.28383045525902667,
+      "micro_recall": 0.4162062615101289,
+      "per_task": {
+        "Referring Expression Detection": {
+          "num_questions": 1313,
+          "acc": 0.3488194973343488
+        }
+      }
+    }
+  }
+}

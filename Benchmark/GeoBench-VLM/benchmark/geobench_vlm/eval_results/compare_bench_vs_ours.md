@@ -6,14 +6,10 @@
 - Ours 数据来源：
   - `benchmark/geobench_vlm/eval_results/01_qwen3vl_baseline_20260319_cuda1_default/*.json`
   - `benchmark/geobench_vlm/eval_results/01_qwen35_baseline_20260319_cuda1_default/*.json`
-  - `benchmark/geobench_vlm/eval_results/02_qwen3vl_refdet_xgrammar_v6_pixel_20260320/ref_det_summary.json`
-  - `benchmark/geobench_vlm/eval_results/02_qwen35_refdet_xgrammar_v6_pixel_20260320/ref_det_summary.json`
 - `Ours-qwen3-vl-baseline` 对应运行标签：
   - `01_qwen3vl_baseline_20260319_cuda1_default`
-  - `02_qwen3vl_refdet_xgrammar_v6_pixel_20260320`
 - `Ours-qwen3.5-baseline` 对应运行标签：
   - `01_qwen35_baseline_20260319_cuda1_default`
-  - `02_qwen35_refdet_xgrammar_v6_pixel_20260320`
 - 论文里的 Bench 数值保持原文小数口径。
 - 当前 Ours 的 `Single` 不是直接拿一个总分去对齐 Table 2，而是按论文公开分组重算：
   - `Event Detection` = `Fire Risk Assessment` + `Disaster Type Classification`
@@ -64,5 +60,5 @@
 | Bench | GPT-4o | 0.0087 | 0.0386 |
 | Bench | LHRS-Nova | 0.0930 | 0.2423 |
 | Bench | SkySenseGPT | 0.1082 | 0.3224 |
-| Ours | Ours-qwen3-vl-baseline | 0.0073 | 0.0580 |
-| Ours | Ours-qwen3.5-baseline | 0.0078 | 0.0570 |
+| Ours | Ours-qwen3-vl-baseline | 0.4482 | 0.5923 |
+| Ours | Ours-qwen3.5-baseline | 0.2838 | 0.3683 |

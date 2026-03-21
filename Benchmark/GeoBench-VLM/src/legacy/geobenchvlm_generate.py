@@ -43,22 +43,6 @@ def _caption_prompt(_row: dict[str, Any], prompt_text: str) -> str:
     return "\n".join([str(prompt_text), "Write around 140 words."])
 
 
-def _refdet_prompt(_row: dict[str, Any], prompt_text: str) -> str:
-    return "\n".join(
-        [
-            "You are a visual grounding assistant.",
-            "Given an image and a referring expression, output strict JSON only.",
-            f"Referring expression: {prompt_text}",
-            "If the expression refers to one target, return exactly one JSON object:",
-            '{"instance": "short target description", "bbox_2d": [x0, y0, x1, y1]}',
-            "If the expression refers to multiple targets, return a JSON array, and each element must use:",
-            '{"instance": "short target description", "bbox_2d": [x0, y0, x1, y1]}',
-            "Use 0..1000 normalized coordinates.",
-            "Do not output any explanation.",
-        ]
-    )
-
-
 def _single_conversation(image_paths: list[Path], prompt: str) -> list[dict[str, Any]]:
     return [
         {
@@ -109,15 +93,6 @@ TASK_SPECS: dict[str, TaskSpec] = {
         prompt_version="dataset_caption_prompt_v1",
         default_max_new_tokens=512,
         prompt_builder=_caption_prompt,
-        conversation_builder=_single_conversation,
-    ),
-    "ref_det": TaskSpec(
-        name="ref_det",
-        desc="GeoBench-VLM referring detection generation",
-        data_default="../../../GeoBench-VLM/dataset/GEOBench-VLM/Ref-Det/qa.json",
-        prompt_version="bbox2d1000_strict_json_v1",
-        default_max_new_tokens=256,
-        prompt_builder=_refdet_prompt,
         conversation_builder=_single_conversation,
     ),
 }

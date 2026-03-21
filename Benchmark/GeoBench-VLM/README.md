@@ -1,40 +1,30 @@
 # GeoBench-VLM 测试代码与结果整理
 
-本目录用于整理当前保留的 GeoBench-VLM 评测代码、脚本和结果，目录组织对齐 `Benchmark/VRSBench`，默认以 `fine-tune-qwen3-vl` 为项目根目录。
+本目录整理当前保留的 GeoBench-VLM 评测代码、脚本和结果，目录组织参考 `Benchmark/VRSBench`，默认以 `fine-tune-qwen3-vl` 为项目根目录。
 
-## 当前保留的四条结果线
+## 当前保留的两条结果线
 
 1. `01_qwen3vl_baseline_20260319_cuda1_default`
    - 模型：原生 `Qwen3-VL-8B-Instruct`
-   - 任务：`Single / Temporal / Captioning`
+   - 任务：`Single / Temporal / Captioning / Ref-Det`
    - 环境：`qwen3-dinov3`
 2. `01_qwen35_baseline_20260319_cuda1_default`
    - 模型：原生 `Qwen3.5-9B`
-   - 任务：`Single / Temporal / Captioning`
+   - 任务：`Single / Temporal / Captioning / Ref-Det`
    - 环境：`qwen3-dinov3.5`
-3. `02_qwen3vl_refdet_xgrammar_v6_pixel_20260320`
-   - 模型：原生 `Qwen3-VL-8B-Instruct`
-   - 任务：`Ref-Det`
-   - 链路：`xgrammar polygon`
-4. `02_qwen35_refdet_xgrammar_v6_pixel_20260320`
-   - 模型：原生 `Qwen3.5-9B`
-   - 任务：`Ref-Det`
-   - 链路：`xgrammar polygon`
 
 ## 已复制内容
 
 - `src/`
   - `shared/`：共享的数据读写、路径解析、分片与预测键工具
-  - `legacy/`：`Single / Temporal / Captioning` 主链路代码
-  - `xgrammar/`：`Ref-Det` 新链路代码
+  - `legacy/`：当前保留的生成与模型运行代码
 - `benchmark/geobench_vlm/eval_scripts/`
   - `README.md`：脚本总览
-  - `legacy/`：共享任务运行脚本与评测脚本
-  - `xgrammar/`：`Ref-Det` 运行脚本与评测脚本
+  - `legacy/`：四个任务的运行脚本与评测脚本
 - `benchmark/geobench_vlm/eval_results/`
   - 当前保留的 summary / details 结果
   - `EVAL_METRIC_LOGIC.md`
-  - `CURRENT_RUNS.md`
+  - `compare_bench_vs_ours.md`
 - `benchmark/geobench_vlm/outputs/`
   - 当前保留的原始预测 `jsonl`
 - `benchmark/geobench_vlm/paper/`
@@ -59,11 +49,9 @@
 
 ## 当前结果入口
 
-- `benchmark/geobench_vlm/eval_results/CURRENT_RUNS.md`
+- `benchmark/geobench_vlm/eval_results/compare_bench_vs_ours.md`
 - `benchmark/geobench_vlm/eval_results/01_qwen3vl_baseline_20260319_cuda1_default/`
 - `benchmark/geobench_vlm/eval_results/01_qwen35_baseline_20260319_cuda1_default/`
-- `benchmark/geobench_vlm/eval_results/02_qwen3vl_refdet_xgrammar_v6_pixel_20260320/`
-- `benchmark/geobench_vlm/eval_results/02_qwen35_refdet_xgrammar_v6_pixel_20260320/`
 
 ## 当前摘要分数
 
@@ -71,9 +59,9 @@
   - `Single Acc`: 0.493242
   - `Temporal Acc`: 0.533684
   - `Captioning BERTScore-F1`: 0.875048
-  - `Ref-Det Acc@0.25 / Acc@0.50`: 0.041127 / 0.006093
+  - `Ref-Det Acc@0.25 / Acc@0.50`: 0.468393 / 0.354912
 - `Qwen3.5`
   - `Single Acc`: 0.509063
   - `Temporal Acc`: 0.540572
   - `Captioning BERTScore-F1`: 0.870362
-  - `Ref-Det Acc@0.25 / Acc@0.50`: 0.043412 / 0.004570
+  - `Ref-Det Acc@0.25 / Acc@0.50`: 0.440975 / 0.348819

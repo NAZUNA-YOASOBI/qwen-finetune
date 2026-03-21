@@ -26,6 +26,7 @@ prompt_version_of() {
     single) echo 'official_mcq_single_v1' ;;
     temporal) echo 'official_mcq_temporal_all_frames_v1' ;;
     captioning) echo 'dataset_caption_prompt_v1' ;;
+    ref_det) echo 'bbox2d1000_xyxy_json_array_v2' ;;
     *)
       echo "Unsupported task: $1" >&2
       return 1
@@ -38,6 +39,7 @@ task_data_path() {
     single) echo "$DATA_ROOT/Single/qa.json" ;;
     temporal) echo "$DATA_ROOT/Temporal/qa.json" ;;
     captioning) echo "$DATA_ROOT/Captioning/qa.json" ;;
+    ref_det) echo "$DATA_ROOT/Ref-Det/qa.json" ;;
     *)
       echo "Unsupported task: $1" >&2
       return 1
@@ -64,14 +66,24 @@ run_task() {
     "$GEOBENCH_SCRIPT_ROOT/$(dirname "$output_path")" \
     "$GEOBENCH_SCRIPT_ROOT/$(dirname "$summary_path")"
 
-  conda run --no-capture-output -n "$env_name" \
-    python "$GEOBENCH_SCRIPT_ROOT/src/legacy/geobenchvlm_generate.py" \
-    --task "$task_name" \
-    --model-family "$model_family" \
-    --model-dir "$model_dir" \
-    --data-root "$DATA_ROOT" \
-    --output "$output_path" \
-    --batch-size "$batch_size"
+  if [ "$task_name" = "ref_det" ]; then
+    conda run --no-capture-output -n "$env_name" \
+      python "$GEOBENCH_SCRIPT_ROOT/src/legacy/geobenchvlm_refdet_generate.py" \
+      --model-family "$model_family" \
+      --model-dir "$model_dir" \
+      --data-root "$DATA_ROOT" \
+      --output "$output_path" \
+      --batch-size "$batch_size"
+  else
+    conda run --no-capture-output -n "$env_name" \
+      python "$GEOBENCH_SCRIPT_ROOT/src/legacy/geobenchvlm_generate.py" \
+      --task "$task_name" \
+      --model-family "$model_family" \
+      --model-dir "$model_dir" \
+      --data-root "$DATA_ROOT" \
+      --output "$output_path" \
+      --batch-size "$batch_size"
+  fi
 
   case "$task_name" in
     single|temporal)
@@ -97,6 +109,17 @@ run_task() {
         --expected-prompt-version "$prompt_version" \
         --device cuda
       ;;
+    ref_det)
+      conda run --no-capture-output -n "$env_name" \
+        python "$GEOBENCH_SCRIPT_ROOT/benchmark/geobench_vlm/eval_scripts/legacy/eval/eval_geobenchvlm_refdet.py" \
+        --data "$data_path" \
+        --predictions "$output_path" \
+        --output "$summary_path" \
+        --details-output "$details_path" \
+        --expected-model-family "$model_family" \
+        --expected-model-dir "$model_dir" \
+        --expected-prompt-version "$prompt_version"
+      ;;
     *)
       echo "Unsupported task: $task_name" >&2
       return 1
@@ -111,13 +134,15 @@ run_model() {
   local single_bs="$4"
   local temporal_bs="$5"
   local caption_bs="$6"
+  local refdet_bs="$7"
   local model_dir
   model_dir=$(model_dir_of "$model_family")
 
   run_task "$env_name" "$model_family" "$model_dir" "$run_name" single "$single_bs"
   run_task "$env_name" "$model_family" "$model_dir" "$run_name" temporal "$temporal_bs"
   run_task "$env_name" "$model_family" "$model_dir" "$run_name" captioning "$caption_bs"
+  run_task "$env_name" "$model_family" "$model_dir" "$run_name" ref_det "$refdet_bs"
 }
 
-run_model qwen3-dinov3 qwen3vl 01_qwen3vl_baseline_20260319_cuda1_default 16 1 2
-run_model qwen3-dinov3.5 qwen35 01_qwen35_baseline_20260319_cuda1_default 1 1 1
+run_model qwen3-dinov3 qwen3vl 01_qwen3vl_baseline_20260319_cuda1_default 16 1 2 256
+run_model qwen3-dinov3.5 qwen35 01_qwen35_baseline_20260319_cuda1_default 1 1 1 256

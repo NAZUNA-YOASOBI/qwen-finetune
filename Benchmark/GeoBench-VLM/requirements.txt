@@ -2,9 +2,8 @@
 numpy>=1.24
 tqdm>=4.66
 pillow>=10.0
-transformers>=4.57.0,<5
+transformers>=4.57.0
 accelerate>=1.0
 torchvision>=0.20.0
 bert-score==0.3.13
-xgrammar>=0.1.32
 pypdf==5.2.0
