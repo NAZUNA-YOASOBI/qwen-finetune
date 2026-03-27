@@ -1,0 +1,42 @@
+{
+  "total_selected": 16159,
+  "processed": 16159,
+  "valid_for_iou": 13536,
+  "mean_iou": 0.35516135489047396,
+  "acc@0.5": 0.3055263320750046,
+  "acc@0.7": 0.16430472182684572,
+  "acc@0.5_count": 4937,
+  "acc@0.7_count": 2655,
+  "by_split": {
+    "unique": {
+      "count_total": 6736,
+      "count_valid_for_iou": 5769,
+      "acc@0.5": 0.32096199524940616,
+      "acc@0.7": 0.17666270783847982,
+      "acc@0.5_count": 2162,
+      "acc@0.7_count": 1190
+    },
+    "non_unique": {
+      "count_total": 9423,
+      "count_valid_for_iou": 7767,
+      "acc@0.5": 0.294492199936326,
+      "acc@0.7": 0.15547065690332165,
+      "acc@0.5_count": 2775,
+      "acc@0.7_count": 1465
+    },
+    "all": {
+      "count_total": 16159,
+      "count_valid_for_iou": 13536,
+      "acc@0.5": 0.3055263320750046,
+      "acc@0.7": 0.16430472182684572,
+      "acc@0.5_count": 4937,
+      "acc@0.7_count": 2655
+    }
+  },
+  "predictions_file": "/opt/data/private/qwen/vg_eval_predictions_fullclip_1shot_v4.jsonl",
+  "start_idx": 0,
+  "limit": 0,
+  "elapsed_seconds": 2291.161845445633,
+  "batch_size": 64,
+  "batch_fallback_count": 0
+}
