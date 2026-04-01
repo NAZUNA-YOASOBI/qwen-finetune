@@ -24,20 +24,117 @@ def _resolve_from_project(path: str | Path) -> Path:
     return (_project_root() / p).resolve()
 
 
-def _polygon_to_xyxy(poly: list[list[float]]) -> list[int]:
-    xs = [float(p[0]) for p in poly]
-    ys = [float(p[1]) for p in poly]
-    return [int(math.floor(min(xs))), int(math.floor(min(ys))), int(math.ceil(max(xs))), int(math.ceil(max(ys)))]
+def _polygon_centroid(points: list[list[float]]) -> tuple[float, float]:
+    cx = sum(float(point[0]) for point in points) / float(len(points))
+    cy = sum(float(point[1]) for point in points) / float(len(points))
+    return float(cx), float(cy)
 
 
-def _gt_boxes(row: dict[str, Any]) -> list[list[int]]:
+def _polygon_signed_area(points: list[list[float]]) -> float:
+    area = 0.0
+    for index, point in enumerate(points):
+        nxt = points[(index + 1) % len(points)]
+        area += (float(point[0]) * float(nxt[1])) - (float(nxt[0]) * float(point[1]))
+    return float(area / 2.0)
+
+
+def _order_polygon_ccw(points: list[list[float]]) -> list[list[float]]:
+    cx, cy = _polygon_centroid(points)
+    ordered = sorted(points, key=lambda point: math.atan2(float(point[1]) - cy, float(point[0]) - cx))
+    if _polygon_signed_area(ordered) < 0.0:
+        ordered.reverse()
+    return [[float(point[0]), float(point[1])] for point in ordered]
+
+
+def _normalize_polygon(points: Any) -> list[list[float]] | None:
+    if not isinstance(points, list) or len(points) < 3:
+        return None
+    out: list[list[float]] = []
+    for point in points:
+        if not isinstance(point, list) or len(point) != 2:
+            return None
+        try:
+            out.append([float(point[0]), float(point[1])])
+        except Exception:
+            return None
+    return _order_polygon_ccw(out)
+
+
+def _polygon_area(points: list[list[float]]) -> float:
+    return abs(_polygon_signed_area(points))
+
+
+def _cross(a: list[float], b: list[float], c: list[float]) -> float:
+    return (float(b[0]) - float(a[0])) * (float(c[1]) - float(a[1])) - (float(b[1]) - float(a[1])) * (float(c[0]) - float(a[0]))
+
+
+def _inside(point: list[float], edge_start: list[float], edge_end: list[float]) -> bool:
+    return _cross(edge_start, edge_end, point) >= -1e-9
+
+
+def _segment_intersection(start_a: list[float], end_a: list[float], start_b: list[float], end_b: list[float]) -> list[float]:
+    x1, y1 = float(start_a[0]), float(start_a[1])
+    x2, y2 = float(end_a[0]), float(end_a[1])
+    x3, y3 = float(start_b[0]), float(start_b[1])
+    x4, y4 = float(end_b[0]), float(end_b[1])
+    denom = ((x1 - x2) * (y3 - y4)) - ((y1 - y2) * (x3 - x4))
+    if abs(denom) < 1e-12:
+        return [float(x2), float(y2)]
+    det_a = (x1 * y2) - (y1 * x2)
+    det_b = (x3 * y4) - (y3 * x4)
+    px = ((det_a * (x3 - x4)) - ((x1 - x2) * det_b)) / denom
+    py = ((det_a * (y3 - y4)) - ((y1 - y2) * det_b)) / denom
+    return [float(px), float(py)]
+
+
+def _polygon_clip(subject_polygon: list[list[float]], clip_polygon: list[list[float]]) -> list[list[float]]:
+    output = [list(point) for point in subject_polygon]
+    clip = _order_polygon_ccw(clip_polygon)
+    for index in range(len(clip)):
+        edge_start = clip[index]
+        edge_end = clip[(index + 1) % len(clip)]
+        input_list = output
+        output = []
+        if not input_list:
+            break
+        previous = input_list[-1]
+        for current in input_list:
+            if _inside(current, edge_start, edge_end):
+                if not _inside(previous, edge_start, edge_end):
+                    output.append(_segment_intersection(previous, current, edge_start, edge_end))
+                output.append(current)
+            elif _inside(previous, edge_start, edge_end):
+                output.append(_segment_intersection(previous, current, edge_start, edge_end))
+            previous = current
+    return _order_polygon_ccw(output) if len(output) >= 3 else []
+
+
+def _compute_polygon_iou(poly_a: list[list[float]], poly_b: list[list[float]]) -> float:
+    norm_a = _normalize_polygon(poly_a)
+    norm_b = _normalize_polygon(poly_b)
+    if not norm_a or not norm_b:
+        return 0.0
+    area_a = _polygon_area(norm_a)
+    area_b = _polygon_area(norm_b)
+    if area_a <= 0.0 or area_b <= 0.0:
+        return 0.0
+    inter_poly = _polygon_clip(norm_a, norm_b)
+    inter_area = _polygon_area(inter_poly) if len(inter_poly) >= 3 else 0.0
+    union_area = area_a + area_b - inter_area
+    if union_area <= 0.0:
+        return 0.0
+    return float(inter_area / union_area)
+
+
+def _gt_polygons(row: dict[str, Any]) -> list[list[list[float]]]:
     gts = row.get("ground_truth", [])
-    out: list[list[int]] = []
+    out: list[list[list[float]]] = []
     if not isinstance(gts, list):
         return out
     for item in gts:
-        if isinstance(item, list) and item and isinstance(item[0], list):
-            out.append(_polygon_to_xyxy(item))
+        polygon = _normalize_polygon(item)
+        if polygon is not None:
+            out.append(polygon)
     return out
 
 
@@ -79,7 +176,7 @@ def _try_parse_json_value(text: str) -> Any | None:
     return None
 
 
-def _clamp_pixel_xyxy(box: list[float], width: int, height: int) -> list[int] | None:
+def _clamp_pixel_xyxy(box: list[float], width: int, height: int) -> list[float] | None:
     if len(box) != 4:
         return None
     x0, y0, x1, y1 = [float(v) for v in box]
@@ -89,7 +186,7 @@ def _clamp_pixel_xyxy(box: list[float], width: int, height: int) -> list[int] | 
     y1 = max(0.0, min(float(height), y1))
     if x1 <= x0 or y1 <= y0:
         return None
-    return [int(round(x0)), int(round(y0)), int(round(x1)), int(round(y1))]
+    return [float(x0), float(y0), float(x1), float(y1)]
 
 
 def _clamp_bbox_2d_1000(box: list[float]) -> list[float] | None:
@@ -105,7 +202,21 @@ def _clamp_bbox_2d_1000(box: list[float]) -> list[float] | None:
     return [x0, y0, x1, y1]
 
 
-def _bbox2d_1000_to_pixels(box: list[float], *, width: int, height: int) -> list[int] | None:
+def _xyxy_to_polygon(box: list[float]) -> list[list[float]] | None:
+    if len(box) != 4:
+        return None
+    x0, y0, x1, y1 = [float(v) for v in box]
+    if x1 <= x0 or y1 <= y0:
+        return None
+    return [
+        [float(x0), float(y0)],
+        [float(x0), float(y1)],
+        [float(x1), float(y1)],
+        [float(x1), float(y0)],
+    ]
+
+
+def _bbox2d_1000_to_polygon(box: list[float], *, width: int, height: int) -> list[list[float]] | None:
     bb = _clamp_bbox_2d_1000(box)
     if bb is None:
         return None
@@ -116,7 +227,11 @@ def _bbox2d_1000_to_pixels(box: list[float], *, width: int, height: int) -> list
         x1 * float(width) / 1000.0,
         y1 * float(height) / 1000.0,
     ]
-    return _clamp_pixel_xyxy(px, width, height)
+    pixel_box = _clamp_pixel_xyxy(px, width, height)
+    if pixel_box is None:
+        return None
+    polygon = _xyxy_to_polygon(pixel_box)
+    return _normalize_polygon(polygon) if polygon is not None else None
 
 
 def _dedup_boxes(boxes: list[list[float]]) -> list[list[float]]:
@@ -174,47 +289,36 @@ def _extract_pred_boxes(text: str) -> list[list[float]]:
     return _dedup_boxes(parsed_boxes + regex_boxes)
 
 
-def _compute_iou_xyxy(box1: list[int], box2: list[int]) -> float:
-    x1, y1, x2, y2 = box1
-    x3, y3, x4, y4 = box2
-    inter_x1 = max(x1, x3)
-    inter_y1 = max(y1, y3)
-    inter_x2 = min(x2, x4)
-    inter_y2 = min(y2, y4)
-    inter = max(0, inter_x2 - inter_x1 + 1) * max(0, inter_y2 - inter_y1 + 1)
-    area1 = max(0, x2 - x1 + 1) * max(0, y2 - y1 + 1)
-    area2 = max(0, x4 - x3 + 1) * max(0, y4 - y3 + 1)
-    union = area1 + area2 - inter
-    return float(inter / union) if union > 0 else 0.0
+def _maximum_match_counts(pred_polygons: list[list[list[float]]], gt_polygons: list[list[list[float]]], threshold: float) -> tuple[int, int, int]:
+    adjacency: list[list[int]] = []
+    for pred_polygon in pred_polygons:
+        neighbors: list[int] = []
+        for gt_index, gt_polygon in enumerate(gt_polygons):
+            if _compute_polygon_iou(pred_polygon, gt_polygon) >= float(threshold):
+                neighbors.append(int(gt_index))
+        adjacency.append(neighbors)
 
+    match_to_pred = [-1] * len(gt_polygons)
 
-def _greedy_true_positives(iou_mat: list[list[float]], thr: float) -> int:
-    if not iou_mat or not iou_mat[0]:
-        return 0
-    work = [row[:] for row in iou_mat]
-    n_gt = len(work)
-    n_pr = len(work[0])
+    def _dfs(pred_index: int, visited_gt: list[bool]) -> bool:
+        for gt_index in adjacency[pred_index]:
+            if visited_gt[gt_index]:
+                continue
+            visited_gt[gt_index] = True
+            if match_to_pred[gt_index] == -1 or _dfs(match_to_pred[gt_index], visited_gt):
+                match_to_pred[gt_index] = int(pred_index)
+                return True
+        return False
+
     matched = 0
+    for pred_index in range(len(pred_polygons)):
+        if _dfs(pred_index, [False] * len(gt_polygons)):
+            matched += 1
 
-    for _ in range(min(n_gt, n_pr)):
-        best_iou = -1.0
-        best_gt = -1
-        best_pr = -1
-        for gt_idx in range(n_gt):
-            for pr_idx in range(n_pr):
-                value = float(work[gt_idx][pr_idx])
-                if value > best_iou:
-                    best_iou = value
-                    best_gt = gt_idx
-                    best_pr = pr_idx
-        if best_iou < float(thr) or best_gt < 0 or best_pr < 0:
-            break
-        matched += 1
-        for pr_idx in range(n_pr):
-            work[best_gt][pr_idx] = 0.0
-        for gt_idx in range(n_gt):
-            work[gt_idx][best_pr] = 0.0
-    return matched
+    tp = int(matched)
+    fp = int(len(pred_polygons) - matched)
+    fn = int(len(gt_polygons) - matched)
+    return tp, fp, fn
 
 
 def _sample_f1(*, tp: int, num_pred: int, num_gt: int) -> float:
@@ -293,26 +397,25 @@ def main() -> None:
                 image_size_cache[image_path_key] = (int(img.size[0]), int(img.size[1]))
         width, height = image_size_cache[image_path_key]
 
-        gt_boxes = _gt_boxes(data_row)
-        pred_boxes = []
+        gt_polygons = _gt_polygons(data_row)
+        pred_polygons = []
         pred_boxes_raw = _extract_pred_boxes(str(row.get("answer", "")))
         for box in pred_boxes_raw:
-            px = _bbox2d_1000_to_pixels(box, width=int(width), height=int(height))
-            if px is not None:
-                pred_boxes.append(px)
+            polygon = _bbox2d_1000_to_polygon(box, width=int(width), height=int(height))
+            if polygon is not None:
+                pred_polygons.append(polygon)
 
-        iou_mat = [[_compute_iou_xyxy(gt, pred) for pred in pred_boxes] for gt in gt_boxes]
-        tp = _greedy_true_positives(iou_mat, float(args.threshold))
-        sample_f1 = _sample_f1(tp=tp, num_pred=len(pred_boxes), num_gt=len(gt_boxes))
-        ok = bool(gt_boxes) and sample_f1 >= 1.0
-        if not pred_boxes:
+        tp, fp, fn = _maximum_match_counts(pred_polygons, gt_polygons, float(args.threshold))
+        sample_f1 = _sample_f1(tp=tp, num_pred=len(pred_polygons), num_gt=len(gt_polygons))
+        ok = bool(gt_polygons) and sample_f1 >= 1.0
+        if not pred_polygons:
             parse_fail += 1
 
         buckets = ["all"]
         size_group = str(data_row.get("size_group", "")).strip().lower()
         if size_group in {"small", "medium", "large"}:
             buckets.append(size_group)
-        if len(gt_boxes) > 1:
+        if len(gt_polygons) > 1:
             buckets.append("multi_object")
         else:
             buckets.append("single_object")
@@ -333,9 +436,11 @@ def main() -> None:
                 {
                     "question_id": qid,
                     "answer": row.get("answer", ""),
-                    "pred_box_count": len(pred_boxes),
-                    "gt_box_count": len(gt_boxes),
+                    "pred_polygon_count": len(pred_polygons),
+                    "gt_polygon_count": len(gt_polygons),
                     "tp": int(tp),
+                    "fp": int(fp),
+                    "fn": int(fn),
                     "f1": float(sample_f1),
                     "type": qtype,
                     "size_group": size_group,
@@ -350,7 +455,7 @@ def main() -> None:
         "threshold": float(args.threshold),
         "parse_fail_count": int(parse_fail),
         "coord_mode": "qwen_native_bbox2d_1000_only",
-        "match_policy": "global_greedy_iou_matching_with_strict_f1_eq_1_success",
+        "match_policy": "pred_bbox_to_rectangle_polygon_vs_gt_polygon_with_bipartite_iou_matching_and_strict_f1_eq_1_success",
         "metrics": {
             key: {
                 "total": int(value["total"]),
