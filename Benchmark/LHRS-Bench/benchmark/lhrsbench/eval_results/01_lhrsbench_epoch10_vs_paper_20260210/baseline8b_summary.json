@@ -1,0 +1,113 @@
+{
+  "preds": "/opt/data/private/YanZiXi/project/fine-tune-qwen3-vl/qwen-finetune/Benchmark/LHRS-Bench/benchmark/lhrsbench/outputs/01_lhrsbench_epoch10_vs_paper_20260210/baseline8b_predictions.jsonl",
+  "data": "/opt/data/private/YanZiXi/project/fine-tune-qwen3-vl/qwen-finetune/Benchmark/LHRS-Bench/benchmark/lhrsbench/data/lhrsbench_attempts_r4_seed42.jsonl",
+  "num_repeats": 4,
+  "rule_note": "Paper rule: repeat 4 times, shuffle choices each time, all attempts must be correct.",
+  "num_questions": 690,
+  "num_attempts": 2760,
+  "question_correct": 423,
+  "question_accuracy": 0.6130434782608696,
+  "question_accuracy_pct": 61.3,
+  "attempt_correct": 1924,
+  "attempt_accuracy": 0.6971014492753623,
+  "attempt_accuracy_pct": 69.71,
+  "parse_mode_count": {
+    "letter": 2536,
+    "none": 224
+  },
+  "missing_attempt_questions": 0,
+  "missing_attempt_examples": [],
+  "metrics_by_type": [
+    {
+      "type_id": "1",
+      "type_name": "identity",
+      "num_questions": 634,
+      "accuracy": 0.6482649842271293,
+      "accuracy_pct": 64.83
+    },
+    {
+      "type_id": "2",
+      "type_name": "color",
+      "num_questions": 113,
+      "accuracy": 0.6991150442477876,
+      "accuracy_pct": 69.91
+    },
+    {
+      "type_id": "3",
+      "type_name": "orientation",
+      "num_questions": 39,
+      "accuracy": 0.1282051282051282,
+      "accuracy_pct": 12.82
+    },
+    {
+      "type_id": "4",
+      "type_name": "shape",
+      "num_questions": 37,
+      "accuracy": 0.6756756756756757,
+      "accuracy_pct": 67.57
+    },
+    {
+      "type_id": "5",
+      "type_name": "quantity",
+      "num_questions": 137,
+      "accuracy": 0.3722627737226277,
+      "accuracy_pct": 37.23
+    },
+    {
+      "type_id": "6",
+      "type_name": "area",
+      "num_questions": 75,
+      "accuracy": 0.6533333333333333,
+      "accuracy_pct": 65.33
+    },
+    {
+      "type_id": "7",
+      "type_name": "distance",
+      "num_questions": 22,
+      "accuracy": 0.45454545454545453,
+      "accuracy_pct": 45.45
+    },
+    {
+      "type_id": "8",
+      "type_name": "resolution",
+      "num_questions": 21,
+      "accuracy": 0.0,
+      "accuracy_pct": 0.0
+    },
+    {
+      "type_id": "9",
+      "type_name": "modality",
+      "num_questions": 23,
+      "accuracy": 0.13043478260869565,
+      "accuracy_pct": 13.04
+    },
+    {
+      "type_id": "10",
+      "type_name": "location",
+      "num_questions": 204,
+      "accuracy": 0.696078431372549,
+      "accuracy_pct": 69.61
+    },
+    {
+      "type_id": "11",
+      "type_name": "reasoning",
+      "num_questions": 46,
+      "accuracy": 0.6956521739130435,
+      "accuracy_pct": 69.57
+    }
+  ],
+  "metrics_by_type_pct": {
+    "identity": 64.83,
+    "color": 69.91,
+    "orientation": 12.82,
+    "shape": 67.57,
+    "quantity": 37.23,
+    "area": 65.33,
+    "distance": 45.45,
+    "resolution": 0.0,
+    "modality": 13.04,
+    "location": 69.61,
+    "reasoning": 69.57
+  },
+  "avg_pct": 61.3
+}

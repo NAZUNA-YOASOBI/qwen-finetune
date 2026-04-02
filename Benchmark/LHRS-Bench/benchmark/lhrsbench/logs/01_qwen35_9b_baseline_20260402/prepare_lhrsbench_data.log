@@ -1,0 +1,4 @@
+[OK] questions=690 attempts=2760
+[OK] wrote: /opt/data/private/YanZiXi/project/fine-tune-qwen3-vl/qwen-finetune/Benchmark/LHRS-Bench/benchmark/lhrsbench/data/lhrsbench_questions.jsonl
+[OK] wrote: /opt/data/private/YanZiXi/project/fine-tune-qwen3-vl/qwen-finetune/Benchmark/LHRS-Bench/benchmark/lhrsbench/data/lhrsbench_attempts_r4_seed42.jsonl
+[OK] wrote: /opt/data/private/YanZiXi/project/fine-tune-qwen3-vl/qwen-finetune/Benchmark/LHRS-Bench/benchmark/lhrsbench/data/lhrsbench_meta.json

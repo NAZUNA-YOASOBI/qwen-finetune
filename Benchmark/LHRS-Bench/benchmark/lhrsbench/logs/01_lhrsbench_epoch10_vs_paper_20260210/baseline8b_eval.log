@@ -1,0 +1,2 @@
+[OK] questions=690 acc=61.59%
+[OK] wrote: /opt/yanzixi/project/fine-tune-qwen3-vl/LHRS-Bench/benchmark/lhrsbench/eval/01_lhrsbench_epoch10_vs_paper_20260210/baseline8b_summary.json
