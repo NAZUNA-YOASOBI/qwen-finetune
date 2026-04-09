@@ -136,7 +136,7 @@ def main() -> None:
     from tqdm import tqdm  # type: ignore
 
     from ftqwen3.dinov3_merger.dinov3_captioner import DinoV3Captioner
-    from ftqwen3.shared.jsonl import append_jsonl, read_jsonl
+    from ftqwen3.shared.data_io import append_jsonl, read_jsonl
     from ftqwen3.shared.qwen_dinov3 import assert_dino_runtime_matches_merger
 
     data_path = _resolve_from_project(args.data)

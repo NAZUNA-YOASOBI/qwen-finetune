@@ -141,7 +141,7 @@ def main() -> None:
     args = parser.parse_args()
 
     sys.path.insert(0, str(_project_root() / "src"))
-    from ftqwen3.shared.jsonl import read_jsonl  # type: ignore
+    from ftqwen3.shared.data_io import read_jsonl  # type: ignore
 
     preds_path = _resolve_from_project(args.preds)
     rows = read_jsonl(preds_path)

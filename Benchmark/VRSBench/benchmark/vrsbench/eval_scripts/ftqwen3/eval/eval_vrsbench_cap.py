@@ -180,7 +180,7 @@ def main() -> None:
     }
 
     if bool(args.bertscore):
-        from ftqwen3.shared.semantic_metrics import compute_bertscore
+        from ftqwen3.shared.metrics import compute_bertscore
 
         bert_metrics, bert_meta = compute_bertscore(
             refs,

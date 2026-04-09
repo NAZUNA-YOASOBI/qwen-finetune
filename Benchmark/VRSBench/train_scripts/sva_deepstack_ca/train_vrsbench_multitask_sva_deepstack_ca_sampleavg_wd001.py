@@ -4,11 +4,35 @@ import argparse
 import json
 import math
 import re
+import sys
+import warnings
 from pathlib import Path
+
+import torch
+from accelerate import Accelerator
+from peft import LoraConfig, PeftModel, get_peft_model  # type: ignore
+from torch.utils.data import DataLoader, Sampler, Subset
+from transformers import AutoProcessor, Qwen3VLForConditionalGeneration, get_scheduler
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+SRC_ROOT = PROJECT_ROOT / "src"
+if str(SRC_ROOT) not in sys.path:
+    sys.path.insert(0, str(SRC_ROOT))
+
+from ftqwen3.shared.device import require_cuda
+from ftqwen3.shared.qwen_dinov3 import torch_dtype_from_str
+from ftqwen3.shared.training_losses import causal_lm_sample_average_loss
+from ftqwen3.sva_deepstack_ca.sva_deepstack_ca_sft import QwenNativeSVAFixedGridCollator, VrsbenchMultiTaskSVAFixedGridDataset
+from ftqwen3.sva_deepstack_ca.sva_deepstack_ca_visual_adapter import (
+    assert_sva_deepstack_ca_runtime_matches_merger,
+    attach_sva_deepstack_ca_visual_adapter,
+    load_sva_deepstack_ca_merger_safetensors,
+    save_sva_deepstack_ca_merger_safetensors,
+)
 
 
 def _project_root() -> Path:
-    return Path(__file__).resolve().parents[2]
+    return PROJECT_ROOT
 
 
 def _resolve_from_project(path: str | Path) -> Path:
@@ -139,6 +163,198 @@ def _extract_vrsbench_task(item: dict) -> str:
     return task
 
 
+class ProportionalDistributedSampler(Sampler[int]):
+    """按每个 rank 的 micro-batch 比例切分数据，并按桶做“全局 batch=32”级别采样。"""
+
+    def __init__(
+        self,
+        *,
+        dataset_size: int,
+        local_batch_sizes: list[int],
+        rank: int,
+        seed: int,
+        grad_accum: int,
+        sample_bucket_keys: list[tuple[int, int, int, int, int]],
+    ) -> None:
+        self.dataset_size = int(dataset_size)
+        self.local_batch_sizes = [int(x) for x in local_batch_sizes]
+        self.rank = int(rank)
+        self.seed = int(seed)
+        self.grad_accum = int(grad_accum)
+        self.epoch = 0
+
+        if self.dataset_size <= 0:
+            raise ValueError(f"Invalid dataset_size={self.dataset_size}.")
+        if self.rank < 0 or self.rank >= len(self.local_batch_sizes):
+            raise ValueError(f"Invalid rank={self.rank} for local_batch_sizes={self.local_batch_sizes}.")
+        if self.grad_accum <= 0:
+            raise ValueError(f"Invalid grad_accum={self.grad_accum}.")
+        if len(sample_bucket_keys) != self.dataset_size:
+            raise ValueError(
+                "sample_bucket_keys length mismatch: "
+                f"expect={self.dataset_size}, got={len(sample_bucket_keys)}"
+            )
+
+        self.global_micro_batch = int(sum(self.local_batch_sizes))
+        if self.global_micro_batch <= 0:
+            raise ValueError(f"Invalid global_micro_batch={self.global_micro_batch}.")
+
+        self.global_batch = int(self.global_micro_batch * self.grad_accum)
+        self.local_batch_size = int(self.local_batch_sizes[self.rank])
+        self.local_samples_per_update = int(self.local_batch_size * self.grad_accum)
+        self.rank_offset = int(sum(self.local_batch_sizes[: self.rank]))
+
+        bucket_to_indices: dict[tuple[int, int, int, int, int], list[int]] = {}
+        for idx, key in enumerate(sample_bucket_keys):
+            bucket_key = tuple(int(x) for x in key)
+            bucket_to_indices.setdefault(bucket_key, []).append(int(idx))
+        if not bucket_to_indices:
+            raise RuntimeError("No bucket keys found for sampler.")
+        self.bucket_to_indices = {key: tuple(indices) for key, indices in bucket_to_indices.items()}
+        self.bucket_keys = sorted(self.bucket_to_indices.keys())
+
+        self.bucket_sizes = {key: len(indices) for key, indices in self.bucket_to_indices.items()}
+        self.bucket_used = {
+            key: (len(indices) // self.global_batch) * self.global_batch
+            for key, indices in self.bucket_to_indices.items()
+        }
+        self.bucket_dropped = {key: int(self.bucket_sizes[key] - self.bucket_used[key]) for key in self.bucket_keys}
+
+        self.steps_per_epoch = int(sum(self.bucket_used[key] for key in self.bucket_keys) // self.global_batch)
+        if self.steps_per_epoch <= 0:
+            raise RuntimeError(
+                "Dataset too small after per-bucket drop for one optimizer step. "
+                f"dataset_size={self.dataset_size}, global_batch={self.global_batch}."
+            )
+
+        self.total_used_samples = int(self.steps_per_epoch * self.global_batch)
+        self.total_dropped_samples = int(self.dataset_size - self.total_used_samples)
+        self.local_num_samples = int(self.steps_per_epoch * self.local_samples_per_update)
+
+    def __len__(self) -> int:
+        return int(self.local_num_samples)
+
+    def set_epoch(self, epoch: int) -> None:
+        self.epoch = int(epoch)
+
+    def __iter__(self):
+        generator = torch.Generator()
+        generator.manual_seed(int(self.seed) + int(self.epoch))
+
+        global_update_groups: list[list[int]] = []
+        for key in self.bucket_keys:
+            indices = self.bucket_to_indices[key]
+            used = int(self.bucket_used[key])
+            if used <= 0:
+                continue
+            order = torch.randperm(len(indices), generator=generator).tolist()
+            shuffled = [int(indices[i]) for i in order]
+            for start in range(0, used, self.global_batch):
+                global_update_groups.append(shuffled[start : start + self.global_batch])
+
+        if len(global_update_groups) != int(self.steps_per_epoch):
+            raise RuntimeError(
+                f"Update group count mismatch: expect={self.steps_per_epoch}, got={len(global_update_groups)}"
+            )
+
+        if len(global_update_groups) > 1:
+            order = torch.randperm(len(global_update_groups), generator=generator).tolist()
+            global_update_groups = [global_update_groups[i] for i in order]
+
+        local_indices: list[int] = []
+        for update_group in global_update_groups:
+            if len(update_group) != int(self.global_batch):
+                raise RuntimeError(
+                    f"Global batch size mismatch: expect={self.global_batch}, got={len(update_group)}"
+                )
+
+            for micro_idx in range(int(self.grad_accum)):
+                start = int(micro_idx * self.global_micro_batch)
+                end = int(start + self.global_micro_batch)
+                micro_group = update_group[start:end]
+                if len(micro_group) != int(self.global_micro_batch):
+                    raise RuntimeError(
+                        f"Micro group size mismatch: expect={self.global_micro_batch}, got={len(micro_group)}"
+                    )
+                local_start = int(self.rank_offset)
+                local_end = int(local_start + self.local_batch_size)
+                local_chunk = micro_group[local_start:local_end]
+                if len(local_chunk) != int(self.local_batch_size):
+                    raise RuntimeError(
+                        f"Local chunk size mismatch: expect={self.local_batch_size}, got={len(local_chunk)}"
+                    )
+                local_indices.extend(int(x) for x in local_chunk)
+
+        if len(local_indices) != int(self.local_num_samples):
+            raise RuntimeError(
+                f"Local sampled size mismatch: expect={self.local_num_samples}, got={len(local_indices)}"
+            )
+        return iter(local_indices)
+
+
+def _move_batch_to_device(batch: dict[str, object], *, device: torch.device) -> dict[str, object]:
+    out: dict[str, object] = {}
+    for key, value in batch.items():
+        if isinstance(value, torch.Tensor):
+            out[key] = value.to(device=device, non_blocking=True)
+        else:
+            out[key] = value
+    return out
+
+
+def _enable_visual_trainables(target_model: torch.nn.Module) -> None:
+    visual = target_model.model.visual
+    for parameter in visual.merger.parameters():
+        parameter.requires_grad = True
+    if getattr(visual, "deepstack_merger_list", None) is not None:
+        for parameter in visual.deepstack_merger_list.parameters():
+            parameter.requires_grad = True
+    if getattr(visual, "input_proj_dino", None) is not None:
+        for parameter in visual.input_proj_dino.parameters():
+            parameter.requires_grad = True
+    if getattr(visual, "sva_main", None) is not None:
+        for parameter in visual.sva_main.parameters():
+            parameter.requires_grad = True
+    if getattr(visual, "sva_deepstack_list", None) is not None:
+        for parameter in visual.sva_deepstack_list.parameters():
+            parameter.requires_grad = True
+
+
+def _assert_expected_trainables_layout(model) -> None:
+    bad: list[str] = []
+    has_visual = False
+    has_lora = False
+    for name, parameter in model.named_parameters():
+        if not bool(getattr(parameter, "requires_grad", False)):
+            continue
+        scoped = f".{name}."
+        is_visual = (
+            ".visual.merger." in scoped
+            or ".visual.deepstack_merger_list." in scoped
+            or ".visual.input_proj_dino." in scoped
+            or ".visual.sva_main." in scoped
+            or ".visual.sva_deepstack_list." in scoped
+        )
+        is_lora = "lora_" in name
+        if is_visual:
+            has_visual = True
+        if is_lora:
+            has_lora = True
+        if not (is_visual or is_lora):
+            bad.append(name)
+            if len(bad) >= 8:
+                break
+    if bad:
+        show = ", ".join(bad)
+        raise RuntimeError(
+            "Found unexpected trainable params outside merger/deepstack/input_proj_dino/sva + LoRA: " + show
+        )
+    if not has_visual:
+        raise RuntimeError("No trainable visual merger params found.")
+    if not has_lora:
+        raise RuntimeError("No trainable LoRA params found.")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="VRSBench multi-task SFT: train SVA deepstack cross-attention visual merger + LLM LoRA (Qwen3-VL native + DINOv3, sample-average loss)."
@@ -206,165 +422,6 @@ def main() -> None:
             "--smart-resize-max-pixels must be >= --smart-resize-min-pixels, "
             f"got {args.smart_resize_max_pixels} < {args.smart_resize_min_pixels}"
         )
-
-    import sys
-
-    sys.path.insert(0, str(_project_root() / "src"))
-
-    import torch
-    from accelerate import Accelerator
-    from peft import LoraConfig, PeftModel, get_peft_model  # type: ignore
-    from torch.utils.data import DataLoader, Sampler, Subset
-    from transformers import AutoProcessor, Qwen3VLForConditionalGeneration, get_scheduler
-
-    from ftqwen3.shared.device import require_cuda
-    from ftqwen3.shared.qwen_dinov3 import torch_dtype_from_str
-    from ftqwen3.sva_deepstack_ca.sva_deepstack_ca_sft import QwenNativeSVAFixedGridCollator, VrsbenchMultiTaskSVAFixedGridDataset
-    from ftqwen3.sva_deepstack_ca.sva_deepstack_ca_visual_adapter import (
-        assert_sva_deepstack_ca_runtime_matches_merger,
-        attach_sva_deepstack_ca_visual_adapter,
-        load_sva_deepstack_ca_merger_safetensors,
-        save_sva_deepstack_ca_merger_safetensors,
-    )
-    from ftqwen3.shared.training_losses import causal_lm_sample_average_loss
-
-    class ProportionalDistributedSampler(Sampler[int]):
-        """按每个 rank 的 micro-batch 比例切分数据，并按桶做“全局 batch=32”级别采样。"""
-
-        def __init__(
-            self,
-            *,
-            dataset_size: int,
-            local_batch_sizes: list[int],
-            rank: int,
-            seed: int,
-            grad_accum: int,
-            sample_bucket_keys: list[tuple[int, int, int, int, int]],
-        ) -> None:
-            self.dataset_size = int(dataset_size)
-            self.local_batch_sizes = [int(x) for x in local_batch_sizes]
-            self.rank = int(rank)
-            self.seed = int(seed)
-            self.grad_accum = int(grad_accum)
-            self.epoch = 0
-
-            if self.dataset_size <= 0:
-                raise ValueError(f"Invalid dataset_size={self.dataset_size}.")
-            if self.rank < 0 or self.rank >= len(self.local_batch_sizes):
-                raise ValueError(f"Invalid rank={self.rank} for local_batch_sizes={self.local_batch_sizes}.")
-            if self.grad_accum <= 0:
-                raise ValueError(f"Invalid grad_accum={self.grad_accum}.")
-            if len(sample_bucket_keys) != self.dataset_size:
-                raise ValueError(
-                    "sample_bucket_keys length mismatch: "
-                    f"expect={self.dataset_size}, got={len(sample_bucket_keys)}"
-                )
-
-            self.global_micro_batch = int(sum(self.local_batch_sizes))
-            if self.global_micro_batch <= 0:
-                raise ValueError(f"Invalid global_micro_batch={self.global_micro_batch}.")
-
-            # 以一次参数更新对应的全局 batch 作为分桶阈值（例如 32）。
-            self.global_batch = int(self.global_micro_batch * self.grad_accum)
-            self.local_batch_size = int(self.local_batch_sizes[self.rank])
-            self.local_samples_per_update = int(self.local_batch_size * self.grad_accum)
-            self.rank_offset = int(sum(self.local_batch_sizes[: self.rank]))
-
-            bucket_to_indices: dict[tuple[int, int, int, int, int], list[int]] = {}
-            for idx, key in enumerate(sample_bucket_keys):
-                k = tuple(int(x) for x in key)
-                bucket_to_indices.setdefault(k, []).append(int(idx))
-            if not bucket_to_indices:
-                raise RuntimeError("No bucket keys found for sampler.")
-            self.bucket_to_indices = {k: tuple(v) for k, v in bucket_to_indices.items()}
-            self.bucket_keys = sorted(self.bucket_to_indices.keys())
-
-            self.bucket_sizes = {k: len(v) for k, v in self.bucket_to_indices.items()}
-            self.bucket_used = {k: (len(v) // self.global_batch) * self.global_batch for k, v in self.bucket_to_indices.items()}
-            self.bucket_dropped = {k: int(self.bucket_sizes[k] - self.bucket_used[k]) for k in self.bucket_keys}
-
-            self.steps_per_epoch = int(sum(self.bucket_used[k] for k in self.bucket_keys) // self.global_batch)
-            if self.steps_per_epoch <= 0:
-                raise RuntimeError(
-                    "Dataset too small after per-bucket drop for one optimizer step. "
-                    f"dataset_size={self.dataset_size}, global_batch={self.global_batch}."
-                )
-
-            self.total_used_samples = int(self.steps_per_epoch * self.global_batch)
-            self.total_dropped_samples = int(self.dataset_size - self.total_used_samples)
-            self.local_num_samples = int(self.steps_per_epoch * self.local_samples_per_update)
-
-        def __len__(self) -> int:
-            return int(self.local_num_samples)
-
-        def set_epoch(self, epoch: int) -> None:
-            self.epoch = int(epoch)
-
-        def __iter__(self):
-            g = torch.Generator()
-            g.manual_seed(int(self.seed) + int(self.epoch))
-
-            # 先在每个桶内随机打乱，再按“全局 batch”切块；不足一个全局 batch 的尾部直接丢弃。
-            global_update_groups: list[list[int]] = []
-            for key in self.bucket_keys:
-                src = self.bucket_to_indices[key]
-                used = int(self.bucket_used[key])
-                if used <= 0:
-                    continue
-                order = torch.randperm(len(src), generator=g).tolist()
-                shuffled = [int(src[i]) for i in order]
-                for start in range(0, used, self.global_batch):
-                    global_update_groups.append(shuffled[start : start + self.global_batch])
-
-            if len(global_update_groups) != int(self.steps_per_epoch):
-                raise RuntimeError(
-                    f"Update group count mismatch: expect={self.steps_per_epoch}, got={len(global_update_groups)}"
-                )
-
-            # 打乱“更新步”的顺序，让不同桶在一个 epoch 内交错出现。
-            if len(global_update_groups) > 1:
-                perm = torch.randperm(len(global_update_groups), generator=g).tolist()
-                global_update_groups = [global_update_groups[i] for i in perm]
-
-            local_indices: list[int] = []
-            for update_group in global_update_groups:
-                if len(update_group) != int(self.global_batch):
-                    raise RuntimeError(
-                        f"Global batch size mismatch: expect={self.global_batch}, got={len(update_group)}"
-                    )
-
-                # 一个 update_group 拆成 grad_accum 个 micro-step，保证训练循环不需要改。
-                for micro_idx in range(int(self.grad_accum)):
-                    m_start = int(micro_idx * self.global_micro_batch)
-                    m_end = int(m_start + self.global_micro_batch)
-                    micro_group = update_group[m_start:m_end]
-                    if len(micro_group) != int(self.global_micro_batch):
-                        raise RuntimeError(
-                            f"Micro group size mismatch: expect={self.global_micro_batch}, got={len(micro_group)}"
-                        )
-                    start = int(self.rank_offset)
-                    end = int(start + self.local_batch_size)
-                    local_chunk = micro_group[start:end]
-                    if len(local_chunk) != int(self.local_batch_size):
-                        raise RuntimeError(
-                            f"Local chunk size mismatch: expect={self.local_batch_size}, got={len(local_chunk)}"
-                        )
-                    local_indices.extend(int(x) for x in local_chunk)
-
-            if len(local_indices) != int(self.local_num_samples):
-                raise RuntimeError(
-                    f"Local sampled size mismatch: expect={self.local_num_samples}, got={len(local_indices)}"
-                )
-            return iter(local_indices)
-
-    def _move_batch_to_device(batch: dict[str, object], *, device: torch.device) -> dict[str, object]:
-        out: dict[str, object] = {}
-        for k, v in batch.items():
-            if isinstance(v, torch.Tensor):
-                out[k] = v.to(device=device, non_blocking=True)
-            else:
-                out[k] = v
-        return out
 
     torch.manual_seed(int(args.seed))
 
@@ -487,57 +544,6 @@ def main() -> None:
             merger_ckpt=init_merger_path,
             visual=base_model.model.visual,
         )
-
-    def _enable_visual_trainables(target_model: torch.nn.Module) -> None:
-        visual = target_model.model.visual
-        for p in visual.merger.parameters():
-            p.requires_grad = True
-        if getattr(visual, "deepstack_merger_list", None) is not None:
-            for p in visual.deepstack_merger_list.parameters():
-                p.requires_grad = True
-        if getattr(visual, "input_proj_dino", None) is not None:
-            for p in visual.input_proj_dino.parameters():
-                p.requires_grad = True
-        if getattr(visual, "sva_main", None) is not None:
-            for p in visual.sva_main.parameters():
-                p.requires_grad = True
-        if getattr(visual, "sva_deepstack_list", None) is not None:
-            for p in visual.sva_deepstack_list.parameters():
-                p.requires_grad = True
-
-    def _assert_expected_trainables_layout(target_model) -> None:
-        bad: list[str] = []
-        has_visual = False
-        has_lora = False
-        for name, p in target_model.named_parameters():
-            if not bool(getattr(p, "requires_grad", False)):
-                continue
-            scoped = f".{name}."
-            is_visual = (
-                ".visual.merger." in scoped
-                or ".visual.deepstack_merger_list." in scoped
-                or ".visual.input_proj_dino." in scoped
-                or ".visual.sva_main." in scoped
-                or ".visual.sva_deepstack_list." in scoped
-            )
-            is_lora = "lora_" in name
-            if is_visual:
-                has_visual = True
-            if is_lora:
-                has_lora = True
-            if not (is_visual or is_lora):
-                bad.append(name)
-                if len(bad) >= 8:
-                    break
-        if bad:
-            show = ", ".join(bad)
-            raise RuntimeError(
-                "Found unexpected trainable params outside merger/deepstack/input_proj_dino/sva + LoRA: " + show
-            )
-        if not has_visual:
-            raise RuntimeError("No trainable visual merger params found.")
-        if not has_lora:
-            raise RuntimeError("No trainable LoRA params found.")
 
     # 先冻结所有参数，再启用 merger 与 LoRA 参数
     for p in base_model.parameters():
@@ -734,8 +740,6 @@ def main() -> None:
                 f"resume_step={resume_step}, steps_per_epoch={steps_per_epoch}."
             )
         start_epoch = int(resume_step // steps_per_epoch)
-        import warnings
-
         if not scheduler_state_loaded:
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")

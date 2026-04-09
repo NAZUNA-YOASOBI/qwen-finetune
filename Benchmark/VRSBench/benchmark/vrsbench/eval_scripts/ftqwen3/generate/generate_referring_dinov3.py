@@ -183,7 +183,7 @@ def main() -> None:
 
     from ftqwen3.shared.device import assert_model_on_cuda, require_cuda
     from ftqwen3.dinov3_merger.dinov3_adapter import DinoV3AdapterConfig, DinoV3VisualAdapter
-    from ftqwen3.shared.jsonl import append_jsonl, read_jsonl
+    from ftqwen3.shared.data_io import append_jsonl, read_jsonl
     from ftqwen3.shared.qwen_dinov3 import (
         assert_dino_runtime_matches_merger,
         build_generate_kwargs,
