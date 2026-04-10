@@ -93,6 +93,72 @@ def _read_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def preallocate_cuda_cache(*, device: torch.device, keep_free_gb: float | None) -> dict[str, int | float | bool | None]:
+    if keep_free_gb is None:
+        return {
+            "enabled": False,
+            "keep_free_gb": None,
+            "free_before_bytes": 0,
+            "reserved_bytes": 0,
+            "free_after_bytes": 0,
+        }
+
+    if str(getattr(device, "type", "")) != "cuda":
+        return {
+            "enabled": False,
+            "keep_free_gb": float(keep_free_gb),
+            "free_before_bytes": 0,
+            "reserved_bytes": 0,
+            "free_after_bytes": 0,
+        }
+
+    keep_free_bytes = max(0, int(float(keep_free_gb) * (1024**3)))
+    free_before_bytes, _total_bytes = torch.cuda.mem_get_info(device=device)
+    target_reserve_bytes = max(0, int(free_before_bytes) - int(keep_free_bytes))
+    if target_reserve_bytes <= 0:
+        free_after_bytes, _ = torch.cuda.mem_get_info(device=device)
+        return {
+            "enabled": False,
+            "keep_free_gb": float(keep_free_gb),
+            "free_before_bytes": int(free_before_bytes),
+            "reserved_bytes": 0,
+            "free_after_bytes": int(free_after_bytes),
+        }
+
+    blocks: list[torch.Tensor] = []
+    reserved_bytes = 0
+    remaining_bytes = int(target_reserve_bytes)
+    chunk_bytes = 512 * 1024 * 1024
+    min_chunk_bytes = 16 * 1024 * 1024
+
+    while remaining_bytes >= min_chunk_bytes:
+        next_bytes = min(int(chunk_bytes), int(remaining_bytes))
+        allocated = False
+        while next_bytes >= min_chunk_bytes:
+            try:
+                blocks.append(torch.empty(int(next_bytes), dtype=torch.uint8, device=device))
+                reserved_bytes += int(next_bytes)
+                remaining_bytes -= int(next_bytes)
+                allocated = True
+                break
+            except torch.OutOfMemoryError:
+                next_bytes = int(next_bytes // 2)
+                next_bytes = int((next_bytes // min_chunk_bytes) * min_chunk_bytes)
+        if not allocated:
+            break
+
+    del blocks
+
+    free_after_bytes, _ = torch.cuda.mem_get_info(device=device)
+    return {
+        "enabled": bool(reserved_bytes > 0),
+        "keep_free_gb": float(keep_free_gb),
+        "free_before_bytes": int(free_before_bytes),
+        "reserved_bytes": int(reserved_bytes),
+        "free_after_bytes": int(free_after_bytes),
+    }
+
+
 def _parse_int_list(raw: str, *, sep: str) -> list[int]:
     values = [x.strip() for x in str(raw).split(sep) if x.strip()]
     if not values:
@@ -400,6 +466,12 @@ def main() -> None:
     parser.add_argument("--max-grad-norm", type=float, default=1.0)
     parser.add_argument("--mixed-precision", type=str, default="bf16", choices=["no", "fp16", "bf16"])
     parser.add_argument("--gradient-checkpointing", action="store_true")
+    parser.add_argument(
+        "--cuda-reserve-free-gb",
+        type=float,
+        default=None,
+        help="Pre-allocate CUDA cache after model setup and keep this much free memory per GPU. Omit to disable.",
+    )
 
     parser.add_argument("--lora-r", type=int, default=64)
     parser.add_argument("--lora-alpha", type=int, default=64)
@@ -422,6 +494,8 @@ def main() -> None:
             "--smart-resize-max-pixels must be >= --smart-resize-min-pixels, "
             f"got {args.smart_resize_max_pixels} < {args.smart_resize_min_pixels}"
         )
+    if args.cuda_reserve_free_gb is not None and float(args.cuda_reserve_free_gb) < 0:
+        raise ValueError(f"--cuda-reserve-free-gb must be >= 0, got {args.cuda_reserve_free_gb}")
 
     torch.manual_seed(int(args.seed))
 
@@ -707,6 +781,21 @@ def main() -> None:
     model, optimizer = accelerator.prepare(model, optimizer)
     accelerator.unwrap_model(model, keep_fp32_wrapper=False)
 
+    prealloc_info = preallocate_cuda_cache(
+        device=device,
+        keep_free_gb=None if args.cuda_reserve_free_gb is None else float(args.cuda_reserve_free_gb),
+    )
+    prealloc_tensor = torch.tensor(
+        [
+            int(prealloc_info["free_before_bytes"]),
+            int(prealloc_info["reserved_bytes"]),
+            int(prealloc_info["free_after_bytes"]),
+        ],
+        device=device,
+        dtype=torch.long,
+    ).unsqueeze(0)
+    gathered_prealloc = accelerator.gather(prealloc_tensor).detach().cpu().tolist()
+
     total_epochs = int(math.ceil(float(args.epochs)))
     total_steps = int(math.ceil(float(args.epochs) * steps_per_epoch))
     if int(args.max_steps) > 0:
@@ -806,6 +895,9 @@ def main() -> None:
                         "warmup_ratio": float(args.warmup_ratio),
                         "mixed_precision": str(args.mixed_precision),
                         "gradient_checkpointing": bool(args.gradient_checkpointing),
+                        "cuda_reserve_free_gb": None
+                        if args.cuda_reserve_free_gb is None
+                        else float(args.cuda_reserve_free_gb),
                         "num_workers": int(args.num_workers),
                         "save_strategy": "epoch",
                     },
@@ -850,6 +942,18 @@ def main() -> None:
             f"steps/epoch={steps_per_epoch} total_steps={total_steps} start_epoch={start_epoch} resume_step={resume_step} save=epoch",
             flush=True,
         )
+        if args.cuda_reserve_free_gb is None:
+            print("[INFO] cuda_prealloc disabled", flush=True)
+        else:
+            for prealloc_rank, values in enumerate(gathered_prealloc):
+                free_before_bytes, reserved_bytes, free_after_bytes = [int(x) for x in values]
+                print(
+                    f"[INFO] cuda_prealloc rank={prealloc_rank} keep_free_gb={float(args.cuda_reserve_free_gb):.2f} "
+                    f"free_before_gb={free_before_bytes / (1024**3):.2f} "
+                    f"reserved_gb={reserved_bytes / (1024**3):.2f} "
+                    f"free_after_gb={free_after_bytes / (1024**3):.2f}",
+                    flush=True,
+                )
         for task_name in task_order:
             ts = task_stats[task_name]
             task_items = int(ts["items"])
@@ -943,7 +1047,6 @@ def main() -> None:
                 accum = 0
                 running_global_loss_sum = 0.0
 
-            torch.cuda.empty_cache()
             if global_step >= total_steps:
                 break
 
