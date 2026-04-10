@@ -3,6 +3,8 @@ from __future__ import annotations
 import torch
 import torch.nn.functional as F
 
+TOKEN_LOSS_CHUNK_SIZE = 32
+
 
 def causal_lm_per_sample_loss(
     logits: torch.Tensor,
@@ -27,30 +29,38 @@ def causal_lm_per_sample_loss(
             f"logits={tuple(logits.shape)}, labels={tuple(labels.shape)}"
         )
 
-    logits = logits.float()
     shift_labels = F.pad(labels, (0, 1), value=ignore_index)[..., 1:].contiguous()
-    flat_logits = logits.reshape(-1, logits.shape[-1])
-    flat_labels = shift_labels.reshape(-1).to(device=flat_logits.device)
-
-    token_loss = F.cross_entropy(
-        flat_logits,
-        flat_labels,
-        ignore_index=ignore_index,
-        reduction="none",
-    ).view_as(shift_labels)
-
     valid_mask = shift_labels.ne(ignore_index)
     valid_count = valid_mask.sum(dim=-1)
-    if bool((valid_count <= 0).any().item()):
-        bad_positions = torch.nonzero(valid_count <= 0, as_tuple=False).view(-1).tolist()
+    invalid_positions = torch.nonzero(valid_count <= 0, as_tuple=False).view(-1)
+    if invalid_positions.numel() > 0:
+        bad_positions = [int(x) for x in invalid_positions.detach().cpu().tolist()]
         raise RuntimeError(
             "Found samples without supervised tokens while computing sample-average loss: "
             f"batch_positions={bad_positions}"
         )
 
-    valid_mask_f = valid_mask.to(dtype=token_loss.dtype)
-    sample_loss = (token_loss * valid_mask_f).sum(dim=-1) / valid_count.to(dtype=token_loss.dtype)
-    return sample_loss
+    sample_losses: list[torch.Tensor] = []
+    for sample_index in range(int(logits.shape[0])):
+        sample_valid_mask = valid_mask[sample_index]
+        valid_positions = torch.nonzero(sample_valid_mask, as_tuple=False).view(-1)
+        sample_loss_sum = logits.new_zeros((), dtype=torch.float32)
+
+        for start in range(0, int(valid_positions.numel()), int(TOKEN_LOSS_CHUNK_SIZE)):
+            end = int(start + int(TOKEN_LOSS_CHUNK_SIZE))
+            chunk_positions = valid_positions[start:end]
+            chunk_logits = logits[sample_index, chunk_positions].float()
+            chunk_labels = shift_labels[sample_index, chunk_positions].to(device=chunk_logits.device)
+            sample_loss_sum = sample_loss_sum + F.cross_entropy(
+                chunk_logits,
+                chunk_labels,
+                reduction="sum",
+            )
+
+        sample_loss = sample_loss_sum / float(valid_positions.numel())
+        sample_losses.append(sample_loss)
+
+    return torch.stack(sample_losses, dim=0)
 
 
 def causal_lm_sample_average_loss(

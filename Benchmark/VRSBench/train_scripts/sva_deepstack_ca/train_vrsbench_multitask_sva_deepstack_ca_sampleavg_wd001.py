@@ -705,6 +705,7 @@ def main() -> None:
 
     # loader 不交给 accelerate 自动切分，避免在 1:3 分片后再次被二次切分。
     model, optimizer = accelerator.prepare(model, optimizer)
+    accelerator.unwrap_model(model, keep_fp32_wrapper=False)
 
     total_epochs = int(math.ceil(float(args.epochs)))
     total_steps = int(math.ceil(float(args.epochs) * steps_per_epoch))
@@ -897,7 +898,8 @@ def main() -> None:
 
                 labels = batch["labels"]
                 forward_batch = {k: v for k, v in batch.items() if k != "labels"}
-                outputs = model(**forward_batch)
+                with accelerator.autocast():
+                    outputs = model(**forward_batch)
                 # 这里显式按“每条样本先对自身有效 token 求平均，再对样本求平均”来算 loss。
                 local_sample_mean_loss = causal_lm_sample_average_loss(outputs.logits, labels)
                 global_loss_sum_t = accelerator.reduce(
@@ -941,6 +943,7 @@ def main() -> None:
                 accum = 0
                 running_global_loss_sum = 0.0
 
+            torch.cuda.empty_cache()
             if global_step >= total_steps:
                 break
 
