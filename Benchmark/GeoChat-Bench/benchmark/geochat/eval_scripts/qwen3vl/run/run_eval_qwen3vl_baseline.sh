@@ -562,8 +562,7 @@ run_region_caption_fix() {
     --model-dir "${MODEL_DIR}" \
     --device-map "${DEVICE_MAP}" \
     --dtype "${DTYPE}" \
-    --max-new-tokens "${MAX_NEW_TOKENS}" \
-    --max-sentences 2 > "${fix_log}" 2>&1
+    --max-new-tokens "${MAX_NEW_TOKENS}" > "${fix_log}" 2>&1
 }
 
 run_region_caption() {

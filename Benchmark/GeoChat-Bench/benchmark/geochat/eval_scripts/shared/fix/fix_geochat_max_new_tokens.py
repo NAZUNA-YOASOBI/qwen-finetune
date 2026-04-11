@@ -29,19 +29,6 @@ def _token_len(tokenizer: Any, text: str) -> int:
     return len(tokenizer(str(text), add_special_tokens=False).input_ids)
 
 
-SENTENCE_SPLIT_PATTERN = re.compile(r"(?<=[.!?。！？])(?:\s+|(?=\S))")
-
-
-def _trim_to_max_sentences(text: str, *, max_sentences: int) -> str:
-    raw = re.sub(r"\s+", " ", str(text or "").strip())
-    if not raw or int(max_sentences) <= 0:
-        return raw
-    parts = [part.strip() for part in SENTENCE_SPLIT_PATTERN.split(raw) if part.strip()]
-    if len(parts) <= int(max_sentences):
-        return raw
-    return " ".join(parts[: int(max_sentences)]).strip()
-
-
 def _normalize_meta_value(value: Any) -> str:
     if isinstance(value, bool):
         return "true" if value else "false"
@@ -168,7 +155,6 @@ def main() -> None:
     parser.add_argument("--dtype", type=str, default="auto", choices=["auto", "fp16", "bf16", "fp32"])
     parser.add_argument("--max-new-tokens", type=int, default=256)
     parser.add_argument("--max-retries", type=int, default=10)
-    parser.add_argument("--max-sentences", type=int, default=2)
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
@@ -251,7 +237,7 @@ def main() -> None:
 
         for attempt in range(1, max_retries + 1):
             pred = runner.generate_batch(image_paths=[image_path], prompts=[prompt])[0]
-            last_pred = _trim_to_max_sentences(str(pred.text).strip(), max_sentences=int(args.max_sentences))
+            last_pred = re.sub(r"\s+", " ", str(pred.text).strip())
             last_generated_token_count = int(pred.generated_token_count)
             last_ended_by_eos = bool(pred.ended_by_eos)
             last_generated_token_id = pred.last_generated_token_id

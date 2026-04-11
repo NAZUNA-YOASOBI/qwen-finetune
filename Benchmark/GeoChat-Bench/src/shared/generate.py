@@ -35,9 +35,6 @@ REFER_JSON_STYLE_HINT = (
     "If uncertain, return an empty bbox array or an empty JSON array."
 )
 
-SENTENCE_SPLIT_PATTERN = re.compile(r"(?<=[.!?。！？])(?:\s+|(?=\S))")
-
-
 def _scene_prompt(row: dict[str, Any]) -> str:
     return str(row["text"])
 
@@ -75,23 +72,6 @@ def _resolve_prompt_version(*, task: str, row: dict[str, Any], default_prompt_ve
     if str(task) != "referring":
         return str(default_prompt_version)
     return "bbox2d1000_qwen_native_style_auto_v3"
-
-
-def _trim_to_max_sentences(text: str, *, max_sentences: int) -> str:
-    raw = re.sub(r"\s+", " ", str(text or "").strip())
-    if not raw or int(max_sentences) <= 0:
-        return raw
-    parts = [part.strip() for part in SENTENCE_SPLIT_PATTERN.split(raw) if part.strip()]
-    if len(parts) <= int(max_sentences):
-        return raw
-    return " ".join(parts[: int(max_sentences)]).strip()
-
-
-def _postprocess_answer(*, task: str, text: str) -> str:
-    raw = re.sub(r"\s+", " ", str(text or "").strip())
-    if str(task) == "region_caption":
-        return _trim_to_max_sentences(raw, max_sentences=2)
-    return raw
 
 
 TASK_SPECS: dict[str, TaskSpec] = {
@@ -330,8 +310,7 @@ def run_generation(*, task: str, model_family: str, argv: list[str] | None = Non
             continue
 
         for row, image_path, prompt, pred in zip(chunk, image_paths, prompts, preds):
-            answer_raw = re.sub(r"\s+", " ", str(pred.text).strip())
-            answer = _postprocess_answer(task=str(task), text=answer_raw)
+            answer = re.sub(r"\s+", " ", str(pred.text).strip())
             payload = {
                 "question_id": row.get("question_id"),
                 "image_id": row.get("image_id", row.get("image", "")),
@@ -367,8 +346,6 @@ def run_generation(*, task: str, model_family: str, argv: list[str] | None = Non
                     default_prompt_version=str(spec.prompt_version),
                 ),
             }
-            if answer_raw and answer_raw != str(answer):
-                payload["answer_raw"] = str(answer_raw)
             for key in ("text", "question", "ground_truth", "category", "dataset", "type", "obj_ids", "size_group"):
                 if key in row:
                     payload[key] = row[key]
