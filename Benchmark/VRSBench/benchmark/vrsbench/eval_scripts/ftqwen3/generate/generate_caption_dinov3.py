@@ -107,7 +107,7 @@ def main() -> None:
     parser.add_argument("--data", type=str, default="benchmark/vrsbench/data/vrsbench_images_test.jsonl")
     parser.add_argument("--output", type=str, required=True, help="Where to write predictions jsonl (append/resume).")
     parser.add_argument("--prompt", type=str, default=DEFAULT_PROMPT)
-    parser.add_argument("--image-size", type=int, default=256)
+    parser.add_argument("--image-size", type=int, default=512)
     parser.add_argument("--smart-resize-min-pixels", type=int, default=None)
     parser.add_argument("--smart-resize-max-pixels", type=int, default=None)
     parser.add_argument("--max-new-tokens", type=int, default=256)
@@ -121,7 +121,7 @@ def main() -> None:
     parser.add_argument("--no-repeat-ngram-size", type=int, default=None)
     parser.add_argument("--repetition-penalty", type=float, default=None)
     parser.add_argument("--batch-size", type=int, default=1, help="Batch size for generation.")
-    parser.add_argument("--device-map", type=str, default="auto")
+    parser.add_argument("--device-map", type=str, default="cuda:0")
     parser.add_argument("--dtype", type=str, default="bf16", choices=["auto", "fp16", "bf16", "fp32"])
     parser.add_argument("--max-images", type=int, default=0)
     parser.add_argument("--shard-world-size", type=int, default=1, help="Total shard workers for inference split.")
@@ -221,7 +221,6 @@ def main() -> None:
         try:
             preds = captioner.caption_batch(image_paths=image_paths, prompt=str(args.prompt))
         except torch.cuda.OutOfMemoryError:
-            torch.cuda.empty_cache()
             gc.collect()
             if cur_bs <= 1:
                 raise

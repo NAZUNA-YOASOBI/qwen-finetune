@@ -153,8 +153,8 @@ class RsicdCaptionSFTDataset(Dataset):
         image_size: int,
         patch_size: int,
         merge_size: int,
-        smart_resize_min_pixels: int = 256 * 256,
-        smart_resize_max_pixels: int = 4096 * 4096,
+        smart_resize_min_pixels: int = 224 * 224,
+        smart_resize_max_pixels: int = 512 * 512,
         image_token: str = "<|image_pad|>",
     ) -> None:
         self.rows = rows
@@ -376,8 +376,8 @@ class VrsbenchMultiTaskSFTDataset(Dataset):
         image_size: int,
         patch_size: int,
         merge_size: int,
-        smart_resize_min_pixels: int = 256 * 256,
-        smart_resize_max_pixels: int = 4096 * 4096,
+        smart_resize_min_pixels: int = 224 * 224,
+        smart_resize_max_pixels: int = 512 * 512,
         image_token: str = "<|image_pad|>",
     ) -> None:
         self.items = items
@@ -589,8 +589,8 @@ class VrsbenchMultiTaskQwenNativeSFTDataset(Dataset):
         split: str = "train",
         patch_size: int,
         merge_size: int,
-        smart_resize_min_pixels: int = 256 * 256,
-        smart_resize_max_pixels: int = 4096 * 4096,
+        smart_resize_min_pixels: int = 224 * 224,
+        smart_resize_max_pixels: int = 512 * 512,
         image_token: str = "<|image_pad|>",
     ) -> None:
         self.items = items

@@ -157,11 +157,11 @@ def main() -> None:
 
     parser.add_argument("--qwen-model-dir", type=str, default="models/Qwen3-VL-8B-Instruct")
     parser.add_argument("--dinov3-dir", type=str, default="models/dinov3/dinov3-vitl16-pretrain-sat493m")
-    parser.add_argument("--image-size", type=int, default=256)
+    parser.add_argument("--image-size", type=int, default=512)
     parser.add_argument("--smart-resize-min-pixels", type=int, default=None)
     parser.add_argument("--smart-resize-max-pixels", type=int, default=None)
     parser.add_argument("--dtype", type=str, default="bf16", choices=["auto", "fp16", "bf16", "fp32"])
-    parser.add_argument("--device-map", type=str, default="auto")
+    parser.add_argument("--device-map", type=str, default="cuda:0")
 
     parser.add_argument("--prompt", type=str, default="Describe the image in detail.")
     parser.add_argument("--max-new-tokens", type=int, default=256)
@@ -398,7 +398,6 @@ def main() -> None:
             try:
                 preds = captioner.caption_batch(image_paths=image_paths, prompt=prompt)
             except torch.cuda.OutOfMemoryError:
-                torch.cuda.empty_cache()
                 gc.collect()
                 if cur_bs <= 1:
                     raise

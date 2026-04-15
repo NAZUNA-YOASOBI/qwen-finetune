@@ -107,8 +107,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="VRSBench referring (Qwen3-VL native + DINOv3 deepstack cross-attention SVA + merger/LoRA).")
     parser.add_argument("--qwen-model-dir", "--model-dir", dest="qwen_model_dir", type=str, default="models/Qwen3-VL-8B-Instruct")
     parser.add_argument("--dinov3-dir", type=str, default="models/dinov3/dinov3-vitl16-pretrain-sat493m")
-    parser.add_argument("--smart-resize-min-pixels", type=int, default=256 * 256)
-    parser.add_argument("--smart-resize-max-pixels", type=int, default=4096 * 4096)
+    parser.add_argument("--smart-resize-min-pixels", type=int, default=224 * 224)
+    parser.add_argument("--smart-resize-max-pixels", type=int, default=512 * 512)
     parser.add_argument("--merger-ckpt", type=str, required=True, help="Merger safetensors path.")
     parser.add_argument("--lora-dir", type=str, default="", help="LoRA directory (optional).")
     parser.add_argument("--merge-lora", action="store_true")
@@ -126,7 +126,7 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--no-repeat-ngram-size", type=int, default=None)
     parser.add_argument("--batch-size", type=int, default=1)
-    parser.add_argument("--device-map", type=str, default="auto")
+    parser.add_argument("--device-map", type=str, default="cuda:0")
     parser.add_argument("--dtype", type=str, default="bf16", choices=["auto", "fp16", "bf16", "fp32"])
     parser.add_argument("--max-items", type=int, default=0)
     parser.add_argument("--shard-world-size", type=int, default=1, help="Total shard workers for inference split.")
@@ -221,7 +221,6 @@ def main() -> None:
         try:
             preds = captioner.caption_batch_prompts(image_paths=image_paths, prompts=prompts)
         except torch.cuda.OutOfMemoryError:
-            torch.cuda.empty_cache()
             gc.collect()
             if cur_bs <= 1:
                 raise

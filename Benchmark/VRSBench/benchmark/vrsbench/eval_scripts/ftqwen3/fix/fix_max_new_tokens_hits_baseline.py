@@ -68,8 +68,8 @@ def main() -> None:
     )
     parser.add_argument("--preds", type=str, required=True, help="Predictions jsonl to fix (in-place).")
     parser.add_argument("--model-dir", type=str, default="models/Qwen3-VL-8B-Instruct")
-    parser.add_argument("--device-map", type=str, default="auto")
-    parser.add_argument("--dtype", type=str, default="auto", choices=["auto", "fp16", "bf16", "fp32"])
+    parser.add_argument("--device-map", type=str, default="cuda:0")
+    parser.add_argument("--dtype", type=str, default="cuda:0", choices=["auto", "fp16", "bf16", "fp32"])
 
     parser.add_argument("--prompt", type=str, default="Describe the image in detail in 2 to 4 sentences.")
     parser.add_argument("--max-new-tokens", type=int, default=256)

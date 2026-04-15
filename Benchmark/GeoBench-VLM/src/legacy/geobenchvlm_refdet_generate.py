@@ -239,8 +239,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument('--repetition-penalty', type=float, default=None)
     parser.add_argument('--seed', type=int, default=None)
     parser.add_argument('--batch-size', type=int, default=1)
-    parser.add_argument('--device-map', type=str, default='auto')
-    parser.add_argument('--dtype', type=str, default='auto', choices=['auto', 'fp16', 'bf16', 'fp32'])
+    parser.add_argument('--device-map', type=str, default='cuda:0')
+    parser.add_argument('--dtype', type=str, default='cuda:0', choices=['auto', 'fp16', 'bf16', 'fp32'])
     parser.add_argument('--max-rows', type=int, default=0)
     parser.add_argument('--shard-world-size', type=int, default=1)
     parser.add_argument('--shard-rank', type=int, default=0)
@@ -339,7 +339,6 @@ def run_generation(argv: list[str] | None = None) -> None:
         try:
             predictions = _generate_batch_exact_trim(runner, conversations)
         except torch.cuda.OutOfMemoryError:
-            torch.cuda.empty_cache()
             gc.collect()
             if current_batch_size <= 1:
                 raise

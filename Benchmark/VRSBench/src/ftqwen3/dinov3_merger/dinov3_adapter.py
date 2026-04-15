@@ -34,7 +34,7 @@ def build_postshuffle_index(*, grid_h: int, grid_w: int, merge_size: int) -> tor
 @dataclass(frozen=True)
 class DinoV3AdapterConfig:
     dinov3_dir: Path
-    image_size: int = 256
+    image_size: int = 512
     merge_size: int = 2
     deepstack_visual_indexes: tuple[int, ...] = (5, 11, 17)
     qwen_vision_depth: int | None = None

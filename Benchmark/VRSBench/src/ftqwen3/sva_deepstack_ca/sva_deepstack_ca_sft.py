@@ -33,8 +33,8 @@ class VrsbenchMultiTaskSVAFixedGridDataset(Dataset):
         merge_size: int,
         latent_grid_h: int,
         latent_grid_w: int,
-        smart_resize_min_pixels: int = 256 * 256,
-        smart_resize_max_pixels: int = 4096 * 4096,
+        smart_resize_min_pixels: int = 224 * 224,
+        smart_resize_max_pixels: int = 512 * 512,
         image_token: str = "<|image_pad|>",
     ) -> None:
         self.items = items

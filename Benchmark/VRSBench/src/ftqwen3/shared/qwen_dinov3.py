@@ -13,7 +13,7 @@ import torch
 class DinoV3RunConfig:
     qwen_model_dir: Path
     dinov3_dir: Path
-    image_size: int = 256
+    image_size: int = 512
 
 
 @dataclass(frozen=True)

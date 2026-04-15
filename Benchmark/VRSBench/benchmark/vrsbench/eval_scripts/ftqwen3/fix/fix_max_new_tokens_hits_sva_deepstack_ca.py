@@ -118,12 +118,12 @@ def main() -> None:
     parser.add_argument("--output", type=str, required=True, help="Patch output jsonl (rows to overwrite by imgid).")
     parser.add_argument("--qwen-model-dir", type=str, default="models/Qwen3-VL-8B-Instruct")
     parser.add_argument("--dinov3-dir", type=str, default="models/dinov3/dinov3-vitl16-pretrain-sat493m")
-    parser.add_argument("--smart-resize-min-pixels", type=int, default=256 * 256)
-    parser.add_argument("--smart-resize-max-pixels", type=int, default=4096 * 4096)
+    parser.add_argument("--smart-resize-min-pixels", type=int, default=224 * 224)
+    parser.add_argument("--smart-resize-max-pixels", type=int, default=512 * 512)
     parser.add_argument("--merger-ckpt", type=str, required=True, help="Merger safetensors path.")
     parser.add_argument("--lora-dir", type=str, default="", help="LoRA directory (optional).")
     parser.add_argument("--merge-lora", action="store_true")
-    parser.add_argument("--device-map", type=str, default="auto")
+    parser.add_argument("--device-map", type=str, default="cuda:0")
     parser.add_argument("--dtype", type=str, default="bf16", choices=["auto", "fp16", "bf16", "fp32"])
 
     parser.add_argument("--prompt", type=str, default="Describe the image in detail.")
@@ -354,7 +354,6 @@ def main() -> None:
             try:
                 preds = captioner.caption_batch(image_paths=image_paths, prompt=prompt)
             except torch.cuda.OutOfMemoryError:
-                torch.cuda.empty_cache()
                 gc.collect()
                 if cur_bs <= 1:
                     raise

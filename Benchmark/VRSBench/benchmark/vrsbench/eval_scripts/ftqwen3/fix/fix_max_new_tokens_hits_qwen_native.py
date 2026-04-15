@@ -71,8 +71,8 @@ def main() -> None:
     parser.add_argument("--merger-ckpt", type=str, default="", help="Merger safetensors path (optional).")
     parser.add_argument("--lora-dir", type=str, default="", help="LoRA directory (optional).")
     parser.add_argument("--merge-lora", action="store_true")
-    parser.add_argument("--device-map", type=str, default="auto")
-    parser.add_argument("--dtype", type=str, default="auto", choices=["auto", "fp16", "bf16", "fp32"])
+    parser.add_argument("--device-map", type=str, default="cuda:0")
+    parser.add_argument("--dtype", type=str, default="cuda:0", choices=["auto", "fp16", "bf16", "fp32"])
 
     parser.add_argument("--prompt", type=str, default="Describe the image in detail.")
     parser.add_argument("--max-new-tokens", type=int, default=256)

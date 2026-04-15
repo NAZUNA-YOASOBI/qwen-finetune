@@ -321,8 +321,8 @@ def main() -> None:
     parser.add_argument("--repetition-penalty", type=float, default=None)
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--batch-size", type=int, default=1)
-    parser.add_argument("--device-map", type=str, default="auto")
-    parser.add_argument("--dtype", type=str, default="auto", choices=["auto", "fp16", "bf16", "fp32"])
+    parser.add_argument("--device-map", type=str, default="cuda:0")
+    parser.add_argument("--dtype", type=str, default="cuda:0", choices=["auto", "fp16", "bf16", "fp32"])
     parser.add_argument("--max-items", type=int, default=0)
     parser.add_argument("--grid-rows", type=int, default=6)
     parser.add_argument("--grid-cols", type=int, default=6)
@@ -581,7 +581,6 @@ def main() -> None:
                     }
                 )
         except torch.cuda.OutOfMemoryError:
-            torch.cuda.empty_cache()
             gc.collect()
             if cur_bs <= 1:
                 raise

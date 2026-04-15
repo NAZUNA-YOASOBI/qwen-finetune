@@ -509,7 +509,6 @@ def run_caption_dataset(
                 repetition_penalty=args.repetition_penalty,
             )
         except runner.torch.cuda.OutOfMemoryError:
-            runner.torch.cuda.empty_cache()
             gc.collect()
             if cur_bs <= 1:
                 raise
@@ -613,7 +612,6 @@ def run_vqa_dataset(
                 repetition_penalty=args.repetition_penalty,
             )
         except runner.torch.cuda.OutOfMemoryError:
-            runner.torch.cuda.empty_cache()
             gc.collect()
             if cur_bs <= 1:
                 raise
@@ -713,7 +711,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--caption-max-new-tokens", type=int, default=48)
     parser.add_argument("--vqa-max-new-tokens", type=int, default=8)
     parser.add_argument("--batch-size", type=int, default=1)
-    parser.add_argument("--device-map", type=str, default="auto")
+    parser.add_argument("--device-map", type=str, default="cuda:0")
     parser.add_argument("--dtype", type=str, default="fp16", choices=["auto", "fp16", "bf16", "fp32"])
     parser.add_argument("--do-sample", dest="do_sample", action="store_true", default=None)
     parser.add_argument("--no-sample", dest="do_sample", action="store_false")

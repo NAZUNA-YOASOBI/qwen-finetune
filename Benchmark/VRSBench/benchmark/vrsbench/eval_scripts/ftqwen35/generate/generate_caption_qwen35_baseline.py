@@ -75,7 +75,7 @@ def main() -> None:
     parser.add_argument("--repetition-penalty", type=float, default=None)
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--batch-size", type=int, default=1)
-    parser.add_argument("--device-map", type=str, default="auto")
+    parser.add_argument("--device-map", type=str, default="cuda:0")
     parser.add_argument("--dtype", type=str, default="bf16", choices=["auto", "fp16", "bf16", "fp32"])
     parser.add_argument("--max-images", type=int, default=0)
     parser.add_argument("--shard-world-size", type=int, default=1)
@@ -148,7 +148,6 @@ def main() -> None:
         try:
             preds = captioner.caption_batch(image_paths=image_paths, prompt=str(args.prompt))
         except torch.cuda.OutOfMemoryError:
-            torch.cuda.empty_cache()
             gc.collect()
             if cur_bs <= 1:
                 raise

@@ -110,7 +110,7 @@ def load_vlm(model: str) -> Tuple[Any, Any]:
     vlm = AutoModelForImageTextToText.from_pretrained(
         model,
         dtype=dtype,
-        device_map="auto",
+        device_map="cuda:0",
         trust_remote_code=True,
     )
     return processor, vlm

@@ -24,7 +24,6 @@ from ftqwen3.shared.qwen_dinov3 import load_merger_safetensors, save_merger_safe
 from ftqwen3.shared.sft import QwenNativeSFTCollator, VrsbenchMultiTaskQwenNativeSFTDataset
 from ftqwen3.shared.training_losses import causal_lm_sample_average_loss
 
-
 def _project_root() -> Path:
     return PROJECT_ROOT
 
@@ -137,8 +136,8 @@ def preallocate_cuda_cache(*, device: torch.device, keep_free_gb: float | None) 
         if not allocated:
             break
 
+    # 释放引用但不清空缓存，让显存留在当前进程的 PyTorch 缓存池里复用。
     del blocks
-
     free_after_bytes, _ = torch.cuda.mem_get_info(device=device)
     return {
         "enabled": bool(reserved_bytes > 0),
@@ -412,8 +411,8 @@ def main() -> None:
     parser.add_argument("--qwen-model-dir", type=str, default="models/Qwen3-VL-8B-Instruct")
     parser.add_argument("--dataset-root", type=str, default="datasets/VRSBench")
     parser.add_argument("--train-json", type=str, default="datasets/VRSBench/VRSBench_train.json")
-    parser.add_argument("--smart-resize-min-pixels", type=int, default=256 * 256)
-    parser.add_argument("--smart-resize-max-pixels", type=int, default=4096 * 4096)
+    parser.add_argument("--smart-resize-min-pixels", type=int, default=224 * 224)
+    parser.add_argument("--smart-resize-max-pixels", type=int, default=512 * 512)
 
     parser.add_argument(
         "--output-dir",

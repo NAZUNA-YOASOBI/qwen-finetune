@@ -66,7 +66,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Retry caption samples that hit max_new_tokens for Qwen3.5 baseline.")
     parser.add_argument("--preds", type=str, required=True)
     parser.add_argument("--model-dir", type=str, required=True)
-    parser.add_argument("--device-map", type=str, default="auto")
+    parser.add_argument("--device-map", type=str, default="cuda:0")
     parser.add_argument("--dtype", type=str, default="bf16", choices=["auto", "fp16", "bf16", "fp32"])
     parser.add_argument("--prompt", type=str, default="Describe the image in detail in 2 to 4 sentences.")
     parser.add_argument("--max-new-tokens", type=int, default=256)

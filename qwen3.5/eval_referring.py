@@ -424,7 +424,7 @@ def load_vlm(model: str) -> Tuple[Any, Any]:
     vlm = AutoModelForImageTextToText.from_pretrained(
         base_model,
         dtype=dtype,
-        device_map="auto",
+        device_map="cuda:0",
         trust_remote_code=True,
     )
     if is_lora_adapter:
