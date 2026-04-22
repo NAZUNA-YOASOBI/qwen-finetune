@@ -1,0 +1,78 @@
+{
+  "dataset_jsonl": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/benchmark/vrsbench/data/grounding_tsne/vrsbench_referring_tsne_clean_subset.jsonl",
+  "num_rows": 3000,
+  "num_ranked": 3000,
+  "num_filtered": 1149,
+  "num_exported": 30,
+  "score_weights": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "filter": {
+    "min_box_area_ratio": 0.0,
+    "max_box_area_ratio": 1.0,
+    "min_border_margin_px": 8,
+    "min_dino_gt_tokens": 4,
+    "min_qwen_gt_tokens": 9
+  },
+  "top_example": {
+    "qid": 14506,
+    "image_id": "10422_0000.png",
+    "image_path": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/datasets/VRSBench/Images_val/10422_0000.png",
+    "question": "The windmill is situated in the top-right section of the image.",
+    "obj_cls": "windmill",
+    "size_bucket": "small",
+    "image_width": 512,
+    "image_height": 512,
+    "box_area_ratio": 0.00347137451171875,
+    "gt_xyxy_100": [
+      69,
+      27,
+      76,
+      32
+    ],
+    "gt_xyxy_pixel": [
+      353,
+      138,
+      388,
+      164
+    ],
+    "dino": {
+      "grid_h": 14,
+      "grid_w": 14,
+      "gt_tokens": 4,
+      "inside_mean": 0.8947686553001404,
+      "outside_mean": 0.3112953305244446,
+      "contrast": 0.5834733247756958,
+      "contrast_z": 4.822653973671638,
+      "topk_precision": 1.0,
+      "gt_energy_ratio": 0.08984233438968658,
+      "peak_inside": 0.9107793569564819,
+      "peak_outside": 0.7726178765296936,
+      "peak_gap": 0.13816148042678833
+    },
+    "qwen": {
+      "grid_h": 32,
+      "grid_w": 32,
+      "gt_tokens": 9,
+      "inside_mean": 0.9404814839363098,
+      "outside_mean": 0.9809823632240295,
+      "contrast": -0.04050087928771973,
+      "contrast_z": -0.7548910880419456,
+      "topk_precision": 0.2222222222222222,
+      "gt_energy_ratio": 0.007888246327638626,
+      "peak_inside": 0.9999597668647766,
+      "peak_outside": 0.9999585151672363,
+      "peak_gap": 1.2516975402832031e-06
+    },
+    "dino_score": 5.912496308061325,
+    "qwen_score": -0.5247806194920848,
+    "delta_score": 6.43727692755341,
+    "delta_contrast_z": 5.577545061713584,
+    "delta_topk_precision": 0.7777777777777778,
+    "delta_gt_energy_ratio": 0.08195408806204796
+  },
+  "qwen_model_dir": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/models/Qwen3-VL-8B-Instruct",
+  "dinov3_dir": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/models/dinov3/dinov3-vitl16-pretrain-sat493m"
+}

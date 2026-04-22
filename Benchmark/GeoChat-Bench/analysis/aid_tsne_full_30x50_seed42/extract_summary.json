@@ -1,0 +1,14 @@
+{
+  "num_samples": 1500,
+  "num_classes": 30,
+  "qwen_feature_shape": [
+    1500,
+    1152
+  ],
+  "dino_feature_shape": [
+    1500,
+    1024
+  ],
+  "qwen_model_dir": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/models/Qwen3-VL-8B-Instruct",
+  "dinov3_dir": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/models/dinov3/dinov3-vitl16-pretrain-sat493m"
+}

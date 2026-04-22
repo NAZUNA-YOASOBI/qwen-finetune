@@ -1,0 +1,130 @@
+{
+  "preset": "geoground",
+  "output_dir": ".",
+  "datasets": [
+    "rsvqa_hr_test1_10pct"
+  ],
+  "caption_prompt": "Write one concise English caption for this remote sensing image in 8 to 15 words. Mention only the main scene and key objects.",
+  "vqa_yesno_prompt": "Answer the question about this remote sensing image with only one word: yes or no.\nQuestion: {question}\nAnswer:",
+  "vqa_rural_urban_prompt": "Answer the question about this remote sensing image with only one word: rural or urban.\nQuestion: {question}\nAnswer:",
+  "caption_max_new_tokens": 48,
+  "vqa_max_new_tokens": 8,
+  "batch_size": 512,
+  "device_map": "cuda:0",
+  "shard_world_size": 2,
+  "shard_rank": 0,
+  "shard_weights": "1:1",
+  "dtype": "bf16",
+  "do_sample": null,
+  "temperature": null,
+  "top_p": null,
+  "top_k": null,
+  "num_beams": null,
+  "repetition_penalty": null,
+  "seed": null,
+  "caption": {},
+  "vqa": {
+    "rsvqa_hr_test1_10pct": {
+      "dataset": "rsvqa_hr_test1_10pct",
+      "prediction_path": "rsvqa_hr_test1_10pct.jsonl",
+      "scored_path": "rsvqa_hr_test1_10pct_scored.jsonl",
+      "num_pending_before_run": 13146,
+      "eval_mode": "local_exact_match",
+      "sample_evaluations": [
+        {
+          "question_id": 40830,
+          "question_type": "comp",
+          "predicted": "yes",
+          "ground_truth": "yes",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 40867,
+          "question_type": "presence",
+          "predicted": "yes",
+          "ground_truth": "no",
+          "correct": "0",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 40888,
+          "question_type": "comp",
+          "predicted": "yes",
+          "ground_truth": "no",
+          "correct": "0",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 40892,
+          "question_type": "comp",
+          "predicted": "yes",
+          "ground_truth": "yes",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 40904,
+          "question_type": "comp",
+          "predicted": "yes",
+          "ground_truth": "no",
+          "correct": "0",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 40907,
+          "question_type": "comp",
+          "predicted": "no",
+          "ground_truth": "no",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 40929,
+          "question_type": "presence",
+          "predicted": "yes",
+          "ground_truth": "no",
+          "correct": "0",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 40938,
+          "question_type": "comp",
+          "predicted": "yes",
+          "ground_truth": "no",
+          "correct": "0",
+          "eval_source": "local_exact_match"
+        }
+      ],
+      "num_rows": 13146,
+      "per_type": {
+        "comp": {
+          "paper_question_type": "comparison",
+          "num_rows": 7292,
+          "accuracy": 0.5488206253428415,
+          "accuracy_x100": 54.882062534284145
+        },
+        "presence": {
+          "paper_question_type": "presence",
+          "num_rows": 5854,
+          "accuracy": 0.6568158524086095,
+          "accuracy_x100": 65.68158524086095
+        }
+      },
+      "average_accuracy": 0.6028182388757255,
+      "average_accuracy_x100": 60.28182388757255,
+      "overall_accuracy": 0.5969116080937167,
+      "overall_accuracy_x100": 59.69116080937167
+    }
+  },
+  "vqa_runtime": {
+    "preset": "geoground",
+    "model_family": "geoground",
+    "merger_ckpt": "",
+    "lora_dir": "",
+    "device_map": "cuda:0",
+    "dtype": "bf16",
+    "decode_strategy": "greedy",
+    "geoground_model_dir": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/models/GeoGround/llava-v1.5-7b-task-lora-geoground"
+  }
+}

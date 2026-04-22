@@ -1,0 +1,20 @@
+{
+  "dataset_name": "GeoChat",
+  "source": {
+    "train_annotations": "sources/GeoChat_Instruct_clean.json",
+    "test_annotations": "sources/referring.jsonl",
+    "image_root": "images/"
+  },
+  "files": {
+    "train": "train.json",
+    "test": "test.json"
+  },
+  "counts": {
+    "train": 49474,
+    "test": 5694
+  },
+  "notes": [
+    "Processed grounding annotations used in this directory.",
+    "Image files are not stored in this repository copy."
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "train": {
+    "dataset_name": "USGS_split_train_all_types_20pct",
+    "seed": 142,
+    "sample_ratio": 0.2,
+    "allowed_question_types": [
+      "area",
+      "comp",
+      "count",
+      "presence"
+    ],
+    "source_files": {
+      "questions": "VRSBench/benchmark/single_task/datasets/vqa/RSVQA-HR/official/raw/USGS_split_train_questions.json",
+      "answers": "VRSBench/benchmark/single_task/datasets/vqa/RSVQA-HR/official/raw/USGS_split_train_answers.json",
+      "images": "VRSBench/benchmark/single_task/datasets/vqa/RSVQA-HR/official/raw/USGS_split_train_images.json"
+    },
+    "counts_before_sampling": {
+      "area": 91224,
+      "comp": 209287,
+      "count": 162282,
+      "presence": 162547
+    },
+    "counts_after_sampling": {
+      "area": 18244,
+      "comp": 41857,
+      "count": 32456,
+      "presence": 32509
+    },
+    "selected_question_count": 125066,
+    "selected_answer_count": 125066,
+    "selected_image_count": 6251,
+    "output_files": {
+      "questions": "USGS_split_train_all_types_20pct_questions.json",
+      "answers": "USGS_split_train_all_types_20pct_answers.json",
+      "images": "USGS_split_train_all_types_20pct_images.json"
+    }
+  },
+  "val": {
+    "dataset_name": "USGS_split_val_all_types_20pct",
+    "seed": 242,
+    "sample_ratio": 0.2,
+    "allowed_question_types": [
+      "area",
+      "comp",
+      "count",
+      "presence"
+    ],
+    "source_files": {
+      "questions": "VRSBench/benchmark/single_task/datasets/vqa/RSVQA-HR/official/raw/USGS_split_val_questions.json",
+      "answers": "VRSBench/benchmark/single_task/datasets/vqa/RSVQA-HR/official/raw/USGS_split_val_answers.json",
+      "images": "VRSBench/benchmark/single_task/datasets/vqa/RSVQA-HR/official/raw/USGS_split_val_images.json"
+    },
+    "counts_before_sampling": {
+      "area": 15199,
+      "comp": 33175,
+      "count": 27239,
+      "presence": 27230
+    },
+    "counts_after_sampling": {
+      "area": 3039,
+      "comp": 6635,
+      "count": 5447,
+      "presence": 5446
+    },
+    "selected_question_count": 20567,
+    "selected_answer_count": 20567,
+    "selected_image_count": 1028,
+    "output_files": {
+      "questions": "USGS_split_val_all_types_20pct_questions.json",
+      "answers": "USGS_split_val_all_types_20pct_answers.json",
+      "images": "USGS_split_val_all_types_20pct_images.json"
+    }
+  },
+  "test1": {
+    "dataset_name": "USGS_split_test_presence_comp_10pct",
+    "seed": 42,
+    "sample_ratio": 0.1,
+    "allowed_question_types": [
+      "presence",
+      "comp"
+    ],
+    "source_files": {
+      "questions": "VRSBench/benchmark/single_task/datasets/vqa/RSVQA-HR/official/raw/USGS_split_test_questions.json",
+      "answers": "VRSBench/benchmark/single_task/datasets/vqa/RSVQA-HR/official/raw/USGS_split_test_answers.json",
+      "images": "VRSBench/benchmark/single_task/datasets/vqa/RSVQA-HR/official/raw/USGS_split_test_images.json"
+    },
+    "counts_before_sampling": {
+      "comp": 72923,
+      "presence": 58545
+    },
+    "counts_after_sampling": {
+      "comp": 7292,
+      "presence": 5854
+    },
+    "selected_question_count": 13146,
+    "selected_answer_count": 13146,
+    "selected_image_count": 2218,
+    "output_files": {
+      "questions": "USGS_split_test_presence_comp_10pct_questions.json",
+      "answers": "USGS_split_test_presence_comp_10pct_answers.json",
+      "images": "USGS_split_test_presence_comp_10pct_images.json"
+    }
+  }
+}

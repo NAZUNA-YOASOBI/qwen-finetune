@@ -1,0 +1,79 @@
+{
+  "preset": "single_task_dinov3_rsicd_epoch2",
+  "output_dir": ".",
+  "datasets": [
+    "rsicd"
+  ],
+  "caption_prompt": "Write one concise English caption for this remote sensing image in 8 to 15 words. Mention only the main scene and key objects.",
+  "vqa_yesno_prompt": "Answer the question about this remote sensing image with only one word: yes or no.\nQuestion: {question}\nAnswer:",
+  "vqa_rural_urban_prompt": "Answer the question about this remote sensing image with only one word: rural or urban.\nQuestion: {question}\nAnswer:",
+  "caption_max_new_tokens": 48,
+  "vqa_max_new_tokens": 8,
+  "batch_size": 512,
+  "device_map": "cuda:0",
+  "shard_world_size": 2,
+  "shard_rank": 0,
+  "shard_weights": "1:1",
+  "dtype": "bf16",
+  "do_sample": null,
+  "temperature": null,
+  "top_p": null,
+  "top_k": null,
+  "num_beams": null,
+  "repetition_penalty": null,
+  "seed": null,
+  "caption": {
+    "rsicd": {
+      "dataset": "rsicd",
+      "task": "caption",
+      "num_rows": 546,
+      "num_pending_before_run": 546,
+      "prompt": "Write one concise English caption for this remote sensing image in 8 to 15 words. Mention only the main scene and key objects.",
+      "sample_predictions": [
+        {
+          "filename": "00623.jpg",
+          "prediction": "a playground with four basketball fields next to it is surrounded by many green trees and buildings .",
+          "first_ref": "this is a huge playground with basketball courts and tennis courts planned orderly inside ."
+        },
+        {
+          "filename": "00624.jpg",
+          "prediction": "a playground is surrounded by many buildings .",
+          "first_ref": "the block formed by two roads has a football field, a basketball court and several buildings ."
+        },
+        {
+          "filename": "00625.jpg",
+          "prediction": "a playground with a football field in it is surrounded by many buildings and a road .",
+          "first_ref": "in this area at the road corner, a standard, new footballfield with two basketball courts aside can be seen ."
+        },
+        {
+          "filename": "00626.jpg",
+          "prediction": "a playground is surrounded by many buildings and a road .",
+          "first_ref": "the football field is located near a l-shaped buildings and a construction site ."
+        },
+        {
+          "filename": "00627.jpg",
+          "prediction": "a playground is surrounded by some green plants and many buildings .",
+          "first_ref": "the football field and two basketball courts are a aprt of this irregular area near the construction site ."
+        }
+      ],
+      "output_path": "rsicd.gpu0.jsonl"
+    }
+  },
+  "vqa": {},
+  "caption_runtime": {
+    "preset": "single_task_dinov3_rsicd_epoch2",
+    "model_family": "dinov3",
+    "qwen_model_dir": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/models/Qwen3-VL-8B-Instruct",
+    "merger_ckpt": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/checkpoints/single_task/dinov3/rsicd_merger_lora_sampleavg_wd001/epoch2/merger.safetensors",
+    "lora_dir": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/checkpoints/single_task/dinov3/rsicd_merger_lora_sampleavg_wd001/epoch2/lora",
+    "device_map": "cuda:0",
+    "dtype": "bf16",
+    "decode_strategy": "generation_config_default",
+    "dinov3_dir": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/models/dinov3/dinov3-vitl16-pretrain-sat493m",
+    "image_size": 256,
+    "smart_resize_min_pixels": 50176,
+    "smart_resize_max_pixels": 262144,
+    "resize_mode": "smart",
+    "force_exact_image_size": false
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "dino": {
+    "silhouette": 0.014322974719107151,
+    "davies_bouldin": 6.923799643219973
+  },
+  "qwen": {
+    "silhouette": -0.12335965782403946,
+    "davies_bouldin": 6.002258521222792
+  },
+  "tsne": {
+    "pca_dim": 50,
+    "dino_perplexity": 30.0,
+    "qwen_perplexity": 30.0,
+    "learning_rate": 200.0,
+    "iterations": 1000
+  }
+}

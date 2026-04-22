@@ -1,0 +1,438 @@
+{
+  "task": "geochat_grounding",
+  "family": "qwen3vl_base",
+  "thresholds": [
+    0.5,
+    0.7
+  ],
+  "metrics": {
+    "all": {
+      "total": 5694,
+      "parse_fail": 15,
+      "acc@0.5": 45.486476993326306,
+      "acc@0.7": 21.355813136635053,
+      "mean_iou": 40.83167849992545,
+      "acc@0.5_count": 2590,
+      "acc@0.7_count": 1216
+    },
+    "refer": {
+      "total": 5694,
+      "parse_fail": 15,
+      "acc@0.5": 45.486476993326306,
+      "acc@0.7": 21.355813136635053,
+      "mean_iou": 40.83167849992545,
+      "acc@0.5_count": 2590,
+      "acc@0.7_count": 1216
+    }
+  },
+  "mismatch_examples": [
+    {
+      "question_id": "fast_0",
+      "task": "refer",
+      "question": "1 dry-cargo-ship at the bottom left",
+      "answer_raw": "{\"instance\": \"dry-cargo-ship at the bottom left\", \"bbox_2d\": [73, 727, 464, 1000]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.3341960516983962
+    },
+    {
+      "question_id": "fast_1",
+      "task": "refer",
+      "question": "gray dry-cargo-ship",
+      "answer_raw": "{\"instance\": \"gray dry-cargo-ship\", \"bbox_2d\": [73, 722, 466, 1000]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.32725233990688546
+    },
+    {
+      "question_id": "fast_100",
+      "task": "refer",
+      "question": "gray a330 airplane",
+      "answer_raw": "{\"instance\": \"gray a330 airplane\", \"bbox_2d\": [437, 357, 578, 512]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.0
+    },
+    {
+      "question_id": "fast_1000",
+      "task": "refer",
+      "question": "large liquid-cargo-ship",
+      "answer_raw": "{\"instance\": \"large liquid-cargo-ship\", \"bbox_2d\": [208, 620, 398, 975]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.4007618416567263
+    },
+    {
+      "question_id": "fast_1001",
+      "task": "refer",
+      "question": "1 olive large liquid-cargo-ship  at the bottom left of the image.",
+      "answer_raw": "{\"instance\": \"large liquid-cargo-ship at the bottom left\", \"bbox_2d\": [208, 620, 398, 975]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.4007618416567263
+    },
+    {
+      "question_id": "fast_1002",
+      "task": "refer",
+      "question": "1 boeing747 airplane at the bottom right",
+      "answer_raw": "{\"instance\": \"boeing747 airplane at the bottom right\", \"bbox_2d\": [812, 707, 932, 865]}\n\n```json\n[\n    {\"instance\": \"boeing747 airplane at the bottom right\", \"bbox_2d\": [812, 707, 932, 865]}\n]\n```",
+      "pred_polygon_count": 1,
+      "best_iou": 0.6894226126873008
+    },
+    {
+      "question_id": "fast_1004",
+      "task": "refer",
+      "question": "silver boeing747 airplane",
+      "answer_raw": "{\"instance\": \"silver boeing747 airplane\", \"bbox_2d\": [845, 708, 932, 862]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.5246694458339327
+    },
+    {
+      "question_id": "fast_1005",
+      "task": "refer",
+      "question": "silver airplane",
+      "answer_raw": "{\"instance\": \"silver airplane\", \"bbox_2d\": [814, 708, 935, 865]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.0
+    },
+    {
+      "question_id": "fast_1006",
+      "task": "refer",
+      "question": "1 large airplane",
+      "answer_raw": "{\"instance\": \"large airplane on tarmac\", \"bbox_2d\": [845, 708, 932, 862]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.0
+    },
+    {
+      "question_id": "fast_1008",
+      "task": "refer",
+      "question": "1 silver small boeing747 airplane  at the bottom right of the image.",
+      "answer_raw": "{\"instance\": \"silver small boeing747 airplane at the bottom right\", \"bbox_2d\": [812, 707, 935, 865]}\n\n```json\n[\n    {\"instance\": \"silver small boeing747 airplane at the bottom right\", \"bbox_2d\": [812, 707, 935, 865]}\n]\n```",
+      "pred_polygon_count": 1,
+      "best_iou": 0.6893958506044473
+    },
+    {
+      "question_id": "fast_1010",
+      "task": "refer",
+      "question": "1 boeing787 airplane at the center",
+      "answer_raw": "{\"instance\": \"boeing787 airplane at the center\", \"bbox_2d\": [446, 106, 606, 258]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.0
+    },
+    {
+      "question_id": "fast_1012",
+      "task": "refer",
+      "question": "silver boeing787 airplane",
+      "answer_raw": "{\"instance\": \"silver boeing787 airplane\", \"bbox_2d\": [447, 106, 606, 258]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.0
+    },
+    {
+      "question_id": "fast_1019",
+      "task": "refer",
+      "question": "1 dry-cargo-ship at the center",
+      "answer_raw": "{\"instance\": \"large container ship\", \"bbox_2d\": [402, 250, 1000, 738]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.27318515956988987
+    },
+    {
+      "question_id": "fast_102",
+      "task": "refer",
+      "question": "1 gray boeing777 airplane",
+      "answer_raw": "{\"instance\": \"gray boeing777 airplane\", \"bbox_2d\": [567, 617, 730, 765]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.6290997041595638
+    },
+    {
+      "question_id": "fast_1020",
+      "task": "refer",
+      "question": "1 tugboat at the center",
+      "answer_raw": "{\"instance\": \"tugboat near container ship\", \"bbox_2d\": [430, 562, 475, 606]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.42538173437049026
+    },
+    {
+      "question_id": "fast_1022",
+      "task": "refer",
+      "question": "olive dry-cargo-ship",
+      "answer_raw": "{\"instance\": \"large container ship\", \"bbox_2d\": [402, 248, 1000, 738]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.27216256910520054
+    },
+    {
+      "question_id": "fast_1024",
+      "task": "refer",
+      "question": "large dry-cargo-ship",
+      "answer_raw": "{\"instance\": \"large dry-cargo-ship\", \"bbox_2d\": [402, 250, 1000, 738]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.27318515956988987
+    },
+    {
+      "question_id": "fast_1025",
+      "task": "refer",
+      "question": "large tugboat",
+      "answer_raw": "{\"instance\": \"large tugboat\", \"bbox_2d\": [433, 562, 477, 606]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.0
+    },
+    {
+      "question_id": "fast_103",
+      "task": "refer",
+      "question": "1 gray airplane",
+      "answer_raw": "{\"instance\": \"gray airplane\", \"bbox_2d\": [437, 357, 578, 512]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.6683784661251034
+    },
+    {
+      "question_id": "fast_1032",
+      "task": "refer",
+      "question": "1 small a321 airplane",
+      "answer_raw": "{\"instance\": \"small airplane on runway\", \"bbox_2d\": [175, 823, 248, 898]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.0
+    },
+    {
+      "question_id": "fast_1037",
+      "task": "refer",
+      "question": "1 airplane at the right",
+      "answer_raw": "{\"instance\": \"airplane on the right side of the image\", \"bbox_2d\": [835, 137, 910, 222]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.0
+    },
+    {
+      "question_id": "fast_104",
+      "task": "refer",
+      "question": "1 large airplane",
+      "answer_raw": "{\"instance\": \"large airplane on tarmac\", \"bbox_2d\": [604, 0, 750, 172]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.0
+    },
+    {
+      "question_id": "fast_1042",
+      "task": "refer",
+      "question": "1 silver a330 airplane",
+      "answer_raw": "{\"instance\": \"silver a330 airplane\", \"bbox_2d\": [264, 448, 365, 530]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.0
+    },
+    {
+      "question_id": "fast_1049",
+      "task": "refer",
+      "question": "1 silver airplane  at the top left of the image.",
+      "answer_raw": "{\"instance\": \"silver airplane at the top left\", \"bbox_2d\": [244, 202, 345, 264]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.6843872501561898
+    },
+    {
+      "question_id": "fast_105",
+      "task": "refer",
+      "question": "small a330 airplane",
+      "answer_raw": "```json\n[\n    {\"instance\": \"small A330 airplane\", \"bbox_2d\": [909, 378, 1000, 520]},\n    {\"instance\": \"small A330 airplane\", \"bbox_2d\": [604, 617, 730, 764]},\n    {\"instance\": \"small A330 airplane\", \"bbox_2d\": [661, 758, 786, 898]},\n    {\"instance\": \"small A330 airplane\", \"bbox_2d\": [436, 359, 580, 508]},\n    {\"instance\": \"small A330 airplane\", \"bbox_2d\": [606, 0, 752, 168]},\n    {\"instance\": \"small A330 airplane\", \"bbox_2d\": [273, 80, 423, 233]}\n]\n```",
+      "pred_polygon_count": 6,
+      "best_iou": 0.6402336742795371
+    },
+    {
+      "question_id": "fast_1052",
+      "task": "refer",
+      "question": "1 a220 airplane at the center",
+      "answer_raw": "{\"instance\": \"a220 airplane at the center\", \"bbox_2d\": [520, 695, 606, 778]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.0
+    },
+    {
+      "question_id": "fast_1058",
+      "task": "refer",
+      "question": "1 white motorboat",
+      "answer_raw": "{\"instance\": \"white motorboat\", \"bbox_2d\": [661, 231, 1000, 359]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.053261225827597056
+    },
+    {
+      "question_id": "fast_1061",
+      "task": "refer",
+      "question": "1 boeing747 airplane at the bottom",
+      "answer_raw": "{\"instance\": \"a boeing 747 airplane on the tarmac\", \"bbox_2d\": [617, 700, 753, 915]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.5596255480240738
+    },
+    {
+      "question_id": "fast_1063",
+      "task": "refer",
+      "question": "large boeing747 airplane",
+      "answer_raw": "{\"instance\": \"large boeing747 airplane\", \"bbox_2d\": [617, 700, 753, 915]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.5596255480240738
+    },
+    {
+      "question_id": "fast_1064",
+      "task": "refer",
+      "question": "1 gray large boeing747 airplane  at the bottom of the image.",
+      "answer_raw": "{\"instance\": \"gray large boeing747 airplane at the bottom of the image\", \"bbox_2d\": [617, 700, 753, 915]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.5596255480240738
+    },
+    {
+      "question_id": "fast_1065",
+      "task": "refer",
+      "question": "1 van at the top right",
+      "answer_raw": "{\"instance\": \"a van parked at the top right\", \"bbox_2d\": [874, 43, 955, 78]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.21204437961992395
+    },
+    {
+      "question_id": "fast_1066",
+      "task": "refer",
+      "question": "1 basketball-court at the top left",
+      "answer_raw": "{\"instance\": \"basketball court at the top left\", \"bbox_2d\": [79, 175, 296, 328]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.4688007216815514
+    },
+    {
+      "question_id": "fast_1068",
+      "task": "refer",
+      "question": "1 large basketball-court",
+      "answer_raw": "{\"instance\": \"large basketball court\", \"bbox_2d\": [77, 175, 296, 328]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.46456526948203136
+    },
+    {
+      "question_id": "fast_1069",
+      "task": "refer",
+      "question": "1 large van",
+      "answer_raw": "{\"instance\": \"1 large van\", \"bbox_2d\": [912, 43, 955, 70]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.45973927013662313
+    },
+    {
+      "question_id": "fast_107",
+      "task": "refer",
+      "question": "1 gray large airplane  at the center of the image.",
+      "answer_raw": "{\"instance\": \"gray large airplane at the center\", \"bbox_2d\": [437, 357, 578, 512]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.6683784661251034
+    },
+    {
+      "question_id": "fast_1070",
+      "task": "refer",
+      "question": "1 large basketball-court  at the top left of the image.",
+      "answer_raw": "{\"instance\": \"large basketball court\", \"bbox_2d\": [77, 175, 296, 328]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.46456526948203136
+    },
+    {
+      "question_id": "fast_1081",
+      "task": "refer",
+      "question": "large a330 airplane",
+      "answer_raw": "{\"instance\": \"large a330 airplane\", \"bbox_2d\": [283, 557, 427, 703]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.0
+    },
+    {
+      "question_id": "fast_1088",
+      "task": "refer",
+      "question": "1 intersection at the right",
+      "answer_raw": "{\"instance\": \"intersection at the right\", \"bbox_2d\": [720, 250, 900, 450]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.46383294226916133
+    },
+    {
+      "question_id": "fast_1089",
+      "task": "refer",
+      "question": "1 boeing747 airplane at the top right",
+      "answer_raw": "{\"instance\": \"a white airplane on the runway\", \"bbox_2d\": [780, 0, 920, 82]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.551795374771242
+    },
+    {
+      "question_id": "fast_1090",
+      "task": "refer",
+      "question": "large intersection",
+      "answer_raw": "{\"instance\": \"large intersection\", \"bbox_2d\": [640, 234, 865, 440]}\n\n```json\n{\"instance\": \"large intersection\", \"bbox_2d\": [640, 234, 865, 440]}\n```",
+      "pred_polygon_count": 1,
+      "best_iou": 0.341521927113021
+    },
+    {
+      "question_id": "fast_1091",
+      "task": "refer",
+      "question": "1 large intersection  at the right of the image.",
+      "answer_raw": "{\"instance\": \"large intersection at the right of the image\", \"bbox_2d\": [684, 250, 907, 500]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.2999501743896363
+    },
+    {
+      "question_id": "fast_1092",
+      "task": "refer",
+      "question": "1  boeing747 airplane  at the top right of the image.",
+      "answer_raw": "{\"instance\": \"a white airplane on the runway\", \"bbox_2d\": [778, 0, 921, 84]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.567068877086736
+    },
+    {
+      "question_id": "fast_1100",
+      "task": "refer",
+      "question": "1 boeing777 airplane at the bottom right",
+      "answer_raw": "{\"instance\": \"boeing777 airplane at the bottom right\", \"bbox_2d\": [688, 899, 815, 1000]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.5820373354557827
+    },
+    {
+      "question_id": "fast_1106",
+      "task": "refer",
+      "question": "silver boeing777 airplane",
+      "answer_raw": "{\"instance\": \"silver boeing777 airplane\", \"bbox_2d\": [500, 725, 656, 856]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.0
+    },
+    {
+      "question_id": "fast_111",
+      "task": "refer",
+      "question": "1 gray dry-cargo-ship",
+      "answer_raw": "{\"instance\": \"gray dry-cargo-ship\", \"bbox_2d\": [231, 342, 262, 362]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.0
+    },
+    {
+      "question_id": "fast_1110",
+      "task": "refer",
+      "question": "small a350 airplane",
+      "answer_raw": "{\"instance\": \"small a350 airplane\", \"bbox_2d\": [526, 430, 634, 556]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.0
+    },
+    {
+      "question_id": "fast_1113",
+      "task": "refer",
+      "question": "1 silver boeing777 airplane  at the bottom right of the image.",
+      "answer_raw": "{\"instance\": \"silver boeing777 airplane at the bottom right\", \"bbox_2d\": [688, 899, 815, 1000]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.5820373354557827
+    },
+    {
+      "question_id": "fast_1114",
+      "task": "refer",
+      "question": "1 tugboat at the bottom right",
+      "answer_raw": "{\"instance\": \"a tugboat at the bottom right\", \"bbox_2d\": [559, 792, 714, 905]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.0
+    },
+    {
+      "question_id": "fast_112",
+      "task": "refer",
+      "question": "gray ship",
+      "answer_raw": "{\"instance\": \"gray ship\", \"bbox_2d\": [231, 342, 262, 362]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.0
+    },
+    {
+      "question_id": "fast_1132",
+      "task": "refer",
+      "question": "1 intersection at the right",
+      "answer_raw": "{\"instance\": \"intersection at the right\", \"bbox_2d\": [684, 546, 924, 720]}",
+      "pred_polygon_count": 1,
+      "best_iou": 0.05175199272724808
+    }
+  ],
+  "data_json": "../../data/test.json",
+  "predictions": "predictions.jsonl",
+  "requested_batch_size": 512,
+  "final_batch_size": null,
+  "cuda_reserve_free_gb": null,
+  "shard_world_size": 2,
+  "shard_rank": 0,
+  "shard_weights": "1:1"
+}

@@ -1,0 +1,6 @@
+{
+  "dataset_root": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/datasets/VRSBench",
+  "annotation_file": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/datasets/VRSBench/VRSBench_EVAL_Cap.json",
+  "image_dir": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/datasets/VRSBench/Images_val",
+  "num_images": 9350
+}

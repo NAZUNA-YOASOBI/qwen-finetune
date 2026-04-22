@@ -8,6 +8,9 @@ from typing import Any
 
 import torch
 
+DEFAULT_SMART_RESIZE_MIN_PIXELS = 224 * 224
+DEFAULT_SMART_RESIZE_MAX_PIXELS = 512 * 512
+
 
 @dataclass(frozen=True)
 class DinoV3RunConfig:
@@ -156,9 +159,8 @@ def resolve_dino_resize_config(
         effective_min = int(meta_min_pixels)
         effective_max = int(meta_max_pixels)
     else:
-        fixed_pixels = int(effective_image_size) * int(effective_image_size)
-        effective_min = int(fixed_pixels)
-        effective_max = int(fixed_pixels)
+        effective_min = int(DEFAULT_SMART_RESIZE_MIN_PIXELS)
+        effective_max = int(DEFAULT_SMART_RESIZE_MAX_PIXELS)
 
     if effective_min <= 0 or effective_max < effective_min:
         raise ValueError(
@@ -173,12 +175,19 @@ def resolve_dino_resize_config(
                 f'expected=({meta_min_pixels}, {meta_max_pixels}), '
                 f'got=({effective_min}, {effective_max})'
             )
-    elif merger_ckpt is not None:
-        fixed_pixels = int(effective_image_size) * int(effective_image_size)
-        if int(effective_min) != int(fixed_pixels) or int(effective_max) != int(fixed_pixels):
+    elif (
+        merger_ckpt is not None
+        and smart_resize_min_pixels is None
+        and smart_resize_max_pixels is None
+    ):
+        if (
+            int(effective_min) != int(DEFAULT_SMART_RESIZE_MIN_PIXELS)
+            or int(effective_max) != int(DEFAULT_SMART_RESIZE_MAX_PIXELS)
+        ):
             raise ValueError(
-                'checkpoint metadata implies fixed-size preprocessing, but runtime resize range is different. '
-                f'expected=({fixed_pixels}, {fixed_pixels}), got=({effective_min}, {effective_max})'
+                'checkpoint metadata does not record smart-resize range, but runtime resize range is different. '
+                f'expected=({DEFAULT_SMART_RESIZE_MIN_PIXELS}, {DEFAULT_SMART_RESIZE_MAX_PIXELS}), '
+                f'got=({effective_min}, {effective_max})'
             )
 
     mode = 'fixed' if int(effective_min) == int(effective_max) == int(effective_image_size) * int(effective_image_size) else 'smart'

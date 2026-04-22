@@ -1,0 +1,92 @@
+{
+  "dataset": "rsvqa_hr_test1_10pct",
+  "prediction_path": "rsvqa_hr_test1_10pct.jsonl",
+  "scored_path": "rsvqa_hr_test1_10pct_scored.jsonl",
+  "num_pending_before_run": 13130,
+  "eval_mode": "local_exact_match",
+  "sample_evaluations": [
+    {
+      "question_id": 40826,
+      "question_type": "comp",
+      "predicted": "no",
+      "ground_truth": "no",
+      "correct": "1",
+      "eval_source": "local_exact_match"
+    },
+    {
+      "question_id": 40868,
+      "question_type": "comp",
+      "predicted": "no",
+      "ground_truth": "no",
+      "correct": "1",
+      "eval_source": "local_exact_match"
+    },
+    {
+      "question_id": 40874,
+      "question_type": "comp",
+      "predicted": "no",
+      "ground_truth": "no",
+      "correct": "1",
+      "eval_source": "local_exact_match"
+    },
+    {
+      "question_id": 40875,
+      "question_type": "presence",
+      "predicted": "yes",
+      "ground_truth": "yes",
+      "correct": "1",
+      "eval_source": "local_exact_match"
+    },
+    {
+      "question_id": 40889,
+      "question_type": "comp",
+      "predicted": "yes",
+      "ground_truth": "yes",
+      "correct": "1",
+      "eval_source": "local_exact_match"
+    },
+    {
+      "question_id": 40956,
+      "question_type": "comp",
+      "predicted": "yes",
+      "ground_truth": "yes",
+      "correct": "1",
+      "eval_source": "local_exact_match"
+    },
+    {
+      "question_id": 40964,
+      "question_type": "presence",
+      "predicted": "no",
+      "ground_truth": "no",
+      "correct": "1",
+      "eval_source": "local_exact_match"
+    },
+    {
+      "question_id": 40984,
+      "question_type": "comp",
+      "predicted": "no",
+      "ground_truth": "no",
+      "correct": "1",
+      "eval_source": "local_exact_match"
+    }
+  ],
+  "num_rows": 13130,
+  "per_type": {
+    "comp": {
+      "paper_question_type": "comparison",
+      "num_rows": 7244,
+      "accuracy": 0.896604086140254,
+      "accuracy_x100": 89.6604086140254
+    },
+    "presence": {
+      "paper_question_type": "presence",
+      "num_rows": 5886,
+      "accuracy": 0.9123343527013251,
+      "accuracy_x100": 91.23343527013252
+    }
+  },
+  "average_accuracy": 0.9044692194207895,
+  "average_accuracy_x100": 90.44692194207894,
+  "overall_accuracy": 0.9036557501904037,
+  "overall_accuracy_x100": 90.36557501904036
+}

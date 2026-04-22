@@ -1,0 +1,99 @@
+{
+  "output_dir": ".",
+  "eval_dir": ".",
+  "eval_mode": "local_exact_match",
+  "datasets": {
+    "rsvqa_hr_test1_10pct": {
+      "dataset": "rsvqa_hr_test1_10pct",
+      "prediction_path": "rsvqa_hr_test1_10pct.jsonl",
+      "scored_path": "rsvqa_hr_test1_10pct_scored.jsonl",
+      "num_pending_before_run": 13146,
+      "eval_mode": "local_exact_match",
+      "sample_evaluations": [
+        {
+          "question_id": 40830,
+          "question_type": "comp",
+          "predicted": "yes",
+          "ground_truth": "yes",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 40867,
+          "question_type": "presence",
+          "predicted": "yes",
+          "ground_truth": "no",
+          "correct": "0",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 40888,
+          "question_type": "comp",
+          "predicted": "no",
+          "ground_truth": "no",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 40892,
+          "question_type": "comp",
+          "predicted": "yes",
+          "ground_truth": "yes",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 40904,
+          "question_type": "comp",
+          "predicted": "no",
+          "ground_truth": "no",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 40907,
+          "question_type": "comp",
+          "predicted": "no",
+          "ground_truth": "no",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 40929,
+          "question_type": "presence",
+          "predicted": "yes",
+          "ground_truth": "no",
+          "correct": "0",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 40938,
+          "question_type": "comp",
+          "predicted": "no",
+          "ground_truth": "no",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        }
+      ],
+      "num_rows": 13146,
+      "per_type": {
+        "comp": {
+          "paper_question_type": "comparison",
+          "num_rows": 7292,
+          "accuracy": 0.8359846407021393,
+          "accuracy_x100": 83.59846407021394
+        },
+        "presence": {
+          "paper_question_type": "presence",
+          "num_rows": 5854,
+          "accuracy": 0.5869490946361462,
+          "accuracy_x100": 58.69490946361462
+        }
+      },
+      "average_accuracy": 0.7114668676691427,
+      "average_accuracy_x100": 71.14668676691427,
+      "overall_accuracy": 0.7250874790810893,
+      "overall_accuracy_x100": 72.50874790810893
+    }
+  }
+}

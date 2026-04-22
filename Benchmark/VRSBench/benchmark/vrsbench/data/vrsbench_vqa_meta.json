@@ -1,0 +1,21 @@
+{
+  "dataset_root": "VRSBench/datasets/VRSBench",
+  "annotation_file": "VRSBench/datasets/VRSBench/VRSBench_EVAL_vqa.json",
+  "image_dir": "VRSBench/datasets/VRSBench/Images_val",
+  "num_questions": 37409,
+  "num_images": 9349,
+  "type_counts": {
+    "image": 1129,
+    "object category": 5434,
+    "object color": 3550,
+    "object direction": 477,
+    "object existence": 7789,
+    "object position": 5828,
+    "object quantity": 6374,
+    "object shape": 1423,
+    "object size": 1011,
+    "reasoning": 902,
+    "rural or urban": 295,
+    "scene type": 3197
+  }
+}

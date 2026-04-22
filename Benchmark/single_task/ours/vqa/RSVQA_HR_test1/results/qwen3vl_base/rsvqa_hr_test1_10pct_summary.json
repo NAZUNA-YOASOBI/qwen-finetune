@@ -1,0 +1,92 @@
+{
+  "dataset": "rsvqa_hr_test1_10pct",
+  "prediction_path": "rsvqa_hr_test1_10pct.jsonl",
+  "scored_path": "rsvqa_hr_test1_10pct_scored.jsonl",
+  "num_pending_before_run": 13146,
+  "eval_mode": "local_exact_match",
+  "sample_evaluations": [
+    {
+      "question_id": 40867,
+      "question_type": "presence",
+      "predicted": "no",
+      "ground_truth": "no",
+      "correct": "1",
+      "eval_source": "local_exact_match"
+    },
+    {
+      "question_id": 40929,
+      "question_type": "presence",
+      "predicted": "yes",
+      "ground_truth": "no",
+      "correct": "0",
+      "eval_source": "local_exact_match"
+    },
+    {
+      "question_id": 40953,
+      "question_type": "presence",
+      "predicted": "no",
+      "ground_truth": "no",
+      "correct": "1",
+      "eval_source": "local_exact_match"
+    },
+    {
+      "question_id": 41020,
+      "question_type": "presence",
+      "predicted": "yes",
+      "ground_truth": "yes",
+      "correct": "1",
+      "eval_source": "local_exact_match"
+    },
+    {
+      "question_id": 41036,
+      "question_type": "presence",
+      "predicted": "yes",
+      "ground_truth": "no",
+      "correct": "0",
+      "eval_source": "local_exact_match"
+    },
+    {
+      "question_id": 41041,
+      "question_type": "presence",
+      "predicted": "no",
+      "ground_truth": "no",
+      "correct": "1",
+      "eval_source": "local_exact_match"
+    },
+    {
+      "question_id": 41042,
+      "question_type": "presence",
+      "predicted": "yes",
+      "ground_truth": "no",
+      "correct": "0",
+      "eval_source": "local_exact_match"
+    },
+    {
+      "question_id": 41098,
+      "question_type": "presence",
+      "predicted": "no",
+      "ground_truth": "no",
+      "correct": "1",
+      "eval_source": "local_exact_match"
+    }
+  ],
+  "num_rows": 13146,
+  "per_type": {
+    "presence": {
+      "paper_question_type": "presence",
+      "num_rows": 5854,
+      "accuracy": 0.6463956269217629,
+      "accuracy_x100": 64.63956269217628
+    },
+    "comp": {
+      "paper_question_type": "comparison",
+      "num_rows": 7292,
+      "accuracy": 0.7550740537575426,
+      "accuracy_x100": 75.50740537575426
+    }
+  },
+  "average_accuracy": 0.7007348403396527,
+  "average_accuracy_x100": 70.07348403396527,
+  "overall_accuracy": 0.706678837669253,
+  "overall_accuracy_x100": 70.6678837669253
+}

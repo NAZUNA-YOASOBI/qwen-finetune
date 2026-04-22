@@ -1,0 +1,147 @@
+{
+  "preds": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/benchmark/vrsbench/outputs/official_vqa_gpt/qwen3vl_base/vqa_predictions.jsonl",
+  "judged_output": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/benchmark/vrsbench/eval/official_vqa_gpt/qwen3vl_base/vqa_predictions_gpt.jsonl",
+  "judge_model": "gpt-4o-mini",
+  "api_base": "https://infai.cc/v1",
+  "num_pending_before_run": 36273,
+  "accuracy": 0.6506188350396963,
+  "accuracy_x100": 65.06188350396963,
+  "correct": 24339,
+  "num_questions": 37409,
+  "by_type_raw": {
+    "image": {
+      "count": 1129,
+      "correct": 944,
+      "accuracy": 0.8361381753764393,
+      "accuracy_x100": 83.61381753764392
+    },
+    "object category": {
+      "count": 5434,
+      "correct": 3380,
+      "accuracy": 0.6220095693779905,
+      "accuracy_x100": 62.20095693779905
+    },
+    "object color": {
+      "count": 3550,
+      "correct": 2588,
+      "accuracy": 0.7290140845070423,
+      "accuracy_x100": 72.90140845070422
+    },
+    "object direction": {
+      "count": 477,
+      "correct": 251,
+      "accuracy": 0.5262054507337526,
+      "accuracy_x100": 52.620545073375254
+    },
+    "object existence": {
+      "count": 7789,
+      "correct": 6223,
+      "accuracy": 0.7989472332776993,
+      "accuracy_x100": 79.89472332776994
+    },
+    "object position": {
+      "count": 5828,
+      "correct": 3187,
+      "accuracy": 0.5468428277282087,
+      "accuracy_x100": 54.68428277282087
+    },
+    "object quantity": {
+      "count": 6374,
+      "correct": 3177,
+      "accuracy": 0.498431126451208,
+      "accuracy_x100": 49.843112645120804
+    },
+    "object shape": {
+      "count": 1423,
+      "correct": 937,
+      "accuracy": 0.6584680252986648,
+      "accuracy_x100": 65.84680252986648
+    },
+    "object size": {
+      "count": 1011,
+      "correct": 498,
+      "accuracy": 0.49258160237388726,
+      "accuracy_x100": 49.25816023738873
+    },
+    "reasoning": {
+      "count": 902,
+      "correct": 630,
+      "accuracy": 0.6984478935698448,
+      "accuracy_x100": 69.84478935698448
+    },
+    "rural or urban": {
+      "count": 295,
+      "correct": 255,
+      "accuracy": 0.864406779661017,
+      "accuracy_x100": 86.4406779661017
+    },
+    "scene type": {
+      "count": 3197,
+      "correct": 2269,
+      "accuracy": 0.7097278698780106,
+      "accuracy_x100": 70.97278698780106
+    }
+  },
+  "by_type_paper_table3": {
+    "Category": {
+      "count": 5434,
+      "correct": 3380,
+      "accuracy": 0.6220095693779905,
+      "accuracy_x100": 62.20095693779905
+    },
+    "Presence": {
+      "count": 7789,
+      "correct": 6223,
+      "accuracy": 0.7989472332776993,
+      "accuracy_x100": 79.89472332776994
+    },
+    "Quantity": {
+      "count": 6374,
+      "correct": 3177,
+      "accuracy": 0.498431126451208,
+      "accuracy_x100": 49.843112645120804
+    },
+    "Color": {
+      "count": 3550,
+      "correct": 2588,
+      "accuracy": 0.7290140845070423,
+      "accuracy_x100": 72.90140845070422
+    },
+    "Shape": {
+      "count": 1423,
+      "correct": 937,
+      "accuracy": 0.6584680252986648,
+      "accuracy_x100": 65.84680252986648
+    },
+    "Size": {
+      "count": 1011,
+      "correct": 498,
+      "accuracy": 0.49258160237388726,
+      "accuracy_x100": 49.25816023738873
+    },
+    "Position": {
+      "count": 5828,
+      "correct": 3187,
+      "accuracy": 0.5468428277282087,
+      "accuracy_x100": 54.68428277282087
+    },
+    "Direction": {
+      "count": 477,
+      "correct": 251,
+      "accuracy": 0.5262054507337526,
+      "accuracy_x100": 52.620545073375254
+    },
+    "Scene": {
+      "count": 4621,
+      "correct": 3468,
+      "accuracy": 0.7504869075957585,
+      "accuracy_x100": 75.04869075957585
+    },
+    "Reasoning": {
+      "count": 902,
+      "correct": 630,
+      "accuracy": 0.6984478935698448,
+      "accuracy_x100": 69.84478935698448
+    }
+  }
+}

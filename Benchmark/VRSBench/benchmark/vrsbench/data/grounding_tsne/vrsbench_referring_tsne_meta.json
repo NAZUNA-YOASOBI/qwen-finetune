@@ -1,0 +1,45 @@
+{
+  "dataset_root": "datasets/VRSBench",
+  "annotation_file": "datasets/VRSBench/VRSBench_EVAL_referring.json",
+  "image_dir": "datasets/VRSBench/Images_val",
+  "seed": 42,
+  "subset_size_requested": 3000,
+  "subset_size_actual": 3000,
+  "clean_full": {
+    "num_samples": 16146,
+    "unique_samples": 6732,
+    "non_unique_samples": 9414,
+    "size_bucket_counts": {
+      "small": 5410,
+      "medium": 5364,
+      "large": 5372
+    }
+  },
+  "clean_subset": {
+    "num_samples": 3000,
+    "unique_samples": 1258,
+    "non_unique_samples": 1742,
+    "size_bucket_counts": {
+      "small": 1000,
+      "medium": 1000,
+      "large": 1000
+    }
+  },
+  "size_bucket_thresholds": {
+    "small_leq": 0.006622314453125,
+    "medium_leq": 0.05755615234375
+  },
+  "dropped_counts": {
+    "missing_image_id": 0,
+    "missing_question": 0,
+    "missing_ground_truth": 0,
+    "missing_image_file": 0,
+    "invalid_gt_parse": 0,
+    "invalid_gt_range_or_order": 13,
+    "invalid_pixel_box": 0
+  },
+  "tsne_dataset_files": {
+    "full": "benchmark/vrsbench/data/grounding_tsne/vrsbench_referring_tsne_clean_full.jsonl",
+    "subset": "benchmark/vrsbench/data/grounding_tsne/vrsbench_referring_tsne_clean_subset.jsonl"
+  }
+}
