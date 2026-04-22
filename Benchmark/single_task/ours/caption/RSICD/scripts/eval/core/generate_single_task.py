@@ -413,22 +413,22 @@ def build_presets() -> dict[str, ModelPreset]:
 
 def build_caption_specs() -> dict[str, CaptionDatasetSpec]:
     source_root = single_task_source_root()
+    caption_root = source_root / "caption"
     rsicd_images = PROJECT_ROOT / "RSICD" / "datasets" / "rsicd" / "RSICD_images"
-    rs_caption_root = PROJECT_ROOT / "RSCoVLM" / "datasets" / "remote-sensing-sft-data" / "rs_caption"
     return {
         "ucm_captions": CaptionDatasetSpec(
             name="ucm_captions",
-            dataset_json=source_root / "caption" / "UCM-captions" / "data" / "dataset.json",
-            image_dir=rs_caption_root / "ucm_caption" / "imgs",
+            dataset_json=caption_root / "UCM-captions" / "data" / "dataset.json",
+            image_dir=caption_root / "UCM-captions" / "data" / "imgs",
         ),
         "sydney_captions": CaptionDatasetSpec(
             name="sydney_captions",
-            dataset_json=source_root / "caption" / "Sydney-captions" / "data" / "dataset.json",
-            image_dir=rs_caption_root / "sydney_caption" / "imgs",
+            dataset_json=caption_root / "Sydney-captions" / "data" / "dataset.json",
+            image_dir=caption_root / "Sydney-captions" / "data" / "imgs",
         ),
         "rsicd": CaptionDatasetSpec(
             name="rsicd",
-            dataset_json=source_root / "caption" / "RSICD" / "data" / "dataset_rsicd.json",
+            dataset_json=caption_root / "RSICD" / "data" / "dataset_rsicd.json",
             image_dir=rsicd_images,
         ),
     }
@@ -437,22 +437,24 @@ def build_caption_specs() -> dict[str, CaptionDatasetSpec]:
 def build_vqa_specs() -> dict[str, VQADatasetSpec]:
     source_root = single_task_source_root()
     benchmark_data_root = benchmark_root() / "datasets" / "vqa"
-    vqa_root = PROJECT_ROOT / "RSCoVLM" / "datasets" / "remote-sensing-sft-data" / "rsvqa"
+    vqa_root = source_root / "vqa"
+    rsvqa_hr_images = vqa_root / "RSVQA-HR" / "data" / "Data"
+    rsvqa_lr_images = vqa_root / "RSVQA-LR" / "data" / "Images_LR"
     return {
         "rsvqa_hr_test1": VQADatasetSpec(
             name="rsvqa_hr_test1",
-            questions_json=source_root / "vqa" / "RSVQA-HR" / "data" / "USGS_split_test_questions.json",
-            answers_json=source_root / "vqa" / "RSVQA-HR" / "data" / "USGS_split_test_answers.json",
-            images_json=source_root / "vqa" / "RSVQA-HR" / "data" / "USGS_split_test_images.json",
-            image_dir=vqa_root / "RSVQA_HR" / "Data",
+            questions_json=vqa_root / "RSVQA-HR" / "data" / "USGS_split_test_questions.json",
+            answers_json=vqa_root / "RSVQA-HR" / "data" / "USGS_split_test_answers.json",
+            images_json=vqa_root / "RSVQA-HR" / "data" / "USGS_split_test_images.json",
+            image_dir=rsvqa_hr_images,
             allowed_qtypes=("presence", "comp"),
         ),
         "rsvqa_hr_test2": VQADatasetSpec(
             name="rsvqa_hr_test2",
-            questions_json=source_root / "vqa" / "RSVQA-HR" / "data" / "USGS_split_test_phili_questions.json",
-            answers_json=source_root / "vqa" / "RSVQA-HR" / "data" / "USGS_split_test_phili_answers.json",
-            images_json=source_root / "vqa" / "RSVQA-HR" / "data" / "USGS_split_test_phili_images.json",
-            image_dir=vqa_root / "RSVQA_HR" / "Data",
+            questions_json=vqa_root / "RSVQA-HR" / "data" / "USGS_split_test_phili_questions.json",
+            answers_json=vqa_root / "RSVQA-HR" / "data" / "USGS_split_test_phili_answers.json",
+            images_json=vqa_root / "RSVQA-HR" / "data" / "USGS_split_test_phili_images.json",
+            image_dir=rsvqa_hr_images,
             allowed_qtypes=("presence", "comp"),
         ),
         "rsvqa_hr_test1_10pct": VQADatasetSpec(
@@ -472,7 +474,7 @@ def build_vqa_specs() -> dict[str, VQADatasetSpec]:
             / "benchmark"
             / "data"
             / "USGS_split_test_presence_comp_10pct_images.json",
-            image_dir=vqa_root / "RSVQA_HR" / "Data",
+            image_dir=rsvqa_hr_images,
             allowed_qtypes=("presence", "comp"),
         ),
         "rsvqa_hr_test2_10pct": VQADatasetSpec(
@@ -492,7 +494,7 @@ def build_vqa_specs() -> dict[str, VQADatasetSpec]:
             / "benchmark"
             / "data"
             / "USGS_split_test_phili_presence_comp_10pct_images.json",
-            image_dir=vqa_root / "RSVQA_HR" / "Data",
+            image_dir=rsvqa_hr_images,
             allowed_qtypes=("presence", "comp"),
         ),
         "rsvqa_hr_combined_10pct": VQADatasetSpec(
@@ -512,15 +514,15 @@ def build_vqa_specs() -> dict[str, VQADatasetSpec]:
             / "benchmark"
             / "data"
             / "USGS_split_test_presence_comp_combined_10pct_images.json",
-            image_dir=vqa_root / "RSVQA_HR" / "Data",
+            image_dir=rsvqa_hr_images,
             allowed_qtypes=("presence", "comp"),
         ),
         "rsvqa_lr_test": VQADatasetSpec(
             name="rsvqa_lr_test",
-            questions_json=source_root / "vqa" / "RSVQA-LR" / "data" / "LR_split_test_questions.json",
-            answers_json=source_root / "vqa" / "RSVQA-LR" / "data" / "LR_split_test_answers.json",
-            images_json=source_root / "vqa" / "RSVQA-LR" / "data" / "LR_split_test_images.json",
-            image_dir=vqa_root / "RSVQA_LR" / "Images_LR",
+            questions_json=vqa_root / "RSVQA-LR" / "data" / "LR_split_test_questions.json",
+            answers_json=vqa_root / "RSVQA-LR" / "data" / "LR_split_test_answers.json",
+            images_json=vqa_root / "RSVQA-LR" / "data" / "LR_split_test_images.json",
+            image_dir=rsvqa_lr_images,
             allowed_qtypes=("presence", "comp", "rural_urban"),
         ),
     }

@@ -1,0 +1,2322 @@
+[
+  {
+    "image_id": "219.tif",
+    "ground_truth": "A residential area with many hosues arranged neatly and a piece of lawn in the upper right corner .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1090,
+    "type": "caption"
+  },
+  {
+    "image_id": "219.tif",
+    "ground_truth": "There are many hosues with red and orange roofs densely arranged while a grassland in the upper right corner .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1091,
+    "type": "caption"
+  },
+  {
+    "image_id": "219.tif",
+    "ground_truth": "A residential area with many houses arranged neatly and a piece of lawn in the upper right corner .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1092,
+    "type": "caption"
+  },
+  {
+    "image_id": "219.tif",
+    "ground_truth": "Lots of houses with red and orange roofs arranged densely and a piece of lawn in the upper right corner .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1093,
+    "type": "caption"
+  },
+  {
+    "image_id": "219.tif",
+    "ground_truth": "Many houses with red and orange roofs arranged densely and a piece of lawn in the upper right corner .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1094,
+    "type": "caption"
+  },
+  {
+    "image_id": "220.tif",
+    "ground_truth": "A residential area with many hosues arranged in lines and some roads go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1095,
+    "type": "caption"
+  },
+  {
+    "image_id": "220.tif",
+    "ground_truth": "There are many hosues with red and orange roofs densely arranged .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1096,
+    "type": "caption"
+  },
+  {
+    "image_id": "220.tif",
+    "ground_truth": "A residential area with many houses arranged in lines and some roads go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1097,
+    "type": "caption"
+  },
+  {
+    "image_id": "220.tif",
+    "ground_truth": "Lots of houses with red and orange roofs arranged densely and some roads go across this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1098,
+    "type": "caption"
+  },
+  {
+    "image_id": "220.tif",
+    "ground_truth": "Many houses with red and orange roofs arranged densely and some roads go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1099,
+    "type": "caption"
+  },
+  {
+    "image_id": "221.tif",
+    "ground_truth": "A residential area with many hosues arranged neatly and a wide highway beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1100,
+    "type": "caption"
+  },
+  {
+    "image_id": "221.tif",
+    "ground_truth": "There are many hosues with red and orange roofs densely arranged while a wide highway beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1101,
+    "type": "caption"
+  },
+  {
+    "image_id": "221.tif",
+    "ground_truth": "A residential area with many houses arranged neatly and a wide road beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1102,
+    "type": "caption"
+  },
+  {
+    "image_id": "221.tif",
+    "ground_truth": "Lots of houses with red and orange roofs arranged densely while a wide highway beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1103,
+    "type": "caption"
+  },
+  {
+    "image_id": "221.tif",
+    "ground_truth": "Many houses with red and orange roofs arranged densely and a wide road beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1104,
+    "type": "caption"
+  },
+  {
+    "image_id": "222.tif",
+    "ground_truth": "A residential area with many hosues arranged densely and some roads go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1105,
+    "type": "caption"
+  },
+  {
+    "image_id": "222.tif",
+    "ground_truth": "There are many hosues with grey and orange roofs densely arranged .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1106,
+    "type": "caption"
+  },
+  {
+    "image_id": "222.tif",
+    "ground_truth": "A residential area with many houses arranged neatly while some roads go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1107,
+    "type": "caption"
+  },
+  {
+    "image_id": "222.tif",
+    "ground_truth": "Lots of houses with red and orange roofs arranged densely while some roads go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1108,
+    "type": "caption"
+  },
+  {
+    "image_id": "222.tif",
+    "ground_truth": "Many houses with red and orange roofs arranged densely .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1109,
+    "type": "caption"
+  },
+  {
+    "image_id": "223.tif",
+    "ground_truth": "Many houses arranged neatly with some roads go across this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1110,
+    "type": "caption"
+  },
+  {
+    "image_id": "223.tif",
+    "ground_truth": "A residential area with many houese arranged neatly and some roads go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1111,
+    "type": "caption"
+  },
+  {
+    "image_id": "223.tif",
+    "ground_truth": "This is a residential area with lots of houses arranged densely and some roads go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1112,
+    "type": "caption"
+  },
+  {
+    "image_id": "223.tif",
+    "ground_truth": "A residential area with some houses arranged neatly .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1113,
+    "type": "caption"
+  },
+  {
+    "image_id": "223.tif",
+    "ground_truth": "Many houses with red and orange roofs arranged densely in the residential area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1114,
+    "type": "caption"
+  },
+  {
+    "image_id": "224.tif",
+    "ground_truth": "Many houses arranged in lines with some roads go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1115,
+    "type": "caption"
+  },
+  {
+    "image_id": "224.tif",
+    "ground_truth": "This is a residential area with lots of houses arranged in lines .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1116,
+    "type": "caption"
+  },
+  {
+    "image_id": "224.tif",
+    "ground_truth": "A residential area with many houses arranged in lines and some roads go across this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1117,
+    "type": "caption"
+  },
+  {
+    "image_id": "224.tif",
+    "ground_truth": "A dense residential area with lots of houses arranged in lines while some roads go across .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1118,
+    "type": "caption"
+  },
+  {
+    "image_id": "224.tif",
+    "ground_truth": "Lots of houses with lots of houses arranged in lines and some roads go across this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1119,
+    "type": "caption"
+  },
+  {
+    "image_id": "225.tif",
+    "ground_truth": "Many houses arranged in lines with some roads go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1120,
+    "type": "caption"
+  },
+  {
+    "image_id": "225.tif",
+    "ground_truth": "This is a residential area with lots of houses arranged in lines .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1121,
+    "type": "caption"
+  },
+  {
+    "image_id": "225.tif",
+    "ground_truth": "A residential area with many houses arranged in lines and some roads go across this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1122,
+    "type": "caption"
+  },
+  {
+    "image_id": "225.tif",
+    "ground_truth": "A dense residential area with lots of houses arranged in lines while some roads go across .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1123,
+    "type": "caption"
+  },
+  {
+    "image_id": "225.tif",
+    "ground_truth": "Lots of houses with lots of houses arranged in lines and some roads go across this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1124,
+    "type": "caption"
+  },
+  {
+    "image_id": "226.tif",
+    "ground_truth": "Many houses arranged in lines with some roads go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1125,
+    "type": "caption"
+  },
+  {
+    "image_id": "226.tif",
+    "ground_truth": "This is a residential area with lots of houses arranged in lines .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1126,
+    "type": "caption"
+  },
+  {
+    "image_id": "226.tif",
+    "ground_truth": "A residential area with many houses arranged in lines and some roads go across this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1127,
+    "type": "caption"
+  },
+  {
+    "image_id": "226.tif",
+    "ground_truth": "A dense residential area with lots of houses arranged in lines while some roads go across .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1128,
+    "type": "caption"
+  },
+  {
+    "image_id": "226.tif",
+    "ground_truth": "Lots of houses with lots of houses arranged in lines and some roads go across this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1129,
+    "type": "caption"
+  },
+  {
+    "image_id": "227.tif",
+    "ground_truth": "Many houses arranged in lines with some roads go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1130,
+    "type": "caption"
+  },
+  {
+    "image_id": "227.tif",
+    "ground_truth": "This is a residential area with lots of houses arranged in lines .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1131,
+    "type": "caption"
+  },
+  {
+    "image_id": "227.tif",
+    "ground_truth": "A residential area with many houses arranged in lines and some roads go across this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1132,
+    "type": "caption"
+  },
+  {
+    "image_id": "227.tif",
+    "ground_truth": "A dense residential area with lots of houses arranged in lines while some roads go across .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1133,
+    "type": "caption"
+  },
+  {
+    "image_id": "227.tif",
+    "ground_truth": "Lots of houses with lots of houses arranged in lines and some roads go across this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1134,
+    "type": "caption"
+  },
+  {
+    "image_id": "228.tif",
+    "ground_truth": "Many houses arranged neatly and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1135,
+    "type": "caption"
+  },
+  {
+    "image_id": "228.tif",
+    "ground_truth": "A residential area with lots of houses arranged neatly and some roads go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1136,
+    "type": "caption"
+  },
+  {
+    "image_id": "228.tif",
+    "ground_truth": "Lots of houses arranged neatly in the residential area and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1137,
+    "type": "caption"
+  },
+  {
+    "image_id": "228.tif",
+    "ground_truth": "This is a residential area with many houses arranged neatly .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1138,
+    "type": "caption"
+  },
+  {
+    "image_id": "228.tif",
+    "ground_truth": "There are lots of houses arranged densely and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1139,
+    "type": "caption"
+  },
+  {
+    "image_id": "229.tif",
+    "ground_truth": "Many houses arranged neatly and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1140,
+    "type": "caption"
+  },
+  {
+    "image_id": "229.tif",
+    "ground_truth": "A residential area with lots of houses arranged neatly and some roads go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1141,
+    "type": "caption"
+  },
+  {
+    "image_id": "229.tif",
+    "ground_truth": "Lots of houses arranged neatly in the residential area and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1142,
+    "type": "caption"
+  },
+  {
+    "image_id": "229.tif",
+    "ground_truth": "This is a residential area with many houses arranged neatly .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1143,
+    "type": "caption"
+  },
+  {
+    "image_id": "229.tif",
+    "ground_truth": "There are lots of houses arranged densely and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1144,
+    "type": "caption"
+  },
+  {
+    "image_id": "230.tif",
+    "ground_truth": "Many houses arranged neatly and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1145,
+    "type": "caption"
+  },
+  {
+    "image_id": "230.tif",
+    "ground_truth": "A residential area with lots of houses arranged neatly and some roads go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1146,
+    "type": "caption"
+  },
+  {
+    "image_id": "230.tif",
+    "ground_truth": "Lots of houses arranged neatly in the residential area and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1147,
+    "type": "caption"
+  },
+  {
+    "image_id": "230.tif",
+    "ground_truth": "This is a residential area with many houses arranged neatly .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1148,
+    "type": "caption"
+  },
+  {
+    "image_id": "230.tif",
+    "ground_truth": "There are lots of houses arranged densely and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1149,
+    "type": "caption"
+  },
+  {
+    "image_id": "231.tif",
+    "ground_truth": "Many houses arranged densely while a piece of lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1150,
+    "type": "caption"
+  },
+  {
+    "image_id": "231.tif",
+    "ground_truth": "A residential area with many houses arranged neatly while a piece of lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1151,
+    "type": "caption"
+  },
+  {
+    "image_id": "231.tif",
+    "ground_truth": "A dense residential area with many houses arranged neatly .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1152,
+    "type": "caption"
+  },
+  {
+    "image_id": "231.tif",
+    "ground_truth": "This is a residential area with many houses arranged neatly while a lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1153,
+    "type": "caption"
+  },
+  {
+    "image_id": "231.tif",
+    "ground_truth": "There are many houses arranged neatly with a piece of lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1154,
+    "type": "caption"
+  },
+  {
+    "image_id": "232.tif",
+    "ground_truth": "Lots of houses arranged in lines with some roads go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1155,
+    "type": "caption"
+  },
+  {
+    "image_id": "232.tif",
+    "ground_truth": "Many houses arranged in lines in the dense residential area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1156,
+    "type": "caption"
+  },
+  {
+    "image_id": "232.tif",
+    "ground_truth": "A residential area with many houses arranged in lines .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1157,
+    "type": "caption"
+  },
+  {
+    "image_id": "232.tif",
+    "ground_truth": "A residential area with lots of houses arranged in lines .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1158,
+    "type": "caption"
+  },
+  {
+    "image_id": "232.tif",
+    "ground_truth": "Lots of houses arranged in lines with some roads go across this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1159,
+    "type": "caption"
+  },
+  {
+    "image_id": "233.tif",
+    "ground_truth": "A residential area with many houses arranged neatly .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1160,
+    "type": "caption"
+  },
+  {
+    "image_id": "233.tif",
+    "ground_truth": "Many houses arranged densely and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1161,
+    "type": "caption"
+  },
+  {
+    "image_id": "233.tif",
+    "ground_truth": "This is a residential area with many houses neatly arranged and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1162,
+    "type": "caption"
+  },
+  {
+    "image_id": "233.tif",
+    "ground_truth": "Lots of houses arranged neatly in the residential area and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1163,
+    "type": "caption"
+  },
+  {
+    "image_id": "233.tif",
+    "ground_truth": "There are many houses arranged neatly and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1164,
+    "type": "caption"
+  },
+  {
+    "image_id": "234.tif",
+    "ground_truth": "A residential area with many houses arranged neatly .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1165,
+    "type": "caption"
+  },
+  {
+    "image_id": "234.tif",
+    "ground_truth": "Many houses arranged densely and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1166,
+    "type": "caption"
+  },
+  {
+    "image_id": "234.tif",
+    "ground_truth": "This is a residential area with many houses neatly arranged and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1167,
+    "type": "caption"
+  },
+  {
+    "image_id": "234.tif",
+    "ground_truth": "Lots of houses arranged neatly in the residential area and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1168,
+    "type": "caption"
+  },
+  {
+    "image_id": "234.tif",
+    "ground_truth": "There are many houses arranged neatly and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1169,
+    "type": "caption"
+  },
+  {
+    "image_id": "235.tif",
+    "ground_truth": "A residential area with many houses arranged neatly .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1170,
+    "type": "caption"
+  },
+  {
+    "image_id": "235.tif",
+    "ground_truth": "Many houses arranged densely and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1171,
+    "type": "caption"
+  },
+  {
+    "image_id": "235.tif",
+    "ground_truth": "This is a residential area with many houses neatly arranged and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1172,
+    "type": "caption"
+  },
+  {
+    "image_id": "235.tif",
+    "ground_truth": "Lots of houses arranged neatly in the residential area and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1173,
+    "type": "caption"
+  },
+  {
+    "image_id": "235.tif",
+    "ground_truth": "There are many houses arranged neatly and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1174,
+    "type": "caption"
+  },
+  {
+    "image_id": "236.tif",
+    "ground_truth": "A residential area with many houses arranged neatly .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1175,
+    "type": "caption"
+  },
+  {
+    "image_id": "236.tif",
+    "ground_truth": "Many houses arranged densely and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1176,
+    "type": "caption"
+  },
+  {
+    "image_id": "236.tif",
+    "ground_truth": "This is a residential area with many houses neatly arranged and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1177,
+    "type": "caption"
+  },
+  {
+    "image_id": "236.tif",
+    "ground_truth": "Lots of houses arranged neatly in the residential area and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1178,
+    "type": "caption"
+  },
+  {
+    "image_id": "236.tif",
+    "ground_truth": "There are many houses arranged neatly and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1179,
+    "type": "caption"
+  },
+  {
+    "image_id": "237.tif",
+    "ground_truth": "A residential area with many houses arranged neatly .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1180,
+    "type": "caption"
+  },
+  {
+    "image_id": "237.tif",
+    "ground_truth": "Many houses arranged densely and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1181,
+    "type": "caption"
+  },
+  {
+    "image_id": "237.tif",
+    "ground_truth": "This is a residential area with many houses neatly arranged and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1182,
+    "type": "caption"
+  },
+  {
+    "image_id": "237.tif",
+    "ground_truth": "Lots of houses arranged neatly in the residential area and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1183,
+    "type": "caption"
+  },
+  {
+    "image_id": "237.tif",
+    "ground_truth": "There are many houses arranged neatly and divided into rectangles by some roads .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1184,
+    "type": "caption"
+  },
+  {
+    "image_id": "238.tif",
+    "ground_truth": "Lots of houses arranged in lines with some roads go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1185,
+    "type": "caption"
+  },
+  {
+    "image_id": "238.tif",
+    "ground_truth": "Many houses arranged in lines in the dense residential area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1186,
+    "type": "caption"
+  },
+  {
+    "image_id": "238.tif",
+    "ground_truth": "A residential area with many houses arranged in lines .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1187,
+    "type": "caption"
+  },
+  {
+    "image_id": "238.tif",
+    "ground_truth": "A residential area with lots of houses arranged in lines .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1188,
+    "type": "caption"
+  },
+  {
+    "image_id": "238.tif",
+    "ground_truth": "Lots of houses arranged in lines with some roads go across this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1189,
+    "type": "caption"
+  },
+  {
+    "image_id": "239.tif",
+    "ground_truth": "Lots of houses arranged in lines with some roads go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1190,
+    "type": "caption"
+  },
+  {
+    "image_id": "239.tif",
+    "ground_truth": "Many houses arranged in lines in the dense residential area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1191,
+    "type": "caption"
+  },
+  {
+    "image_id": "239.tif",
+    "ground_truth": "A residential area with many houses arranged in lines .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1192,
+    "type": "caption"
+  },
+  {
+    "image_id": "239.tif",
+    "ground_truth": "A residential area with lots of houses arranged in lines .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1193,
+    "type": "caption"
+  },
+  {
+    "image_id": "239.tif",
+    "ground_truth": "Lots of houses arranged in lines with some roads go across this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1194,
+    "type": "caption"
+  },
+  {
+    "image_id": "240.tif",
+    "ground_truth": "Many houses with red and orange roofs arranged neatly in the residential area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1195,
+    "type": "caption"
+  },
+  {
+    "image_id": "240.tif",
+    "ground_truth": "Lots of houses arranged neatly with some roads go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1196,
+    "type": "caption"
+  },
+  {
+    "image_id": "240.tif",
+    "ground_truth": "A residential area with some houses of orange roofs arranged neatly .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1197,
+    "type": "caption"
+  },
+  {
+    "image_id": "240.tif",
+    "ground_truth": "This is a residential area with many houses arranged neatly and some roads go across this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1198,
+    "type": "caption"
+  },
+  {
+    "image_id": "240.tif",
+    "ground_truth": "A residential area with many houses arranged neatly and some roads go across this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1199,
+    "type": "caption"
+  },
+  {
+    "image_id": "241.tif",
+    "ground_truth": "Many houses arranged neatly with a wide road go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1200,
+    "type": "caption"
+  },
+  {
+    "image_id": "241.tif",
+    "ground_truth": "A dense residential area with many houses arranged neatly .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1201,
+    "type": "caption"
+  },
+  {
+    "image_id": "241.tif",
+    "ground_truth": "A residential area with many houses of red and orange roofs arranged neatly .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1202,
+    "type": "caption"
+  },
+  {
+    "image_id": "241.tif",
+    "ground_truth": "This is a dense residential area with many houses arranged neatly .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1203,
+    "type": "caption"
+  },
+  {
+    "image_id": "241.tif",
+    "ground_truth": "A residential area with lots of houses arranged neatly while a wide road go through this area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1204,
+    "type": "caption"
+  },
+  {
+    "image_id": "242.tif",
+    "ground_truth": "A residential area with many houses arranged neatly and a highway passed by .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1205,
+    "type": "caption"
+  },
+  {
+    "image_id": "242.tif",
+    "ground_truth": "This is a residential area with many houses arranged neatly while a highway passed by .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1206,
+    "type": "caption"
+  },
+  {
+    "image_id": "242.tif",
+    "ground_truth": "Many houses arranged neatly while a highway passed by .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1207,
+    "type": "caption"
+  },
+  {
+    "image_id": "242.tif",
+    "ground_truth": "There are many houses arranged neatly in the residential area while a highway passed by .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1208,
+    "type": "caption"
+  },
+  {
+    "image_id": "242.tif",
+    "ground_truth": "A residential area with many houses arranged neatly and a highway passed by .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1209,
+    "type": "caption"
+  },
+  {
+    "image_id": "264.tif",
+    "ground_truth": "A white airplane parked on the airport with some runways beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1315,
+    "type": "caption"
+  },
+  {
+    "image_id": "264.tif",
+    "ground_truth": "A white airplane parked on the airport with some runways beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1316,
+    "type": "caption"
+  },
+  {
+    "image_id": "264.tif",
+    "ground_truth": "A white airplane parked on the airport with some runways passed by .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1317,
+    "type": "caption"
+  },
+  {
+    "image_id": "264.tif",
+    "ground_truth": "There is a big airport with a white airplane parked on .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1318,
+    "type": "caption"
+  },
+  {
+    "image_id": "264.tif",
+    "ground_truth": "There is a big airport with a white airplane parked on .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1319,
+    "type": "caption"
+  },
+  {
+    "image_id": "310.tif",
+    "ground_truth": "A meadow with some green bushes on it while some roads passed by .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1545,
+    "type": "caption"
+  },
+  {
+    "image_id": "310.tif",
+    "ground_truth": "A meadow with bushes and roads on it while some houses beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1546,
+    "type": "caption"
+  },
+  {
+    "image_id": "310.tif",
+    "ground_truth": "This is a meadow with some green bushes on it while some roads passed by .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1547,
+    "type": "caption"
+  },
+  {
+    "image_id": "310.tif",
+    "ground_truth": "Some green bushes and paths on the meadow with some houses beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1548,
+    "type": "caption"
+  },
+  {
+    "image_id": "310.tif",
+    "ground_truth": "There are some green bushes and paths on the meadow while some houses beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1549,
+    "type": "caption"
+  },
+  {
+    "image_id": "311.tif",
+    "ground_truth": "A meadow with some green bushes on it while some roads passed by .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1550,
+    "type": "caption"
+  },
+  {
+    "image_id": "311.tif",
+    "ground_truth": "A meadow with bushes and roads on it while some houses beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1551,
+    "type": "caption"
+  },
+  {
+    "image_id": "311.tif",
+    "ground_truth": "This is a meadow with some green bushes on it while some roads passed by .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1552,
+    "type": "caption"
+  },
+  {
+    "image_id": "311.tif",
+    "ground_truth": "Some green bushes and paths on the meadow with some houses beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1553,
+    "type": "caption"
+  },
+  {
+    "image_id": "311.tif",
+    "ground_truth": "There are some green bushes and paths on the meadow while some houses beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1554,
+    "type": "caption"
+  },
+  {
+    "image_id": "312.tif",
+    "ground_truth": "A meadow with some green bushes on it while some roads passed by .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1555,
+    "type": "caption"
+  },
+  {
+    "image_id": "312.tif",
+    "ground_truth": "A meadow with bushes and roads on it while some houses beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1556,
+    "type": "caption"
+  },
+  {
+    "image_id": "312.tif",
+    "ground_truth": "This is a meadow with some green bushes on it while some roads passed by .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1557,
+    "type": "caption"
+  },
+  {
+    "image_id": "312.tif",
+    "ground_truth": "Some green bushes and paths on the meadow with some houses beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1558,
+    "type": "caption"
+  },
+  {
+    "image_id": "312.tif",
+    "ground_truth": "There are some green bushes and paths on the meadow while some houses beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1559,
+    "type": "caption"
+  },
+  {
+    "image_id": "313.tif",
+    "ground_truth": "A meadow with some green bushes on it while a highway passed by .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1560,
+    "type": "caption"
+  },
+  {
+    "image_id": "313.tif",
+    "ground_truth": "There is a meadow with scattered bushes and some houses on it .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1561,
+    "type": "caption"
+  },
+  {
+    "image_id": "313.tif",
+    "ground_truth": "Some green bushes on the meadow while a highway passed by .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1562,
+    "type": "caption"
+  },
+  {
+    "image_id": "313.tif",
+    "ground_truth": "A meadow with some green bushes on it while some houses beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1563,
+    "type": "caption"
+  },
+  {
+    "image_id": "313.tif",
+    "ground_truth": "Some green bushes on the meadow with some houses and a highway beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1564,
+    "type": "caption"
+  },
+  {
+    "image_id": "314.tif",
+    "ground_truth": "A meadow with some green bushes on it while a highway passed by .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1565,
+    "type": "caption"
+  },
+  {
+    "image_id": "314.tif",
+    "ground_truth": "There is a meadow with scattered bushes and some houses on it .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1566,
+    "type": "caption"
+  },
+  {
+    "image_id": "314.tif",
+    "ground_truth": "Some green bushes on the meadow while a highway passed by .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1567,
+    "type": "caption"
+  },
+  {
+    "image_id": "314.tif",
+    "ground_truth": "A meadow with some green bushes on it while some houses beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1568,
+    "type": "caption"
+  },
+  {
+    "image_id": "314.tif",
+    "ground_truth": "Some green bushes on the meadow with some houses and a highway beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1569,
+    "type": "caption"
+  },
+  {
+    "image_id": "356.tif",
+    "ground_truth": "A wide river with deep green waters and some boats on it .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1775,
+    "type": "caption"
+  },
+  {
+    "image_id": "356.tif",
+    "ground_truth": "There are some white boats on the river with some houses on the bank .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1776,
+    "type": "caption"
+  },
+  {
+    "image_id": "356.tif",
+    "ground_truth": "Some small boats on the river with some houses on the bank .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1777,
+    "type": "caption"
+  },
+  {
+    "image_id": "356.tif",
+    "ground_truth": "There are some small boats on the wide river with some houses on the bank .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1778,
+    "type": "caption"
+  },
+  {
+    "image_id": "356.tif",
+    "ground_truth": "A wide river with deep green waters and some boats on it .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1779,
+    "type": "caption"
+  },
+  {
+    "image_id": "357.tif",
+    "ground_truth": "A wide river with deep green waters and some boats on it .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1780,
+    "type": "caption"
+  },
+  {
+    "image_id": "357.tif",
+    "ground_truth": "There are some white boats on the river with some houses on the bank .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1781,
+    "type": "caption"
+  },
+  {
+    "image_id": "357.tif",
+    "ground_truth": "Some small boats on the river with some houses on the bank .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1782,
+    "type": "caption"
+  },
+  {
+    "image_id": "357.tif",
+    "ground_truth": "There are some small boats on the wide river with some houses on the bank .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1783,
+    "type": "caption"
+  },
+  {
+    "image_id": "357.tif",
+    "ground_truth": "A wide river with deep green waters and some boats on it .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1784,
+    "type": "caption"
+  },
+  {
+    "image_id": "358.tif",
+    "ground_truth": "There are some algae on the river with some plants and lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1785,
+    "type": "caption"
+  },
+  {
+    "image_id": "358.tif",
+    "ground_truth": "Some algae float on the waters with some plants beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1786,
+    "type": "caption"
+  },
+  {
+    "image_id": "358.tif",
+    "ground_truth": "There is a river with deep green waters while some algae float on the waters .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1787,
+    "type": "caption"
+  },
+  {
+    "image_id": "358.tif",
+    "ground_truth": "There is a river with deep green waters while some algae float on the waters .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1788,
+    "type": "caption"
+  },
+  {
+    "image_id": "358.tif",
+    "ground_truth": "A river with deep green waters while some algae float on the waters .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1789,
+    "type": "caption"
+  },
+  {
+    "image_id": "359.tif",
+    "ground_truth": "A river goes through a industrial area with many white buildings on the banks of the river .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1790,
+    "type": "caption"
+  },
+  {
+    "image_id": "359.tif",
+    "ground_truth": "There are many white buildings on the banks of a river .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1791,
+    "type": "caption"
+  },
+  {
+    "image_id": "359.tif",
+    "ground_truth": "Lots of white buildings are on the bankes of a curved river .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1792,
+    "type": "caption"
+  },
+  {
+    "image_id": "359.tif",
+    "ground_truth": "There are many white buildings on the banks of a curved river .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1793,
+    "type": "caption"
+  },
+  {
+    "image_id": "359.tif",
+    "ground_truth": "A river goes through the industrial area with white bulidings on both sides of the river .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 1794,
+    "type": "caption"
+  },
+  {
+    "image_id": "443.tif",
+    "ground_truth": "This is a part of deep green sparkling sea .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2210,
+    "type": "caption"
+  },
+  {
+    "image_id": "443.tif",
+    "ground_truth": "A part of ocean with deep green waters .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2211,
+    "type": "caption"
+  },
+  {
+    "image_id": "443.tif",
+    "ground_truth": "This is a part of ocean with deep green water .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2212,
+    "type": "caption"
+  },
+  {
+    "image_id": "443.tif",
+    "ground_truth": "This is a part of deep green sparkling sea .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2213,
+    "type": "caption"
+  },
+  {
+    "image_id": "443.tif",
+    "ground_truth": "This is a part of ocean with deep green water shining .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2214,
+    "type": "caption"
+  },
+  {
+    "image_id": "444.tif",
+    "ground_truth": "This is a part of deep green sparkling sea .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2215,
+    "type": "caption"
+  },
+  {
+    "image_id": "444.tif",
+    "ground_truth": "A part of ocean with deep green waters .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2216,
+    "type": "caption"
+  },
+  {
+    "image_id": "444.tif",
+    "ground_truth": "This is a part of ocean with deep green water .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2217,
+    "type": "caption"
+  },
+  {
+    "image_id": "444.tif",
+    "ground_truth": "This is a part of deep green sparkling sea .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2218,
+    "type": "caption"
+  },
+  {
+    "image_id": "444.tif",
+    "ground_truth": "This is a part of ocean with deep green water shining .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2219,
+    "type": "caption"
+  },
+  {
+    "image_id": "445.tif",
+    "ground_truth": "This is a part of deep green sparkling sea .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2220,
+    "type": "caption"
+  },
+  {
+    "image_id": "445.tif",
+    "ground_truth": "A part of ocean with deep green waters .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2221,
+    "type": "caption"
+  },
+  {
+    "image_id": "445.tif",
+    "ground_truth": "This is a part of ocean with deep green water .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2222,
+    "type": "caption"
+  },
+  {
+    "image_id": "445.tif",
+    "ground_truth": "This is a part of deep green sparkling sea .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2223,
+    "type": "caption"
+  },
+  {
+    "image_id": "445.tif",
+    "ground_truth": "This is a part of ocean with deep green water shining .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2224,
+    "type": "caption"
+  },
+  {
+    "image_id": "446.tif",
+    "ground_truth": "This is a part of deep green sparkling sea .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2225,
+    "type": "caption"
+  },
+  {
+    "image_id": "446.tif",
+    "ground_truth": "A part of ocean with deep green waters .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2226,
+    "type": "caption"
+  },
+  {
+    "image_id": "446.tif",
+    "ground_truth": "This is a part of ocean with deep green water .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2227,
+    "type": "caption"
+  },
+  {
+    "image_id": "446.tif",
+    "ground_truth": "This is a part of deep green sparkling sea .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2228,
+    "type": "caption"
+  },
+  {
+    "image_id": "446.tif",
+    "ground_truth": "This is a part of ocean with deep green water shining .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2229,
+    "type": "caption"
+  },
+  {
+    "image_id": "447.tif",
+    "ground_truth": "This is a part of deep green sparkling sea .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2230,
+    "type": "caption"
+  },
+  {
+    "image_id": "447.tif",
+    "ground_truth": "A part of ocean with deep green waters .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2231,
+    "type": "caption"
+  },
+  {
+    "image_id": "447.tif",
+    "ground_truth": "This is a part of ocean with deep green water .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2232,
+    "type": "caption"
+  },
+  {
+    "image_id": "447.tif",
+    "ground_truth": "This is a part of deep green sparkling sea .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2233,
+    "type": "caption"
+  },
+  {
+    "image_id": "447.tif",
+    "ground_truth": "This is a part of ocean with deep green water shining .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2234,
+    "type": "caption"
+  },
+  {
+    "image_id": "448.tif",
+    "ground_truth": "This is a part of deep green sparkling sea with a highway beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2235,
+    "type": "caption"
+  },
+  {
+    "image_id": "448.tif",
+    "ground_truth": "A part of ocean with deep green waters and a highway beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2236,
+    "type": "caption"
+  },
+  {
+    "image_id": "448.tif",
+    "ground_truth": "This is a part of ocean with deep green water and a highway beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2237,
+    "type": "caption"
+  },
+  {
+    "image_id": "448.tif",
+    "ground_truth": "This is a part of deep green sparkling sea with a highway beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2238,
+    "type": "caption"
+  },
+  {
+    "image_id": "448.tif",
+    "ground_truth": "This is a part of ocean with deep green water shining and a highway beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2239,
+    "type": "caption"
+  },
+  {
+    "image_id": "449.tif",
+    "ground_truth": "This is a part of deep green sparkling sea .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2240,
+    "type": "caption"
+  },
+  {
+    "image_id": "449.tif",
+    "ground_truth": "A part of ocean with deep green waters .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2241,
+    "type": "caption"
+  },
+  {
+    "image_id": "449.tif",
+    "ground_truth": "This is a part of ocean with deep green water .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2242,
+    "type": "caption"
+  },
+  {
+    "image_id": "449.tif",
+    "ground_truth": "This is a part of deep green sparkling sea .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2243,
+    "type": "caption"
+  },
+  {
+    "image_id": "449.tif",
+    "ground_truth": "This is a part of ocean with deep green water shining .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2244,
+    "type": "caption"
+  },
+  {
+    "image_id": "450.tif",
+    "ground_truth": "This is a part of deep green sparkling sea .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2245,
+    "type": "caption"
+  },
+  {
+    "image_id": "450.tif",
+    "ground_truth": "A part of ocean with deep green waters .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2246,
+    "type": "caption"
+  },
+  {
+    "image_id": "450.tif",
+    "ground_truth": "This is a part of ocean with deep green water .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2247,
+    "type": "caption"
+  },
+  {
+    "image_id": "450.tif",
+    "ground_truth": "This is a part of deep green sparkling sea .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2248,
+    "type": "caption"
+  },
+  {
+    "image_id": "450.tif",
+    "ground_truth": "This is a part of ocean with deep green water shining .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2249,
+    "type": "caption"
+  },
+  {
+    "image_id": "451.tif",
+    "ground_truth": "This is a part of deep green sparkling sea .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2250,
+    "type": "caption"
+  },
+  {
+    "image_id": "451.tif",
+    "ground_truth": "A part of ocean with deep green waters .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2251,
+    "type": "caption"
+  },
+  {
+    "image_id": "451.tif",
+    "ground_truth": "This is a part of ocean with deep green water .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2252,
+    "type": "caption"
+  },
+  {
+    "image_id": "451.tif",
+    "ground_truth": "This is a part of deep green sparkling sea .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2253,
+    "type": "caption"
+  },
+  {
+    "image_id": "451.tif",
+    "ground_truth": "This is a part of ocean with deep green water shining .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2254,
+    "type": "caption"
+  },
+  {
+    "image_id": "539.tif",
+    "ground_truth": "Many white buildings arranged densely in the industrial area while some houses beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2690,
+    "type": "caption"
+  },
+  {
+    "image_id": "539.tif",
+    "ground_truth": "This is an industrial area with many white buildings densely arranged while a residential area beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2691,
+    "type": "caption"
+  },
+  {
+    "image_id": "539.tif",
+    "ground_truth": "An industrial area with many white buildings densely arranged while a residential area beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2692,
+    "type": "caption"
+  },
+  {
+    "image_id": "539.tif",
+    "ground_truth": "An industrial area with a residential area beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2693,
+    "type": "caption"
+  },
+  {
+    "image_id": "539.tif",
+    "ground_truth": "Many white buildings in the industrial area while a residential area beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2694,
+    "type": "caption"
+  },
+  {
+    "image_id": "540.tif",
+    "ground_truth": "An industrial area with many white buildings arranged densely and some containers beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2695,
+    "type": "caption"
+  },
+  {
+    "image_id": "540.tif",
+    "ground_truth": "There are some containers in the industrial area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2696,
+    "type": "caption"
+  },
+  {
+    "image_id": "540.tif",
+    "ground_truth": "An industrial area with many white buildings densely arranged .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2697,
+    "type": "caption"
+  },
+  {
+    "image_id": "540.tif",
+    "ground_truth": "An industrial area with many containers and white buildings densely arranged .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2698,
+    "type": "caption"
+  },
+  {
+    "image_id": "540.tif",
+    "ground_truth": "This is an industrial area with many containers and white buildings arranged densely .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2699,
+    "type": "caption"
+  },
+  {
+    "image_id": "541.tif",
+    "ground_truth": "An industrial area with many white buildings densely arranged while a lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2700,
+    "type": "caption"
+  },
+  {
+    "image_id": "541.tif",
+    "ground_truth": "There is a lawn with a industrial area beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2701,
+    "type": "caption"
+  },
+  {
+    "image_id": "541.tif",
+    "ground_truth": "Many white houses arranged densely in the industrial area while a lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2702,
+    "type": "caption"
+  },
+  {
+    "image_id": "541.tif",
+    "ground_truth": "There are many white buildings arranged densely in the industrial area with a lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2703,
+    "type": "caption"
+  },
+  {
+    "image_id": "541.tif",
+    "ground_truth": "An industrial area with many white buildings densely arranged while a lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2704,
+    "type": "caption"
+  },
+  {
+    "image_id": "542.tif",
+    "ground_truth": "An industrial area with many white buildings densely arranged while a lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2705,
+    "type": "caption"
+  },
+  {
+    "image_id": "542.tif",
+    "ground_truth": "There is a lawn with a industrial area beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2706,
+    "type": "caption"
+  },
+  {
+    "image_id": "542.tif",
+    "ground_truth": "Many white houses arranged densely in the industrial area while a lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2707,
+    "type": "caption"
+  },
+  {
+    "image_id": "542.tif",
+    "ground_truth": "There are many white buildings arranged densely in the industrial area with a lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2708,
+    "type": "caption"
+  },
+  {
+    "image_id": "542.tif",
+    "ground_truth": "An industrial area with many white buildings densely arranged while a lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2709,
+    "type": "caption"
+  },
+  {
+    "image_id": "543.tif",
+    "ground_truth": "An industrial area with many white buildings and containers .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2710,
+    "type": "caption"
+  },
+  {
+    "image_id": "543.tif",
+    "ground_truth": "There are many white buildings and containers in the industrial area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2711,
+    "type": "caption"
+  },
+  {
+    "image_id": "543.tif",
+    "ground_truth": "An industrial area with many white buildings and containers in .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2712,
+    "type": "caption"
+  },
+  {
+    "image_id": "543.tif",
+    "ground_truth": "This is an industrial area with many white buildings and containers in .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2713,
+    "type": "caption"
+  },
+  {
+    "image_id": "543.tif",
+    "ground_truth": "There are many white buildings and containers in the industrial area .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2714,
+    "type": "caption"
+  },
+  {
+    "image_id": "544.tif",
+    "ground_truth": "Many white buildings arranged densely in the industrial area while some houses beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2715,
+    "type": "caption"
+  },
+  {
+    "image_id": "544.tif",
+    "ground_truth": "This is an industrial area with many white buildings densely arranged while a residential area beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2716,
+    "type": "caption"
+  },
+  {
+    "image_id": "544.tif",
+    "ground_truth": "An industrial area with many white buildings densely arranged while a residential area beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2717,
+    "type": "caption"
+  },
+  {
+    "image_id": "544.tif",
+    "ground_truth": "An industrial area with a residential area beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2718,
+    "type": "caption"
+  },
+  {
+    "image_id": "544.tif",
+    "ground_truth": "Many white buildings in the industrial area while a residential area beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2719,
+    "type": "caption"
+  },
+  {
+    "image_id": "545.tif",
+    "ground_truth": "Many white buildings arranged densely in the industrial area while some houses beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2720,
+    "type": "caption"
+  },
+  {
+    "image_id": "545.tif",
+    "ground_truth": "This is an industrial area with many white buildings densely arranged while a residential area beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2721,
+    "type": "caption"
+  },
+  {
+    "image_id": "545.tif",
+    "ground_truth": "An industrial area with many white buildings densely arranged while a residential area beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2722,
+    "type": "caption"
+  },
+  {
+    "image_id": "545.tif",
+    "ground_truth": "An industrial area with a residential area beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2723,
+    "type": "caption"
+  },
+  {
+    "image_id": "545.tif",
+    "ground_truth": "Many white buildings in the industrial area while a residential area beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2724,
+    "type": "caption"
+  },
+  {
+    "image_id": "546.tif",
+    "ground_truth": "An industrial area with many white and grey buildings densely arranged while a lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2725,
+    "type": "caption"
+  },
+  {
+    "image_id": "546.tif",
+    "ground_truth": "There is a lawn with a industrial area beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2726,
+    "type": "caption"
+  },
+  {
+    "image_id": "546.tif",
+    "ground_truth": "Many white and grey buildings arranged densely in the industrial area while a lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2727,
+    "type": "caption"
+  },
+  {
+    "image_id": "546.tif",
+    "ground_truth": "There are many white and grey buildings arranged densely in the industrial area with a lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2728,
+    "type": "caption"
+  },
+  {
+    "image_id": "546.tif",
+    "ground_truth": "An industrial area with many white and grey buildings densely arranged while a lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2729,
+    "type": "caption"
+  },
+  {
+    "image_id": "547.tif",
+    "ground_truth": "An industrial area with many white and grey buildings densely arranged while a lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2730,
+    "type": "caption"
+  },
+  {
+    "image_id": "547.tif",
+    "ground_truth": "There is a lawn with a industrial area beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2731,
+    "type": "caption"
+  },
+  {
+    "image_id": "547.tif",
+    "ground_truth": "Many white and grey buildings arranged densely in the industrial area while a lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2732,
+    "type": "caption"
+  },
+  {
+    "image_id": "547.tif",
+    "ground_truth": "There are many white and grey buildings arranged densely in the industrial area with a lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2733,
+    "type": "caption"
+  },
+  {
+    "image_id": "547.tif",
+    "ground_truth": "An industrial area with many white and grey buildings densely arranged while a lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 2734,
+    "type": "caption"
+  },
+  {
+    "image_id": "608.tif",
+    "ground_truth": "A narrow runway with ssome lawns beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3035,
+    "type": "caption"
+  },
+  {
+    "image_id": "608.tif",
+    "ground_truth": "A rectangular runway goes through the lawn .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3036,
+    "type": "caption"
+  },
+  {
+    "image_id": "608.tif",
+    "ground_truth": "There is a narrow rectangular runway going through the lawn .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3037,
+    "type": "caption"
+  },
+  {
+    "image_id": "608.tif",
+    "ground_truth": "A rectangular runway goes through the lawn .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3038,
+    "type": "caption"
+  },
+  {
+    "image_id": "608.tif",
+    "ground_truth": "A narrow rectangular runway goes through the lawn .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3039,
+    "type": "caption"
+  },
+  {
+    "image_id": "609.tif",
+    "ground_truth": "A wide runway with white mark lines on while a river beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3040,
+    "type": "caption"
+  },
+  {
+    "image_id": "609.tif",
+    "ground_truth": "A river with deep green water are beside a wide runway .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3041,
+    "type": "caption"
+  },
+  {
+    "image_id": "609.tif",
+    "ground_truth": "There is a wide runway with white mark lines on while a river beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3042,
+    "type": "caption"
+  },
+  {
+    "image_id": "609.tif",
+    "ground_truth": "There is a river beside a wide runway .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3043,
+    "type": "caption"
+  },
+  {
+    "image_id": "609.tif",
+    "ground_truth": "A wide runway with white mark lines and numbers on while a river beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3044,
+    "type": "caption"
+  },
+  {
+    "image_id": "610.tif",
+    "ground_truth": "A narrow runway on the river bank .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3045,
+    "type": "caption"
+  },
+  {
+    "image_id": "610.tif",
+    "ground_truth": "There is a narrow curved runway on the river bank .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3046,
+    "type": "caption"
+  },
+  {
+    "image_id": "610.tif",
+    "ground_truth": "A narrow curved runway are on the river bank .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3047,
+    "type": "caption"
+  },
+  {
+    "image_id": "610.tif",
+    "ground_truth": "There is a narrow runway on the river bank while a lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3048,
+    "type": "caption"
+  },
+  {
+    "image_id": "610.tif",
+    "ground_truth": "A narrow runway goes through a lawn with a river beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3049,
+    "type": "caption"
+  },
+  {
+    "image_id": "611.tif",
+    "ground_truth": "A narrow runway on the river bank .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3050,
+    "type": "caption"
+  },
+  {
+    "image_id": "611.tif",
+    "ground_truth": "There is a narrow curved runway on the river bank .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3051,
+    "type": "caption"
+  },
+  {
+    "image_id": "611.tif",
+    "ground_truth": "A narrow curved runway are on the river bank .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3052,
+    "type": "caption"
+  },
+  {
+    "image_id": "611.tif",
+    "ground_truth": "There is a narrow runway on the river bank while a lawn beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3053,
+    "type": "caption"
+  },
+  {
+    "image_id": "611.tif",
+    "ground_truth": "A narrow runway goes through a lawn with a river beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3054,
+    "type": "caption"
+  },
+  {
+    "image_id": "612.tif",
+    "ground_truth": "Some curving runways with some marking lines on it while some lawns beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3055,
+    "type": "caption"
+  },
+  {
+    "image_id": "612.tif",
+    "ground_truth": "There are some marking lines on the runways while some lawns beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3056,
+    "type": "caption"
+  },
+  {
+    "image_id": "612.tif",
+    "ground_truth": "Some curved ruwnays with many marking lines on it while some lawns beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3057,
+    "type": "caption"
+  },
+  {
+    "image_id": "612.tif",
+    "ground_truth": "There are some curved runways with many marking lines on it while some lawns beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3058,
+    "type": "caption"
+  },
+  {
+    "image_id": "612.tif",
+    "ground_truth": "Some marking lines are on the runways while some lawns beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3059,
+    "type": "caption"
+  },
+  {
+    "image_id": "613.tif",
+    "ground_truth": "Some curving runways with some marking lines on it while some lawns beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3060,
+    "type": "caption"
+  },
+  {
+    "image_id": "613.tif",
+    "ground_truth": "There are some marking lines on the runways while some lawns beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3061,
+    "type": "caption"
+  },
+  {
+    "image_id": "613.tif",
+    "ground_truth": "Some curved ruwnays with many marking lines on it while some lawns beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3062,
+    "type": "caption"
+  },
+  {
+    "image_id": "613.tif",
+    "ground_truth": "There are some curved runways with many marking lines on it while some lawns beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3063,
+    "type": "caption"
+  },
+  {
+    "image_id": "613.tif",
+    "ground_truth": "Some marking lines are on the runways while some lawns beside .",
+    "question": "Describe the image",
+    "dataset": "sydney_caption",
+    "question_id": 3064,
+    "type": "caption"
+  }
+]
