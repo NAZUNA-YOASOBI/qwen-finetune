@@ -20,7 +20,7 @@
   },
   "avg_len_words": 83.09786096256684,
   "refs": "benchmark/vrsbench/data/vrsbench_refs_test.json",
-  "preds": "benchmark/vrsbench/outputs/qwen35_baseline/02_qwen35_9b_baseline_githubstyle_20260315/caption_qwen35_9b.jsonl",
+  "preds": "benchmark/vrsbench/outputs/20_qwen35_9b_baseline_20260315/caption_baseline.jsonl",
   "samples": [
     {
       "imgid": "0",

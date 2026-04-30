@@ -1,0 +1,99 @@
+{
+  "output_dir": "/opt/data/private/YanZiXi/project/fine-tune-qwen3-vl/fine-tune-qwen3-vl/Benchmark/single_task/vqa/RSVQA_HR_test1/results/dinov3_epoch4",
+  "eval_dir": "/opt/data/private/YanZiXi/project/fine-tune-qwen3-vl/fine-tune-qwen3-vl/Benchmark/single_task/vqa/RSVQA_HR_test1/results/dinov3_epoch4",
+  "eval_mode": "local_exact_match",
+  "datasets": {
+    "rsvqa_hr_test1_10pct": {
+      "dataset": "rsvqa_hr_test1_10pct",
+      "prediction_path": "/opt/data/private/YanZiXi/project/fine-tune-qwen3-vl/fine-tune-qwen3-vl/Benchmark/single_task/vqa/RSVQA_HR_test1/results/dinov3_epoch4/rsvqa_hr_test1_10pct.jsonl",
+      "scored_path": "/opt/data/private/YanZiXi/project/fine-tune-qwen3-vl/fine-tune-qwen3-vl/Benchmark/single_task/vqa/RSVQA_HR_test1/results/dinov3_epoch4/rsvqa_hr_test1_10pct_scored.jsonl",
+      "num_pending_before_run": 13146,
+      "eval_mode": "local_exact_match",
+      "sample_evaluations": [
+        {
+          "question_id": 40867,
+          "question_type": "presence",
+          "predicted": "no",
+          "ground_truth": "no",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 40929,
+          "question_type": "presence",
+          "predicted": "no",
+          "ground_truth": "no",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 40953,
+          "question_type": "presence",
+          "predicted": "no",
+          "ground_truth": "no",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 41020,
+          "question_type": "presence",
+          "predicted": "no",
+          "ground_truth": "yes",
+          "correct": "0",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 41036,
+          "question_type": "presence",
+          "predicted": "no",
+          "ground_truth": "no",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 41041,
+          "question_type": "presence",
+          "predicted": "no",
+          "ground_truth": "no",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 41042,
+          "question_type": "presence",
+          "predicted": "no",
+          "ground_truth": "no",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 41098,
+          "question_type": "presence",
+          "predicted": "no",
+          "ground_truth": "no",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        }
+      ],
+      "num_rows": 13146,
+      "per_type": {
+        "presence": {
+          "paper_question_type": "presence",
+          "num_rows": 5854,
+          "accuracy": 0.8744448240519304,
+          "accuracy_x100": 87.44448240519304
+        },
+        "comp": {
+          "paper_question_type": "comparison",
+          "num_rows": 7292,
+          "accuracy": 0.9144267690619857,
+          "accuracy_x100": 91.44267690619857
+        }
+      },
+      "average_accuracy": 0.894435796556958,
+      "average_accuracy_x100": 89.4435796556958,
+      "overall_accuracy": 0.8966225467822911,
+      "overall_accuracy_x100": 89.66225467822912
+    }
+  }
+}

@@ -16,6 +16,9 @@
   - `grounding/merger_only/`：VRSBench 联合训练后的 grounding 输出（Merger-Only）
   - `grounding/merger_lora/`：VRSBench 联合训练后的 grounding 输出（Merger+LoRA）
 
+- `official_vqa_gpt/`
+  - VRSBench VQA 在 GPT judge 前的 raw generation prediction 文件
+
 说明：每个子目录中通常包含
 - `*.jsonl`：逐样本预测结果
 - `*_summary.json` 或 `*_eval_summary.json`：汇总指标

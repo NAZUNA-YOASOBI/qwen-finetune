@@ -6,7 +6,7 @@
   ],
   "expected_num_samples": 16159,
   "num_rows_in_file": 16159,
-  "preds": "benchmark/vrsbench/outputs/17_qwen8b_baseline_noftstyle_20260308/grounding_baseline_test.jsonl",
+  "preds": "benchmark/vrsbench/outputs/18_qwen8b_baseline_noftstyle_retest_20260315/grounding_baseline_test.jsonl",
   "meta": "benchmark/vrsbench/data/vrsbench_referring_meta.json",
   "config_hint": {
     "model": "qwen3-vl-baseline-noftstyle",
@@ -87,5 +87,5 @@
       "acc@0.7_count": 6050
     }
   },
-  "predictions_file": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/benchmark/vrsbench/outputs/baseline_noftstyle/18_qwen8b_baseline_noftstyle_retest_20260315/grounding_baseline.jsonl"
+  "predictions_file": "benchmark/vrsbench/outputs/18_qwen8b_baseline_noftstyle_retest_20260315/grounding_baseline_test.jsonl"
 }

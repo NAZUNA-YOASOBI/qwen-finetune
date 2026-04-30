@@ -1,23 +1,38 @@
-# RSICD
+# Caption / RSICD
 
-这个目录归档了 `RSICD` 这个单独 bench 的数据划分、脚本和本次原生 `Qwen3-VL-8B-Instruct` zero-shot 结果。
+这份目录用于集中整理 single-task caption 在 `RSICD` 数据集上的当前正式文件。
 
-## 目录结构
+## 当前保留的五个对比模型
 
-- `data/`：当前实验用到的 bench 标注或划分文件
-- `paper/`：该 bench 对应的论文表格整理结果
-- `scripts/`：该 bench 的运行与评测脚本
-- `results/qwen3_vl_8b_instruct_zero_shot_native_default_20260307/predictions/`：逐样本预测
-- `results/qwen3_vl_8b_instruct_zero_shot_native_default_20260307/reports/`：评测汇总和对比表
+- `DINOv3`：`epoch2`
+- `Qwen3-VL Native FT`：`epoch2`
+- `Qwen3-VL-8B Base`
+- `GeoChat-7B`
+- `GeoGround`
 
-## 当前结果
+## 目录说明
 
-- 预测文件：`results/qwen3_vl_8b_instruct_zero_shot_native_default_20260307/predictions/rsicd.jsonl`
-- 评测文件：`results/qwen3_vl_8b_instruct_zero_shot_native_default_20260307/reports/evaluation_summary.json`
-- 对比表：`results/qwen3_vl_8b_instruct_zero_shot_native_default_20260307/reports/comparison.md`
+- `data/`
+  - 训练、验证、测试所用的标注文件。
+  - 不包含图片实体。
+- `scripts/`
+  - 训练入口、评测入口以及 caption 共用脚本。
+- `results/`
+  - 这五个模型当前选定结果对应的逐条 prediction、生成摘要和评测摘要。
+- `table/`
+  - 当前这组 caption 对比表。
 
-## 说明
+## 数据口径
 
-- 这里保存的是 bench 级归档结果。
-- 重新运行脚本时，底层调用的是项目根目录下原始 `RSGPT-Simbench/scripts/` 里的主脚本。
-- 论文里的 `RSGPT (ours)` 是微调结果；当前归档的是原生 zero-shot 结果。
+- 训练使用：
+  - `dataset_train.json`
+  - `dataset_val.json`
+- 测试使用：
+  - `dataset_rsicd.json`
+- 标注中的 `image_id` / `filename` 就是原始 `RSICD` 图片文件名，可用于重新对应公开原图。
+- 这里不复制图片实体，图片路径只在需要时由外部传入。
+
+## 整理方式
+
+- 这里所有内容都是独立副本，不使用符号链接。
+- 标注和结果中的路径字段已经尽量改成仓库内相对路径或相对路径占位，便于单独整理到 GitHub。

@@ -1,0 +1,25 @@
+{
+  "preset": "dinov3_epoch10",
+  "data": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/benchmark/vrsbench/data/vrsbench_vqa_test.jsonl",
+  "output": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/benchmark/vrsbench/outputs/official_vqa_gpt/dinov3_epoch10/vqa_predictions.jsonl",
+  "num_questions": 37409,
+  "num_pending_before_run": 37409,
+  "max_new_tokens": 64,
+  "requested_batch_size": 512,
+  "runtime": {
+    "preset": "dinov3_epoch10",
+    "model_family": "dinov3",
+    "qwen_model_dir": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/models/Qwen3-VL-8B-Instruct",
+    "merger_ckpt": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/merger.safetensors",
+    "lora_dir": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/lora",
+    "device_map": "cuda:0",
+    "dtype": "bf16",
+    "decode_strategy": "generation_config_default",
+    "dinov3_dir": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/models/dinov3/dinov3-vitl16-pretrain-sat493m",
+    "image_size": 512,
+    "smart_resize_min_pixels": 262144,
+    "smart_resize_max_pixels": 262144,
+    "resize_mode": "fixed",
+    "force_exact_image_size": true
+  }
+}

@@ -1,0 +1,22 @@
+\begin{table*}[t]
+  \caption{GeoChat grounding comparison. Acc.@0.5, Acc.@0.7, and mIoU are reported as percentage points.}
+  \label{tab:GeoChat_grounding}
+  \vspace{5pt}
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{6pt}
+  \renewcommand{\arraystretch}{1.08}
+  \begin{tabular}{lccc}
+    \toprule
+    Method & Acc.@0.5 & Acc.@0.7 & mIoU \\
+    \midrule
+    GeoChat-7B                       & 18.69          & 4.21           & 23.50          \\
+    GeoGround                        & 40.57          & 16.25          & 37.62          \\
+    Qwen3-VL-8B Base                 & 45.49          & 21.36          & 40.83          \\
+    \midrule
+    \multicolumn{4}{l}{\textit{Ours}} \\
+    Ours-Qwen3-VL Native FT           & 50.54          & 32.56          & 44.56          \\
+    Ours-merger\_lora+DINOv3          & \textbf{57.82} & \textbf{37.99} & \textbf{49.37} \\
+    \bottomrule
+  \end{tabular}
+\end{table*}

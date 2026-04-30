@@ -53,10 +53,11 @@
   - 当前保留结果的 `caption_summary.json`
   - 当前保留结果的 `grounding_summary.json`
 - `benchmark/vrsbench/outputs/`
-  - `17_qwen8b_baseline_noftstyle_20260308/`
+  - `18_qwen8b_baseline_noftstyle_retest_20260315/`
   - `18_qwen8b_merger_lora_epoch10_smartresize512_sampleavg_20260310/`
   - `19_qwen8b_sva_deepstack_ca_epoch10_20260315/`
   - `20_qwen35_9b_baseline_20260315/`
+  - `official_vqa_gpt/`
 
 ## 未复制内容
 
@@ -66,9 +67,9 @@
 - LoRA 权重
 - DINOv3 权重
 - 原始图片数据集
-- 其他大体积原始预测文件 `*.jsonl`
+- 非当前论文复核链路所需的其他原始预测文件 `*.jsonl`
 
-这样做是为了控制 GitHub 仓库体积，同时避免把不必要的大文件混入版本管理。当前额外保留了四组 VRSBench 输出，分别用于 baseline、smartresize512、sva_deepstack_ca 和 qwen3.5 baseline 结果复核。
+这样做是为了控制 GitHub 仓库体积，同时避免把不必要的大文件混入版本管理。当前额外保留了四组 VRSBench caption/grounding 输出，以及 VQA raw generation prediction 文件，用于结果复核。
 
 ## 结果入口
 

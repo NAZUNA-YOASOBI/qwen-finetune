@@ -241,18 +241,18 @@ run_sharded_generate caption_smartbucket imgid 128 "$SCRIPT_ROOT/generate/genera
   --merger-ckpt checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/merger.safetensors \
   --lora-dir checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/lora \
   --data benchmark/vrsbench/data/vrsbench_images_test.jsonl \
-  --image-size 256 \
-  --smart-resize-min-pixels 65536 \
-  --smart-resize-max-pixels 16777216 \
+  --image-size 512 \
+  --smart-resize-min-pixels 50176 \
+  --smart-resize-max-pixels 262144 \
   --max-new-tokens 256 \
   --dtype bf16
 run_dino_fix caption_smartbucket_fix "$SMART_DIR/caption_smartbucket.jsonl" \
   checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/merger.safetensors \
   checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/lora 128 \
   --dinov3-dir models/dinov3/dinov3-vitl16-pretrain-sat493m \
-  --image-size 256 \
-  --smart-resize-min-pixels 65536 \
-  --smart-resize-max-pixels 16777216 \
+  --image-size 512 \
+  --smart-resize-min-pixels 50176 \
+  --smart-resize-max-pixels 262144 \
   --dtype bf16
 run_caption_eval caption_smartbucket_eval "$SMART_DIR/caption_smartbucket.jsonl" "$SMART_DIR/caption_summary.json"
 run_sharded_generate grounding_smartbucket qid 128 "$SCRIPT_ROOT/generate/generate_referring_dinov3.py" "$SMART_DIR" \
@@ -261,9 +261,9 @@ run_sharded_generate grounding_smartbucket qid 128 "$SCRIPT_ROOT/generate/genera
   --merger-ckpt checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/merger.safetensors \
   --lora-dir checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/lora \
   --data benchmark/vrsbench/data/vrsbench_referring_test.jsonl \
-  --image-size 256 \
-  --smart-resize-min-pixels 65536 \
-  --smart-resize-max-pixels 16777216 \
+  --image-size 512 \
+  --smart-resize-min-pixels 50176 \
+  --smart-resize-max-pixels 262144 \
   --max-new-tokens 256 \
   --dtype bf16
 run_grounding_eval grounding_smartbucket_eval "$SMART_DIR/grounding_smartbucket.jsonl" "$SMART_DIR/grounding_summary.json"

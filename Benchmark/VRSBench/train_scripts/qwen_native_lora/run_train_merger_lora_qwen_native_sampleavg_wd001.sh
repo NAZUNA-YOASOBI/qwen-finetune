@@ -16,8 +16,8 @@ conda run --no-capture-output -n qwen3-dinov3 \
   --qwen-model-dir models/Qwen3-VL-8B-Instruct \
   --dataset-root datasets/VRSBench \
   --train-json datasets/VRSBench/VRSBench_train.json \
-  --smart-resize-min-pixels 65536 \
-  --smart-resize-max-pixels 16777216 \
+  --smart-resize-min-pixels 50176 \
+  --smart-resize-max-pixels 262144 \
   --output-dir "${RUN_DIR}" \
   --epochs 10 \
   --batch-size-per-rank 8,8 \

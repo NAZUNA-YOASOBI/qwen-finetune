@@ -1,0 +1,22 @@
+\begin{table*}[t]
+  \caption{RSVQA-HR single-task VQA comparison on the retained test1 10\% split. Presence, Comparison, Avg., and Overall are reported as percentage points.}
+  \label{tab:RSVQA_HR_single_task_vqa_test1}
+  \vspace{5pt}
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{6pt}
+  \renewcommand{\arraystretch}{1.08}
+  \begin{tabular}{lcccc}
+    \toprule
+    Method & Presence & Comparison & Avg. & Overall \\
+    \midrule
+    GeoChat-7B                         & 58.69          & 83.60          & 71.15          & 72.51          \\
+    GeoGround                          & 65.68          & 54.88          & 60.28          & 59.69          \\
+    Qwen3-VL-8B Base                    & 64.64          & 75.51          & 70.07          & 70.67          \\
+    \midrule
+    \multicolumn{5}{l}{\textit{Ours}} \\
+    Ours-Qwen3-VL Native FT            & \textbf{91.13} & 90.83          & \textbf{90.98} & \textbf{90.96} \\
+    Ours-merger\_lora+DINOv3           & 87.44          & \textbf{91.44} & 89.44          & 89.66          \\
+    \bottomrule
+  \end{tabular}
+\end{table*}

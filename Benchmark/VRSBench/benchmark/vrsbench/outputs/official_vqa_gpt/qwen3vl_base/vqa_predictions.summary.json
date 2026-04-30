@@ -1,0 +1,19 @@
+{
+  "preset": "qwen3vl_base",
+  "data": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/benchmark/vrsbench/data/vrsbench_vqa_test.jsonl",
+  "output": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/benchmark/vrsbench/outputs/official_vqa_gpt/qwen3vl_base/vqa_predictions.jsonl",
+  "num_questions": 37409,
+  "num_pending_before_run": 37409,
+  "max_new_tokens": 64,
+  "requested_batch_size": 512,
+  "runtime": {
+    "preset": "qwen3vl_base",
+    "model_family": "qwen_native",
+    "qwen_model_dir": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/models/Qwen3-VL-8B-Instruct",
+    "merger_ckpt": "",
+    "lora_dir": "",
+    "device_map": "cuda:0",
+    "dtype": "bf16",
+    "decode_strategy": "generation_config_default"
+  }
+}

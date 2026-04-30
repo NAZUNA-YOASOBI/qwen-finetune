@@ -1,0 +1,14 @@
+{
+  "preset": "qwen_native_epoch10",
+  "output": "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/benchmark/vrsbench/outputs/official_vqa_gpt/qwen_native_epoch10/vqa_predictions.jsonl",
+  "num_records": 37409,
+  "num_shards": 2,
+  "shards": [
+    "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/benchmark/vrsbench/outputs/official_vqa_gpt/qwen_native_epoch10_shards/shard0/vqa_predictions.jsonl",
+    "/opt/yanzixi/project/fine-tune-qwen3-vl/VRSBench/benchmark/vrsbench/outputs/official_vqa_gpt/qwen_native_epoch10_shards/shard1/vqa_predictions.jsonl"
+  ],
+  "qid_range": [
+    0,
+    37408
+  ]
+}

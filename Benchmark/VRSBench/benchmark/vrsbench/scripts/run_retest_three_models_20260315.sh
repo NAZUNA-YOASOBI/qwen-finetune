@@ -147,9 +147,9 @@ run_dual_fix_dino() {
     --dinov3-dir "${DINOV3_DIR}" \
     --merger-ckpt "${merger_ckpt}" \
     --lora-dir "${lora_dir}" \
-    --image-size 256 \
-    --smart-resize-min-pixels 65536 \
-    --smart-resize-max-pixels 16777216 \
+    --image-size 512 \
+    --smart-resize-min-pixels 50176 \
+    --smart-resize-max-pixels 262144 \
     --max-new-tokens "${MAX_NEW_TOKENS}" \
     --max-retries 10 \
     --batch-size "${FIX_BATCH_SIZE}" \
@@ -166,9 +166,9 @@ run_dual_fix_dino() {
     --dinov3-dir "${DINOV3_DIR}" \
     --merger-ckpt "${merger_ckpt}" \
     --lora-dir "${lora_dir}" \
-    --image-size 256 \
-    --smart-resize-min-pixels 65536 \
-    --smart-resize-max-pixels 16777216 \
+    --image-size 512 \
+    --smart-resize-min-pixels 50176 \
+    --smart-resize-max-pixels 262144 \
     --max-new-tokens "${MAX_NEW_TOKENS}" \
     --max-retries 10 \
     --batch-size "${FIX_BATCH_SIZE}" \
@@ -211,8 +211,8 @@ run_dual_fix_sva() {
     --dinov3-dir "${DINOV3_DIR}" \
     --merger-ckpt "${merger_ckpt}" \
     --lora-dir "${lora_dir}" \
-    --smart-resize-min-pixels 65536 \
-    --smart-resize-max-pixels 16777216 \
+    --smart-resize-min-pixels 50176 \
+    --smart-resize-max-pixels 262144 \
     --max-new-tokens "${MAX_NEW_TOKENS}" \
     --max-retries 10 \
     --batch-size "${FIX_BATCH_SIZE}" \
@@ -229,8 +229,8 @@ run_dual_fix_sva() {
     --dinov3-dir "${DINOV3_DIR}" \
     --merger-ckpt "${merger_ckpt}" \
     --lora-dir "${lora_dir}" \
-    --smart-resize-min-pixels 65536 \
-    --smart-resize-max-pixels 16777216 \
+    --smart-resize-min-pixels 50176 \
+    --smart-resize-max-pixels 262144 \
     --max-new-tokens "${MAX_NEW_TOKENS}" \
     --max-retries 10 \
     --batch-size "${FIX_BATCH_SIZE}" \
@@ -339,9 +339,9 @@ run_dino() {
     --merger-ckpt "${DINO_CKPT_DIR}/merger.safetensors" \
     --lora-dir "${DINO_CKPT_DIR}/lora" \
     --data benchmark/vrsbench/data/vrsbench_images_test.jsonl \
-    --image-size 256 \
-    --smart-resize-min-pixels 65536 \
-    --smart-resize-max-pixels 16777216 \
+    --image-size 512 \
+    --smart-resize-min-pixels 50176 \
+    --smart-resize-max-pixels 262144 \
     --max-new-tokens "${MAX_NEW_TOKENS}" \
     --dtype "${DTYPE}"
 
@@ -361,9 +361,9 @@ run_dino() {
     --merger-ckpt "${DINO_CKPT_DIR}/merger.safetensors" \
     --lora-dir "${DINO_CKPT_DIR}/lora" \
     --data benchmark/vrsbench/data/vrsbench_referring_test.jsonl \
-    --image-size 256 \
-    --smart-resize-min-pixels 65536 \
-    --smart-resize-max-pixels 16777216 \
+    --image-size 512 \
+    --smart-resize-min-pixels 50176 \
+    --smart-resize-max-pixels 262144 \
     --max-new-tokens "${MAX_NEW_TOKENS}" \
     --dtype "${DTYPE}"
 

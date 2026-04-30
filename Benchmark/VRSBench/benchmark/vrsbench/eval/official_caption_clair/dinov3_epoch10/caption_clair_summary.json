@@ -1,0 +1,43 @@
+{
+  "preds": "benchmark/vrsbench/outputs/merger_lora_smartbucket512/13_qwen8b_smartbucket_sampleavg_wd001_epoch10_retest_20260315/caption_smartbucket.jsonl",
+  "refs": "benchmark/vrsbench/data/vrsbench_refs_test.json",
+  "judged_output": "benchmark/vrsbench/eval/official_caption_clair/dinov3_epoch10/caption_predictions_clair.jsonl",
+  "judge_model": "gpt-4o-mini",
+  "api_base": "https://infai.cc/v1",
+  "num_pending_before_run": 9350,
+  "num_images": 9350,
+  "clair": 0.6847090909091128,
+  "clair_x100": 68.47090909091128,
+  "samples": [
+    {
+      "imgid": 0,
+      "prediction": "The high-resolution image from GoogleEarth shows a section of a road with a curving pathway and adjacent parked large vehicles. On the curving road, there is a small vehicle located at the bottom right of the image. The area also includes a lineup of large vehicles parked on the left side, with the most visually prominent one being the right-most among them.",
+      "ground_truth": "The aerial image from GoogleEarth features a group of large yellow buses lined up on the left side, and two small vehicles, one on the top-right and another large vehicle on the bottom-right side of the image. The buses are parked in a lot adjacent to a green area and a road running roughly north-south.",
+      "clair": 0.6
+    },
+    {
+      "imgid": 1,
+      "prediction": "The high-resolution image sourced from GoogleEarth displays a section of a roadway with two small vehicles and one large vehicle. The road curves slightly and has clear markings. The small vehicles are on opposite sides of the road, with one near the top edge and the other near the bottom edge of the image. A large vehicle is situated on the left side, parallel to the road.",
+      "ground_truth": "The image from GoogleEarth captures a section of a road with three vehicles visible. One large vehicle is positioned towards the middle-left side of the frame, two small vehicles are located at the top of the frame and the other at the bottom, with the road curving around the landscape.",
+      "clair": 0.85
+    },
+    {
+      "imgid": 2,
+      "prediction": "The high-resolution image from GoogleEarth shows a top-down view of an area with vehicles and structures. A small, unique vehicle is located towards the top of the image. There are large vehicles situated in the top-right corner of the image.",
+      "ground_truth": "The high-resolution image from GoogleEarth shows a parking area with vehicles and asphalt surfaces. A small vehicle is positioned towards the top of this aerial view.",
+      "clair": 0.85
+    },
+    {
+      "imgid": 3,
+      "prediction": "The high-resolution image from GoogleEarth shows a parking area with large and small vehicles. There are multiple large vehicles, some of which are parked in alignment creating a pattern, and a couple of small vehicles positioned at the top and bottom edges. The area appears to be well-organized, with vehicles categorized by size and parked in designated spaces. Trees and vegetation are visible surrounding the parking area, providing a natural border.",
+      "ground_truth": "The aerial image, sourced from GoogleEarth with high resolution, shows a parking lot with large vehicles arranged neatly in rows. Most of the large vehicles are white, and they are predominantly parked in a north-south alignment. There is a large vehicle at the left edge of the road.",
+      "clair": 0.75
+    },
+    {
+      "imgid": 4,
+      "prediction": "The high-resolution image from GoogleEarth shows a variety of vehicles parked in a storage lot. There are multiple large and small vehicles arranged in rows. Among them, one small vehicle on the right side of the image stands out due to its unique position. Additionally, a large vehicle is situated towards the bottom-right area, which is the farthest right within its category.",
+      "ground_truth": "A high-resolution Google Earth image capturing a gray parking lot with large vehicles and a small vehicle. The large vehicles are aligned in parallel rows. A small vehicle is positioned near the top-right corner.",
+      "clair": 0.7
+    }
+  ]
+}

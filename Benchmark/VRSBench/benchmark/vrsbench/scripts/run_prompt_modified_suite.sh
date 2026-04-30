@@ -241,8 +241,8 @@ run_sharded_generate caption_merger_only imgid 256 benchmark/vrsbench/scripts/ge
   --dinov3-dir models/dinov3/dinov3-vitl16-pretrain-sat493m \
   --merger-ckpt checkpoints/vrsbench_joint/merger_only_8b_dinov3_micro8_24_ga1_effective32_taskseq_run_20260210_210858/epoch10/merger.safetensors \
   --data benchmark/vrsbench/data/vrsbench_images_test.jsonl \
-  --image-size 256 \
-  --smart-resize-min-pixels 65536 \
+  --image-size 512 \
+  --smart-resize-min-pixels 50176 \
   --smart-resize-max-pixels 65536 \
   --max-new-tokens 256 \
   --dtype bf16
@@ -250,8 +250,8 @@ run_dino_fix caption_merger_only_fix "$MERGER_ONLY_DIR/caption_merger_only.jsonl
   checkpoints/vrsbench_joint/merger_only_8b_dinov3_micro8_24_ga1_effective32_taskseq_run_20260210_210858/epoch10/merger.safetensors \
   "" 256 \
   --dinov3-dir models/dinov3/dinov3-vitl16-pretrain-sat493m \
-  --image-size 256 \
-  --smart-resize-min-pixels 65536 \
+  --image-size 512 \
+  --smart-resize-min-pixels 50176 \
   --smart-resize-max-pixels 65536 \
   --dtype bf16
 run_caption_eval caption_merger_only_eval "$MERGER_ONLY_DIR/caption_merger_only.jsonl" "$MERGER_ONLY_DIR/caption_summary.json"
@@ -260,8 +260,8 @@ run_sharded_generate grounding_merger_only qid 256 benchmark/vrsbench/scripts/ge
   --dinov3-dir models/dinov3/dinov3-vitl16-pretrain-sat493m \
   --merger-ckpt checkpoints/vrsbench_joint/merger_only_8b_dinov3_micro8_24_ga1_effective32_taskseq_run_20260210_210858/epoch10/merger.safetensors \
   --data benchmark/vrsbench/data/vrsbench_referring_test.jsonl \
-  --image-size 256 \
-  --smart-resize-min-pixels 65536 \
+  --image-size 512 \
+  --smart-resize-min-pixels 50176 \
   --smart-resize-max-pixels 65536 \
   --max-new-tokens 256 \
   --dtype bf16
@@ -273,8 +273,8 @@ run_sharded_generate caption_merger_lora imgid 256 benchmark/vrsbench/scripts/ge
   --merger-ckpt checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro2_6_ga4_effective32_taskseq_resume_from_epoch5_20260208/epoch10/merger.safetensors \
   --lora-dir checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro2_6_ga4_effective32_taskseq_resume_from_epoch5_20260208/epoch10/lora \
   --data benchmark/vrsbench/data/vrsbench_images_test.jsonl \
-  --image-size 256 \
-  --smart-resize-min-pixels 65536 \
+  --image-size 512 \
+  --smart-resize-min-pixels 50176 \
   --smart-resize-max-pixels 65536 \
   --max-new-tokens 256 \
   --dtype bf16
@@ -282,8 +282,8 @@ run_dino_fix caption_merger_lora_fix "$MERGER_LORA_DIR/caption_merger_lora.jsonl
   checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro2_6_ga4_effective32_taskseq_resume_from_epoch5_20260208/epoch10/merger.safetensors \
   checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro2_6_ga4_effective32_taskseq_resume_from_epoch5_20260208/epoch10/lora 256 \
   --dinov3-dir models/dinov3/dinov3-vitl16-pretrain-sat493m \
-  --image-size 256 \
-  --smart-resize-min-pixels 65536 \
+  --image-size 512 \
+  --smart-resize-min-pixels 50176 \
   --smart-resize-max-pixels 65536 \
   --dtype bf16
 run_caption_eval caption_merger_lora_eval "$MERGER_LORA_DIR/caption_merger_lora.jsonl" "$MERGER_LORA_DIR/caption_summary.json"
@@ -293,8 +293,8 @@ run_sharded_generate grounding_merger_lora qid 256 benchmark/vrsbench/scripts/ge
   --merger-ckpt checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro2_6_ga4_effective32_taskseq_resume_from_epoch5_20260208/epoch10/merger.safetensors \
   --lora-dir checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro2_6_ga4_effective32_taskseq_resume_from_epoch5_20260208/epoch10/lora \
   --data benchmark/vrsbench/data/vrsbench_referring_test.jsonl \
-  --image-size 256 \
-  --smart-resize-min-pixels 65536 \
+  --image-size 512 \
+  --smart-resize-min-pixels 50176 \
   --smart-resize-max-pixels 65536 \
   --max-new-tokens 256 \
   --dtype bf16
@@ -306,18 +306,18 @@ run_sharded_generate caption_smartbucket imgid 128 benchmark/vrsbench/scripts/ge
   --merger-ckpt checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/merger.safetensors \
   --lora-dir checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/lora \
   --data benchmark/vrsbench/data/vrsbench_images_test.jsonl \
-  --image-size 256 \
-  --smart-resize-min-pixels 65536 \
-  --smart-resize-max-pixels 16777216 \
+  --image-size 512 \
+  --smart-resize-min-pixels 50176 \
+  --smart-resize-max-pixels 262144 \
   --max-new-tokens 256 \
   --dtype bf16
 run_dino_fix caption_smartbucket_fix "$SMART_DIR/caption_smartbucket.jsonl" \
   checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/merger.safetensors \
   checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/lora 128 \
   --dinov3-dir models/dinov3/dinov3-vitl16-pretrain-sat493m \
-  --image-size 256 \
-  --smart-resize-min-pixels 65536 \
-  --smart-resize-max-pixels 16777216 \
+  --image-size 512 \
+  --smart-resize-min-pixels 50176 \
+  --smart-resize-max-pixels 262144 \
   --dtype bf16
 run_caption_eval caption_smartbucket_eval "$SMART_DIR/caption_smartbucket.jsonl" "$SMART_DIR/caption_summary.json"
 run_sharded_generate grounding_smartbucket qid 128 benchmark/vrsbench/scripts/generate_referring_dinov3.py "$SMART_DIR" \
@@ -326,9 +326,9 @@ run_sharded_generate grounding_smartbucket qid 128 benchmark/vrsbench/scripts/ge
   --merger-ckpt checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/merger.safetensors \
   --lora-dir checkpoints/vrsbench_joint/merger_lora_8b_dinov3_micro8_8_ga2_effective32_taskseq_smartbucket_sampleavg_wd001_run_20260308_025747/epoch10/lora \
   --data benchmark/vrsbench/data/vrsbench_referring_test.jsonl \
-  --image-size 256 \
-  --smart-resize-min-pixels 65536 \
-  --smart-resize-max-pixels 16777216 \
+  --image-size 512 \
+  --smart-resize-min-pixels 50176 \
+  --smart-resize-max-pixels 262144 \
   --max-new-tokens 256 \
   --dtype bf16
 run_grounding_eval grounding_smartbucket_eval "$SMART_DIR/grounding_smartbucket.jsonl" "$SMART_DIR/grounding_summary.json"

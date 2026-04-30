@@ -1,0 +1,138 @@
+{
+  "preset": "qwen_native_rsvqa_hr_epoch3_test1",
+  "output_dir": ".",
+  "datasets": [
+    "rsvqa_hr_test1_10pct"
+  ],
+  "caption_prompt": "Write one concise English caption for this remote sensing image in 8 to 15 words. Mention only the main scene and key objects.",
+  "vqa_yesno_prompt": "Answer the question about this remote sensing image with only one word: yes or no.\nQuestion: {question}\nAnswer:",
+  "vqa_rural_urban_prompt": "Answer the question about this remote sensing image with only one word: rural or urban.\nQuestion: {question}\nAnswer:",
+  "caption_max_new_tokens": 48,
+  "vqa_max_new_tokens": 8,
+  "batch_size": 512,
+  "device_map": "cuda:0",
+  "cuda_reserve_free_gb": null,
+  "shard_world_size": 1,
+  "shard_rank": 0,
+  "shard_weights": "1",
+  "dtype": "bf16",
+  "do_sample": null,
+  "temperature": null,
+  "top_p": null,
+  "top_k": null,
+  "num_beams": null,
+  "repetition_penalty": null,
+  "seed": null,
+  "caption": {},
+  "vqa": {
+    "rsvqa_hr_test1_10pct": {
+      "dataset": "rsvqa_hr_test1_10pct",
+      "prediction_path": "rsvqa_hr_test1_10pct.jsonl",
+      "scored_path": "rsvqa_hr_test1_10pct_scored.jsonl",
+      "num_pending_before_run": 13146,
+      "eval_mode": "local_exact_match",
+      "sample_evaluations": [
+        {
+          "question_id": 40867,
+          "question_type": "presence",
+          "predicted": "no",
+          "ground_truth": "no",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 40929,
+          "question_type": "presence",
+          "predicted": "no",
+          "ground_truth": "no",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 40953,
+          "question_type": "presence",
+          "predicted": "no",
+          "ground_truth": "no",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 41020,
+          "question_type": "presence",
+          "predicted": "yes",
+          "ground_truth": "yes",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 41036,
+          "question_type": "presence",
+          "predicted": "yes",
+          "ground_truth": "no",
+          "correct": "0",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 41041,
+          "question_type": "presence",
+          "predicted": "no",
+          "ground_truth": "no",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 41042,
+          "question_type": "presence",
+          "predicted": "no",
+          "ground_truth": "no",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        },
+        {
+          "question_id": 41098,
+          "question_type": "presence",
+          "predicted": "no",
+          "ground_truth": "no",
+          "correct": "1",
+          "eval_source": "local_exact_match"
+        }
+      ],
+      "num_rows": 13146,
+      "per_type": {
+        "presence": {
+          "paper_question_type": "presence",
+          "num_rows": 5854,
+          "accuracy": 0.9113426716774855,
+          "accuracy_x100": 91.13426716774855
+        },
+        "comp": {
+          "paper_question_type": "comparison",
+          "num_rows": 7292,
+          "accuracy": 0.9082556226001097,
+          "accuracy_x100": 90.82556226001097
+        }
+      },
+      "average_accuracy": 0.9097991471387976,
+      "average_accuracy_x100": 90.97991471387977,
+      "overall_accuracy": 0.90963030579644,
+      "overall_accuracy_x100": 90.963030579644
+    }
+  },
+  "vqa_runtime": {
+    "preset": "qwen_native_rsvqa_hr_epoch3_test1",
+    "model_family": "qwen_native",
+    "merger_ckpt": "/opt/data/private/YanZiXi/project/fine-tune-qwen3-vl/VRSBench/checkpoints/single_task/qwen_native/rsvqa_hr_merger_lora_sampleavg_wd001/epoch3/merger.safetensors",
+    "lora_dir": "/opt/data/private/YanZiXi/project/fine-tune-qwen3-vl/VRSBench/checkpoints/single_task/qwen_native/rsvqa_hr_merger_lora_sampleavg_wd001/epoch3/lora",
+    "device_map": "cuda:0",
+    "dtype": "bf16",
+    "decode_strategy": "generation_config_default",
+    "qwen_model_dir": "/opt/data/private/YanZiXi/project/fine-tune-qwen3-vl/VRSBench/models/Qwen3-VL-8B-Instruct"
+  },
+  "vqa_cuda_prealloc": {
+    "enabled": false,
+    "keep_free_gb": null,
+    "free_before_bytes": 0,
+    "reserved_bytes": 0,
+    "free_after_bytes": 0
+  }
+}
