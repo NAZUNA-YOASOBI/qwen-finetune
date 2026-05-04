@@ -430,9 +430,9 @@
   "data_json": "../../data/test.json",
   "predictions": "predictions.jsonl",
   "requested_batch_size": 512,
-  "final_batch_size": null,
-  "cuda_reserve_free_gb": null,
+  "final_batch_size": 64,
+  "cuda_reserve_free_gb": 5.0,
   "shard_world_size": 2,
-  "shard_rank": 0,
+  "shard_rank": 1,
   "shard_weights": "1:1"
 }

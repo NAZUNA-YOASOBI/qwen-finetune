@@ -2,11 +2,12 @@
 
 这份目录用于集中整理 single-task grounding 在 `GeoChat` 数据集上的当前正式文件。
 
-## 当前保留的五个对比模型
+## 当前保留的六个对比模型
 
 - `DINOv3`：`epoch4`
 - `Qwen3-VL Native FT`：`epoch3`
-- `Qwen3-VL-8B Base`
+- `Qwen3-VL-8B w/o FT`
+- `Qwen3.5-9B`
 - `GeoChat-7B`
 - `GeoGround`
 
@@ -20,9 +21,9 @@
 - `scripts/train/`
   - 两条可训练链路的训练入口。
 - `scripts/eval/`
-  - 五个模型的评测入口，以及共用评测脚本。
+  - 模型评测入口，以及共用评测脚本。
 - `results/`
-  - 这五个模型当前选定结果对应的逐条 prediction、运行配置和评测摘要。
+  - 这六个模型当前选定结果对应的逐条 prediction、运行配置和评测摘要。
 - `table/`
   - 当前这组 grounding 对比表。
 

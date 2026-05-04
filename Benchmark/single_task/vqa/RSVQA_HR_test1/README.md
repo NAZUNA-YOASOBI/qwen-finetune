@@ -2,11 +2,12 @@
 
 这份目录用于集中整理 single-task VQA 在 `RSVQA-HR test1 10%` 上的当前正式材料。
 
-## 当前保留的五个对比模型
+## 当前保留的六个对比模型
 
 - `DINOv3`：`epoch4`
 - `Qwen3-VL Native FT`：`epoch3`
-- `Qwen3-VL-8B Base`
+- `Qwen3-VL-8B w/o FT`
+- `Qwen3.5-9B`
 - `GeoChat-7B`
 - `GeoGround`
 
@@ -20,9 +21,9 @@
 - `scripts/train/`
   - 两条可训练链路的训练代码和 `RSVQA-HR` 专用训练入口。
 - `scripts/eval/`
-  - 五个模型的 `test1` 评测入口，以及 VQA 共用评测脚本。
+  - 模型的 `test1` 评测入口，以及 VQA 共用评测脚本。
 - `results/`
-  - 当前表格使用的五个模型结果。
+  - 当前表格使用的六个模型结果。
 - `table/`
   - 当前这组 VQA 对比表。
 
@@ -39,9 +40,9 @@
 
 ## 结果口径说明
 
-- `Qwen3-VL-8B Base`、`GeoChat-7B`、`GeoGround` 这里保留的是它们现成的 `test1` 正式结果副本。
+- `Qwen3-VL-8B w/o FT`、`Qwen3.5-9B`、`GeoChat-7B`、`GeoGround` 这里保留的是它们现成的 `test1` 正式结果副本。
 - `DINOv3 epoch4` 和 `Qwen3-VL Native FT epoch3` 已重新整理为当前固定 `test1 10%` 标注上的本地评测结果。
-- 因此五个模型当前统一使用同一份 `test1` 评测集，样本数均为 `13146`。
+- 因此六个模型当前统一使用同一份 `test1` 评测集，样本数均为 `13146`。
 
 ## 整理方式
 

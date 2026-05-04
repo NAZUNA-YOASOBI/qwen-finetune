@@ -30,8 +30,8 @@
   "geoground_box_scale": 1000.0,
   "max_samples": 0,
   "generate_only": false,
-  "shard_world_size": 2,
+  "shard_world_size": 1,
   "shard_rank": 0,
-  "shard_weights": "1:1",
+  "shard_weights": "1",
   "cuda_reserve_free_gb": null
 }
